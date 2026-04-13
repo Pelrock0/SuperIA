@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Superia - Iniciar Sesión</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#001f27",
+                    "inverse-surface": "#2d3133",
+                    "on-surface": "#191c1e",
+                    "on-background": "#191c1e",
+                    "tertiary-container": "#00422b",
+                    "surface-container-low": "#f2f4f6",
+                    "on-primary-fixed-variant": "#174c62",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#9ecde8",
+                    "on-tertiary-fixed": "#002113",
+                    "secondary-fixed-dim": "#4cd6fb",
+                    "tertiary": "#002a1a",
+                    "surface-tint": "#34647b",
+                    "surface-dim": "#d8dadc",
+                    "primary-container": "#003e54",
+                    "primary": "#002736",
+                    "surface-container": "#eceef0",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#f7f9fb",
+                    "outline-variant": "#c1c7cd",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#7aa9c3",
+                    "surface-bright": "#f7f9fb",
+                    "secondary-container": "#50d9fe",
+                    "secondary-fixed": "#b3ebff",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-container-high": "#e6e8ea",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#10b981",
+                    "tertiary-fixed": "#6ffbbe",
+                    "surface-variant": "#e0e3e5",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-secondary-container": "#005c70",
+                    "on-error": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "on-primary-fixed": "#001e2b",
+                    "on-secondary-fixed-variant": "#004e5f",
+                    "on-surface-variant": "#41484c",
+                    "secondary": "#00677d",
+                    "inverse-primary": "#9ecde8",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "primary-fixed": "#c1e8ff",
+                    "outline": "#71787d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Ambient Shadow Spec */
+        .ambient-shadow {
+            box-shadow: 0px 4px 24px 0px rgba(0, 39, 54, 0.06);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface min-h-screen flex flex-col items-center justify-start antialiased text-on-surface">
+<!-- Top Canvas Background (Mediterranean Depth) -->
+<div class="fixed top-0 left-0 w-full h-[265px] bg-gradient-to-br from-primary-container to-primary -z-10 opacity-5"></div>
+<main class="w-full max-w-md px-6 pt-12 pb-24 flex flex-col min-h-screen">
+<!-- Header / Logo Section -->
+<header class="flex flex-col items-center justify-center mb-10">
+<div class="flex items-center gap-3">
+<div class="relative w-12 h-12 flex items-center justify-center">
+<span class="text-4xl font-extrabold text-primary-container leading-none">S</span>
+<span class="material-symbols-outlined absolute -top-1 -right-1 text-on-tertiary-container text-xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<h1 class="text-3xl font-extrabold tracking-tighter text-primary">Superia</h1>
+</div>
+</header>
+<!-- Login Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8 ambient-shadow relative overflow-hidden border border-outline-variant/10">
+<!-- Greeting -->
+<div class="mb-8">
+<h2 class="text-2xl font-bold tracking-tight text-primary mb-2">Bienvenido de nuevo</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed">Tu lista de compra inteligente te espera.</p>
+</div>
+<!-- Form -->
+<form class="space-y-6">
+<!-- Email Input -->
+<div class="space-y-2">
+<label class="block text-[11px] font-bold tracking-[0.05em] text-on-surface-variant uppercase">EMAIL</label>
+<input class="w-full h-14 px-4 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-on-surface placeholder:text-outline transition-all duration-200" placeholder="ejemplo@superia.es" type="email"/>
+</div>
+<!-- Password Input -->
+<div class="space-y-2">
+<label class="block text-[11px] font-bold tracking-[0.05em] text-on-surface-variant uppercase">CONTRASEÑA</label>
+<div class="relative">
+<input class="w-full h-14 px-4 pr-12 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-on-surface placeholder:text-outline transition-all duration-200" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember & Forgot -->
+<div class="flex items-center justify-between text-sm">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/30 transition-all" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Recuérdame</span>
+</label>
+<a class="font-medium text-secondary hover:text-primary transition-colors" href="#">Olvidé mi contraseña</a>
+</div>
+<!-- Primary Action -->
+<button class="w-full h-14 bg-gradient-to-r from-primary to-primary-container text-white font-bold rounded-lg scale-100 active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/10" type="submit">
+                    Iniciar Sesión
+                </button>
+</form>
+</section>
+<!-- Footer / Waitlist Section -->
+<footer class="mt-10 flex flex-col items-center text-center">
+<div class="mb-8 flex flex-col items-center gap-4">
+<div class="flex items-center gap-2 text-primary font-semibold">
+<span>¿No tienes cuenta?</span>
+<span class="text-lg">✨</span>
+</div>
+<!-- Waitlist Card -->
+<div class="bg-tertiary-fixed/20 p-4 rounded-xl border border-tertiary-fixed-dim/30 max-w-xs">
+<p class="text-on-tertiary-fixed text-sm font-medium leading-snug">
+                        Estás en lista de espera, te avisaremos pronto para que disfrutes de la experiencia Superia.
+                    </p>
+</div>
+</div>
+<!-- Bottom Links -->
+<div class="flex items-center gap-8 text-on-surface-variant text-sm font-medium">
+<a class="hover:text-primary flex items-center gap-1.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">help_outline</span>
+                    Ayuda
+                </a>
+<div class="flex items-center gap-1.5 cursor-pointer hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">language</span>
+<span class="uppercase tracking-wider">ES</span>
+</div>
+</div>
+</footer>
+</main>
+<!-- Decorative Bottom Image (Editorial feel) -->
+<div class="fixed bottom-0 left-0 w-full h-48 -z-10 pointer-events-none opacity-20">
+<div class="w-full h-full bg-cover bg-center" data-alt="close-up of fresh organic mediterranean vegetables with soft morning sunlight on a rustic stone table background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACWjv231_84ieVYRLKsy44YOlp3vIhGd-xAdYFvpLjv-BvWNfR_frcFfB7pLxC0dQ7vqn9yedlguUxfM5Cls6nzNXKaJSBVkQnBW_xMpS2jmQd2dk5DLIwd6akj0TLrcF9836QApE-BSQ8pAGK8t-1Pqayp5I4VJp3W9uu-lMKc_wMrgp7rmefiqjJga7KBBaaxsiIcShDZyYA8nHFDNGpn_gqEvf6N-hnRrjDwIr9EOSWFWPpwlHgivEDmxcCd_PTlIAGVRML1hE')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+</div>
+</body></html>

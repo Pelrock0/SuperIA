@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sofia4Coa - Technical Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f1419;
+            --bg-secondary: #1a1f26;
+            --bg-tertiary: #242a33;
+            --bg-code: #0d1117;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-yellow: #d29922;
+            --accent-red: #f85149;
+            --accent-purple: #a371f7;
+            --accent-cyan: #39c5cf;
+            --accent-orange: #db6d28;
+            --border-color: #30363d;
+            --syntax-keyword: #ff7b72;
+            --syntax-string: #a5d6ff;
+            --syntax-function: #d2a8ff;
+            --syntax-variable: #ffa657;
+            --syntax-comment: #8b949e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            padding: 1.5rem;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .sidebar-version {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--bg-tertiary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-left: auto;
+        }
+
+        .nav-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .nav-link.active {
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--accent-blue);
+        }
+
+        .nav-link code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            background: var(--bg-tertiary);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 3rem 4rem;
+            max-width: 1000px;
+        }
+
+        /* Headers */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent-cyan);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Code blocks */
+        pre {
+            background: var(--bg-code);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            overflow-x: auto;
+            margin: 1rem 0 1.5rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        p code, li code {
+            background: var(--bg-tertiary);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            color: var(--accent-cyan);
+        }
+
+        /* Syntax highlighting */
+        .keyword { color: var(--syntax-keyword); }
+        .string { color: var(--syntax-string); }
+        .function { color: var(--syntax-function); }
+        .variable { color: var(--syntax-variable); }
+        .comment { color: var(--syntax-comment); font-style: italic; }
+        .number { color: var(--accent-cyan); }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: var(--bg-secondary);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+
+        .callout-info {
+            background: rgba(88, 166, 255, 0.1);
+            border-color: var(--accent-blue);
+        }
+
+        .callout-warning {
+            background: rgba(210, 153, 34, 0.1);
+            border-color: var(--accent-yellow);
+        }
+
+        .callout-danger {
+            background: rgba(248, 81, 73, 0.1);
+            border-color: var(--accent-red);
+        }
+
+        .callout-success {
+            background: rgba(63, 185, 80, 0.1);
+            border-color: var(--accent-green);
+        }
+
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .callout-info .callout-title { color: var(--accent-blue); }
+        .callout-warning .callout-title { color: var(--accent-yellow); }
+        .callout-danger .callout-title { color: var(--accent-red); }
+        .callout-success .callout-title { color: var(--accent-green); }
+
+        /* File tree */
+        .file-tree {
+            background: var(--bg-code);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin: 1.5rem 0;
+        }
+
+        .file-tree-item {
+            padding: 0.25rem 0;
+            color: var(--text-secondary);
+        }
+
+        .file-tree-item.folder {
+            color: var(--accent-blue);
+        }
+
+        .file-tree-item.file {
+            color: var(--text-secondary);
+        }
+
+        .file-tree-indent {
+            display: inline-block;
+            width: 1.5rem;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-required { background: var(--accent-red); color: white; }
+        .badge-optional { background: var(--accent-yellow); color: black; }
+        .badge-mandatory { background: var(--accent-purple); color: white; }
+        .badge-gate { background: var(--accent-green); color: white; }
+
+        /* Architecture diagram */
+        .architecture-diagram {
+            background: var(--bg-code);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .arch-layer {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .arch-layer-label {
+            width: 120px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .arch-boxes {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        .arch-box {
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+
+        .arch-box.rules { background: rgba(248, 81, 73, 0.15); border-color: var(--accent-red); color: var(--accent-red); }
+        .arch-box.workflow { background: rgba(163, 113, 247, 0.15); border-color: var(--accent-purple); color: var(--accent-purple); }
+        .arch-box.agent { background: rgba(88, 166, 255, 0.15); border-color: var(--accent-blue); color: var(--accent-blue); }
+        .arch-box.skill { background: rgba(63, 185, 80, 0.15); border-color: var(--accent-green); color: var(--accent-green); }
+        .arch-box.cli { background: rgba(255, 166, 87, 0.15); border-color: var(--accent-orange); color: var(--accent-orange); }
+
+        .arch-arrow {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        /* State machine */
+        .state-machine {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            padding: 2rem;
+            background: var(--bg-code);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .state {
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .state-s1 { background: #3b82f6; color: white; }
+        .state-s2 { background: #8b5cf6; color: white; }
+        .state-s3 { background: #06b6d4; color: white; }
+        .state-s4 { background: #10b981; color: white; }
+        .state-s5 { background: #f59e0b; color: white; }
+        .state-s6 { background: #ef4444; color: white; }
+
+        .state-arrow {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+        }
+
+        /* JSON viewer */
+        .json-viewer {
+            background: var(--bg-code);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        .json-key { color: var(--accent-cyan); }
+        .json-string { color: var(--syntax-string); }
+        .json-number { color: var(--accent-orange); }
+        .json-boolean { color: var(--syntax-keyword); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 2rem;
+            }
+        }
+
+        /* Print */
+        @media print {
+            .sidebar { display: none; }
+            .main-content { margin-left: 0; }
+        }
+
+        /* Command example */
+        .command-example {
+            background: var(--bg-code);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .command-header {
+            background: var(--bg-tertiary);
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .command-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .command-dot.red { background: #ff5f56; }
+        .command-dot.yellow { background: #ffbd2e; }
+        .command-dot.green { background: #27ca3f; }
+
+        .command-body {
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .command-prompt {
+            color: var(--accent-green);
+        }
+
+        .command-output {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">S4C</div>
+            <span class="sidebar-title">Technical Docs</span>
+            <span class="sidebar-version">v1.4</span>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Getting Started</div>
+            <a href="#overview" class="nav-link">Overview</a>
+            <a href="#architecture" class="nav-link">Architecture</a>
+            <a href="#file-structure" class="nav-link">File Structure</a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Core Concepts</div>
+            <a href="#rules" class="nav-link">Global Rules</a>
+            <a href="#workflow" class="nav-link">Workflow & Gates</a>
+            <a href="#agents" class="nav-link">Agents</a>
+            <a href="#skills" class="nav-link">Skills</a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">CLI Reference</div>
+            <a href="#cli-overview" class="nav-link">CLI Overview</a>
+            <a href="#cli-commands" class="nav-link">Commands</a>
+            <a href="#cli-state" class="nav-link">State Management</a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Implementation</div>
+            <a href="#state-machine" class="nav-link">State Machine</a>
+            <a href="#metrics" class="nav-link">Metrics System</a>
+            <a href="#integration" class="nav-link">Cursor Integration</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <h1 id="overview">Sofia4Coa AI Workflow</h1>
+        <p>Technical documentation for the AI-powered development workflow system.</p>
+
+        <div class="callout callout-info">
+            <div class="callout-title">📘 About This Document</div>
+            <p>This document covers the technical implementation of the Sofia4Coa AI workflow system, including architecture, agents, skills, CLI tools, and integration with Cursor IDE.</p>
+        </div>
+
+        <!-- Architecture -->
+        <h2 id="architecture">System Architecture</h2>
+        
+        <p>The system follows a layered architecture where each layer has specific responsibilities and constraints:</p>
+
+        <div class="architecture-diagram">
+            <div class="arch-layer">
+                <div class="arch-layer-label">Layer 1</div>
+                <div class="arch-boxes">
+                    <div class="arch-box rules">Global Rules</div>
+                </div>
+            </div>
+            <div class="arch-arrow">↓ overrides</div>
+            <div class="arch-layer">
+                <div class="arch-layer-label">Layer 2</div>
+                <div class="arch-boxes">
+                    <div class="arch-box workflow">Workflow Definition</div>
+                    <div class="arch-box workflow">Gates</div>
+                </div>
+            </div>
+            <div class="arch-arrow">↓ orchestrates</div>
+            <div class="arch-layer">
+                <div class="arch-layer-label">Layer 3</div>
+                <div class="arch-boxes">
+                    <div class="arch-box agent">Scope Analyzer</div>
+                    <div class="arch-box agent">Product Owner</div>
+                    <div class="arch-box agent">Architect</div>
+                    <div class="arch-box agent">Developer</div>
+                    <div class="arch-box agent">Reviewers</div>
+                </div>
+            </div>
+            <div class="arch-arrow">↓ applies</div>
+            <div class="arch-layer">
+                <div class="arch-layer-label">Layer 4</div>
+                <div class="arch-boxes">
+                    <div class="arch-box skill">scope-analysis</div>
+                    <div class="arch-box skill">prd-writing</div>
+                    <div class="arch-box skill">technical-design</div>
+                    <div class="arch-box skill">implementation</div>
+                    <div class="arch-box skill">code-review</div>
+                </div>
+            </div>
+            <div class="arch-arrow">↓ tracked by</div>
+            <div class="arch-layer">
+                <div class="arch-layer-label">Layer 5</div>
+                <div class="arch-boxes">
+                    <div class="arch-box cli">CLI (cli.py)</div>
+                    <div class="arch-box cli">State Files (JSON)</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Key Principles</h3>
+        <ul>
+            <li><strong>Rules > Agents</strong>: Global rules always take precedence over agent behavior</li>
+            <li><strong>Gates are mandatory</strong>: No step can be skipped, no gate can be implicit</li>
+            <li><strong>Separation of concerns</strong>: Each agent has clear responsibilities and cannot exceed them</li>
+            <li><strong>Full traceability</strong>: Every decision is timestamped and stored in state files</li>
+        </ul>
+
+        <!-- File Structure -->
+        <h2 id="file-structure">File Structure</h2>
+
+        <div class="file-tree">
+            <div class="file-tree-item folder">📁 .cursor/</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span>📄 rules.md <span style="color: var(--accent-red);">← Global rules (NON-NEGOTIABLE)</span></div>
+            <div class="file-tree-item folder"><span class="file-tree-indent"></span>📁 agents/</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 scope-analyzer.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 product-owner.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 architect.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 backend-developer.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 code-reviewer.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 security-reviewer.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 test-gate.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 ux-designer.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 ui-ux-reviewer.md</div>
+            <div class="file-tree-item folder"><span class="file-tree-indent"></span>📁 skills/</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 scope-analysis.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 prd-writing.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 technical-design.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 implementation.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 code-review.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 security-review.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 test-enforcement.md</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 ux-design.md</div>
+            <div class="file-tree-item folder"><span class="file-tree-indent"></span>📁 workflows/</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 feature-workflow.md <span style="color: var(--accent-purple);">← Main workflow definition</span></div>
+            <div class="file-tree-item folder">📁 cli/</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span>📄 cli.py <span style="color: var(--accent-orange);">← CLI implementation</span></div>
+            <div class="file-tree-item folder"><span class="file-tree-indent"></span>📁 state/</div>
+            <div class="file-tree-item file"><span class="file-tree-indent"></span><span class="file-tree-indent"></span>📄 {feature-name}.json <span style="color: var(--accent-green);">← State per feature</span></div>
+        </div>
+
+        <!-- Global Rules -->
+        <h2 id="rules">Global Rules</h2>
+
+        <p>These rules apply to ALL features, regardless of size or complexity. They are <strong>non-negotiable</strong>.</p>
+
+        <h3>Tech Stack (Fixed)</h3>
+        <table>
+            <tr><th>Component</th><th>Version</th></tr>
+            <tr><td>Laravel</td><td>11+</td></tr>
+            <tr><td>PHP</td><td>8.3+</td></tr>
+            <tr><td>Admin Panel</td><td>Backpack CRUD</td></tr>
+            <tr><td>Database</td><td>MySQL</td></tr>
+        </table>
+
+        <h3>Architectural Rules <span class="badge badge-mandatory">NON-NEGOTIABLE</span></h3>
+
+        <table>
+            <tr><th>Rule</th><th>Description</th></tr>
+            <tr><td>Thin Controllers</td><td>Controllers only orchestrate, no business logic</td></tr>
+            <tr><td>Backpack CRUD</td><td>Must NOT contain business logic</td></tr>
+            <tr><td>Business Logic</td><td>Lives in Services / Domain layer</td></tr>
+            <tr><td>Validation</td><td>MUST use FormRequest</td></tr>
+            <tr><td>Status/States</td><td>Enums MUST be used</td></tr>
+            <tr><td>Critical Flows</td><td>Explicit database transactions REQUIRED</td></tr>
+            <tr><td>Architecture</td><td>Follow Hexagonal / Clean Architecture</td></tr>
+        </table>
+
+        <h3>Quality Rules <span class="badge badge-mandatory">NON-NEGOTIABLE</span></h3>
+
+        <div class="callout callout-danger">
+            <div class="callout-title">⚠️ Non-Negotiable Quality Gates</div>
+            <ul>
+                <li>No TODOs or commented-out code in production</li>
+                <li>Every feature MUST be reviewable</li>
+                <li>Code review is mandatory</li>
+                <li>Security review is mandatory</li>
+                <li>If tests are omitted, it must be explicitly justified</li>
+            </ul>
+        </div>
+
+        <!-- Workflow -->
+        <h2 id="workflow">Workflow & Gates</h2>
+
+        <p>The workflow defines 6 mandatory steps with gates. No step can be skipped.</p>
+
+        <div class="state-machine">
+            <div class="state state-s1">S1<br><small>Scope</small></div>
+            <span class="state-arrow">→</span>
+            <div class="state state-s2">S2<br><small>PRD</small></div>
+            <span class="state-arrow">→</span>
+            <div class="state state-s3">S3<br><small>Design</small></div>
+            <span class="state-arrow">→</span>
+            <div class="state state-s4">S4<br><small>Implement</small></div>
+            <span class="state-arrow">→</span>
+            <div class="state state-s5">S5<br><small>Review</small></div>
+            <span class="state-arrow">→</span>
+            <div class="state state-s6">S6<br><small>Done</small></div>
+        </div>
+
+        <h3>Step Details</h3>
+
+        <table>
+            <tr>
+                <th>Step</th>
+                <th>Agent</th>
+                <th>Skill</th>
+                <th>Gate Criteria</th>
+            </tr>
+            <tr>
+                <td><strong>S1</strong> Scope Analysis</td>
+                <td><code>scope-analyzer.md</code></td>
+                <td><code>scope-analysis.md</code></td>
+                <td>Complexity classified, risks explicit, decision documented</td>
+            </tr>
+            <tr>
+                <td><strong>S2</strong> PRD</td>
+                <td><code>product-owner.md</code></td>
+                <td><code>prd-writing.md</code></td>
+                <td>PRD complete, scope explicit, acceptance criteria testable</td>
+            </tr>
+            <tr>
+                <td><strong>S3</strong> Technical Design</td>
+                <td><code>architect.md</code></td>
+                <td><code>technical-design.md</code></td>
+                <td>Design aligns with PRD, architectural rules respected</td>
+            </tr>
+            <tr>
+                <td><strong>S4</strong> Implementation</td>
+                <td><code>backend-developer.md</code></td>
+                <td><code>implementation.md</code></td>
+                <td>Feature implemented, tests exist, no TODOs</td>
+            </tr>
+            <tr>
+                <td><strong>S5</strong> Review</td>
+                <td><code>code-reviewer.md</code><br><code>security-reviewer.md</code><br><code>test-gate.md</code></td>
+                <td><code>code-review.md</code><br><code>security-review.md</code><br><code>test-enforcement.md</code></td>
+                <td>All reviews PASS</td>
+            </tr>
+            <tr>
+                <td><strong>S6</strong> Done</td>
+                <td>—</td>
+                <td>—</td>
+                <td>All previous gates passed</td>
+            </tr>
+        </table>
+
+        <h3>Complexity-Based Routing</h3>
+
+        <pre><span class="keyword">if</span> complexity == <span class="string">"LOW"</span>:
+    <span class="comment"># Skip PRD, go to mini-scope</span>
+    next_step = <span class="string">"S1b"</span>  <span class="comment"># Then directly to S4</span>
+<span class="keyword">elif</span> complexity <span class="keyword">in</span> [<span class="string">"MEDIUM"</span>, <span class="string">"HIGH"</span>]:
+    <span class="comment"># Full workflow required</span>
+    next_step = <span class="string">"S2"</span>  <span class="comment"># PRD required</span></pre>
+
+        <!-- Agents -->
+        <h2 id="agents">Agents</h2>
+
+        <p>Agents define WHO acts at each step. Each agent has specific responsibilities and constraints.</p>
+
+        <h3>Agent Definition Structure</h3>
+
+        <pre><span class="comment"># ROLE: {Agent Name}</span>
+
+<span class="variable">You are a {role description}.</span>
+
+<span class="variable">Your responsibility is to {primary responsibility}.</span>
+
+<span class="comment">## Responsibilities (MANDATORY)</span>
+- Responsibility 1
+- Responsibility 2
+
+<span class="comment">## Core Constraints (NON-NEGOTIABLE)</span>
+- Constraint 1
+- Constraint 2
+
+<span class="comment">## Output Format (MANDATORY)</span>
+- Output specification</pre>
+
+        <h3>Available Agents</h3>
+
+        <table>
+            <tr>
+                <th>Agent</th>
+                <th>Role</th>
+                <th>Key Responsibilities</th>
+            </tr>
+            <tr>
+                <td><code>scope-analyzer</code></td>
+                <td>Senior Technical Analyst</td>
+                <td>Classify complexity (LOW/MEDIUM/HIGH), identify risks, recommend next step</td>
+            </tr>
+            <tr>
+                <td><code>product-owner</code></td>
+                <td>Enterprise PO</td>
+                <td>Write PRD, define scope, acceptance criteria (Given/When/Then)</td>
+            </tr>
+            <tr>
+                <td><code>architect</code></td>
+                <td>Software Architect</td>
+                <td>Technical design, component boundaries, transaction boundaries</td>
+            </tr>
+            <tr>
+                <td><code>backend-developer</code></td>
+                <td>Senior Developer</td>
+                <td>Implement exactly as designed, no redesign, tests mandatory</td>
+            </tr>
+            <tr>
+                <td><code>code-reviewer</code></td>
+                <td>Code Reviewer</td>
+                <td>Validate quality, maintainability, performance. No redesign.</td>
+            </tr>
+            <tr>
+                <td><code>security-reviewer</code></td>
+                <td>Security Specialist</td>
+                <td>Review auth, authorization, data handling, vulnerabilities</td>
+            </tr>
+            <tr>
+                <td><code>test-gate</code></td>
+                <td>Test Guardian</td>
+                <td>Block if tests missing. Does NOT suggest improvements.</td>
+            </tr>
+            <tr>
+                <td><code>ux-designer</code></td>
+                <td>UX Designer</td>
+                <td>Propose UX solutions for user-facing features, explore interaction flows, define user actions and feedback. Only during PRD.</td>
+            </tr>
+            <tr>
+                <td><code>ui-ux-reviewer</code></td>
+                <td>UI/UX Reviewer</td>
+                <td>Detect usability issues and regressions, ensure UI consistency. No redesign, only evaluate what exists.</td>
+            </tr>
+        </table>
+
+        <!-- Skills -->
+        <h2 id="skills">Skills</h2>
+
+        <p>Skills define HOW work is done. They provide specific instructions and output formats.</p>
+
+        <h3>Skill Definition Structure</h3>
+
+        <pre><span class="comment"># SKILL: {Skill Name}</span>
+
+<span class="variable">This skill defines HOW {task} must be done.</span>
+
+<span class="comment">## Objectives</span>
+- Objective 1
+- Objective 2
+
+<span class="comment">## Output Format (MANDATORY)</span>
+- Format specification
+
+<span class="comment">## Rules</span>
+- Rule 1
+- Rule 2</pre>
+
+        <h3>Available Skills</h3>
+
+        <table>
+            <tr>
+                <th>Skill</th>
+                <th>Applied By</th>
+                <th>Output</th>
+            </tr>
+            <tr>
+                <td><code>scope-analysis</code></td>
+                <td>scope-analyzer</td>
+                <td>Complexity, risks, effort estimate, recommendation</td>
+            </tr>
+            <tr>
+                <td><code>prd-writing</code></td>
+                <td>product-owner</td>
+                <td>Full PRD with acceptance criteria</td>
+            </tr>
+            <tr>
+                <td><code>technical-design</code></td>
+                <td>architect</td>
+                <td>Architecture overview, components, data flow, trade-offs</td>
+            </tr>
+            <tr>
+                <td><code>implementation</code></td>
+                <td>backend-developer</td>
+                <td>Code, tests, implementation summary</td>
+            </tr>
+            <tr>
+                <td><code>code-review</code></td>
+                <td>code-reviewer</td>
+                <td>PASS or CHANGES REQUIRED with findings</td>
+            </tr>
+            <tr>
+                <td><code>security-review</code></td>
+                <td>security-reviewer</td>
+                <td>PASS or CHANGES REQUIRED with security findings</td>
+            </tr>
+            <tr>
+                <td><code>test-enforcement</code></td>
+                <td>test-gate</td>
+                <td>PASS or FAIL with missing tests</td>
+            </tr>
+            <tr>
+                <td><code>ux-design</code></td>
+                <td>ux-designer</td>
+                <td>UX proposal(s) with rationale and trade-offs for user-facing features</td>
+            </tr>
+        </table>
+
+        <!-- CLI Overview -->
+        <h2 id="cli-overview">CLI Overview</h2>
+
+        <p>The CLI (<code>cli.py</code>) is a Python script that manages feature workflow state.</p>
+
+        <h3>Location</h3>
+        <pre>cli/cli.py</pre>
+
+        <h3>Dependencies</h3>
+        <ul>
+            <li>Python 3.x (standard library only)</li>
+            <li>No external packages required</li>
+        </ul>
+
+        <h3>State Storage</h3>
+        <pre>cli/state/{feature-name}.json</pre>
+
+        <!-- CLI Commands -->
+        <h2 id="cli-commands">CLI Commands</h2>
+
+        <h4><code>create</code> — Create new feature</h4>
+        <div class="command-example">
+            <div class="command-header">
+                <span class="command-dot red"></span>
+                <span class="command-dot yellow"></span>
+                <span class="command-dot green"></span>
+            </div>
+            <div class="command-body">
+                <div><span class="command-prompt">$</span> python cli/cli.py create my-feature</div>
+                <div class="command-output">Feature 'my-feature' created (S1)</div>
+            </div>
+        </div>
+
+        <h4><code>approve</code> — Approve current gate and advance</h4>
+        <div class="command-example">
+            <div class="command-header">
+                <span class="command-dot red"></span>
+                <span class="command-dot yellow"></span>
+                <span class="command-dot green"></span>
+            </div>
+            <div class="command-body">
+                <div><span class="command-prompt">$</span> python cli/cli.py approve my-feature S1</div>
+                <div class="command-output">S1 approved. Current step: S2</div>
+            </div>
+        </div>
+
+        <h4><code>reject</code> — Reject with documented reason</h4>
+        <div class="command-example">
+            <div class="command-header">
+                <span class="command-dot red"></span>
+                <span class="command-dot yellow"></span>
+                <span class="command-dot green"></span>
+            </div>
+            <div class="command-body">
+                <div><span class="command-prompt">$</span> python cli/cli.py reject my-feature S5 "Missing security tests"</div>
+                <div class="command-output">S5 rejected: Missing security tests</div>
+            </div>
+        </div>
+
+        <h4><code>status</code> — Show full feature state</h4>
+        <div class="command-example">
+            <div class="command-header">
+                <span class="command-dot red"></span>
+                <span class="command-dot yellow"></span>
+                <span class="command-dot green"></span>
+            </div>
+            <div class="command-body">
+                <div><span class="command-prompt">$</span> python cli/cli.py status my-feature</div>
+                <div class="command-output">{
+  "feature": "my-feature",
+  "status": "S4",
+  "workflow": { ... }
+}</div>
+            </div>
+        </div>
+
+        <h4><code>add-time</code> — Register human time spent</h4>
+        <div class="command-example">
+            <div class="command-header">
+                <span class="command-dot red"></span>
+                <span class="command-dot yellow"></span>
+                <span class="command-dot green"></span>
+            </div>
+            <div class="command-body">
+                <div><span class="command-prompt">$</span> python cli/cli.py add-time my-feature 15</div>
+                <div class="command-output">Added 15 minutes to feature 'my-feature'</div>
+            </div>
+        </div>
+
+        <h4><code>metrics</code> — Calculate final metrics</h4>
+        <div class="command-example">
+            <div class="command-header">
+                <span class="command-dot red"></span>
+                <span class="command-dot yellow"></span>
+                <span class="command-dot green"></span>
+            </div>
+            <div class="command-body">
+                <div><span class="command-prompt">$</span> python cli/cli.py metrics my-feature</div>
+                <div class="command-output">{
+  "lead_time_minutes": 45,
+  "review_iterations": 0,
+  "critical_findings": 0,
+  "human_time_minutes": 25
+}</div>
+            </div>
+        </div>
+
+        <!-- CLI State -->
+        <h2 id="cli-state">State Management</h2>
+
+        <p>Each feature has a JSON state file that tracks its entire lifecycle.</p>
+
+        <h3>State File Schema</h3>
+
+        <div class="json-viewer">
+{
+  <span class="json-key">"feature"</span>: <span class="json-string">"s4c-coa-events-api"</span>,
+  <span class="json-key">"created_at"</span>: <span class="json-string">"2026-01-02T16:24:23.899127+00:00"</span>,
+  <span class="json-key">"status"</span>: <span class="json-string">"S6"</span>,
+  <span class="json-key">"require_s1b"</span>: <span class="json-boolean">false</span>,
+  <span class="json-key">"workflow"</span>: {
+    <span class="json-key">"S1"</span>: {
+      <span class="json-key">"entered_at"</span>: <span class="json-string">"2026-01-02T16:24:23.899137+00:00"</span>,
+      <span class="json-key">"approved_at"</span>: <span class="json-string">"2026-01-02T16:25:56.391335+00:00"</span>
+    },
+    <span class="json-key">"S2"</span>: { ... },
+    <span class="json-key">"S3"</span>: { ... },
+    <span class="json-key">"S4"</span>: { ... },
+    <span class="json-key">"S5"</span>: { ... },
+    <span class="json-key">"S6"</span>: { ... }
+  },
+  <span class="json-key">"metrics"</span>: {
+    <span class="json-key">"review_iterations"</span>: <span class="json-number">0</span>,
+    <span class="json-key">"critical_findings"</span>: <span class="json-number">0</span>,
+    <span class="json-key">"human_time_minutes"</span>: <span class="json-number">25</span>
+  },
+  <span class="json-key">"lifecycle"</span>: {
+    <span class="json-key">"discarded"</span>: <span class="json-boolean">false</span>
+  }
+}
+        </div>
+
+        <h3>State Transitions</h3>
+
+        <pre><span class="comment"># Valid transitions</span>
+S1 → S2  <span class="comment"># After scope approval (MEDIUM/HIGH)</span>
+S1 → S1b <span class="comment"># After scope approval (LOW)</span>
+S1b → S4 <span class="comment"># Mini-scope approved, skip to implementation</span>
+S2 → S3  <span class="comment"># PRD approved</span>
+S3 → S4  <span class="comment"># Design approved</span>
+S4 → S5  <span class="comment"># Implementation complete</span>
+S5 → S4  <span class="comment"># Review failed (loop back)</span>
+S5 → S6  <span class="comment"># All reviews passed</span></pre>
+
+        <!-- State Machine -->
+        <h2 id="state-machine">State Machine Implementation</h2>
+
+        <p>The CLI implements a simple state machine with the following logic:</p>
+
+        <pre><span class="keyword">def</span> <span class="function">approve</span>(feature, step):
+    data = load_feature(feature)
+    current = data[<span class="string">"status"</span>]
+    
+    <span class="keyword">if</span> current != step:
+        <span class="keyword">raise</span> Error(<span class="string">f"Cannot approve {step} while in {current}"</span>)
+    
+    data[<span class="string">"workflow"</span>][step][<span class="string">"approved_at"</span>] = now()
+    
+    <span class="comment"># State transition logic</span>
+    next_step = {
+        <span class="string">"S1"</span>: <span class="string">"S2"</span>,
+        <span class="string">"S2"</span>: <span class="string">"S3"</span>,
+        <span class="string">"S3"</span>: <span class="string">"S4"</span>,
+        <span class="string">"S4"</span>: <span class="string">"S5"</span>,
+        <span class="string">"S5"</span>: <span class="string">"S6"</span>,
+    }.get(step)
+    
+    data[<span class="string">"status"</span>] = next_step
+    data[<span class="string">"workflow"</span>][next_step] = {
+        <span class="string">"entered_at"</span>: now()
+    }
+    
+    save_feature(feature, data)</pre>
+
+        <!-- Metrics -->
+        <h2 id="metrics">Metrics System</h2>
+
+        <p>The system automatically tracks and calculates development metrics.</p>
+
+        <h3>Tracked Metrics</h3>
+
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Description</th>
+                <th>Calculation</th>
+            </tr>
+            <tr>
+                <td><code>lead_time_minutes</code></td>
+                <td>Time from PRD approval to completion</td>
+                <td><code>S6.approved_at - S2.approved_at</code></td>
+            </tr>
+            <tr>
+                <td><code>review_iterations</code></td>
+                <td>Number of review rejections</td>
+                <td>Incremented on each <code>reject</code> call</td>
+            </tr>
+            <tr>
+                <td><code>critical_findings</code></td>
+                <td>Number of critical issues found</td>
+                <td>Incremented on each <code>reject</code> call</td>
+            </tr>
+            <tr>
+                <td><code>human_time_minutes</code></td>
+                <td>Human time spent (approvals, decisions)</td>
+                <td>Manually added via <code>add-time</code></td>
+            </tr>
+        </table>
+
+        <h3>Metrics Calculation</h3>
+
+        <pre><span class="keyword">def</span> <span class="function">metrics</span>(feature):
+    data = load_feature(feature)
+    wf = data[<span class="string">"workflow"</span>]
+    
+    start = parse_ts(wf[<span class="string">"S2"</span>][<span class="string">"approved_at"</span>])
+    end = parse_ts(wf[<span class="string">"S6"</span>][<span class="string">"approved_at"</span>])
+    
+    lead_time = (end - start).total_seconds() / <span class="number">60</span>
+    
+    <span class="keyword">return</span> {
+        <span class="string">"lead_time_minutes"</span>: lead_time,
+        <span class="string">"review_iterations"</span>: data[<span class="string">"metrics"</span>][<span class="string">"review_iterations"</span>],
+        <span class="string">"critical_findings"</span>: data[<span class="string">"metrics"</span>][<span class="string">"critical_findings"</span>],
+        <span class="string">"human_time_minutes"</span>: data[<span class="string">"metrics"</span>][<span class="string">"human_time_minutes"</span>]
+    }</pre>
+
+        <!-- Integration -->
+        <h2 id="integration">Cursor Integration</h2>
+
+        <p>The system integrates with Cursor IDE through the <code>.cursor/</code> directory.</p>
+
+        <h3>How It Works</h3>
+
+        <ol>
+            <li>Cursor reads <code>.cursor/rules.md</code> as global context</li>
+            <li>When prompted with a step (e.g., "Execute S1"), Cursor:
+                <ul>
+                    <li>Loads the appropriate agent definition</li>
+                    <li>Applies the corresponding skill</li>
+                    <li>Follows the workflow constraints</li>
+                </ul>
+            </li>
+            <li>Human approves via CLI: <code>cli.py approve feature step</code></li>
+            <li>State advances to next step</li>
+        </ol>
+
+        <h3>Prompt Format</h3>
+
+        <pre><span class="comment"># Typical prompt to execute a workflow step</span>
+
+<span class="variable"># === GLOBAL RULES ===</span>
+<span class="variable"># (automatically included by Cursor)</span>
+
+<span class="variable"># === CONTEXT ===</span>
+Feature: my-feature
+Step: S1
+Task: Execute this step. Follow rules strictly.</pre>
+
+        <div class="callout callout-success">
+            <div class="callout-title">✅ Key Benefits</div>
+            <ul>
+                <li><strong>Consistency</strong>: Same process for every feature</li>
+                <li><strong>Traceability</strong>: Every decision is timestamped</li>
+                <li><strong>Quality</strong>: Mandatory gates prevent shortcuts</li>
+                <li><strong>Metrics</strong>: Automatic tracking for continuous improvement</li>
+            </ul>
+        </div>
+
+        <hr style="margin: 3rem 0; border: none; border-top: 1px solid var(--border-color);">
+
+        <p style="text-align: center; color: var(--text-muted);">
+            Sofia4Coa Technical Documentation v1.4<br>
+            Last updated: January 2026
+        </p>
+    </main>
+
+    <script>
+        // Highlight active nav link on scroll
+        const sections = document.querySelectorAll('h2[id], h3[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

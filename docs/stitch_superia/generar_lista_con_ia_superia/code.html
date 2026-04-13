@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c1c7cd",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container": "#eceef0",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary-fixed": "#001e2b",
+                        "surface-bright": "#f7f9fb",
+                        "primary-container": "#003e54",
+                        "error": "#ba1a1a",
+                        "on-surface": "#191c1e",
+                        "on-primary-container": "#7aa9c3",
+                        "secondary-fixed-dim": "#4cd6fb",
+                        "secondary-fixed": "#b3ebff",
+                        "primary-fixed-dim": "#9ecde8",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#34647b",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "primary": "#002736",
+                        "tertiary": "#002a1a",
+                        "primary-fixed": "#c1e8ff",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-low": "#f2f4f6",
+                        "outline": "#71787d",
+                        "secondary": "#00677d",
+                        "on-secondary-container": "#005c70",
+                        "on-primary-fixed-variant": "#174c62",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#9ecde8",
+                        "on-background": "#191c1e",
+                        "background": "#f7f9fb",
+                        "surface-dim": "#d8dadc",
+                        "surface": "#f7f9fb",
+                        "secondary-container": "#50d9fe",
+                        "on-tertiary-container": "#10b981",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed": "#001f27",
+                        "tertiary-container": "#00422b",
+                        "on-surface-variant": "#41484c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-40">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-[#f7f9fb] transition-colors duration-300 flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#002736]" data-icon="menu">menu</span>
+<h1 class="text-xl font-bold tracking-tighter text-[#002736]">Superia</h1>
+</div>
+<div class="flex items-center gap-2 text-on-tertiary-container">
+<span class="material-symbols-outlined" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-sm font-bold">Generar lista con IA</span>
+</div>
+<span class="material-symbols-outlined text-slate-500" data-icon="account_circle">account_circle</span>
+</header>
+<main class="max-w-2xl mx-auto px-6 py-8">
+<!-- AI Input Section -->
+<section class="mb-12">
+<div class="relative bg-surface-container-lowest rounded-[24px] p-6 shadow-[0_4px_24px_rgba(0,39,54,0.04)]">
+<label class="block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mb-4 ml-2">¿Qué tienes en mente?</label>
+<textarea class="w-full bg-surface-container-low border-none rounded-xl p-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-secondary/20 min-h-[140px] resize-none" placeholder="Describe qué necesitas... ej: Cena de cumpleaños para 8 personas, Semana de dieta mediterránea"></textarea>
+<div class="mt-6 flex items-center justify-between">
+<div>
+<span class="text-sm font-medium text-on-surface-variant ml-2">Comensales</span>
+<div class="flex items-center gap-4 mt-2 bg-surface-container-low rounded-full px-4 py-2 w-fit">
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm hover:scale-95 transition-transform">
+<span class="material-symbols-outlined text-lg" data-icon="remove">remove</span>
+</button>
+<span class="font-bold text-primary w-4 text-center">4</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm hover:scale-95 transition-transform">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<button class="bg-[#10B981] text-white flex items-center gap-2 px-8 py-4 rounded-xl font-bold shadow-[0_8px_20px_rgba(16,185,129,0.3)] hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span>Generar lista</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Loading State -->
+<section class="flex flex-col items-center justify-center py-12 gap-4">
+<div class="flex gap-2">
+<div class="w-3 h-3 bg-on-tertiary-container rounded-full opacity-40"></div>
+<div class="w-3 h-3 bg-on-tertiary-container rounded-full opacity-70"></div>
+<div class="w-3 h-3 bg-on-tertiary-container rounded-full"></div>
+</div>
+<p class="text-on-tertiary-container font-medium">Pensando tu lista...</p>
+</section>
+<!-- Results Preview -->
+<section class="space-y-10">
+<!-- Category: Frutas -->
+<div>
+<h3 class="text-primary font-bold text-lg mb-6 ml-2 flex items-center gap-3">
+<span class="w-1.5 h-6 bg-tertiary-fixed-dim rounded-full"></span>
+                    Frutas y Verduras
+                </h3>
+<div class="space-y-3">
+<div class="bg-surface-container-lowest p-5 rounded-2xl flex items-center justify-between hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="relative flex items-center">
+<input checked="" class="w-6 h-6 rounded-md border-outline-variant text-on-tertiary-container focus:ring-on-tertiary-container cursor-pointer" type="checkbox"/>
+</div>
+<div>
+<p class="font-bold text-primary">Tomates Cherry</p>
+<p class="text-xs text-on-surface-variant">Fresco • Local</p>
+</div>
+</div>
+<div class="text-right">
+<span class="text-sm font-bold text-primary px-3 py-1 bg-surface-container-low rounded-lg">500 g</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-2xl flex items-center justify-between hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<input checked="" class="w-6 h-6 rounded-md border-outline-variant text-on-tertiary-container focus:ring-on-tertiary-container cursor-pointer" type="checkbox"/>
+<div>
+<p class="font-bold text-primary">Aguacates</p>
+<p class="text-xs text-on-surface-variant">Maduros</p>
+</div>
+</div>
+<div class="text-right">
+<span class="text-sm font-bold text-primary px-3 py-1 bg-surface-container-low rounded-lg">2 ud</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Category: Carnes -->
+<div>
+<h3 class="text-primary font-bold text-lg mb-6 ml-2 flex items-center gap-3">
+<span class="w-1.5 h-6 bg-primary-container rounded-full"></span>
+                    Carnes y Pescados
+                </h3>
+<div class="space-y-3">
+<div class="bg-surface-container-lowest p-5 rounded-2xl flex items-center justify-between hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<input checked="" class="w-6 h-6 rounded-md border-outline-variant text-on-tertiary-container focus:ring-on-tertiary-container cursor-pointer" type="checkbox"/>
+<div>
+<p class="font-bold text-primary">Pechuga de Pollo</p>
+<p class="text-xs text-on-surface-variant">Corte limpio</p>
+</div>
+</div>
+<div class="text-right">
+<span class="text-sm font-bold text-primary px-3 py-1 bg-surface-container-low rounded-lg">800 g</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Sticky Actions -->
+<div class="fixed bottom-0 left-0 w-full z-50 px-6 pb-8 pt-4 bg-white/70 backdrop-blur-xl rounded-t-[32px] shadow-[0_-8px_32px_rgba(0,39,54,0.08)]">
+<div class="max-w-2xl mx-auto space-y-4">
+<button class="w-full bg-primary text-white py-5 rounded-2xl font-bold flex items-center justify-center gap-3 shadow-lg active:scale-95 transition-all">
+<span>Añadir 12 ítems a la lista</span>
+<span class="material-symbols-outlined text-lg" data-icon="shopping_basket">shopping_basket</span>
+</button>
+<div class="flex justify-center">
+<button class="text-secondary font-bold text-sm flex items-center gap-2 py-2 hover:opacity-70">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                    Añadir a lista nueva
+                </button>
+</div>
+</div>
+</div>
+<!-- BottomNavBar (Suppressed on focus screens, but placeholder logic for shell integrity) -->
+<nav class="hidden md:flex fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-6 pt-2 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md rounded-t-[32px] shadow-[0_-4px_24px_rgba(0,39,54,0.06)] border-none">
+<div class="flex flex-col items-center justify-center text-[#002736] p-3 hover:bg-slate-100 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[11px] font-medium">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#003e54] text-white rounded-full p-3 scale-98 active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-['Inter'] text-[11px] font-medium">Planner</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#002736] p-3 hover:bg-slate-100 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="kitchen">kitchen</span>
+<span class="font-['Inter'] text-[11px] font-medium">Kitchen</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#002736] p-3 hover:bg-slate-100 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[11px] font-medium">Profile</span>
+</div>
+</nav>
+</body></html>

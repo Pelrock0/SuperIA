@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sofia4Coa - AI-Powered Development Workflow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Replacing grayscale with elegant deep blue and gold palette */
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --bg-card-hover: #1f2937;
+            --accent-primary: #d4af37;
+            --accent-secondary: #1e40af;
+            --accent-muted: #6b7280;
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+            --text-muted: #9ca3af;
+            --border-color: #2a3650;
+            --border-hover: #3b4d70;
+            --gold-glow: rgba(212, 175, 55, 0.15);
+            --blue-glow: rgba(30, 64, 175, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            /* Adding subtle gold glow to hero */
+            background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            /* Adding gold accent border to badge */
+            background: var(--bg-card);
+            border: 1px solid var(--accent-primary);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.02em;
+            color: var(--accent-primary);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            /* Adding subtle gold gradient to main title */
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-12px); }
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.01em;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Problem Section */
+        #problem {
+            background: var(--bg-secondary);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .problem-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .problem-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+        }
+
+        .problem-card .icon {
+            width: 56px;
+            height: 56px;
+            /* Adding subtle blue gradient for icon backgrounds */
+            background: linear-gradient(135deg, var(--blue-glow), rgba(30, 64, 175, 0.05));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.75rem;
+            border: 1px solid rgba(30, 64, 175, 0.2);
+        }
+
+        .problem-card h3 {
+            font-size: 1.375rem;
+            margin-bottom: 0.875rem;
+            font-weight: 600;
+            /* Adding gold color to card titles */
+            color: var(--accent-primary);
+        }
+
+        .problem-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Solution Section */
+        .architecture-diagram {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 3.5rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .architecture-diagram h3 {
+            margin-bottom: 2.5rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .architecture-layers {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .layer {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .layer:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-primary);
+        }
+
+        .layer-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Adding blue gradient to layer icons */
+            background: linear-gradient(135deg, var(--blue-glow), rgba(30, 64, 175, 0.05));
+            border-radius: 14px;
+            flex-shrink: 0;
+            border: 1px solid rgba(30, 64, 175, 0.2);
+        }
+
+        .layer-content h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            /* Adding gold color to layer titles */
+            color: var(--accent-primary);
+        }
+
+        .layer-content p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        /* Workflow Section */
+        #workflow {
+            background: var(--bg-secondary);
+        }
+
+        .workflow-timeline {
+            position: relative;
+            padding-left: 4rem;
+        }
+
+        .workflow-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--border-color), transparent);
+        }
+
+        .workflow-step {
+            position: relative;
+            margin-bottom: 2rem;
+            padding: 2rem 2.5rem;
+            background: var(--bg-card);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .workflow-step:hover {
+            transform: translateX(12px);
+            border-color: var(--border-hover);
+        }
+
+        .workflow-step::before {
+            content: '';
+            position: absolute;
+            left: -52px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            /* Changing timeline dots to gold */
+            background: var(--accent-primary);
+            border: 3px solid var(--bg-secondary);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--bg-card), 0 0 12px var(--gold-glow);
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .step-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .step-gate {
+            padding: 0.5rem 1rem;
+            /* Adding gold background to gate badges */
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--accent-primary);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .workflow-step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            /* Adding gold color to workflow titles */
+            color: var(--accent-primary);
+        }
+
+        .workflow-step p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .agent-badge {
+            display: inline-block;
+            padding: 0.5rem 0.875rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            border-radius: 8px;
+            font-size: 0.8125rem;
+            margin-top: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Agents Section */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .agent-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .agent-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            background: var(--bg-card-hover);
+        }
+
+        .agent-header {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .agent-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            /* Adding blue gradient to agent avatars */
+            background: linear-gradient(135deg, var(--blue-glow), rgba(30, 64, 175, 0.05));
+            border: 1px solid rgba(30, 64, 175, 0.3);
+        }
+
+        .agent-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            /* Adding gold color to agent names */
+            color: var(--accent-primary);
+        }
+
+        .agent-role {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .agent-card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
+        /* CLI Section */
+        #cli {
+            background: var(--bg-secondary);
+        }
+
+        .cli-demo {
+            background: #000000;
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: auto;
+        }
+
+        .cli-header {
+            display: flex;
+            gap: 0.625rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cli-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+        }
+
+        .cli-content {
+            font-size: 0.875rem;
+            line-height: 2;
+        }
+
+        .cli-line {
+            margin-bottom: 0.5rem;
+        }
+
+        .cli-prompt {
+            color: var(--text-muted);
+        }
+
+        .cli-command {
+            color: var(--text-primary);
+        }
+
+        .cli-output {
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+        }
+
+        .cli-success {
+            color: var(--text-primary);
+        }
+
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .command-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .command-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .command-card code {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .command-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            line-height: 1.6;
+        }
+
+        /* Highlights Section */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .highlight-card {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .highlight-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+
+        .highlight-number {
+            font-size: 4rem;
+            font-weight: 700;
+            /* Changing highlight numbers to gold */
+            color: var(--accent-primary);
+            line-height: 1;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        .highlight-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            /* Adding gold color to highlight titles */
+            color: var(--accent-primary);
+        }
+
+        .highlight-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Stats Section */
+        #metrics {
+            background: var(--bg-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--bg-card);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stat-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            /* Changing stat numbers to gold with glow */
+            color: var(--accent-primary);
+            text-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+            font-size: 0.9375rem;
+        }
+
+        /* Case Study */
+        .case-study {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 3.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .case-study h3 {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            /* Adding gold color to case study title */
+            color: var(--accent-primary);
+        }
+
+        .case-study .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+        }
+
+        .case-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        .case-step {
+            text-align: center;
+            padding: 1.75rem 1rem;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .case-step:hover {
+            border-color: var(--border-hover);
+        }
+
+        .case-step .time {
+            font-size: 2rem;
+            font-weight: 700;
+            /* Changing case step numbers to gold */
+            color: var(--accent-primary);
+        }
+
+        .case-step .label {
+            color: var(--text-secondary);
+            font-size: 0.8125rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Implementation Timeline */
+        .implementation-timeline {
+            margin-top: 3rem;
+            padding: 3rem;
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        .implementation-timeline h4 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .timeline-bar {
+            display: flex;
+            height: 48px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .timeline-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-primary);
+            font-weight: 700;
+            font-size: 0.8125rem;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            /* Adding blue gradient to timeline segments */
+            background: linear-gradient(135deg, var(--accent-secondary), #2563eb);
+        }
+
+        .timeline-segment:hover {
+            filter: brightness(1.2);
+        }
+
+        .timeline-segment:not(:last-child) {
+            border-right: 2px solid var(--bg-primary);
+        }
+
+        .timeline-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            /* Adding blue color to legend dots */
+            background: var(--accent-secondary);
+        }
+
+        .legend-item strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .time-totals {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .total-box {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+        }
+
+        .total-icon {
+            /* Updated for SVG sizing */
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .total-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .total-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            /* Changing total values to gold */
+            color: var(--accent-primary);
+        }
+
+        .total-label {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Feature Description Section */
+        .feature-description {
+            margin-top: 3rem;
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-description h4 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            /* Adding gold color to feature description title */
+            color: var(--accent-primary);
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .feature-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .feature-summary {
+            text-align: center;
+            font-size: 1.0625rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .highlight-text {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .feature-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .feature-block {
+            display: flex;
+            gap: 1.25rem;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-block:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            /* Updated for SVG sizing */
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-block strong {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 0.625rem;
+            font-size: 1.0625rem;
+            font-weight: 600;
+        }
+
+        .feature-block p {
+            color: var(--text-muted);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .feature-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--bg-primary);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .flow-step {
+            /* Changing flow steps to blue gradient */
+            background: linear-gradient(135deg, var(--accent-secondary), #2563eb);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(30, 64, 175, 0.3);
+        }
+
+        .flow-arrow {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+            /* Adding gold color to footer title */
+            color: var(--accent-primary);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+            font-size: 1.0625rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            color: var(--text-muted);
+            font-size: 0.9375rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .workflow-timeline {
+                padding-left: 2.5rem;
+            }
+
+            .workflow-step::before {
+                left: -38px;
+            }
+
+            .architecture-diagram,
+            .case-study,
+            .feature-description,
+            .implementation-timeline {
+                padding: 2rem;
+            }
+
+            .highlight-card {
+                padding: 2rem;
+            }
+
+            .feature-flow {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        /* Updating custom icon colors to match the palette */
+        .custom-icon {
+            stroke: var(--accent-primary);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#problem">The Problem</a></li>
+            <li><a href="#solution">The Solution</a></li>
+            <li><a href="#workflow">Workflow</a></li>
+            <li><a href="#agents">AI Agents</a></li>
+            <li><a href="#cli">CLI</a></li>
+            <li><a href="#highlights">Key Benefits</a></li>
+            <li><a href="#metrics">Metrics</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">AI-Powered Development</span>
+            <h1>Agent-Driven Development Workflow</h1>
+        </div>
+        <p class="hero-subtitle">
+            An AI-assisted development system with specialized agents,
+            automated quality control, and complete traceability from start to finish.
+        </p>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Problem -->
+    <section id="problem">
+        <div class="section-header">
+            <h2>The Traditional Problem</h2>
+            <p>The challenges of enterprise software development without structured methodology</p>
+        </div>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="icon">
+                    <svg class="custom-icon" viewBox="0 0 48 48" width="32" height="32">
+                        <rect x="8" y="10" width="32" height="28" rx="2"/>
+                        <line x1="8" y1="18" x2="40" y2="18"/>
+                        <line x1="14" y1="24" x2="34" y2="24"/>
+                        <line x1="14" y1="29" x2="28" y2="29"/>
+                    </svg>
+                </div>
+                <h3>Ambiguous Requirements</h3>
+                <p>Requirements get lost, change without control, and nobody knows exactly what needs to be built.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">
+                    <svg class="custom-icon" viewBox="0 0 48 48" width="32" height="32">
+                        <circle cx="24" cy="24" r="16"/>
+                        <path d="M24 12 L24 24 L30 30"/>
+                        <path d="M12 18 L8 14 M36 18 L40 14"/>
+                    </svg>
+                </div>
+                <h3>Scope Creep</h3>
+                <p>"Can you add this too?" becomes a completely different project without documentation.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">
+                    <svg class="custom-icon" viewBox="0 0 48 48" width="32" height="32">
+                        <circle cx="18" cy="32" r="6"/>
+                        <circle cx="30" cy="24" r="6"/>
+                        <line x1="18" y1="26" x2="18" y2="12"/>
+                        <line x1="30" y1="18" x2="30" y2="12"/>
+                        <rect x="12" y="8" width="24" height="8" rx="2"/>
+                    </svg>
+                </div>
+                <h3>Inconsistent Quality</h3>
+                <p>Without mandatory reviews, low-quality code reaches production.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">
+                    <svg class="custom-icon" viewBox="0 0 48 48" width="32" height="32">
+                        <rect x="10" y="14" width="28" height="20" rx="2"/>
+                        <path d="M16 20 L20 24 L16 28"/>
+                        <line x1="24" y1="26" x2="32" y2="26"/>
+                    </svg>
+                </div>
+                <h3>No Traceability</h3>
+                <p>There's no way to know what was decided, when, why, or how long it took.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution -->
+    <section id="solution">
+        <div class="section-header">
+            <h2>The Solution</h2>
+            <p>A 4-layer system that guarantees quality, traceability, and efficiency</p>
+        </div>
+        <div class="architecture-diagram">
+            <h3>System Architecture</h3>
+            <div class="architecture-layers">
+                <div class="layer">
+                    <div class="layer-icon">
+                        <svg class="custom-icon" viewBox="0 0 48 48" width="32" height="32">
+                            <rect x="12" y="8" width="24" height="32" rx="2"/>
+                            <line x1="16" y1="16" x2="32" y2="16"/>
+                            <line x1="16" y1="22" x2="32" y2="22"/>
+                            <line x1="16" y1="28" x2="28" y2="28"/>
+                            <line x1="16" y1="34" x2="26" y2="34"/>
+                        </svg>
+                    </div>
+                    <div class="layer-content">
+                        <h4>Rules (Global Rules)</h4>
+                        <p>Non-negotiable rules that apply to the ENTIRE project: architecture, quality, security.</p>
+                    </div>
+                </div>
+                <div class="layer">
+                    <div class="layer-icon">
+                        <svg class="custom-icon" viewBox="0 0 48 48" width="32" height="32">
+                            <path d="M10 24 L18 16 L26 24 L34 16 L42 24"/>
+                            <circle cx="10" cy="24" r="3" fill="rgba(255,255,255,0.7)"/>
+                            <circle cx="18" cy="16" r="3" fill="rgba(255,255,255,0.7)"/>
+                            <circle cx="26" cy="24" r="3" fill="rgba(255,255,255,0.7)"/>
+                            <circle cx="34" cy="16" r="3" fill="rgba(255,255,255,0.7)"/>
+                            <circle cx="42" cy="24" r="3" fill="rgba(255,255,255,0.7)"/>
+                        </svg>
+                    </div>
+                    <div class="layer-content">
+                        <h4>Workflow</h4>
+                        <p>6 steps with mandatory gates. No step can be skipped. Each gate has explicit criteria.</p>
+                    </div>
+                </div>
+                <div class="layer">
+                    <div class="layer-icon">
+                        <svg class="custom-icon" viewBox="0 0 48 48" width="32" height="32">
+                            <circle cx="24" cy="20" r="8"/>
+                            <path d="M16 34 C16 28 20 26 24 26 C28 26 32 28 32 34"/>
+                            <rect x="20" y="38" width="8" height="4" rx="1"/>
+                            <circle cx="18" cy="16" r="1.5" fill="rgba(255,255,255,0.7)"/>
+                            <circle cx="30" cy="16" r="1.5" fill="rgba(255,255,255,0.7)"/>
+                        </svg>
+                    </div>
+                    <div class="layer-content">
+                        <h4>Agents (AI Agents)</h4>
+                        <p>9 specialized roles: Analyst, Product Owner, Architect, Developer, Reviewers...</p>
+                    </div>
+                </div>
+                <div class="layer">
+                    <div class="layer-icon">
+                        <svg class="custom-icon" viewBox="0 0 48 48" width="32" height="32">
+                            <circle cx="24" cy="24" r="14"/>
+                            <circle cx="24" cy="24" r="4" fill="rgba(255,255,255,0.7)"/>
+                            <path d="M24 10 L24 16 M38 24 L32 24 M24 38 L24 32 M10 24 L16 24"/>
+                            <path d="M33 15 L29 19 M33 33 L29 29 M15 33 L19 29 M15 15 L19 19"/>
+                        </svg>
+                    </div>
+                    <div class="layer-content">
+                        <h4>Skills</h4>
+                        <p>9 specific skills that define HOW each agent executes their work.</p>
+                    </div>
+                </div>
+                <div class="layer">
+                    <div class="layer-icon">
+                        <svg class="custom-icon" viewBox="0 0 48 48" width="32" height="32">
+                            <rect x="8" y="12" width="32" height="24" rx="2"/>
+                            <rect x="12" y="20" width="4" height="4" rx="1"/>
+                            <rect x="12" y="26" width="4" height="4" rx="1"/>
+                            <rect x="18" y="20" width="4" height="4" rx="1"/>
+                            <rect x="18" y="26" width="4" height="4" rx="1"/>
+                            <rect x="24" y="20" width="12" height="4" rx="1"/>
+                            <rect x="24" y="26" width="8" height="4" rx="1"/>
+                        </svg>
+                    </div>
+                    <div class="layer-content">
+                        <h4>CLI (Command Line Interface)</h4>
+                        <p>Tool to manage workflow state, approve gates, and measure metrics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow -->
+    <section id="workflow">
+        <div class="section-header">
+            <h2>The Complete Workflow</h2>
+            <p>6 steps with mandatory gates - none can be skipped</p>
+        </div>
+        <div class="workflow-timeline">
+            <div class="workflow-step">
+                <div class="step-header">
+                    <span class="step-number">STEP 1</span>
+                    <span class="step-gate">GATE S1</span>
+                </div>
+                <h3>Scope Analysis</h3>
+                <p>Scope and risk analysis BEFORE any work. Classifies as LOW / MEDIUM / HIGH. If LOW, can skip PRD.</p>
+                <span class="agent-badge">scope-analyzer.md</span>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-header">
+                    <span class="step-number">STEP 2</span>
+                    <span class="step-gate">GATE S2</span>
+                </div>
+                <h3>PRD (Product Requirements)</h3>
+                <p>Complete requirements document with objectives, explicit scope, acceptance criteria in Given/When/Then, and marked TBDs.</p>
+                <span class="agent-badge">product-owner.md</span>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-header">
+                    <span class="step-number">STEP 3</span>
+                    <span class="step-gate">GATE S3</span>
+                </div>
+                <h3>Technical Design</h3>
+                <p>Technical design with architecture, transaction boundaries, explicit trade-offs, and documented rejected alternatives.</p>
+                <span class="agent-badge">architect.md</span>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-header">
+                    <span class="step-number">STEP 4</span>
+                    <span class="step-gate">GATE S4</span>
+                </div>
+                <h3>Implementation</h3>
+                <p>Strict implementation according to approved design. Mandatory tests. No shortcuts or on-the-fly redesign.</p>
+                <span class="agent-badge">backend-developer.md</span>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-header">
+                    <span class="step-number">STEP 5</span>
+                    <span class="step-gate">GATE S5</span>
+                </div>
+                <h3>Reviews (4 types)</h3>
+                <p>Code Review + Security Review + Test Gate + UI/UX Review (if applicable). ALL must pass to continue.</p>
+                <span class="agent-badge">code-reviewer.md + security-reviewer.md + test-gate.md</span>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-header">
+                    <span class="step-number">STEP 6</span>
+                    <span class="step-gate">GATE S6</span>
+                </div>
+                <h3>Done</h3>
+                <p>Feature completed. All gates passed. Ready for merge and deployment.</p>
+                <span class="agent-badge">Metrics finalized</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agents -->
+    <section id="agents">
+        <div class="section-header">
+            <h2>The 9 AI Agents</h2>
+            <p>Each agent has a specific role and clear responsibilities</p>
+        </div>
+        <div class="agents-grid">
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-avatar">🔍</div>
+                    <div>
+                        <h3>Scope Analyzer</h3>
+                        <div class="agent-role">Senior Technical Analyst</div>
+                    </div>
+                </div>
+                <p>Evaluates complexity and risks BEFORE any work. Decides if full PRD is needed or mini-scope is sufficient.</p>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-avatar">📋</div>
+                    <div>
+                        <h3>Product Owner</h3>
+                        <div class="agent-role">Enterprise PO</div>
+                    </div>
+                </div>
+                <p>Writes PRDs that are clear contracts between business and technology. Defines the WHAT, never the HOW.</p>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-avatar">🏗️</div>
+                    <div>
+                        <h3>Architect</h3>
+                        <div class="agent-role">Software Architect</div>
+                    </div>
+                </div>
+                <p>Translates requirements into technical design. Defines boundaries, transactions, trade-offs, and rejected alternatives.</p>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-avatar">💻</div>
+                    <div>
+                        <h3>Backend Developer</h3>
+                        <div class="agent-role">Senior Developer</div>
+                    </div>
+                </div>
+                <p>Implements exactly what was designed. No redesign, no scope creep, no shortcuts. Mandatory tests.</p>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-avatar">👁️</div>
+                    <div>
+                        <h3>Code Reviewer</h3>
+                        <div class="agent-role">Code Reviewer</div>
+                    </div>
+                </div>
+                <p>Validates quality, maintainability, performance. Does not redesign, only verifies compliance.</p>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-avatar">🔒</div>
+                    <div>
+                        <h3>Security Reviewer</h3>
+                        <div class="agent-role">Security Specialist</div>
+                    </div>
+                </div>
+                <p>Reviews vulnerabilities, authentication, authorization, sensitive data handling.</p>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-avatar">🧪</div>
+                    <div>
+                        <h3>Test Gate</h3>
+                        <div class="agent-role">Test Guardian</div>
+                    </div>
+                </div>
+                <p>Blocks if tests don't exist or are insufficient. Does not suggest improvements, only blocks or passes.</p>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-avatar">🎨</div>
+                    <div>
+                        <h3>UX Designer</h3>
+                        <div class="agent-role">Experience Designer</div>
+                    </div>
+                </div>
+                <p>Defines interface design when the feature includes visual components or user flows.</p>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-avatar">✨</div>
+                    <div>
+                        <h3>UI/UX Reviewer</h3>
+                        <div class="agent-role">Interface Reviewer</div>
+                    </div>
+                </div>
+                <p>Reviews UI implementation against approved design. Only applies if the feature modifies views.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLI -->
+    <section id="cli">
+        <div class="section-header">
+            <h2>Management CLI</h2>
+            <p>Command line tool to control the workflow</p>
+        </div>
+
+        <div class="cli-demo">
+            <div class="cli-header">
+                <div class="cli-dot"></div>
+                <div class="cli-dot"></div>
+                <div class="cli-dot"></div>
+            </div>
+            <div class="cli-content">
+                <div class="cli-line">
+                    <span class="cli-prompt">$ </span>
+                    <span class="cli-command">python cli.py create s4c-coa-events-api</span>
+                </div>
+                <div class="cli-line cli-output cli-success">Feature 's4c-coa-events-api' created (S1)</div>
+
+                <div class="cli-line" style="margin-top: 1rem;">
+                    <span class="cli-prompt">$ </span>
+                    <span class="cli-command">python cli.py approve s4c-coa-events-api S1</span>
+                </div>
+                <div class="cli-line cli-output cli-success">S1 approved. Current step: S2</div>
+
+                <div class="cli-line" style="margin-top: 1rem;">
+                    <span class="cli-prompt">$ </span>
+                    <span class="cli-command">python cli.py status s4c-coa-events-api</span>
+                </div>
+                <div class="cli-line cli-output">{</div>
+                <div class="cli-line cli-output">  "feature": "s4c-coa-events-api",</div>
+                <div class="cli-line cli-output">  "status": "S6",</div>
+                <div class="cli-line cli-output">  "workflow": { "S1": {...}, "S2": {...}, ... }</div>
+                <div class="cli-line cli-output">}</div>
+
+                <div class="cli-line" style="margin-top: 1rem;">
+                    <span class="cli-prompt">$ </span>
+                    <span class="cli-command">python cli.py metrics s4c-coa-events-api</span>
+                </div>
+                <div class="cli-line cli-output">{</div>
+                <div class="cli-line cli-output">  "lead_time_minutes": 45,</div>
+                <div class="cli-line cli-output">  "review_iterations": 0,</div>
+                <div class="cli-line cli-output">  "critical_findings": 0</div>
+                <div class="cli-line cli-output">}</div>
+            </div>
+        </div>
+
+        <div class="commands-grid">
+            <div class="command-card">
+                <code>cli.py create &lt;feature&gt;</code>
+                <p>Creates a new feature and starts at S1</p>
+            </div>
+            <div class="command-card">
+                <code>cli.py approve &lt;feature&gt; &lt;step&gt;</code>
+                <p>Approves a gate and advances to the next</p>
+            </div>
+            <div class="command-card">
+                <code>cli.py reject &lt;feature&gt; &lt;step&gt; "reason"</code>
+                <p>Rejects with documented reason</p>
+            </div>
+            <div class="command-card">
+                <code>cli.py status &lt;feature&gt;</code>
+                <p>Shows the complete workflow state</p>
+            </div>
+            <div class="command-card">
+                <code>cli.py add-time &lt;feature&gt; &lt;minutes&gt;</code>
+                <p>Records human time invested</p>
+            </div>
+            <div class="command-card">
+                <code>cli.py metrics &lt;feature&gt;</code>
+                <p>Calculates final metrics (lead time, iterations)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights -->
+    <section id="highlights">
+        <div class="section-header">
+            <h2>What Makes This System Great</h2>
+            <p>Why this implementation is special</p>
+        </div>
+        <div class="highlights-grid">
+            <div class="highlight-card">
+                <div class="highlight-number">01</div>
+                <h3>Non-Negotiable Gates</h3>
+                <p>Every step has a gate with explicit criteria. None can be skipped. If something fails, it returns to the previous step. This guarantees consistent quality.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-number">02</div>
+                <h3>Role Separation</h3>
+                <p>Each agent has clear responsibilities and CANNOT exceed them. The Architect doesn't implement. The Developer doesn't redesign. This prevents conflicts and scope creep.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-number">03</div>
+                <h3>Complete Traceability</h3>
+                <p>Every decision is documented in PRD, Design, and Review. The CLI records timestamps for each step. You always know who decided what and when.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-number">04</div>
+                <h3>Rules > Agents</h3>
+                <p>Global rules always apply, regardless of which agent is acting. Clean architecture, mandatory tests, code without TODOs are laws, not suggestions.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-number">05</div>
+                <h3>Automatic Metrics</h3>
+                <p>Lead time, review iterations, critical findings... everything is calculated automatically. Real data to improve the process.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-number">06</div>
+                <h3>Complexity-Based Scaling</h3>
+                <p>LOW features can skip PRD. MEDIUM/HIGH require complete documentation. The process adapts to risk, not whim.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics -->
+    <section id="metrics">
+        <div class="section-header">
+            <h2>Real Metrics</h2>
+            <p>Case study: Feature s4c-coa-events-api</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">9</div>
+                <div class="stat-label">AI Agents</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Specialized Skills</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Mandatory Gates</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Critical Findings</div>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <h3>Feature: COA Events API</h3>
+            <p class="subtitle">s4c-coa-events-api</p>
+
+            <div class="case-timeline">
+                <div class="case-step">
+                    <div class="time">HIGH</div>
+                    <div class="label">Complexity</div>
+                </div>
+                <div class="case-step">
+                    <div class="time">37</div>
+                    <div class="label">Tests</div>
+                </div>
+                <div class="case-step">
+                    <div class="time">79</div>
+                    <div class="label">Assertions</div>
+                </div>
+                <div class="case-step">
+                    <div class="time">0</div>
+                    <div class="label">Rejections</div>
+                </div>
+                <div class="case-step">
+                    <div class="time">3</div>
+                    <div class="label">Documents</div>
+                </div>
+                <div class="case-step">
+                    <div class="time">45</div>
+                    <div class="label">AI Min Total</div>
+                </div>
+                <div class="case-step">
+                    <div class="time">25</div>
+                    <div class="label">Human Min</div>
+                </div>
+            </div>
+
+            <!-- Implementation Timeline -->
+            <div class="implementation-timeline">
+                <h4>Time Breakdown by Phase</h4>
+                <div class="timeline-container">
+                    <div class="timeline-bar">
+                        <div class="timeline-segment" style="flex: 1.5;" title="Scope Analysis: 1:33 min">
+                            <span class="segment-label">S1</span>
+                        </div>
+                        <div class="timeline-segment" style="flex: 20.5;" title="PRD: 20:26 min">
+                            <span class="segment-label">S2</span>
+                        </div>
+                        <div class="timeline-segment" style="flex: 10.5;" title="Technical Design: 10:30 min">
+                            <span class="segment-label">S3</span>
+                        </div>
+                        <div class="timeline-segment" style="flex: 9;" title="Implementation: 8:52 min">
+                            <span class="segment-label">S4</span>
+                        </div>
+                        <div class="timeline-segment" style="flex: 3;" title="Code Review: 2:59 min">
+                            <span class="segment-label">S5</span>
+                        </div>
+                        <div class="timeline-segment" style="flex: 1.2;" title="Workflow Update: 1:15 min">
+                            <span class="segment-label">S6</span>
+                        </div>
+                    </div>
+                    <div class="timeline-legend">
+                        <div class="legend-item">
+                            <span class="legend-color"></span>
+                            <span>S1 Scope: <strong>1:33</strong></span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color"></span>
+                            <span>S2 PRD: <strong>20:26</strong></span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color"></span>
+                            <span>S3 Design: <strong>10:30</strong></span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color"></span>
+                            <span>S4 Implement: <strong>8:52</strong></span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color"></span>
+                            <span>S5 Review: <strong>2:59</strong></span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color"></span>
+                            <span>S6 Update: <strong>1:15</strong></span>
+                        </div>
+                    </div>
+                    <div class="time-totals">
+                        <div class="total-box">
+                            <span class="total-icon">
+                                <svg class="custom-icon" viewBox="0 0 48 48" width="28" height="28">
+                                    <circle cx="24" cy="20" r="8"/>
+                                    <path d="M16 34 C16 28 20 26 24 26 C28 26 32 28 32 34"/>
+                                    <rect x="20" y="38" width="8" height="4" rx="1"/>
+                                    <circle cx="18" cy="16" r="1.5" fill="rgba(255,255,255,0.7)"/>
+                                    <circle cx="30" cy="16" r="1.5" fill="rgba(255,255,255,0.7)"/>
+                                </svg>
+                            </span>
+                            <div class="total-info">
+                                <span class="total-value">45 min</span>
+                                <span class="total-label">AI Time</span>
+                            </div>
+                        </div>
+                        <div class="total-box">
+                            <span class="total-icon">
+                                <svg class="custom-icon" viewBox="0 0 48 48" width="28" height="28">
+                                    <circle cx="24" cy="16" r="7"/>
+                                    <path d="M14 38 C14 30 18 28 24 28 C30 28 34 30 34 38"/>
+                                </svg>
+                            </span>
+                            <div class="total-info">
+                                <span class="total-value">25 min</span>
+                                <span class="total-label">Human Time</span>
+                            </div>
+                        </div>
+                        <div class="total-box">
+                            <span class="total-icon">
+                                <svg class="custom-icon" viewBox="0 0 48 48" width="28" height="28">
+                                    <circle cx="24" cy="24" r="14"/>
+                                    <path d="M24 14 L24 24 L30 28"/>
+                                </svg>
+                            </span>
+                            <div class="total-info">
+                                <span class="total-value">~70 min</span>
+                                <span class="total-label">Total Real</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="margin-top: 2.5rem; color: var(--text-secondary); text-align: center; line-height: 1.7;">
+                Full PRD → Technical Design → Implementation → 4 Reviews → 0 critical issues → Deploy Ready
+            </p>
+
+            <!-- Feature Description -->
+            <div class="feature-description">
+                <h4>What was this feature about?</h4>
+                <div class="feature-content">
+                    <p class="feature-summary">
+                        <strong>Objective:</strong> Create a secure REST API so that <span class="highlight-text">Power Automate</span>
+                        can notify Sofia4Coa when a new <span class="highlight-text">COA (Certificate of Analysis)</span>
+                        arrives from external suppliers.
+                    </p>
+
+                    <div class="feature-details">
+                        <div class="feature-block">
+                            <span class="feature-icon">
+                                <svg class="custom-icon" viewBox="0 0 48 48" width="28" height="28">
+                                    <rect x="14" y="10" width="20" height="28" rx="2"/>
+                                    <circle cx="24" cy="32" r="2" fill="rgba(255,255,255,0.7)"/>
+                                    <path d="M20 18 L28 18 M20 22 L28 22"/>
+                                </svg>
+                            </span>
+                            <div>
+                                <strong>JWT Authentication</strong>
+                                <p>Power Automate authenticates with username/password and receives a JWT token valid for 180 minutes.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-block">
+                            <span class="feature-icon">
+                                <svg class="custom-icon" viewBox="0 0 48 48" width="28" height="28">
+                                    <path d="M8 12 L24 24 L40 12"/>
+                                    <path d="M8 12 L8 36 L40 36 L40 12"/>
+                                </svg>
+                            </span>
+                            <div>
+                                <strong>Event Reception</strong>
+                                <p>Protected endpoint that receives: sender, reception date, PDF name, and SharePoint location.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-block">
+                            <span class="feature-icon">
+                                <svg class="custom-icon" viewBox="0 0 48 48" width="28" height="28">
+                                    <path d="M24 8 L28 16 L38 18 L30 26 L32 38 L24 32 L16 38 L18 26 L10 18 L20 16 Z"/>
+                                </svg>
+                            </span>
+                            <div>
+                                <strong>Zero Side Effects</strong>
+                                <p>If JWT is invalid (401) or payload is malformed (400), NOTHING is persisted. Zero garbage in DB.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-block">
+                            <span class="feature-icon">
+                                <svg class="custom-icon" viewBox="0 0 48 48" width="28" height="28">
+                                    <rect x="10" y="14" width="28" height="20" rx="2"/>
+                                    <path d="M16 20 L20 24 L16 28"/>
+                                    <line x1="24" y1="26" x2="32" y2="26"/>
+                                </svg>
+                            </span>
+                            <div>
+                                <strong>Technical Logs</strong>
+                                <p>All attempts (successful or failed) are recorded in separate technical logs for troubleshooting.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-flow">
+                        <div class="flow-step">Power Automate</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">POST /login</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">JWT Token</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">POST /coa-pa-record</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">Sofia4Coa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h2>The Future of Development</h2>
+        <p>
+            This system demonstrates how AI can augment (not replace)
+            the team's capacity, guaranteeing quality, consistency, and traceability
+            in every feature developed.
+        </p>
+
+        <div class="tech-stack">
+            <div class="tech-item">Laravel 12</div>
+            <div class="tech-item">PHP 8.3+</div>
+            <div class="tech-item">Backpack CRUD</div>
+            <div class="tech-item">MySQL</div>
+            <div class="tech-item">Cursor AI</div>
+            <div class="tech-item">Python CLI</div>
+        </div>
+
+        <p style="margin-top: 3rem; color: var(--text-muted); font-size: 0.875rem;">
+            Alfredo Martín Santos © 2026 — AI-Powered Development Workflow
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animate on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.problem-card, .agent-card, .workflow-step, .highlight-card, .stat-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+

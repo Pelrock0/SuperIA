@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="5"
+    resolveFromConfigFile="true"
+    findUnusedBaselineEntry="false"
+    findUnusedCode="false"
+    cacheDirectory="storage/framework/psalm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="app" />
+        <directory name="database" />
+        <directory name="routes" />
+        <directory name="tests" />
+        <ignoreFiles>
+            <directory name="vendor" />
+            <directory name="storage" />
+            <directory name="bootstrap/cache" />
+            <directory name="node_modules" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <plugins>
+        <pluginClass class="Psalm\LaravelPlugin\Plugin" />
+    </plugins>
+
+    <issueHandlers>
+        <UndefinedFunction>
+            <errorLevel type="suppress">
+                <directory name="app/Http/Controllers/Admin" />
+                <file name="app/Http/Middleware/CheckIfAdmin.php" />
+                <file name="app/Http/Requests/UserRequest.php" />
+            </errorLevel>
+        </UndefinedFunction>
+    </issueHandlers>
+</psalm>

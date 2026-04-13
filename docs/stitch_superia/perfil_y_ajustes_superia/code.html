@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#191c1e",
+                    "on-tertiary-fixed": "#002113",
+                    "surface-tint": "#34647b",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "tertiary": "#002a1a",
+                    "outline-variant": "#c1c7cd",
+                    "inverse-surface": "#2d3133",
+                    "on-primary-fixed-variant": "#174c62",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "outline": "#71787d",
+                    "on-secondary-fixed": "#001f27",
+                    "on-secondary-container": "#005c70",
+                    "secondary-container": "#50d9fe",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-fixed-dim": "#9ecde8",
+                    "on-secondary-fixed-variant": "#004e5f",
+                    "surface-bright": "#f7f9fb",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#b3ebff",
+                    "primary-fixed": "#c1e8ff",
+                    "tertiary-container": "#00422b",
+                    "primary-container": "#003e54",
+                    "secondary": "#00677d",
+                    "secondary-fixed-dim": "#4cd6fb",
+                    "inverse-primary": "#9ecde8",
+                    "surface-dim": "#d8dadc",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-variant": "#e0e3e5",
+                    "on-primary-fixed": "#001e2b",
+                    "background": "#f7f9fb",
+                    "primary": "#002736",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e6e8ea",
+                    "on-primary-container": "#7aa9c3",
+                    "surface": "#f7f9fb",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#10b981",
+                    "on-surface-variant": "#41484c",
+                    "on-surface": "#191c1e",
+                    "on-error": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-mesh-gradient {
+            background: radial-gradient(at 0% 0%, #c1e8ff 0%, transparent 50%),
+                        radial-gradient(at 100% 0%, #6ffbbe 0%, transparent 50%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-surface min-h-screen pb-24">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full flex items-center justify-between px-6 h-16 bg-[#f7f9fb]/70 dark:bg-[#002736]/70 backdrop-blur-xl z-50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#002736] dark:text-[#f7f9fb] transition-transform duration-200 scale-98 active:scale-95" data-icon="arrow_back">arrow_back</span>
+<h1 class="font-headline font-bold tracking-tight text-[#002736] dark:text-[#f7f9fb] text-lg">Perfil</h1>
+</div>
+<div class="flex items-center gap-2">
+<!-- Superia Leaf Logo -->
+<div class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary-container text-tertiary-fixed">
+<span class="material-symbols-outlined" data-icon="eco" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+</div>
+</header>
+<main class="pt-20 px-6 max-w-2xl mx-auto space-y-8">
+<!-- Profile Header Section -->
+<section class="flex flex-col items-center text-center space-y-4 py-6">
+<div class="relative">
+<div class="w-24 h-24 rounded-full bg-mesh-gradient flex items-center justify-center shadow-lg ring-4 ring-white">
+<span class="text-primary font-headline font-extrabold text-3xl tracking-tighter">EG</span>
+</div>
+<div class="absolute bottom-0 right-0 p-1.5 bg-primary rounded-full border-2 border-white text-white">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</div>
+</div>
+<div>
+<h2 class="font-headline font-extrabold text-2xl text-primary tracking-tight">Elena García</h2>
+<p class="text-on-surface-variant font-medium text-sm">elena.garcia@example.com</p>
+</div>
+</section>
+<!-- Bento Layout: Datos Personales -->
+<section class="space-y-4">
+<h3 class="font-headline font-bold text-xs uppercase tracking-[0.1em] text-outline px-2">Datos personales</h3>
+<div class="grid grid-cols-1 gap-4">
+<!-- Name Card -->
+<div class="bg-surface-container-lowest p-5 rounded-xl transition-all duration-200 hover:shadow-sm border border-transparent hover:border-primary/5 group">
+<label class="block font-headline text-[10px] font-bold text-outline-variant uppercase tracking-widest mb-1">Nombre Completo</label>
+<div class="flex justify-between items-center">
+<span class="text-primary font-semibold text-lg">Elena García</span>
+<button class="p-2 bg-surface-container-low rounded-lg text-primary-container hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="edit_square">edit_square</span>
+</button>
+</div>
+</div>
+<!-- Password Action -->
+<button class="w-full flex items-center justify-between bg-primary p-5 rounded-xl shadow-md transition-transform active:scale-[0.98]">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="lock_reset">lock_reset</span>
+</div>
+<span class="text-white font-bold">Cambiar contraseña</span>
+</div>
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Bento Layout: Privacidad y Datos -->
+<section class="space-y-4">
+<h3 class="font-headline font-bold text-xs uppercase tracking-[0.1em] text-outline px-2">Privacidad y datos</h3>
+<div class="bg-surface-container-low rounded-xl overflow-hidden p-2 space-y-1">
+<a class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg hover:bg-white/80 transition-all group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="visibility">visibility</span>
+<span class="font-medium text-primary">Ver mis datos</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg hover:bg-white/80 transition-all group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="history">history</span>
+<span class="font-medium text-primary">Limpiar historial de productos</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg hover:bg-white/80 transition-all group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="ios_share">ios_share</span>
+<span class="font-medium text-primary">Exportar mis datos</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- Danger Zone Section -->
+<section class="mt-12 mb-8">
+<div class="bg-error-container/20 border border-error/10 rounded-xl p-6">
+<h3 class="font-headline font-extrabold text-error text-lg mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+                    Zona de Riesgo
+                </h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">
+                    Esta acción es permanente e irreversible. Una vez eliminada, toda tu información, listas y preferencias de IA serán borradas de nuestros servidores.
+                </p>
+<button class="w-full py-4 bg-error text-white font-bold rounded-xl shadow-lg shadow-error/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="delete_forever">delete_forever</span>
+                    Eliminar cuenta
+                </button>
+</div>
+</section>
+<!-- Version Footer -->
+<footer class="text-center py-6">
+<p class="text-outline text-xs font-medium tracking-widest uppercase">Versión 1.2.0</p>
+<div class="mt-4 opacity-10 flex justify-center grayscale">
+<img alt="Superia Logo" data-alt="minimalist typographic logo for Superia brand in dark navy text with soft grey shadow on white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMUi-JCTL5DmgOOCqxgCSlamfQ_DgTJ4wMLTGVtUKszeMic8bcR8LPNxzeUUlUR13oWun8qNydJ4eZCUunR2omaQwvMpCDOpCGXWyk6eDqDozSxjNhcH-pt7CEIbqXWl4SWaC_SOdo18Tj728qza6mM_ip9tViSZYL6gN7OfNHmD1lgqOGJGvdsbdM9xQHdcL7jmBsbF2agz60IVxkKqsvav2ZjsytX3eCg6bUruWhDa5t1J-699MJt58ZfMfH0jsVnXq6-NJcwRc"/>
+</div>
+</footer>
+</main>
+<!-- Navigation Bar Logic (Active: Perfil) -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center px-4 py-3 z-50 bg-white/80 dark:bg-[#002736]/80 backdrop-blur-lg rounded-t-3xl shadow-[0_-4px_24px_rgba(0,39,54,0.06)]">
+<button class="flex flex-col items-center justify-center text-[#191c1e]/50 dark:text-[#f7f9fb]/40 hover:opacity-80 transition-all duration-200 scale-95">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-['Inter'] text-[11px] font-medium">Tienda</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#191c1e]/50 dark:text-[#f7f9fb]/40 hover:opacity-80 transition-all duration-200 scale-95">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-['Inter'] text-[11px] font-medium">Listas</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#191c1e]/50 dark:text-[#f7f9fb]/40 hover:opacity-80 transition-all duration-200 scale-95">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-['Inter'] text-[11px] font-medium">IA</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#002736] dark:text-[#6ffbbe] scale-110 font-bold hover:opacity-80 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-['Inter'] text-[11px] font-medium">Perfil</span>
+</button>
+</nav>
+</body></html>

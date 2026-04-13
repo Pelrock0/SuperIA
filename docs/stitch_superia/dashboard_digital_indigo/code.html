@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#777586",
+                    "primary-fixed": "#e3dfff",
+                    "on-tertiary-fixed-variant": "#005321",
+                    "inverse-primary": "#c3c0ff",
+                    "secondary": "#4953bc",
+                    "on-surface-variant": "#464554",
+                    "on-secondary-fixed-variant": "#2f3aa3",
+                    "surface": "#f8f9fb",
+                    "on-primary-fixed": "#100069",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#6bff8f",
+                    "surface-variant": "#e1e2e4",
+                    "surface-container-highest": "#e1e2e4",
+                    "on-secondary-container": "#17228f",
+                    "on-tertiary-container": "#48df75",
+                    "on-error-container": "#93000a",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e7e8ea",
+                    "inverse-on-surface": "#f0f1f3",
+                    "secondary-fixed": "#e0e0ff",
+                    "surface-bright": "#f8f9fb",
+                    "secondary-container": "#8792fe",
+                    "on-primary-container": "#c1beff",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c7c4d7",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#f8f9fb",
+                    "surface-container": "#edeef0",
+                    "primary": "#2a14b4",
+                    "primary-container": "#4338ca",
+                    "surface-dim": "#d9dadc",
+                    "surface-tint": "#5148d7",
+                    "tertiary": "#00451b",
+                    "secondary-fixed-dim": "#bdc2ff",
+                    "on-tertiary-fixed": "#002109",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-low": "#f3f4f6",
+                    "tertiary-container": "#005f28",
+                    "on-primary-fixed-variant": "#372abf",
+                    "on-background": "#191c1e",
+                    "on-surface": "#191c1e",
+                    "inverse-surface": "#2e3132",
+                    "on-secondary-fixed": "#000767",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#4ae176",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .glass-shell { backdrop-filter: blur(24px); }
+        .ai-glow { background: linear-gradient(45deg, #005f28, #4ae176); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_8px_24px_rgba(42,20,180,0.06)] flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-indigo-700 dark:text-indigo-400" data-icon="sparkles">colors_spark</span>
+<h1 class="text-2xl font-bold tracking-tighter text-indigo-800 dark:text-indigo-300 font-['Inter']">Superia</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed transition-opacity hover:opacity-80">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Close-up portrait of a professional man in high-end office lighting with soft focus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn4SfUoF40esXXDs2ANjOMU2dgnG9VwfSmaPAXHhdBrFPq8HJUZRPHI9OEb1K_XnkfKcKEG9o9HalGIYtblNslZ8HaxGHc5DILtN518195X_rGWTuzZtBCJqI602NBaOvnQat8xyVmTZBxAppQhWiNGVs0DVnk7WWctCbSrwXuhaL845dQytHvnTLsp4vyJq9jKVLoplS8roxtWtvvc8d8h4p_wM7PK2Ibk_rEHMzv-3P28wIPcuAIEC7ANrSZjyhlFSp-RV79aEw"/>
+</div>
+</header>
+<main class="mt-24 px-6">
+<!-- AI Smart Greeting -->
+<section class="mb-8">
+<p class="text-[11px] font-medium uppercase tracking-wider text-primary mb-1">Tu Asistente Inteligente</p>
+<h2 class="text-3xl font-bold tracking-tight text-on-surface leading-tight">Buenas tardes, <br/>Marco</h2>
+</section>
+<!-- List Grid -->
+<div class="grid grid-cols-1 gap-4">
+<!-- List Card: Compra Semanal -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_8px_24px_rgba(42,20,180,0.06)] relative overflow-hidden group transition-all duration-300 active:scale-[0.98]">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-xl font-semibold tracking-tight text-on-surface">Compra Semanal</h3>
+<p class="text-on-surface-variant text-sm mt-1 font-medium">8 / 12 items</p>
+</div>
+<span class="material-symbols-outlined text-secondary-container" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-2 bg-surface-container rounded-full mb-6 overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 66%"></div>
+</div>
+<!-- AI Optimization Action -->
+<button class="w-full flex items-center justify-between bg-tertiary-container px-4 py-3 rounded-lg group-hover:opacity-90 transition-opacity">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-lg" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-tertiary-fixed-dim text-sm font-semibold tracking-tight">Ver optimización</span>
+</div>
+<span class="material-symbols-outlined text-tertiary-fixed text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<!-- List Card: Cena Evento -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_8px_24px_rgba(42,20,180,0.06)] relative overflow-hidden group transition-all duration-300 active:scale-[0.98]">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-xl font-semibold tracking-tight text-on-surface">Cena Evento</h3>
+<p class="text-on-surface-variant text-sm mt-1 font-medium">2 / 15 items</p>
+</div>
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-2 bg-surface-container rounded-full mb-6 overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 15%"></div>
+</div>
+<!-- AI Optimization Action -->
+<button class="w-full flex items-center justify-between bg-tertiary-container px-4 py-3 rounded-lg group-hover:opacity-90 transition-opacity">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-lg" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-tertiary-fixed-dim text-sm font-semibold tracking-tight">Ver optimización</span>
+</div>
+<span class="material-symbols-outlined text-tertiary-fixed text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<!-- Empty State / Suggestion Card -->
+<div class="bg-surface-container-low border-2 border-dashed border-outline-variant p-8 rounded-xl flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-outline-variant text-4xl mb-2" data-icon="shopping_basket">shopping_basket</span>
+<p class="text-on-surface-variant font-medium">¿Listo para planificar?</p>
+<p class="text-outline text-xs mt-1">Crea una lista asistida por IA</p>
+</div>
+</div>
+</main>
+<!-- FAB: Create New List -->
+<button class="fixed right-6 bottom-32 w-16 h-16 rounded-2xl bg-primary text-on-primary flex items-center justify-center shadow-[0_12px_32px_rgba(42,20,180,0.25)] transition-all duration-300 active:scale-90 z-40">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_-8px_24px_rgba(42,20,180,0.06)] flex justify-around items-center px-4 pb-6 pt-3 z-50 rounded-t-3xl">
+<!-- Listas (Active) -->
+<a class="flex flex-col items-center justify-center bg-indigo-100/50 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 rounded-2xl px-5 py-2 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="format_list_bulleted" style="font-variation-settings: 'FILL' 1;">format_list_bulleted</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Listas</span>
+</a>
+<!-- Explorar -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-indigo-600 dark:hover:text-indigo-300 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Explorar</span>
+</a>
+<!-- Ajustes -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-indigo-600 dark:hover:text-indigo-300 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Ajustes</span>
+</a>
+</nav>
+</body></html>

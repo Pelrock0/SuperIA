@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2d3133",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "background": "#f7f9fb",
+                        "on-tertiary-container": "#10b981",
+                        "tertiary-fixed": "#6ffbbe",
+                        "secondary": "#00677d",
+                        "on-secondary-fixed": "#001f27",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-background": "#191c1e",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed": "#001e2b",
+                        "on-primary-container": "#7aa9c3",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-dim": "#d8dadc",
+                        "surface-container": "#eceef0",
+                        "secondary-fixed-dim": "#4cd6fb",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary-container": "#00422b",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#50d9fe",
+                        "tertiary": "#002a1a",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#174c62",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c1c7cd",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "surface-bright": "#f7f9fb",
+                        "surface": "#f7f9fb",
+                        "surface-tint": "#34647b",
+                        "inverse-primary": "#9ecde8",
+                        "primary": "#002736",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "outline": "#71787d",
+                        "on-surface-variant": "#41484c",
+                        "on-secondary-container": "#005c70",
+                        "primary-container": "#003e54",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#b3ebff",
+                        "primary-fixed-dim": "#9ecde8",
+                        "primary-fixed": "#c1e8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "12px",
+                        "xl": "16px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(247, 249, 251, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex flex-col items-center justify-center p-4">
+<!-- Top Navigation Anchor (Manual suppression check: Hidden in focused modal view but present as Brand Identity) -->
+<header class="fixed top-0 w-full z-50 bg-[#f7f9fb]/70 backdrop-blur-md flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+<span class="font-bold tracking-tighter text-xl text-primary">Superia</span>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img class="w-full h-full object-cover" data-alt="Portrait of a modern user in bright natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK4eXYRiQtDkntnaBBx0y-IXjQK4pr0C1hTv9AuABx0lQ4ADLcxV6h3mummOVkcRihjHcpuibzv6TNosnExh_Ieb5-50mrnWT1giBR1fR0JRV8E5ny3BNB4oUjviYyxAiOL-vKBavL12jkDi8ETFpcgI2MxpmlcFvTgJtwnkpGsMPYLDwKN-cNqfgaV1ThU14JByBafryJk3CcPyhuJ5yhJFs5djjVdapMq_0pNZC7yareMkdH15X32v-E91zP91w0l_JcuN7tvG4"/>
+</div>
+</header>
+<!-- Main Content Canvas: Share List Modal -->
+<main class="w-full max-w-md mt-20 mb-24">
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_-4px_24px_rgba(0,39,54,0.06)] p-8 relative overflow-hidden">
+<!-- Branding Header -->
+<div class="flex flex-col items-center mb-8">
+<div class="w-14 h-14 bg-primary rounded-xl flex items-center justify-center mb-6 shadow-lg">
+<div class="relative">
+<span class="text-white font-extrabold text-3xl italic">S</span>
+<div class="absolute -top-1 -right-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-2xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+</div>
+</div>
+<h1 class="text-display-sm font-bold tracking-tighter text-primary text-center mb-2">Compartir Lista</h1>
+<p class="text-on-surface-variant text-center leading-relaxed max-w-[280px]">Elige cómo quieres que otros colaboren en tu lista</p>
+</div>
+<!-- Permission Options: Asymmetric Layout Avoidance of Standard Lists -->
+<div class="space-y-4 mb-8">
+<!-- Edit Option Card -->
+<button class="w-full text-left p-5 rounded-xl bg-surface-container-low border-2 border-primary ring-offset-2 ring-primary transition-all duration-300 transform active:scale-95 group">
+<div class="flex items-start gap-4">
+<div class="bg-primary-container p-3 rounded-lg text-primary-fixed group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-bold text-primary">Puede editar</h3>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full">Recomendado</span>
+</div>
+<p class="text-body-md text-on-surface-variant mt-1 leading-tight">Los invitados pueden añadir, tachar y borrar productos</p>
+</div>
+</div>
+</button>
+<!-- View Only Option Card -->
+<button class="w-full text-left p-5 rounded-xl bg-surface-container-lowest border border-outline-variant/30 hover:bg-surface-container-low transition-all duration-300 transform active:scale-95 group">
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-high p-3 rounded-lg text-on-surface-variant group-hover:bg-primary-container group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</div>
+<div>
+<h3 class="font-bold text-primary">Solo ver</h3>
+<p class="text-body-md text-on-surface-variant mt-1 leading-tight">Los invitados solo pueden ver y marcar productos como comprados</p>
+</div>
+</div>
+</button>
+</div>
+<!-- Link Generation Field -->
+<div class="space-y-3 mb-8">
+<label class="text-[10px] font-bold tracking-widest uppercase text-on-surface-variant px-1">Enlace de invitación</label>
+<div class="flex gap-2">
+<div class="flex-grow bg-surface-container-low rounded-lg px-4 py-3 text-on-surface-variant text-sm truncate font-medium border border-transparent focus-within:border-primary/20">
+                        superia.app/list/9k2l-casa-garcia
+                    </div>
+<button class="bg-primary text-white px-5 rounded-lg font-bold text-sm tracking-tight active:scale-90 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+                        Copiar
+                    </button>
+</div>
+</div>
+<!-- Quick Share Buttons -->
+<div class="grid grid-cols-2 gap-4 mb-10">
+<button class="flex items-center justify-center gap-2 py-3 rounded-lg bg-[#25D366] text-white font-bold text-sm transition-opacity hover:opacity-90 active:scale-95">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+                    WhatsApp
+                </button>
+<button class="flex items-center justify-center gap-2 py-3 rounded-lg bg-surface-container-highest text-primary font-bold text-sm transition-opacity hover:opacity-80 active:scale-95">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+                    Email
+                </button>
+</div>
+<!-- Destructive Action -->
+<div class="pt-6 border-t border-outline-variant/10 flex justify-center">
+<button class="text-error font-bold text-sm tracking-tight hover:underline flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="block">block</span>
+                    Revocar acceso a todos
+                </button>
+</div>
+</div>
+<!-- Intelligent Insight (AI Component) -->
+<div class="mt-6 p-5 rounded-xl bg-tertiary-fixed/10 border border-tertiary-fixed/20 flex gap-4 items-start">
+<span class="material-symbols-outlined text-on-tertiary-container mt-0.5" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<p class="text-sm text-tertiary leading-relaxed">
+<strong class="font-bold">AI Concierge:</strong> Compartir esta lista con <span class="underline">Casa García</span> reducirá duplicados de compra en un estimado del 14% esta semana.
+            </p>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Filter: Active on Top Level Ecosystem) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-2 bg-white/80 dark:bg-[#002736]/80 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,39,54,0.06)] rounded-t-3xl z-50">
+<div class="flex flex-col items-center justify-center text-[#003e54]/50 dark:text-[#f7f9fb]/50 px-5 py-2 scale-105 active:scale-95 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="kitchen">kitchen</span>
+<span class="text-[10px] font-bold tracking-widest uppercase mt-1">Kitchen</span>
+</div>
+<!-- Active Tab: Lists (based on 'Compartir Lista' intent) -->
+<div class="flex flex-col items-center justify-center bg-[#003e54] dark:bg-[#6ffbbe] text-white dark:text-[#002113] rounded-2xl px-5 py-2 scale-105 active:scale-95 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="format_list_bulleted">format_list_bulleted</span>
+<span class="text-[10px] font-bold tracking-widest uppercase mt-1">Lists</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#003e54]/50 dark:text-[#f7f9fb]/50 px-5 py-2 scale-105 active:scale-95 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+<span class="text-[10px] font-bold tracking-widest uppercase mt-1">Market</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#003e54]/50 dark:text-[#f7f9fb]/50 px-5 py-2 scale-105 active:scale-95 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-[10px] font-bold tracking-widest uppercase mt-1">AI Concierge</span>
+</div>
+</nav>
+</body></html>

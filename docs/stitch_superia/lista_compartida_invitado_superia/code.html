@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Superia - Lista Compartida</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#71787d",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed-variant": "#174c62",
+                        "on-error-container": "#93000a",
+                        "secondary": "#00677d",
+                        "on-secondary-container": "#005c70",
+                        "on-background": "#191c1e",
+                        "background": "#f7f9fb",
+                        "inverse-primary": "#9ecde8",
+                        "surface-dim": "#d8dadc",
+                        "surface": "#f7f9fb",
+                        "secondary-container": "#50d9fe",
+                        "on-tertiary-container": "#10b981",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed": "#001f27",
+                        "tertiary-container": "#00422b",
+                        "on-surface-variant": "#41484c",
+                        "outline-variant": "#c1c7cd",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary-fixed": "#001e2b",
+                        "surface-container": "#eceef0",
+                        "tertiary-fixed": "#6ffbbe",
+                        "primary-container": "#003e54",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f7f9fb",
+                        "on-primary-container": "#7aa9c3",
+                        "secondary-fixed-dim": "#4cd6fb",
+                        "on-surface": "#191c1e",
+                        "surface-tint": "#34647b",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#b3ebff",
+                        "primary-fixed-dim": "#9ecde8",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "primary": "#002736",
+                        "tertiary": "#002a1a",
+                        "primary-fixed": "#c1e8ff",
+                        "on-tertiary-fixed": "#002113",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-container-high": "#e6e8ea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- Top AppBar (from JSON) -->
+<header class="w-full top-0 sticky z-50 bg-[#f7f9fb] dark:bg-[#002736]">
+<!-- Mobile URL Bar Hint (As requested) -->
+<div class="bg-surface-container-low px-4 py-1.5 flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="lock">lock</span>
+<span class="text-[11px] font-medium tracking-tight text-outline">superia.io/shared/abc123xyz</span>
+</div>
+<div class="flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<div class="relative flex items-center justify-center w-8 h-8 bg-primary rounded-xl overflow-hidden">
+<span class="text-white font-extrabold text-xl leading-none">S</span>
+<div class="absolute top-1 right-1 w-2 h-2 bg-tertiary-fixed rounded-full shadow-sm"></div>
+</div>
+<h1 class="font-bold tracking-tighter text-2xl text-[#002736] dark:text-[#f7f9fb]">Superia</h1>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#002736] dark:text-[#f7f9fb]" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+<!-- Sticky Banner for Guest Mode -->
+<div class="bg-secondary-container text-on-secondary-container px-6 py-3 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="share">share</span>
+<p class="text-xs font-bold tracking-tight">Lista compartida por María · Solo puedes marcar ítems</p>
+</div>
+<button class="hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+</div>
+</header>
+<main class="max-w-2xl mx-auto px-6 pt-8 pb-32">
+<!-- List Header -->
+<div class="mb-10">
+<div class="flex items-center gap-2 mb-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-tertiary-fixed-variant bg-tertiary-fixed px-2 py-0.5 rounded-full">Lectura y Marcado</span>
+</div>
+<h2 class="text-4xl font-extrabold tracking-tighter text-primary mb-2">Compra Semanal</h2>
+<p class="text-on-surface-variant font-medium">Lista de víveres para la cena del viernes y básicos de despensa.</p>
+</div>
+<!-- Category Section: Frutas -->
+<section class="mb-10">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-px flex-1 bg-gradient-to-r from-transparent via-outline-variant to-transparent opacity-30"></div>
+<h3 class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-outline">Frutas</h3>
+<div class="h-px flex-1 bg-gradient-to-r from-transparent via-outline-variant to-transparent opacity-30"></div>
+</div>
+<div class="space-y-4">
+<!-- Item 1 -->
+<label class="group flex items-center p-5 bg-surface-container-lowest rounded-[20px] transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
+<input class="w-6 h-6 rounded-lg border-2 border-outline-variant text-primary focus:ring-0 transition-colors cursor-pointer checked:bg-primary checked:border-primary" type="checkbox"/>
+<div class="ml-4 flex-1">
+<span class="block text-lg font-bold text-primary transition-all peer-checked:line-through peer-checked:opacity-40">Aguacate Hass</span>
+<span class="text-sm text-on-surface-variant font-medium">2 unidades · Muy maduros</span>
+</div>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</label>
+<!-- Item 2 -->
+<label class="group flex items-center p-5 bg-surface-container-lowest rounded-[20px] transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
+<input class="peer w-6 h-6 rounded-lg border-2 border-outline-variant text-primary focus:ring-0 transition-colors cursor-pointer checked:bg-primary checked:border-primary" type="checkbox"/>
+<div class="ml-4 flex-1">
+<span class="block text-lg font-bold text-primary peer-checked:line-through peer-checked:opacity-40 peer-checked:text-outline">Fresas Silvestres</span>
+<span class="text-sm text-on-surface-variant font-medium">1 bandeja 500g</span>
+</div>
+</label>
+</div>
+</section>
+<!-- AI Highlight Card -->
+<div class="mb-10 p-6 bg-gradient-to-br from-tertiary-container to-primary rounded-[24px] text-white relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-tertiary-fixed" data-icon="tempest">storm</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-tertiary-fixed">Superia AI Suggestion</span>
+</div>
+<p class="text-sm leading-relaxed opacity-90 font-medium">Parece que María planea hacer guacamole. He agrupado los ingredientes necesarios para que los encuentres más rápido.</p>
+</div>
+<!-- Abstract background shape -->
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-tertiary-fixed/10 rounded-full blur-3xl"></div>
+</div>
+<!-- Category Section: Lácteos -->
+<section class="mb-10">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-px flex-1 bg-gradient-to-r from-transparent via-outline-variant to-transparent opacity-30"></div>
+<h3 class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-outline">Lácteos</h3>
+<div class="h-px flex-1 bg-gradient-to-r from-transparent via-outline-variant to-transparent opacity-30"></div>
+</div>
+<div class="space-y-4">
+<!-- Item 1 (Checked state simulation) -->
+<label class="group flex items-center p-5 bg-surface-container-low/50 rounded-[20px] transition-all cursor-pointer">
+<input checked="" class="peer w-6 h-6 rounded-lg border-2 border-primary text-primary focus:ring-0 transition-colors cursor-pointer" type="checkbox"/>
+<div class="ml-4 flex-1">
+<span class="block text-lg font-bold text-outline line-through opacity-50">Leche de Almendras</span>
+<span class="text-sm text-on-surface-variant font-medium opacity-50">Sin azúcar · 1L</span>
+</div>
+</label>
+<!-- Item 2 -->
+<label class="group flex items-center p-5 bg-surface-container-lowest rounded-[20px] transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
+<input class="peer w-6 h-6 rounded-lg border-2 border-outline-variant text-primary focus:ring-0 transition-colors cursor-pointer checked:bg-primary checked:border-primary" type="checkbox"/>
+<div class="ml-4 flex-1">
+<span class="block text-lg font-bold text-primary peer-checked:line-through peer-checked:opacity-40">Yogur Griego</span>
+<span class="text-sm text-on-surface-variant font-medium">Pack de 4 · Natural</span>
+</div>
+</label>
+</div>
+</section>
+<!-- Empty state context -->
+<div class="text-center py-8">
+<div class="inline-flex items-center justify-center w-12 h-12 bg-surface-container-low rounded-full mb-4">
+<span class="material-symbols-outlined text-outline" data-icon="inventory_2">inventory_2</span>
+</div>
+<p class="text-xs font-bold text-outline uppercase tracking-widest">Fin de la lista compartida</p>
+</div>
+</main>
+<!-- Bottom Action Banner (From requirements) -->
+<div class="fixed bottom-0 left-0 w-full z-50 bg-white/70 dark:bg-[#002736]/70 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,39,54,0.1)] rounded-t-[32px] overflow-hidden">
+<div class="px-6 py-6 flex flex-col items-center gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container flex items-center justify-center rounded-xl">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="tempest">storm</span>
+</div>
+<p class="text-sm font-bold text-primary">¿Quieres crear tus propias listas? Es gratis</p>
+</div>
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-transform">
+                Empezar con Superia
+                <span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Safety area for modern mobile browsers -->
+<div class="h-4"></div>
+</div>
+</body></html>

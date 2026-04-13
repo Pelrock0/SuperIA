@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUPERIA — Historias de Usuario v3.0</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicons@1.8.0/css/devicons.min.css">
+<style>
+  /* ── Reset & Base ─────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0d1117;
+    --bg2:       #161b22;
+    --bg3:       #1c2333;
+    --border:    #30363d;
+    --accent:    #58a6ff;
+    --accent2:   #00d4ff;
+    --text:      #e6edf3;
+    --text-mute: #8b949e;
+    --success:   #3fb950;
+    --font-ui:   'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    /* syntax tokens */
+    --tok-comment: #8b949e;
+    --tok-string:  #a5d6ff;
+    --tok-keyword: #ff7b72;
+    --tok-number:  #79c0ff;
+    --tok-func:    #d2a8ff;
+  }
+
+  html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 16px; }
+
+  /* ── Grid background ───────────────────────────────────────── */
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(88,166,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(88,166,255,.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ── Scanlines overlay ─────────────────────────────────────── */
+  body::after {
+    content: ''; position: fixed; inset: 0; z-index: 200; pointer-events: none;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
+  }
+
+  /* ── Progress bar ──────────────────────────────────────────── */
+  #progress {
+    position: fixed; top: 0; left: 0; z-index: 100; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width .4s ease; box-shadow: 0 0 12px var(--accent);
+  }
+
+  /* ── Fullscreen button ─────────────────────────────────────── */
+  #btn-fs {
+    position: fixed; top: 1rem; right: 1rem; z-index: 100;
+    background: rgba(22,27,34,.8); border: 1px solid var(--border); color: var(--text-mute);
+    width: 2rem; height: 2rem; border-radius: .375rem; cursor: pointer; font-size: .9rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s; backdrop-filter: blur(8px);
+  }
+  #btn-fs:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── Dot navigation ────────────────────────────────────────── */
+  #dot-nav {
+    position: fixed; bottom: 1.5rem; left: 50%; z-index: 100;
+    transform: translateX(-50%);
+    display: flex; gap: .45rem; align-items: center;
+    padding: .35rem .65rem; border-radius: 2rem;
+    background: rgba(22,27,34,.75); border: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+    max-width: 80vw; flex-wrap: wrap; justify-content: center;
+  }
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%; border: none; padding: 0; cursor: pointer;
+    background: var(--border); transition: background .25s, transform .25s;
+  }
+  .dot:hover  { background: var(--text-mute); transform: scale(1.4); }
+  .dot.active { background: var(--accent); transform: scale(1.3); box-shadow: 0 0 5px var(--accent); }
+
+  /* ── Slides ────────────────────────────────────────────────── */
+  #slides { position: relative; width: 100%; height: 100%; }
+
+  .slide {
+    position: absolute; inset: 0; z-index: 1;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 4rem 6rem;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity .4s ease, transform .4s ease;
+    pointer-events: none;
+  }
+  .slide.active { opacity: 1; transform: translateY(0); pointer-events: all; }
+  .slide.exit   { opacity: 0; transform: translateY(-20px); }
+
+  /* ── Overview overlay ──────────────────────────────────────── */
+  #overview {
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(13,17,23,.95); backdrop-filter: blur(12px);
+    display: flex; flex-direction: column; padding: 1.5rem;
+    overflow: auto;
+  }
+  #overview[hidden] { display: none; }
+  #overview * { animation-duration: 0s !important; transition-duration: 0s !important; }
+
+  .ov-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.25rem; flex-shrink: 0;
+  }
+  .ov-title { font-family: var(--font-mono); font-size: .8rem; color: var(--text-mute); letter-spacing: .1em; text-transform: uppercase; }
+  .ov-hint  { font-family: var(--font-mono); font-size: .7rem; color: var(--text-mute); margin-left: 1rem; }
+  .ov-close {
+    background: none; border: 1px solid var(--border); color: var(--text-mute);
+    width: 1.75rem; height: 1.75rem; border-radius: .375rem; cursor: pointer; font-size: .8rem;
+    display: flex; align-items: center; justify-content: center; transition: all .2s;
+  }
+  .ov-close:hover { border-color: var(--accent); color: var(--accent); }
+
+  .ov-grid { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+  .ov-thumb {
+    border: 2px solid var(--border); border-radius: .5rem; overflow: hidden;
+    cursor: pointer; flex-shrink: 0; position: relative;
+    transition: border-color .2s; background: var(--bg2);
+  }
+  .ov-thumb:hover  { border-color: var(--accent); }
+  .ov-thumb.active { border-color: var(--accent); box-shadow: 0 0 10px rgba(88,166,255,.4); }
+  .ov-thumb-inner  { overflow: hidden; }
+  .ov-thumb-label  {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(13,17,23,.85); padding: .2rem .4rem;
+    font-family: var(--font-mono); font-size: .6rem; color: var(--text-mute);
+    text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* ── Nav buttons ───────────────────────────────────────────── */
+  .nav-btn {
+    position: fixed; top: 50%; z-index: 100; transform: translateY(-50%);
+    background: rgba(22,27,34,.8); border: 1px solid var(--border); color: var(--text-mute);
+    width: 2.5rem; height: 2.5rem; border-radius: 50%; cursor: pointer; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s; backdrop-filter: blur(8px);
+  }
+  .nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+  #btn-prev { left: 1.25rem; } #btn-next { right: 1.25rem; }
+
+  /* ── Cover ─────────────────────────────────────────────────── */
+  .slide-cover { text-align: center; gap: 1.5rem; }
+  .cover-eyebrow { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; color: var(--accent2); margin-bottom: .5rem; }
+  .cover-title {
+    font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.15;
+    background: linear-gradient(135deg, var(--text) 40%, var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 1rem;
+  }
+  .cover-subtitle { font-size: clamp(.9rem, 1.5vw, 1.2rem); color: var(--text-mute); max-width: 48rem; line-height: 1.6; margin-bottom: 2rem; }
+  .cover-meta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; font-family: var(--font-mono); font-size: .75rem; color: var(--text-mute); }
+  .cover-meta span { padding: .25rem .75rem; border: 1px solid var(--border); border-radius: 2rem; background: var(--bg2); }
+
+  /* ── TOC slide ─────────────────────────────────────────────── */
+  .slide-toc { align-items: flex-start; max-width: 900px; margin: 0 auto; width: 100%; gap: 1.5rem; }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; width: 100%; }
+  .toc-item {
+    display: flex; align-items: center; gap: .85rem;
+    padding: .7rem 1rem; border-radius: .5rem; border: 1px solid var(--border);
+    background: var(--bg2); cursor: pointer; transition: border-color .2s, background .2s;
+    animation: fadeUp .35s ease both;
+    animation-delay: calc(0.25s + var(--i, 0) * 45ms);
+  }
+  .toc-item:hover { border-color: var(--accent); background: var(--bg3); }
+  .toc-num   { font-family: var(--font-mono); font-size: .68rem; color: var(--accent2); min-width: 2ch; flex-shrink: 0; }
+  .toc-label { flex: 1; font-size: .88rem; color: var(--text); line-height: 1.35; }
+  .toc-page  { font-family: var(--font-mono); font-size: .62rem; color: var(--text-mute); flex-shrink: 0; }
+
+  /* ── Chapter break slide ───────────────────────────────────── */
+  .slide-chapter {
+    justify-content: center; align-items: center; text-align: center; gap: 1rem;
+    background: radial-gradient(ellipse at center, rgba(88,166,255,.07) 0%, transparent 65%);
+  }
+  .chapter-eyebrow { font-family: var(--font-mono); font-size: .75rem; color: var(--accent2); letter-spacing: .2em; text-transform: uppercase; }
+  .chapter-title   { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; color: var(--text); line-height: 1.1; }
+  .chapter-desc    { font-size: clamp(.9rem, 1.5vw, 1.1rem); color: var(--text-mute); max-width: 40rem; line-height: 1.6; }
+  .chapter-line    { width: 4rem; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); margin: .5rem auto; }
+
+  /* ── Section slides ────────────────────────────────────────── */
+  .slide-section {
+    align-items: flex-start; gap: 1.75rem;
+    max-width: 940px; margin: 0 auto; width: 100%;
+    --slide-accent: var(--accent);
+    --slide-accent-dim: rgba(88,166,255,.12);
+    --slide-accent-border: rgba(88,166,255,.25);
+  }
+
+  /* ── Personality variants ──────────────────────────────────── */
+  .slide-purple { --slide-accent: #a78bfa; --slide-accent-dim: rgba(167,139,250,.12); --slide-accent-border: rgba(167,139,250,.3); }
+  .slide-cyan   { --slide-accent: #00d4ff; --slide-accent-dim: rgba(0,212,255,.1);    --slide-accent-border: rgba(0,212,255,.25); }
+  .slide-green  { --slide-accent: #3fb950; --slide-accent-dim: rgba(63,185,80,.12);   --slide-accent-border: rgba(63,185,80,.25); }
+
+  .slide-purple .slide-title, .slide-cyan .slide-title, .slide-green .slide-title { color: var(--slide-accent); }
+  .slide-purple .slide-header, .slide-cyan .slide-header, .slide-green .slide-header { border-bottom-color: var(--slide-accent-border); }
+
+  /* ── Slide header ──────────────────────────────────────────── */
+  .slide-header { display: flex; align-items: center; gap: 1rem; width: 100%; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .slide-title  { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 700; color: var(--text); flex: 1; }
+
+  /* ── Badges ────────────────────────────────────────────────── */
+  .badge {
+    font-family: var(--font-mono); font-size: .65rem; letter-spacing: .08em; text-transform: uppercase;
+    padding: .2rem .6rem; border-radius: .25rem; white-space: nowrap;
+    background: var(--slide-accent-dim, rgba(88,166,255,.12));
+    color: var(--slide-accent, var(--accent));
+    border: 1px solid var(--slide-accent-border, rgba(88,166,255,.25));
+  }
+
+  /* ── Stagger animation ─────────────────────────────────────── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .slide.active ul.bullets li,
+  .slide.active ol.steps li,
+  .slide.active .toc-item {
+    animation: fadeUp .35s ease both;
+    animation-delay: calc(0.28s + var(--i, 0) * 65ms);
+  }
+
+  /* ── Bullet lists ──────────────────────────────────────────── */
+  ul.bullets { list-style: none; display: flex; flex-direction: column; gap: .85rem; width: 100%; }
+  ul.bullets li { position: relative; padding-left: 1.5rem; font-size: clamp(.9rem, 1.4vw, 1.05rem); line-height: 1.6; color: var(--text); }
+  ul.bullets li::before {
+    content: ''; position: absolute; left: 0; top: .6em;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--slide-accent, var(--accent));
+    box-shadow: 0 0 6px var(--slide-accent, var(--accent));
+  }
+  ul.bullets li strong { color: var(--slide-accent, var(--accent)); font-weight: 600; }
+
+  /* ── Steps (ordered) ───────────────────────────────────────── */
+  ol.steps { list-style: none; display: flex; flex-direction: column; gap: .9rem; width: 100%; counter-reset: step-counter; }
+  ol.steps li {
+    position: relative; padding-left: 3rem;
+    font-size: clamp(.9rem, 1.4vw, 1.05rem); line-height: 1.6;
+    counter-increment: step-counter;
+  }
+  ol.steps li::before {
+    content: counter(step-counter);
+    position: absolute; left: 0; top: 0;
+    width: 1.8rem; height: 1.8rem; border-radius: 50%;
+    background: var(--slide-accent-dim, rgba(88,166,255,.12));
+    border: 1px solid var(--slide-accent, var(--accent));
+    color: var(--slide-accent, var(--accent));
+    font-family: var(--font-mono); font-size: .75rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  ol.steps li strong { color: var(--slide-accent, var(--accent)); font-weight: 600; }
+
+  /* ── Callout block ─────────────────────────────────────────── */
+  .callout {
+    background: var(--slide-accent-dim, rgba(88,166,255,.06));
+    border: 1px solid var(--slide-accent-border, rgba(88,166,255,.2));
+    border-left: 4px solid var(--slide-accent, var(--accent));
+    border-radius: .75rem; padding: 1.5rem 2rem; width: 100%;
+  }
+  .callout-text   { font-size: clamp(1rem, 1.8vw, 1.25rem); line-height: 1.7; color: var(--text); font-style: italic; }
+  .callout-source { margin-top: .75rem; font-family: var(--font-mono); font-size: .72rem; color: var(--text-mute); }
+
+  /* ── Layout: Split ─────────────────────────────────────────── */
+  .slide-section.layout-split {
+    display: grid;
+    grid-template-areas: "header header" "bullets visual";
+    grid-template-columns: 55% 42%; grid-template-rows: auto 1fr;
+    gap: 1.5rem 3%; align-items: start;
+    height: fit-content;
+    margin-block: auto;
+  }
+  .layout-split .slide-header { grid-area: header; }
+  .layout-split ul.bullets, .layout-split ol.steps { grid-area: bullets; }
+  .layout-split .slide-visual { grid-area: visual; display: flex; flex-direction: column; gap: 1rem; justify-content: center; }
+
+  /* ── Layout: Two-column ────────────────────────────────────── */
+  .slide-section.layout-two-col {
+    display: grid;
+    grid-template-areas: "header header" "col1 col2";
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 3rem; align-items: start;
+    height: fit-content;
+    margin-block: auto;
+  }
+  .layout-two-col .slide-header { grid-area: header; }
+  .layout-two-col .col1 { grid-area: col1; }
+  .layout-two-col .col2 { grid-area: col2; }
+
+  /* ── KPI dashboard ─────────────────────────────────────────── */
+  .slide-kpi { gap: 1.5rem; max-width: 1000px; margin: 0 auto; width: 100%; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; width: 100%; }
+  .kpi-card {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: .75rem;
+    padding: 1.5rem 1.25rem; text-align: center;
+    position: relative; overflow: hidden; transition: border-color .3s, transform .3s;
+  }
+  .kpi-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: 0; transition: opacity .3s;
+  }
+  .kpi-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .kpi-card:hover::before { opacity: 1; }
+  .kpi-value { font-family: var(--font-mono); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: var(--accent2); line-height: 1; margin-bottom: .5rem; display: flex; align-items: baseline; justify-content: center; gap: .2rem; }
+  .kpi-unit  { font-size: .55em; color: var(--text-mute); font-weight: 400; }
+  .kpi-label { font-size: .78rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: .08em; }
+
+  /* ── Code blocks ───────────────────────────────────────────── */
+  pre.code-block {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-left: 3px solid var(--slide-accent, var(--accent));
+    border-radius: .5rem; padding: 1rem 1.25rem; overflow-x: auto; width: 100%;
+  }
+  pre.code-block code { font-family: var(--font-mono); font-size: .78rem; line-height: 1.6; color: #cdd9e5; }
+  .tok-comment { color: var(--tok-comment); font-style: italic; }
+  .tok-string  { color: var(--tok-string); }
+  .tok-keyword { color: var(--tok-keyword); font-weight: 600; }
+  .tok-number  { color: var(--tok-number); }
+
+  /* ── Bar chart ─────────────────────────────────────────────── */
+  .bar-chart { display: flex; flex-direction: column; gap: .7rem; width: 100%; }
+  .bar-row { display: grid; grid-template-columns: 8rem 1fr 3.5rem; align-items: center; gap: .65rem; }
+  .bar-row-label { font-size: .75rem; color: var(--text-mute); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar-track { background: var(--bg3); border-radius: 3px; height: 8px; overflow: hidden; }
+  .bar-fill  { height: 100%; border-radius: 3px; width: 0%; background: linear-gradient(90deg, var(--slide-accent, var(--accent)), var(--accent2)); transition: width 1s cubic-bezier(.25,.8,.25,1); }
+  .bar-row-value { font-family: var(--font-mono); font-size: .72rem; color: var(--accent2); }
+
+  /* ── Donut chart (SVG) ─────────────────────────────────────── */
+  .donut-wrap { display: flex; flex-direction: column; align-items: center; gap: .5rem; }
+  .donut { width: 130px; height: 130px; transform: rotate(-90deg); overflow: visible; }
+  .donut-bg   { fill: none; stroke: var(--bg3); stroke-width: 12; }
+  .donut-fill { fill: none; stroke: var(--slide-accent, var(--accent2)); stroke-width: 12; stroke-linecap: round; stroke-dasharray: 220; stroke-dashoffset: 220; transition: stroke-dashoffset 1.2s cubic-bezier(.25,.8,.25,1); }
+  .donut-label { transform: rotate(90deg); fill: var(--text); font-family: var(--font-mono); font-size: 18px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; }
+  .donut-caption { font-size: .72rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: .08em; text-align: center; }
+
+  /* ── Flow diagram ──────────────────────────────────────────── */
+  .flow { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; width: 100%; }
+  .flow-step { background: var(--bg2); border: 1px solid var(--border); border-top: 2px solid var(--slide-accent, var(--accent)); border-radius: .5rem; padding: .65rem 1rem; font-size: .78rem; color: var(--text); text-align: center; flex: 1; min-width: 80px; transition: border-color .2s; }
+  .flow-step:hover { border-color: var(--slide-accent, var(--accent)); }
+  .flow-arrow { color: var(--text-mute); font-size: 1rem; flex-shrink: 0; }
+
+  /* ── Slide table ───────────────────────────────────────────── */
+  .slide-table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  .slide-table th {
+    background: var(--bg3); color: var(--slide-accent, var(--accent));
+    font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase;
+    letter-spacing: .06em; padding: .65rem 1rem; text-align: left;
+    border-bottom: 2px solid var(--slide-accent-border, var(--border));
+  }
+  .slide-table td { padding: .6rem 1rem; border-bottom: 1px solid var(--border); color: var(--text); line-height: 1.4; vertical-align: top; }
+  .slide-table tr:last-child td { border-bottom: none; }
+  .slide-table tr:hover td { background: rgba(255,255,255,.02); }
+  .slide-table td strong { color: var(--slide-accent, var(--accent)); font-weight: 600; }
+
+  /* ── Definitions (dl) ──────────────────────────────────────── */
+  dl.definitions { display: grid; grid-template-columns: auto 1fr; gap: .5rem 1.5rem; width: 100%; align-items: baseline; }
+  dl.definitions dt { font-family: var(--font-mono); color: var(--slide-accent, var(--accent)); font-weight: 600; font-size: .85rem; white-space: nowrap; padding-top: .1rem; }
+  dl.definitions dd { color: var(--text-mute); line-height: 1.55; font-size: clamp(.85rem, 1.3vw, 1rem); border-bottom: 1px solid rgba(255,255,255,.04); padding-bottom: .4rem; }
+
+  /* ── Stat row (metric chips) ──────────────────────────────── */
+  .stat-row { display: flex; flex-wrap: wrap; gap: .75rem; width: 100%; margin-bottom: .25rem; }
+  .stat-chip {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--slide-accent-dim, rgba(88,166,255,.12));
+    border: 1px solid var(--slide-accent-border, rgba(88,166,255,.25));
+    border-radius: .6rem; padding: .55rem 1.1rem; min-width: 5rem;
+    transition: transform .2s;
+  }
+  .stat-chip:hover { transform: translateY(-2px); }
+  .stat-val { font-family: var(--font-mono); font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 700; color: var(--slide-accent, var(--accent)); line-height: 1; }
+  .stat-lbl { font-size: .65rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: .08em; margin-top: .2rem; white-space: nowrap; }
+
+  /* ── Horizontal timeline ───────────────────────────────────── */
+  .timeline-h { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 0; width: 100%; position: relative; }
+  .timeline-h::before {
+    content: ''; position: absolute; top: .55rem; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, var(--slide-accent, var(--accent)), transparent);
+    opacity: .3;
+  }
+  .tl-item { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 90px; position: relative; padding: 0 .25rem; }
+  .tl-dot {
+    width: 1.1rem; height: 1.1rem; border-radius: 50%;
+    background: var(--slide-accent-dim, rgba(88,166,255,.15));
+    border: 2px solid var(--slide-accent, var(--accent));
+    box-shadow: 0 0 8px var(--slide-accent, var(--accent));
+    flex-shrink: 0; margin-bottom: .5rem; z-index: 1;
+  }
+  .tl-label { font-family: var(--font-mono); font-size: .75rem; font-weight: 700; color: var(--slide-accent, var(--accent)); text-align: center; }
+  .tl-desc  { font-size: .72rem; color: var(--text); text-align: center; line-height: 1.4; margin-top: .2rem; }
+  .tl-date  { font-family: var(--font-mono); font-size: .62rem; color: var(--text-mute); text-align: center; margin-top: .15rem; }
+  .tl-arrow { display: none; }
+
+  /* ── Tag list (priority / tech pills) ─────────────────────── */
+  .tag-list { display: flex; flex-wrap: wrap; gap: .5rem; width: 100%; }
+  .tag {
+    font-family: var(--font-mono); font-size: .7rem; letter-spacing: .06em;
+    padding: .28rem .75rem; border-radius: 2rem; white-space: nowrap;
+    border: 1px solid; font-weight: 600;
+  }
+  .tag-must    { background: rgba(63,185,80,.12);    color: #3fb950; border-color: rgba(63,185,80,.3); }
+  .tag-should  { background: rgba(0,212,255,.1);     color: #00d4ff; border-color: rgba(0,212,255,.25); }
+  .tag-could   { background: rgba(167,139,250,.1);   color: #a78bfa; border-color: rgba(167,139,250,.25); }
+  .tag-tech    { background: rgba(88,166,255,.1);    color: #58a6ff; border-color: rgba(88,166,255,.25); }
+  .tag-neutral { background: rgba(139,148,158,.08);  color: #8b949e; border-color: rgba(139,148,158,.2); }
+  .tag-warn    { background: rgba(255,166,0,.1);     color: #ffa600; border-color: rgba(255,166,0,.25); }
+
+  /* ── Cover canvas (particle network) ──────────────────────── */
+  #cover-canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .4; }
+
+  /* ── Icon font base (Bootstrap Icons + Devicons via CDN) ──── */
+  .ico    { font-size: 1.5em;   line-height: 1; vertical-align: middle; flex-shrink: 0; display: inline-block; }
+  .ico-sm { font-size: 1em; }
+  .ico-lg { font-size: 2.25rem; }
+  .ico-xl { font-size: 3rem; }
+
+  /* ── Icon card grid ────────────────────────────────────────── */
+  .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 1rem; width: 100%; }
+  .icon-card {
+    display: flex; flex-direction: column; align-items: center; text-align: center; gap: .6rem;
+    padding: 1.25rem 1rem; background: var(--bg2); border: 1px solid var(--border);
+    border-top: 2px solid var(--slide-accent, var(--accent));
+    border-radius: .75rem; transition: border-color .2s, transform .2s;
+  }
+  .icon-card:hover { border-color: var(--slide-accent, var(--accent)); transform: translateY(-2px); }
+  .icon-card .ico-lg { color: var(--slide-accent, var(--accent)); text-shadow: 0 0 8px var(--slide-accent, var(--accent)); }
+  .icon-card-title { font-size: .85rem; font-weight: 700; color: var(--text); }
+  .icon-card-body  { font-size: .72rem; color: var(--text-mute); line-height: 1.45; }
+
+  /* ── Architecture diagram ──────────────────────────────────── */
+  .arch-layers { display: flex; flex-direction: column; gap: 0; width: 100%; max-width: 480px; }
+  .arch-flow   { display: flex; align-items: stretch; flex-wrap: wrap; gap: 0; width: 100%; }
+  .arch-node {
+    display: flex; align-items: center; gap: .85rem; padding: .75rem 1.1rem;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-left: 3px solid var(--arch-color, var(--slide-accent, var(--accent)));
+    border-radius: .5rem; flex: 1; transition: filter .2s;
+  }
+  .arch-node:hover  { filter: brightness(1.06); }
+  .arch-node .ico   { color: var(--arch-color, var(--slide-accent, var(--accent))); flex-shrink: 0; }
+  .arch-node-text   { display: flex; flex-direction: column; gap: .1rem; }
+  .arch-node-label  { font-weight: 700; font-size: .88rem; color: var(--text); }
+  .arch-node-sub    { font-size: .7rem; color: var(--text-mute); line-height: 1.35; }
+  .arch-node-frontend { --arch-color: #00d4ff; }
+  .arch-node-backend  { --arch-color: #58a6ff; }
+  .arch-node-data     { --arch-color: #3fb950; }
+  .arch-node-infra    { --arch-color: #a78bfa; }
+  .arch-node-queue    { --arch-color: #ffa600; }
+  .arch-node-security { --arch-color: #ff7b72; }
+  .arch-arrow-v { text-align: center; color: var(--text-mute); font-size: 1.1rem; padding: .15rem 0; line-height: 1; }
+  .arch-arrow-h { color: var(--text-mute); font-size: 1.1rem; padding: 0 .35rem; align-self: center; flex-shrink: 0; }
+
+  /* ── Ring stat (animated SVG ring) ────────────────────────── */
+  .ring-stat-wrap { display: flex; flex-direction: column; align-items: center; gap: .75rem; }
+  .ring-stat  { width: 160px; height: 160px; transform: rotate(-90deg); overflow: visible; flex-shrink: 0; }
+  .ring-bg    { fill: none; stroke: var(--bg3); stroke-width: 14; }
+  .ring-fill  { fill: none; stroke: var(--slide-accent, var(--accent2)); stroke-width: 14; stroke-linecap: round; transition: stroke-dashoffset 1.2s cubic-bezier(.25,.8,.25,1); }
+  .ring-val   { transform: rotate(90deg); fill: var(--text); font-family: var(--font-mono); font-size: 28px; font-weight: 700; text-anchor: middle; dominant-baseline: central; }
+  .ring-unit  { transform: rotate(90deg); fill: var(--text-mute); font-family: var(--font-mono); font-size: 11px; text-anchor: middle; dominant-baseline: central; }
+  .ring-caption { font-size: .72rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: .08em; text-align: center; max-width: 160px; line-height: 1.4; }
+
+  /* ── Conclusion + Summary ──────────────────────────────────── */
+  .slide-conclusion .slide-title { color: var(--accent2); }
+  .slide-conclusion ul.bullets li::before { background: var(--accent2); box-shadow: 0 0 6px var(--accent2); }
+  .slide-summary .slide-title { color: var(--accent); }
+
+  /* ── Speaker notes ────────────────────────────────────────── */
+  aside.notes { display: none; }
+
+  #notes-panel {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+    background: rgba(13,17,23,.97); border-top: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    padding: .85rem 2rem 1.1rem;
+    transform: translateY(100%);
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
+  }
+  #notes-panel.open { transform: translateY(0); }
+
+  #notes-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: .5rem;
+  }
+  #notes-label {
+    font-family: var(--font-mono); font-size: .65rem; color: var(--accent2);
+    letter-spacing: .12em; text-transform: uppercase;
+  }
+  #notes-close {
+    background: none; border: none; color: var(--text-mute); cursor: pointer;
+    font-size: .8rem; padding: .1rem .35rem; border-radius: .25rem; transition: color .2s;
+  }
+  #notes-close:hover { color: var(--accent); }
+
+  #notes-content {
+    font-size: .85rem; line-height: 1.65; color: var(--text-mute);
+    list-style: none; display: flex; flex-direction: column; gap: .35rem;
+  }
+  #notes-content li::before {
+    content: '▸ '; color: var(--accent2); font-size: .7rem;
+  }
+  #notes-content:empty::after {
+    content: 'No hay notas para esta diapositiva.';
+    color: rgba(139,148,158,.45); font-style: italic;
+  }
+
+  #btn-notes {
+    position: fixed; bottom: 1.5rem; left: 1rem; z-index: 100;
+    background: rgba(22,27,34,.8); border: 1px solid var(--border); color: var(--text-mute);
+    width: 2rem; height: 2rem; border-radius: .375rem; cursor: pointer; font-size: .75rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s; backdrop-filter: blur(8px);
+  }
+  #btn-notes:hover  { border-color: var(--accent2); color: var(--accent2); }
+  #btn-notes.active { border-color: var(--accent2); color: var(--accent2); background: rgba(0,212,255,.08); }
+
+  /* ── Print / PDF export ────────────────────────────────────── */
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    html, body { overflow: visible !important; height: auto !important; }
+    #slides { position: static !important; height: auto !important; }
+    .slide {
+      position: relative !important; opacity: 1 !important; transform: none !important;
+      pointer-events: all !important; page-break-after: always; break-after: page;
+      min-height: 100vh; padding: 3rem 4rem; display: flex !important;
+    }
+    ul.bullets li, ol.steps li { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .toc-item { animation: none !important; opacity: 1 !important; }
+    .nav-btn, #progress, #dot-nav, #btn-fs, #overview, #notes-panel, #btn-notes { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<button id="btn-fs" title="Fullscreen (F)">⤢</button>
+<div id="dot-nav"></div>
+
+<div id="slides">
+<section class="slide slide-cover active" data-index="0">
+  <canvas id="cover-canvas"></canvas>
+  <p class="cover-eyebrow">Sofia4Builders · Documento HU</p>
+  <h1 class="cover-title">SUPERIA — Historias de Usuario v3.0</h1>
+  <p class="cover-subtitle">La compra, más inteligente · 11 épicas · 45 historias · Abril 2026</p>
+  <div class="cover-meta">
+    <span>Abril 2026</span>
+    <span>Laravel · React · MySQL · Claude</span>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Presentar Superia como app de listas con IA, colaboración y cumplimiento RGPD, alineada al backlog v3.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-toc" data-index="1">
+  <div class="slide-header">
+    <h2 class="slide-title">Índice</h2>
+    <span class="badge">14 secciones</span>
+  </div>
+  <div class="toc-grid">
+    <div class="toc-item" onclick="goTo(4)" style="--i:0"><span class="toc-num">01</span><span class="toc-label">Guía técnica agentes</span><span class="toc-page">slide 4</span></div>
+    <div class="toc-item" onclick="goTo(5)" style="--i:1"><span class="toc-num">02</span><span class="toc-label">Índice de épicas</span><span class="toc-page">slide 5</span></div>
+    <div class="toc-item" onclick="goTo(6)" style="--i:2"><span class="toc-num">03</span><span class="toc-label">Épica 0 · Landing</span><span class="toc-page">slide 6</span></div>
+    <div class="toc-item" onclick="goTo(7)" style="--i:3"><span class="toc-num">04</span><span class="toc-label">Épica 1 · Auth</span><span class="toc-page">slide 7</span></div>
+    <div class="toc-item" onclick="goTo(8)" style="--i:4"><span class="toc-num">05</span><span class="toc-label">Épica 2 · Listas</span><span class="toc-page">slide 8</span></div>
+    <div class="toc-item" onclick="goTo(9)" style="--i:5"><span class="toc-num">06</span><span class="toc-label">Épica 3 · Ítems</span><span class="toc-page">slide 9</span></div>
+    <div class="toc-item" onclick="goTo(10)" style="--i:6"><span class="toc-num">07</span><span class="toc-label">Épica 4 · Colaboración</span><span class="toc-page">slide 10</span></div>
+    <div class="toc-item" onclick="goTo(11)" style="--i:7"><span class="toc-num">08</span><span class="toc-label">Épica 5 · IA sugerencias</span><span class="toc-page">slide 11</span></div>
+    <div class="toc-item" onclick="goTo(12)" style="--i:8"><span class="toc-num">09</span><span class="toc-label">Épica 6 · IA generación</span><span class="toc-page">slide 12</span></div>
+    <div class="toc-item" onclick="goTo(13)" style="--i:9"><span class="toc-num">10</span><span class="toc-label">Épica 7 · Precios</span><span class="toc-page">slide 13</span></div>
+    <div class="toc-item" onclick="goTo(14)" style="--i:10"><span class="toc-num">11</span><span class="toc-label">Épica 8 · Duplicados</span><span class="toc-page">slide 14</span></div>
+    <div class="toc-item" onclick="goTo(15)" style="--i:11"><span class="toc-num">12</span><span class="toc-label">Épica 9 · Historial</span><span class="toc-page">slide 15</span></div>
+    <div class="toc-item" onclick="goTo(16)" style="--i:12"><span class="toc-num">13</span><span class="toc-label">Épica 10 · Admin SaaS</span><span class="toc-page">slide 16</span></div>
+    <div class="toc-item" onclick="goTo(17)" style="--i:13"><span class="toc-num">14</span><span class="toc-label">Apéndice resumen HU</span><span class="toc-page">slide 17</span></div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>La guía técnica fija stack y reglas para agentes; las épicas 0–10 desglosan el backlog completo.</li>
+      <li>Destacar que la épica 5 concentra buena parte de la complejidad de IA.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-summary" data-index="2">
+  <div class="slide-header">
+    <h2 class="slide-title">Resumen ejecutivo</h2>
+    <span class="badge">Visión</span>
+  </div>
+  <ul class="bullets">
+    <li style="--i:0">Superia une listas compartidas, historial de compra e IA sin exponer la API key en cliente.</li>
+    <li style="--i:1">El documento define 45 historias en 11 épicas, de landing pública a administración SaaS.</li>
+    <li style="--i:2">Frontend React sigue pantallas Google Stitch vía MCP; guía técnica fija Laravel, MySQL y JWT corto.</li>
+    <li style="--i:3">IA y precios usan pipelines por capas con límites freemium y validación JSON en servidor.</li>
+  </ul>
+  <aside class="notes">
+    <ul>
+      <li>La cabecera del markdown cita FastAPI y Railway; la tabla de stack en guía técnica prioriza Laravel y jobs Laravel.</li>
+      <li>Conectar con el dashboard de KPIs en la siguiente diapositiva.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-kpi" data-index="3">
+  <div class="slide-header" style="width:100%;max-width:1000px;margin:0 auto 1.5rem;">
+    <h2 class="slide-title">Métricas del documento</h2>
+    <span class="badge" style="--slide-accent:#00d4ff;--slide-accent-dim:rgba(0,212,255,.1);--slide-accent-border:rgba(0,212,255,.25);">KPIs</span>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-value"><span class="kpi-counter" data-target="11">0</span></div>
+      <div class="kpi-label">Épicas en el índice</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value"><span class="kpi-counter" data-target="45">0</span></div>
+      <div class="kpi-label">Historias (cabecera doc.)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value"><span class="kpi-counter" data-target="15">0</span><span class="kpi-unit">min</span></div>
+      <div class="kpi-label">Vida access token JWT</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value"><span class="kpi-counter" data-target="2500">0</span></div>
+      <div class="kpi-label">Productos catálogo ES (aprox.)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value"><span class="kpi-counter" data-target="20">0</span><span class="kpi-unit">/día</span></div>
+      <div class="kpi-label">Tope Claude plan gratis (HU-501)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value"><span class="kpi-counter" data-target="3">0</span></div>
+      <div class="kpi-label">Listas activas máx. freemium</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>11 épicas y 45 HUs en cabecera; JWT 15 min y refresh 30 días en guía técnica.</li>
+      <li>~2500 productos y 20 llamadas/día en notas de HU-501; 3 listas activas en HU-202.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section layout-split" data-index="4">
+  <div class="slide-header">
+    <h2 class="slide-title">Guía técnica para agentes</h2>
+    <span class="badge">Stack · Stitch · IA</span>
+  </div>
+  <ul class="bullets">
+    <li style="--i:0"><strong>Stack:</strong> Laravel, React, MySQL Dinahosting; JWT 15 min y refresh 30 días.</li>
+    <li style="--i:1"><strong>Stitch:</strong> conectar MCP antes de generar cada componente React del mapa HU.</li>
+    <li style="--i:2"><strong>Claude:</strong> solo servidor; JSON validado; un reintento si el parseo falla.</li>
+    <li style="--i:3"><strong>Precios:</strong> historial → dataset estático → Open Food Facts → Claude como último recurso.</li>
+    <li style="--i:4"><strong>Jobs:</strong> resumen semanal HU-505 con jobs Laravel según esta guía.</li>
+  </ul>
+  <div class="slide-visual">
+    <div class="arch-layers">
+      <div class="arch-node arch-node-frontend">
+        <i class="devicons devicons-react ico" aria-hidden="true"></i>
+        <div class="arch-node-text"><span class="arch-node-label">React</span><span class="arch-node-sub">Stitch · UI</span></div>
+      </div>
+      <div class="arch-arrow-v">↓</div>
+      <div class="arch-node arch-node-backend">
+        <i class="devicons devicons-laravel ico" aria-hidden="true"></i>
+        <div class="arch-node-text"><span class="arch-node-label">Laravel API</span><span class="arch-node-sub">JWT · rate limits</span></div>
+      </div>
+      <div class="arch-arrow-v">↓</div>
+      <div class="arch-node arch-node-data">
+        <i class="devicons devicons-mysql ico" aria-hidden="true"></i>
+        <div class="arch-node-text"><span class="arch-node-label">MySQL</span><span class="arch-node-sub">Dinahosting</span></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Insistir en la regla de no exponer la API key y en el mapa HU → pantalla Stitch → componente React.</li>
+      <li>Mencionar el comando MCP de ejemplo del markdown si el público es técnico.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-purple layout-two-col" data-index="5">
+  <div class="slide-header">
+    <h2 class="slide-title">Índice de épicas</h2>
+    <span class="badge">0 → 10</span>
+  </div>
+  <div class="col1">
+    <ul class="bullets">
+      <li style="--i:0"><strong>E0</strong> Landing y lista de espera</li>
+      <li style="--i:1"><strong>E1</strong> Autenticación y usuarios</li>
+      <li style="--i:2"><strong>E2</strong> Gestión de listas</li>
+      <li style="--i:3"><strong>E3</strong> Ítems en la lista</li>
+      <li style="--i:4"><strong>E4</strong> Colaboración compartida</li>
+      <li style="--i:5"><strong>E5</strong> IA sugerencias y reposición</li>
+    </ul>
+  </div>
+  <div class="col2">
+    <ul class="bullets">
+      <li style="--i:0"><strong>E6</strong> IA generación por contexto</li>
+      <li style="--i:1"><strong>E7</strong> IA estimación de precio</li>
+      <li style="--i:2"><strong>E8</strong> Duplicados y categorías</li>
+      <li style="--i:3"><strong>E9</strong> Historial y estadísticas</li>
+      <li style="--i:4"><strong>E10</strong> Administración SaaS</li>
+    </ul>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>E5–E8 concentran la mayoría de historias marcadas con IA en el apéndice tabular.</li>
+      <li>Transición: entrar en Épica 0 como puerta de entrada al producto.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-cyan" data-index="6">
+  <div class="slide-header">
+    <h2 class="slide-title">Épica 0 — Landing y lista de espera</h2>
+    <span class="badge">4 historias</span>
+  </div>
+  <div class="stat-row">
+    <div class="stat-chip"><span class="stat-val">4</span><span class="stat-lbl">HUs</span></div>
+    <div class="stat-chip"><span class="stat-val">E0</span><span class="stat-lbl">Épica</span></div>
+  </div>
+  <dl class="definitions">
+    <dt>HU-001</dt><dd>Landing con tagline, hero, sin analytics de terceros, rendimiento móvil.</dd>
+    <dt>HU-002</dt><dd>Waitlist con email, rate limit 3/IP/h, confirmación con posición aproximada.</dd>
+    <dt>HU-003</dt><dd>Compromiso de datos visible, RGPD, sin cookies de tracking.</dd>
+    <dt>HU-004</dt><dd>Admin exporta CSV, invita con enlace 7 días.</dd>
+  </dl>
+  <aside class="notes">
+    <ul>
+      <li>Valida demanda antes del lanzamiento; HU-004 cierra el circuito operativo con admin.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-green" data-index="7">
+  <div class="slide-header">
+    <h2 class="slide-title">Épica 1 — Autenticación y usuarios</h2>
+    <span class="badge">5 historias</span>
+  </div>
+  <div class="stat-row">
+    <div class="stat-chip"><span class="stat-val">5</span><span class="stat-lbl">HUs</span></div>
+    <div class="stat-chip"><span class="stat-val">bcrypt 12</span><span class="stat-lbl">Coste mín.</span></div>
+  </div>
+  <dl class="definitions">
+    <dt>HU-101</dt><dd>Registro con invitación, verificación email, JWT y refresh.</dd>
+    <dt>HU-102</dt><dd>Login, bloqueo tras 5 fallos 15 min, “Recuérdame” 30 días.</dd>
+    <dt>HU-103</dt><dd>Recuperación con mensaje uniforme y enlace 1 h, un solo uso.</dd>
+    <dt>HU-104</dt><dd>Perfil editable; email fijo como identificador.</dd>
+    <dt>HU-105</dt><dd>Borrado RGPD con soft delete y hard delete a 30 días.</dd>
+  </dl>
+  <aside class="notes">
+    <ul>
+      <li>Refuerzo de seguridad: mensajes genéricos en login y reset para no filtrar cuentas.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section" data-index="8">
+  <div class="slide-header">
+    <h2 class="slide-title">Épica 2 — Gestión de listas</h2>
+    <span class="badge">5 historias</span>
+  </div>
+  <div class="stat-row">
+    <div class="stat-chip"><span class="stat-val">5</span><span class="stat-lbl">HUs</span></div>
+    <div class="stat-chip"><span class="stat-val">60</span><span class="stat-lbl">Car. nombre máx.</span></div>
+  </div>
+  <dl class="definitions">
+    <dt>HU-201</dt><dd>Dashboard tarjetas, archivadas aparte, CTA nueva lista, ReplenishmentBanner.</dd>
+    <dt>HU-202</dt><dd>Crear lista nombre, emoji, categoría; tope 3 activas en gratis.</dd>
+    <dt>HU-203</dt><dd>Editar nombre, icono, categoría con guardado automático.</dd>
+    <dt>HU-204</dt><dd>Archivar y restaurar sin perder ítems; archivadas no cuentan freemium.</dd>
+    <dt>HU-205</dt><dd>Eliminar con confirmación y aviso si hay colaboradores.</dd>
+  </dl>
+  <aside class="notes">
+    <ul>
+      <li>El límite de tres listas activas es el principal gancho freemium en esta épica.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-purple" data-index="9">
+  <div class="slide-header">
+    <h2 class="slide-title">Épica 3 — Ítems en la lista</h2>
+    <span class="badge">6 historias</span>
+  </div>
+  <div class="stat-row">
+    <div class="stat-chip"><span class="stat-val">6</span><span class="stat-lbl">HUs</span></div>
+    <div class="stat-chip"><span class="stat-val">80</span><span class="stat-lbl">Car. ítem máx.</span></div>
+  </div>
+  <dl class="definitions">
+    <dt>HU-301</dt><dd>Detalle agrupado por categoría, progreso X de Y, comprados abajo.</dd>
+    <dt>HU-302</dt><dd>Alta rápida con cantidad, unidad, categoría y precio estimado opcional.</dd>
+    <dt>HU-303</dt><dd>Toggle comprado instantáneo; alimenta producto_historial y tiempo real si compartida.</dd>
+    <dt>HU-304</dt><dd>Panel edición nombre, cantidad, unidad, categoría, precio.</dd>
+    <dt>HU-305</dt><dd>Borrar con swipe o panel; deshacer 5 s.</dd>
+    <dt>HU-306</dt><dd>Limpiar solo comprados con confirmación.</dd>
+  </dl>
+  <aside class="notes">
+    <ul>
+      <li>HU-303 es el disparador de datos para IA de hábitos, reposición y resumen.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-cyan" data-index="10">
+  <div class="slide-header">
+    <h2 class="slide-title">Épica 4 — Colaboración</h2>
+    <span class="badge">3 historias</span>
+  </div>
+  <div class="stat-row">
+    <div class="stat-chip"><span class="stat-val">3</span><span class="stat-lbl">HUs</span></div>
+    <div class="stat-chip"><span class="stat-val">HMAC</span><span class="stat-lbl">Token enlace</span></div>
+  </div>
+  <dl class="definitions">
+    <dt>HU-401</dt><dd>Enlace único, copiar o compartir, lectura o edición, revocación.</dd>
+    <dt>HU-402</dt><dd>Acceso sin cuenta, banner de propietario, invitación suave a registrarse.</dd>
+    <dt>HU-403</dt><dd>Presencia colaboradores, historial cambios, polling mín. 10 s.</dd>
+  </dl>
+  <aside class="notes">
+    <ul>
+      <li>El modelo de token HMAC y modo solo lectura equilibra fricción y seguridad.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-green" data-index="11">
+  <div class="slide-header">
+    <h2 class="slide-title">Épica 5 — IA sugerencias y reposición</h2>
+    <span class="badge">5 historias · IA</span>
+  </div>
+  <div class="stat-row">
+    <div class="stat-chip"><span class="stat-val">5</span><span class="stat-lbl">HUs</span></div>
+    <div class="stat-chip"><span class="stat-val">2s</span><span class="stat-lbl">Pausa capa 3</span></div>
+  </div>
+  <div class="arch-flow">
+    <div class="arch-node arch-node-data"><i class="bi bi-database ico" aria-hidden="true"></i><div class="arch-node-text"><span class="arch-node-label">Historial</span><span class="arch-node-sub">MySQL full-text</span></div></div>
+    <div class="arch-arrow-h">→</div>
+    <div class="arch-node arch-node-backend"><i class="bi bi-box-seam ico" aria-hidden="true"></i><div class="arch-node-text"><span class="arch-node-label">Catálogo</span><span class="arch-node-sub">Local precargado</span></div></div>
+    <div class="arch-arrow-h">→</div>
+    <div class="arch-node arch-node-infra"><i class="bi bi-lightning ico" aria-hidden="true"></i><div class="arch-node-text"><span class="arch-node-label">Claude</span><span class="arch-node-sub">Tras pausa</span></div></div>
+  </div>
+  <dl class="definitions">
+    <dt>HU-501</dt><dd>Autocompletado &lt;50 ms capas 1–2; Claude si &lt;3 resultados tras 2 s.</dd>
+    <dt>HU-502</dt><dd>producto_historial independiente de listas, peso reciente 30 días.</dd>
+    <dt>HU-503</dt><dd>Banner reposición en dashboard, máx. 3 sugerencias.</dd>
+    <dt>HU-504</dt><dd>Complementarios por co-ocurrencia y fallback Claude.</dd>
+    <dt>HU-505</dt><dd>Resumen semanal lunes; email opcional; mín. 3 semanas historial.</dd>
+  </dl>
+  <aside class="notes">
+    <ul>
+      <li>Enfatizar “sin lag visible”: la experiencia depende de las dos primeras capas locales.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section" data-index="12">
+  <div class="slide-header">
+    <h2 class="slide-title">Épica 6 — IA generación por contexto</h2>
+    <span class="badge">2 historias · IA</span>
+  </div>
+  <div class="stat-row">
+    <div class="stat-chip"><span class="stat-val">2</span><span class="stat-lbl">HUs</span></div>
+    <div class="stat-chip"><span class="stat-val">5</span><span class="stat-lbl">Gen./día gratis</span></div>
+  </div>
+  <dl class="definitions">
+    <dt>HU-601</dt><dd>Descripción libre, previsualización ítems JSON, confirmar en &lt;10 s.</dd>
+    <dt>HU-602</dt><dd>Campo personas por defecto 2; regenerar cantidades sin reescribir contexto.</dd>
+  </dl>
+  <aside class="notes">
+    <ul>
+      <li>El tope de cinco generaciones diarias en gratis controla coste de Claude.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-purple layout-split" data-index="13">
+  <div class="slide-header">
+    <h2 class="slide-title">Épica 7 — IA estimación de precio</h2>
+    <span class="badge">2 historias</span>
+  </div>
+  <ul class="bullets">
+    <li style="--i:0"><strong>HU-701:</strong> Total como rango en euros; desglose por ítem bajo demanda.</li>
+    <li style="--i:1"><strong>HU-702:</strong> Tras compra, opción “¿Cuánto pagaste?” alimenta historial precios.</li>
+    <li style="--i:2"><strong>Capa 4:</strong> máximo 10 llamadas Claude/día en plan gratuito.</li>
+  </ul>
+  <div class="slide-visual">
+    <div class="flow">
+      <div class="flow-step">Historial<br><small style="color:var(--text-mute)">usuario</small></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">Dataset<br><small style="color:var(--text-mute)">mensual</small></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">OFF<br><small style="color:var(--text-mute)">API</small></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">Claude<br><small style="color:var(--text-mute)">fallback</small></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Las cuatro capas priorizan datos propios antes que llamadas caras a modelo.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-cyan" data-index="14">
+  <div class="slide-header">
+    <h2 class="slide-title">Épica 8 — Duplicados y categorías</h2>
+    <span class="badge">2 historias · IA</span>
+  </div>
+  <div class="stat-row">
+    <div class="stat-chip"><span class="stat-val">2</span><span class="stat-lbl">HUs</span></div>
+    <div class="stat-chip"><span class="stat-val">&lt;1s</span><span class="stat-lbl">Aviso dup.</span></div>
+  </div>
+  <dl class="definitions">
+    <dt>HU-801</dt><dd>Levenshtein &gt;90 % local; Claude si similitud 50–90 %.</dd>
+    <dt>HU-802</dt><dd>Inferencia categoría supermercado y agrupación visual ordenable.</dd>
+  </dl>
+  <aside class="notes">
+    <ul>
+      <li>Duplicados semánticos mejoran la calidad de lista sin fricción de confirmaciones pesadas.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-green" data-index="15">
+  <div class="slide-header">
+    <h2 class="slide-title">Épica 9 — Historial y estadísticas</h2>
+    <span class="badge">2 historias</span>
+  </div>
+  <div class="stat-row">
+    <div class="stat-chip"><span class="stat-val">2</span><span class="stat-lbl">HUs</span></div>
+    <div class="stat-chip"><span class="stat-val">6</span><span class="stat-lbl">Meses gráfico</span></div>
+  </div>
+  <dl class="definitions">
+    <dt>HU-901</dt><dd>Listas completadas, duplicar como plantilla, detalle histórico.</dd>
+    <dt>HU-902</dt><dd>Gasto 6 meses, top categorías, 10 productos; mínimo 3 listas completadas.</dd>
+  </dl>
+  <aside class="notes">
+    <ul>
+      <li>HU-902 aclara que los importes son estimaciones salvo confirmación manual.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section" data-index="16">
+  <div class="slide-header">
+    <h2 class="slide-title">Épica 10 — Administración SaaS</h2>
+    <span class="badge">4 historias</span>
+  </div>
+  <div class="stat-row">
+    <div class="stat-chip"><span class="stat-val">4</span><span class="stat-lbl">HUs</span></div>
+    <div class="stat-chip"><span class="stat-val">80%</span><span class="stat-lbl">Alerta límite IA</span></div>
+  </div>
+  <dl class="definitions">
+    <dt>HU-1001</dt><dd>Panel métricas usuarios, listas, waitlist, consumo y coste Claude.</dd>
+    <dt>HU-1002</dt><dd>CRUD usuarios, planes gratis/premium, búsqueda.</dd>
+    <dt>HU-1003</dt><dd>Consumo IA por usuario y función; bloqueo al superar límite diario.</dd>
+    <dt>HU-1004</dt><dd>Logs 24 h / 7 d / 30 d, severidad, email en críticos.</dd>
+  </dl>
+  <aside class="notes">
+    <ul>
+      <li>Rol superadmin protege todas las rutas; HU-1003 es clave para control de costes.</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-cyan" data-index="17">
+  <div class="slide-header">
+    <h2 class="slide-title">Apéndice — Resumen por épica</h2>
+    <span class="badge">Tabla HU · 40 filas en doc.</span>
+  </div>
+  <table class="slide-table">
+    <thead><tr><th>Épica</th><th>Ámbito</th><th>HUs</th><th>Con IA</th></tr></thead>
+    <tbody>
+      <tr><td><strong>0</strong></td><td>Landing / waitlist</td><td>4</td><td>0</td></tr>
+      <tr><td><strong>1</strong></td><td>Auth / RGPD</td><td>5</td><td>0</td></tr>
+      <tr><td><strong>2</strong></td><td>Listas</td><td>5</td><td>0</td></tr>
+      <tr><td><strong>3</strong></td><td>Ítems</td><td>6</td><td>0</td></tr>
+      <tr><td><strong>4</strong></td><td>Compartir</td><td>3</td><td>0</td></tr>
+      <tr><td><strong>5</strong></td><td>Sugerencias IA</td><td>5</td><td>5</td></tr>
+      <tr><td><strong>6</strong></td><td>Generación IA</td><td>2</td><td>2</td></tr>
+      <tr><td><strong>7</strong></td><td>Precios</td><td>2</td><td>1</td></tr>
+      <tr><td><strong>8</strong></td><td>Duplicados</td><td>2</td><td>2</td></tr>
+      <tr><td><strong>9</strong></td><td>Historial</td><td>2</td><td>0</td></tr>
+      <tr><td><strong>10</strong></td><td>Admin</td><td>4</td><td>0</td></tr>
+      <tr><td colspan="2"><strong>Total (suma filas)</strong></td><td>40</td><td>10</td></tr>
+    </tbody>
+  </table>
+  <aside class="notes">
+    <ul>
+      <li>La cabecera del documento declara 45 historias; la tabla del apéndice lista 40 filas HU: conviene alinear cifras en una futura revisión del doc.</li>
+      <li>“Con IA” sigue la columna 🤖 del apéndice del markdown (501–505, 601–602, 701, 801–802).</li>
+    </ul>
+  </aside>
+</section>
+<section class="slide slide-section slide-purple" data-index="18">
+  <div class="slide-header">
+    <h2 class="slide-title">Conclusiones</h2>
+    <span class="badge">Cierre</span>
+  </div>
+  <ul class="bullets">
+    <li style="--i:0">El backlog recorre captación, núcleo de listas, IA multicapa, precios y operación SaaS.</li>
+    <li style="--i:1">Privacidad sin tracking y derechos RGPD están en landing, waitlist y perfil.</li>
+    <li style="--i:2">Los límites freemium y las capas locales priorizan UX y control de coste de Claude.</li>
+    <li style="--i:3">Stitch vía MCP y el mapa HU → componente React reducen deriva visual en el frontend.</li>
+  </ul>
+  <aside class="notes">
+    <ul>
+      <li>Invitar a abrir el markdown para criterios de aceptación detallados por HU.</li>
+      <li>Preguntas: alineación 40 vs 45 HUs y unificación de referencias FastAPI/Laravel en cabecera.</li>
+    </ul>
+  </aside>
+</section>
+
+</div>
+
+<button id="btn-notes" title="Speaker notes (N)">N</button>
+<div id="notes-panel">
+  <div id="notes-header">
+    <span id="notes-label">Speaker Notes</span>
+    <button id="notes-close">✕</button>
+  </div>
+  <ul id="notes-content"></ul>
+</div>
+
+<div id="overview" hidden>
+  <div class="ov-header">
+    <span>
+      <span class="ov-title">Slide Overview</span>
+      <span class="ov-hint">— click to jump · Esc to close</span>
+    </span>
+    <button class="ov-close" title="Close (Esc)">✕</button>
+  </div>
+  <div class="ov-grid"></div>
+</div>
+
+<button class="nav-btn" id="btn-prev" title="Previous (←)">&#8592;</button>
+<button class="nav-btn" id="btn-next" title="Next (→)">&#8594;</button>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── State ───────────────────────────────────────────────────────
+  const slides  = Array.from(document.querySelectorAll('#slides > .slide'));
+  const total   = slides.length;
+  let   current = 0;
+  const animated = new Set();
+  let   ovBuilt  = false;
+
+  // ── DOM refs ────────────────────────────────────────────────────
+  const progress    = document.getElementById('progress');
+  const dotNav      = document.getElementById('dot-nav');
+  const btnFs       = document.getElementById('btn-fs');
+  const overview    = document.getElementById('overview');
+  const ovGrid      = overview.querySelector('.ov-grid');
+  const notesPanel  = document.getElementById('notes-panel');
+  const notesContent= document.getElementById('notes-content');
+  const btnNotes    = document.getElementById('btn-notes');
+
+  // ── Build dot navigation ────────────────────────────────────────
+  const dots = slides.map((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot';
+    d.setAttribute('aria-label', 'Slide ' + (i + 1));
+    d.addEventListener('click', () => goTo(i));
+    dotNav.appendChild(d);
+    return d;
+  });
+
+  // ── Update UI ───────────────────────────────────────────────────
+  function updateUI() {
+    const pct = total <= 1 ? 100 : (current / (total - 1)) * 100;
+    progress.style.width = pct + '%';
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    if (!overview.hidden) {
+      ovGrid.querySelectorAll('.ov-thumb').forEach((t, i) => t.classList.toggle('active', i === current));
+    }
+    if (notesPanel.classList.contains('open')) renderNotes();
+  }
+
+  // ── Navigate ────────────────────────────────────────────────────
+  function goTo(index) {
+    if (index < 0 || index >= total) return;
+    if (!overview.hidden) closeOverview();
+
+    const previous = current;
+    slides[previous].classList.add('exit');
+    setTimeout(() => slides[previous].classList.remove('exit', 'active'), 400);
+
+    current = index;
+
+    const incoming = slides[current];
+    incoming.querySelectorAll('ul.bullets li, ol.steps li').forEach(li => { li.style.animation = 'none'; });
+    incoming.offsetHeight;
+    incoming.querySelectorAll('ul.bullets li, ol.steps li').forEach(li => { li.style.animation = ''; });
+
+    incoming.classList.add('active');
+    incoming.classList.remove('exit');
+    updateUI();
+    triggerSlideAnimations();
+  }
+
+  window.goTo = goTo;
+
+  // ── Keyboard ────────────────────────────────────────────────────
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    switch (e.key) {
+      case 'ArrowRight': case 'ArrowDown': case ' ': e.preventDefault(); goTo(current + 1); break;
+      case 'ArrowLeft':  case 'ArrowUp':              goTo(current - 1); break;
+      case 'Home': goTo(0); break;
+      case 'End':  goTo(total - 1); break;
+      case 'f': case 'F': toggleFullscreen(); break;
+      case 'n': case 'N': toggleNotes(); break;
+      case 'o': case 'O': overview.hidden ? openOverview() : closeOverview(); break;
+      case 'Escape':
+        if (!overview.hidden) { e.preventDefault(); closeOverview(); }
+        else if (notesPanel.classList.contains('open')) { e.preventDefault(); closeNotes(); }
+        break;
+      case 'p': case 'P': if (!e.ctrlKey && !e.metaKey) window.print(); break;
+    }
+  });
+
+  // ── Touch / swipe ───────────────────────────────────────────────
+  let touchX = 0;
+  document.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1);
+  });
+
+  // ── Nav buttons ─────────────────────────────────────────────────
+  document.getElementById('btn-prev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('btn-next').addEventListener('click', () => goTo(current + 1));
+
+  // ── Fullscreen ──────────────────────────────────────────────────
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+  btnFs.addEventListener('click', toggleFullscreen);
+  document.addEventListener('fullscreenchange', () => {
+    btnFs.textContent = document.fullscreenElement ? '✕' : '⤢';
+    btnFs.title = document.fullscreenElement ? 'Exit fullscreen (F)' : 'Fullscreen (F)';
+  });
+
+  // ── Speaker notes ───────────────────────────────────────────────
+  function renderNotes() {
+    const notesEl = slides[current].querySelector('aside.notes');
+    notesContent.innerHTML = '';
+    if (notesEl) {
+      notesEl.querySelectorAll('li').forEach(li => {
+        const item = document.createElement('li');
+        item.textContent = li.textContent.trim();
+        notesContent.appendChild(item);
+      });
+    }
+  }
+
+  function openNotes()  { notesPanel.classList.add('open'); btnNotes.classList.add('active'); renderNotes(); }
+  function closeNotes() { notesPanel.classList.remove('open'); btnNotes.classList.remove('active'); }
+  function toggleNotes(){ notesPanel.classList.contains('open') ? closeNotes() : openNotes(); }
+
+  btnNotes.addEventListener('click', toggleNotes);
+  document.getElementById('notes-close').addEventListener('click', closeNotes);
+
+  // ── Slide overview ───────────────────────────────────────────────
+  function buildOverview() {
+    if (ovBuilt) return;
+    ovBuilt = true;
+    const thumbW  = 200;
+    const scale   = thumbW / window.innerWidth;
+    const thumbH  = Math.round(window.innerHeight * scale);
+
+    slides.forEach((slide, i) => {
+      const thumb = document.createElement('div');
+      thumb.className = 'ov-thumb' + (i === current ? ' active' : '');
+      thumb.style.cssText = `width:${thumbW}px; height:${thumbH}px;`;
+
+      const inner = document.createElement('div');
+      inner.className = 'ov-thumb-inner';
+      inner.style.cssText = `width:${window.innerWidth}px; height:${window.innerHeight}px; transform:scale(${scale}); transform-origin:top left; overflow:hidden;`;
+
+      const clone = slide.cloneNode(true);
+      clone.style.cssText = 'position:relative; opacity:1 !important; transform:none !important; pointer-events:none; z-index:1;';
+      clone.classList.remove('exit');
+      clone.classList.add('active');
+
+      inner.appendChild(clone);
+
+      const label = document.createElement('div');
+      const titleEl = slide.querySelector('.slide-title, .cover-title, .chapter-title');
+      label.className = 'ov-thumb-label';
+      label.textContent = (i + 1) + (titleEl ? ' · ' + titleEl.textContent.trim().substring(0, 24) : '');
+
+      thumb.appendChild(inner);
+      thumb.appendChild(label);
+      thumb.addEventListener('click', () => { goTo(i); closeOverview(); });
+      ovGrid.appendChild(thumb);
+    });
+  }
+
+  function openOverview() {
+    buildOverview();
+    overview.hidden = false;
+    ovGrid.querySelectorAll('.ov-thumb').forEach((t, i) => t.classList.toggle('active', i === current));
+  }
+
+  function closeOverview() { overview.hidden = true; }
+
+  overview.querySelector('.ov-close').addEventListener('click', closeOverview);
+  overview.addEventListener('click', (e) => { if (e.target === overview) closeOverview(); });
+
+  // ── Slide animations (KPI / bar / donut) ───────────────────────
+  function triggerSlideAnimations() {
+    if (animated.has(current)) return;
+    animated.add(current);
+    const slide = slides[current];
+
+    slide.querySelectorAll('.kpi-counter').forEach((el) => {
+      const target = parseFloat(el.dataset.target);
+      const isFloat = el.dataset.target.includes('.');
+      setTimeout(() => animateCounter(el, target, isFloat), 200);
+    });
+    slide.querySelectorAll('.bar-fill[data-pct]').forEach((bar) => {
+      setTimeout(() => { bar.style.width = bar.dataset.pct + '%'; }, 150);
+    });
+    slide.querySelectorAll('.donut-fill[data-pct]').forEach((circle) => {
+      const offset = 220 - (220 * parseFloat(circle.dataset.pct) / 100);
+      setTimeout(() => { circle.style.strokeDashoffset = offset; }, 200);
+    });
+    slide.querySelectorAll('.ring-fill[data-pct]').forEach((circle) => {
+      const r    = parseFloat(circle.getAttribute('r'));
+      const circ = 2 * Math.PI * r;
+      circle.style.strokeDasharray  = circ;
+      circle.style.strokeDashoffset = circ;
+      const pct = parseFloat(circle.dataset.pct);
+      setTimeout(() => { circle.style.strokeDashoffset = circ * (1 - pct / 100); }, 200);
+    });
+    slide.querySelectorAll('.ring-val[data-target]').forEach((el) => {
+      const target = parseFloat(el.dataset.target);
+      setTimeout(() => animateCounter(el, target, el.dataset.target.includes('.')), 200);
+    });
+  }
+
+  function animateCounter(el, target, isFloat) {
+    const duration = 1400, start = performance.now();
+    function step(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const v = 1 - Math.pow(1 - t, 3);
+      el.textContent = isFloat ? (v * target).toFixed(1) : Math.round(v * target);
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = isFloat ? target.toFixed(1) : target;
+    }
+    requestAnimationFrame(step);
+  }
+
+  // ── Print: ensure all data visualisations show correct values ──
+  window.addEventListener('beforeprint', () => {
+    slides.forEach((slide, i) => {
+      slide.querySelectorAll('.bar-fill[data-pct]').forEach(b => { b.style.transition = 'none'; b.style.width = b.dataset.pct + '%'; });
+      slide.querySelectorAll('.donut-fill[data-pct]').forEach(c => { c.style.transition = 'none'; c.style.strokeDashoffset = 220 - (220 * parseFloat(c.dataset.pct) / 100); });
+      slide.querySelectorAll('.ring-fill[data-pct]').forEach(c => {
+        const r = parseFloat(c.getAttribute('r')), circ = 2 * Math.PI * r;
+        c.style.transition = 'none'; c.style.strokeDasharray = circ;
+        c.style.strokeDashoffset = circ * (1 - parseFloat(c.dataset.pct) / 100);
+      });
+      slide.querySelectorAll('.kpi-counter, .ring-val[data-target]').forEach(el => { el.textContent = el.dataset.target; });
+    });
+  });
+
+  // ── Code syntax colorizer ───────────────────────────────────────
+  const KW = {
+    python: /\b(def|class|return|if|elif|else|for|while|import|from|as|with|try|except|finally|raise|in|is|not|and|or|True|False|None|async|await|pass|yield|lambda|global|nonlocal|del|assert|self)\b/g,
+    js:     /\b(const|let|var|function|return|if|else|for|while|class|import|export|from|as|new|this|typeof|instanceof|true|false|null|undefined|async|await|try|catch|finally|throw|of|in|switch|case|break|default)\b/g,
+    sql:    /\b(SELECT|FROM|WHERE|JOIN|LEFT|RIGHT|INNER|OUTER|ON|AS|AND|OR|NOT|IN|IS|NULL|INSERT|INTO|VALUES|UPDATE|SET|DELETE|CREATE|TABLE|PRIMARY|KEY|FOREIGN|REFERENCES|INDEX|DROP|ALTER|ADD|COLUMN|UNIQUE|DEFAULT|TEXT|INTEGER|REAL|BLOB|IF|EXISTS|ORDER|BY|GROUP|HAVING|LIMIT|OFFSET|ASC|DESC|BEGIN|COMMIT|TRIGGER|VIEW)\b/gi,
+    json:   null
+  };
+
+  function inferLang(pre) {
+    if (pre.dataset.lang) return pre.dataset.lang.toLowerCase();
+    const t = pre.textContent;
+    if (/\bdef\b|\bimport\b|\bclass\b/.test(t)) return 'python';
+    if (/\bSELECT\b|\bCREATE TABLE\b|\bINSERT\b/i.test(t)) return 'sql';
+    if (/^\s*[\[{]/.test(t) && /":\s/.test(t)) return 'json';
+    if (/\bconst\b|\bfunction\b|\blet\b/.test(t)) return 'js';
+    return 'text';
+  }
+
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function colorizeBlock(pre) {
+    const code = pre.querySelector('code');
+    if (!code) return;
+    const lang = inferLang(pre);
+    const toks = [];
+    const stash = (type, val) => { const id = '\x01' + toks.length + '\x01'; toks.push({ type, val }); return id; };
+
+    let raw = code.textContent;
+    raw = raw.replace(/#[^\n]*/g,          m => stash('comment', m));
+    raw = raw.replace(/\/\/[^\n]*/g,        m => stash('comment', m));
+    raw = raw.replace(/\/\*[\s\S]*?\*\//g,  m => stash('comment', m));
+    raw = raw.replace(/--[^\n]*/g,          m => stash('comment', m));
+    raw = raw.replace(/"(?:[^"\\]|\\.)*"/g, m => stash('string', m));
+    raw = raw.replace(/'(?:[^'\\]|\\.)*'/g, m => stash('string', m));
+    raw = raw.replace(/`(?:[^`\\]|\\.)*`/g, m => stash('string', m));
+    raw = raw.replace(/\b\d+\.?\d*\b/g,     m => stash('number', m));
+    const kw = KW[lang];
+    if (kw) { kw.lastIndex = 0; raw = raw.replace(kw, m => stash('keyword', m)); }
+
+    raw = esc(raw).replace(/\x01(\d+)\x01/g, (_, idx) => {
+      const { type, val } = toks[+idx];
+      return `<span class="tok-${type}">${esc(val)}</span>`;
+    });
+    code.innerHTML = raw;
+  }
+
+  document.querySelectorAll('pre.code-block').forEach(colorizeBlock);
+
+  // ── Init ────────────────────────────────────────────────────────
+  slides[0].classList.add('active');
+  updateUI();
+  triggerSlideAnimations();
+
+  // ── Cover canvas particle network ───────────────────────────────
+  (function () {
+    const canvas = document.getElementById('cover-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const COUNT = 55, MAX_DIST = 130;
+    let W, H, particles;
+
+    function resize() {
+      W = canvas.width  = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+
+    function Particle() {
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.vx = (Math.random() - .5) * .45;
+      this.vy = (Math.random() - .5) * .45;
+      this.r  = Math.random() * 1.4 + .8;
+    }
+
+    function draw() {
+      requestAnimationFrame(draw);
+      if (!slides[0].classList.contains('active')) return;
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(88,166,255,.75)';
+        ctx.fill();
+        for (let j = i + 1; j < particles.length; j++) {
+          const q  = particles[j];
+          const dx = p.x - q.x, dy = p.y - q.y;
+          const d  = Math.sqrt(dx * dx + dy * dy);
+          if (d < MAX_DIST) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(88,166,255,${(1 - d / MAX_DIST) * .3})`;
+            ctx.lineWidth = .7;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    window.addEventListener('resize', () => { resize(); });
+    resize();
+    particles = Array.from({ length: COUNT }, () => new Particle());
+    draw();
+  })();
+})();
+</script>
+
+</body>
+</html>

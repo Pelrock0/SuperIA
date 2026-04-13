@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Wireframes - FEAT-EPIC0-LANDING: Landing y Lista de Espera</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+        .wireframe-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        h1 { font-size: 32px; color: #1a202c; margin-bottom: 8px; font-weight: 700; }
+        .feature-id { color: #718096; font-size: 14px; margin-bottom: 40px; font-weight: 500; }
+        h2 { font-size: 24px; color: #2d3748; margin: 50px 0 20px; padding-bottom: 10px; border-bottom: 2px solid #e2e8f0; font-weight: 600; }
+        h3 { font-size: 18px; color: #2d3748; margin: 20px 0 10px; }
+        .user-flow { display: flex; gap: 15px; align-items: center; margin: 30px 0; padding: 30px; background: #f7fafc; border-radius: 8px; overflow-x: auto; flex-wrap: wrap; }
+        .flow-step { flex: 0 0 220px; padding: 24px; background: white; border: 2px solid #cbd5e0; border-radius: 8px; text-align: center; }
+        .flow-step.current { border-color: #003E54; background: #ebf8ff; }
+        .flow-step-number { display: inline-block; width: 36px; height: 36px; background: #003E54; color: white; border-radius: 50%; line-height: 36px; font-weight: bold; margin-bottom: 12px; font-size: 16px; }
+        .flow-step h4 { font-size: 15px; color: #2d3748; margin-bottom: 8px; font-weight: 600; }
+        .flow-step p { font-size: 13px; color: #718096; line-height: 1.5; }
+        .flow-arrow { flex: 0 0 auto; font-size: 24px; color: #a0aec0; }
+        .screen { border: 3px solid #2d3748; border-radius: 8px; margin: 30px 0; background: white; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .screen-header { background: #2d3748; color: white; padding: 12px 24px; font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .screen-size { color: #a0aec0; font-size: 11px; }
+        .content { padding: 40px 30px; min-height: 200px; }
+        .hero-section { text-align: center; padding: 60px 20px; background: linear-gradient(135deg, #f0fdf9 0%, #ecfdf5 50%, #f0f9ff 100%); border-radius: 8px; margin-bottom: 30px; }
+        .hero-title { font-size: 48px; font-weight: 800; color: #003E54; margin-bottom: 12px; }
+        .hero-tagline { font-size: 22px; color: #10B981; font-weight: 500; margin-bottom: 16px; }
+        .hero-desc { font-size: 16px; color: #64748b; max-width: 600px; margin: 0 auto; }
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 30px 0; }
+        .feature-card { padding: 24px; background: #f8fafc; border-radius: 12px; text-align: center; border: 1px solid #e2e8f0; }
+        .feature-icon { font-size: 36px; margin-bottom: 12px; }
+        .feature-title { font-weight: 600; color: #003E54; margin-bottom: 8px; }
+        .feature-desc { font-size: 14px; color: #64748b; }
+        .form-section { max-width: 480px; margin: 30px auto; padding: 30px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; }
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 6px; }
+        .form-label .required { color: #ef4444; }
+        .form-input { width: 100%; height: 44px; padding: 0 16px; background: white; border: 2px solid #d1d5db; border-radius: 8px; font-size: 14px; color: #9ca3af; display: flex; align-items: center; }
+        .form-select { width: 100%; height: 44px; padding: 0 16px; background: white; border: 2px solid #d1d5db; border-radius: 8px; font-size: 14px; color: #9ca3af; display: flex; align-items: center; }
+        .btn-primary { display: block; width: 100%; padding: 14px; background: #003E54; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; text-align: center; cursor: pointer; margin-top: 16px; }
+        .commitment-section { text-align: center; padding: 40px 20px; background: #f0fdf9; border-radius: 8px; margin: 30px 0; }
+        .commitment-items { display: flex; justify-content: center; gap: 32px; margin: 16px 0; flex-wrap: wrap; }
+        .commitment-item { display: flex; align-items: center; gap: 8px; color: #374151; }
+        .check { color: #10B981; font-weight: bold; }
+        .privacy-link { color: #003E54; text-decoration: underline; }
+        .footer { padding: 24px 30px; background: #1e293b; color: #94a3b8; font-size: 13px; display: flex; justify-content: space-between; align-items: center; border-radius: 0 0 8px 8px; }
+        .footer a { color: #cbd5e1; text-decoration: none; margin-left: 16px; }
+        .admin-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        .admin-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-size: 13px; color: #475569; border-bottom: 2px solid #e2e8f0; }
+        .admin-table td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; font-size: 14px; color: #334155; }
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+        .badge-pending { background: #fef3c7; color: #92400e; }
+        .badge-invited { background: #dbeafe; color: #1e40af; }
+        .btn-sm { padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; border: none; cursor: pointer; }
+        .btn-invite { background: #10B981; color: white; }
+        .btn-export { background: #003E54; color: white; padding: 8px 16px; border-radius: 6px; font-size: 13px; border: none; margin-bottom: 16px; }
+        .annotation { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .annotation strong { color: #92400e; }
+        .annotation p { font-size: 14px; color: #78350f; margin-top: 4px; }
+        .success-msg { text-align: center; padding: 24px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; }
+        .success-msg h4 { color: #16a34a; font-size: 20px; margin-bottom: 8px; }
+        .error-msg { padding: 12px 16px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; font-size: 14px; color: #dc2626; margin-bottom: 16px; }
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .commitment-items { flex-direction: column; align-items: center; }
+            .hero-title { font-size: 32px; }
+            .footer { flex-direction: column; gap: 12px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <h1>UX Wireframes: Landing y Lista de Espera</h1>
+        <div class="feature-id">FEAT-EPIC0-LANDING | Fecha: 2026-04-10 | Design: Stitch MCP (Proyecto Superia)</div>
+
+        <!-- UX PROPOSAL -->
+        <h2>1. UX Proposal</h2>
+
+        <h3>User Actions</h3>
+        <ul>
+            <li>Visitante ve la landing y entiende la propuesta de valor sin scroll</li>
+            <li>Visitante rellena formulario de waitlist (nombre*, email*, companion opcional)</li>
+            <li>Visitante lee la política de privacidad (enlace visible, no solo footer)</li>
+            <li>Admin gestiona waitlist desde panel Backpack (tabla, filtros, invitar, exportar CSV)</li>
+        </ul>
+
+        <h3>Feedback & Confirmations</h3>
+        <ul>
+            <li>Formulario: estados de carga ("Enviando..."), éxito (posición en lista), error (validación, rate limit)</li>
+            <li>Email: confirmación con posición aproximada</li>
+            <li>Admin: alerta flash tras invitar usuario</li>
+        </ul>
+
+        <h3>Error Handling</h3>
+        <ul>
+            <li>Validación inline (email formato, nombre requerido)</li>
+            <li>Email duplicado: mensaje genérico de éxito (no revelar existencia)</li>
+            <li>Rate limit 429: mensaje amigable "Inténtalo más tarde"</li>
+            <li>Error genérico 500: "Ha ocurrido un error"</li>
+        </ul>
+
+        <h3>UX Risks</h3>
+        <ul>
+            <li>Carga >2s en móvil: mitigado con Vite build + Tailwind purge + lazy loading</li>
+            <li>Formulario sin feedback visual: mitigado con estados disabled/loading</li>
+        </ul>
+
+        <!-- USER FLOW -->
+        <h2>2. User Flows</h2>
+
+        <h3>Flow A: Visitante se registra en waitlist</h3>
+        <div class="user-flow">
+            <div class="flow-step current">
+                <span class="flow-step-number">1</span>
+                <h4>Landing Page</h4>
+                <p>Ve hero + features + compromiso datos</p>
+            </div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">
+                <span class="flow-step-number">2</span>
+                <h4>Formulario Waitlist</h4>
+                <p>Rellena nombre, email, companion (opc)</p>
+            </div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">
+                <span class="flow-step-number">3</span>
+                <h4>Mensaje Éxito</h4>
+                <p>Ve posición aproximada en lista</p>
+            </div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">
+                <span class="flow-step-number">4</span>
+                <h4>Email Confirmación</h4>
+                <p>Recibe email con posición</p>
+            </div>
+        </div>
+
+        <h3>Flow B: Admin invita usuario</h3>
+        <div class="user-flow">
+            <div class="flow-step current">
+                <span class="flow-step-number">1</span>
+                <h4>Panel Admin</h4>
+                <p>Ve tabla waitlist con filtros</p>
+            </div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">
+                <span class="flow-step-number">2</span>
+                <h4>Botón "Invitar"</h4>
+                <p>Confirma envío de invitación</p>
+            </div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">
+                <span class="flow-step-number">3</span>
+                <h4>Email Invitación</h4>
+                <p>Usuario recibe enlace registro (7d exp)</p>
+            </div>
+        </div>
+
+        <!-- SCREEN: LANDING PAGE -->
+        <h2>3. Screen Wireframes</h2>
+
+        <h3>Screen 1: Landing Page (Desktop — Stitch: "Landing Page (Desktop) - Mediterranean Modern")</h3>
+        <div class="screen">
+            <div class="screen-header">
+                <span>Landing Page — superia.com.local/</span>
+                <span class="screen-size">Desktop 1440px / Mobile 375px</span>
+            </div>
+            <div class="content">
+                <!-- Hero -->
+                <div class="hero-section">
+                    <div class="hero-title">Superia</div>
+                    <div class="hero-tagline">La compra, más inteligente</div>
+                    <div class="hero-desc">
+                        Organiza tus listas de la compra con inteligencia artificial.
+                        Sugerencias personalizadas, listas compartidas y control total de tu presupuesto.
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <div class="feature-title">Inteligencia Artificial</div>
+                        <div class="feature-desc">Sugerencias que anticipan tus necesidades analizando patrones de consumo semanal</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤝</div>
+                        <div class="feature-title">Listas Compartidas</div>
+                        <div class="feature-desc">Sincronización en tiempo real con tu pareja, familia o compañeros de piso</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-title">Historial Inteligente</div>
+                        <div class="feature-desc">Historial de gasto y analíticas de presupuesto con gráficos intuitivos</div>
+                    </div>
+                </div>
+
+                <!-- Waitlist Form -->
+                <div class="form-section">
+                    <h3 style="text-align:center; margin-bottom:16px; color:#003E54;">Sé de los primeros</h3>
+                    <p style="text-align:center; color:#64748b; margin-bottom:20px; font-size:14px;">Apúntate a la lista de espera</p>
+                    <div class="form-group">
+                        <label class="form-label">Nombre <span class="required">*</span></label>
+                        <div class="form-input">Tu nombre</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email <span class="required">*</span></label>
+                        <div class="form-input">tu@email.com</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">¿Con quién sueles compartir la compra?</label>
+                        <div class="form-select">Selecciona (opcional)</div>
+                    </div>
+                    <div class="btn-primary">Unirme a la lista de espera</div>
+                </div>
+
+                <!-- Data Commitment -->
+                <div class="commitment-section">
+                    <h3 style="color:#003E54; margin-bottom:12px;">Tus listas son tuyas</h3>
+                    <p style="color:#475569; margin-bottom:12px;">Nunca las venderemos, nunca las usaremos para publicidad.</p>
+                    <div class="commitment-items">
+                        <div class="commitment-item"><span class="check">✓</span> Sin cookies de tracking</div>
+                        <div class="commitment-item"><span class="check">✓</span> Sin venta de datos</div>
+                        <div class="commitment-item"><span class="check">✓</span> Sin publicidad</div>
+                    </div>
+                    <a href="#" class="privacy-link">Lee nuestra política de privacidad completa</a>
+                </div>
+
+                <!-- Footer -->
+                <div class="footer">
+                    <span>&copy; 2026 Superia. Todos los derechos reservados.</span>
+                    <div>
+                        <a href="#">Política de privacidad</a>
+                        <a href="#">Aviso legal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUCCESS STATE -->
+        <h3>Screen 1b: Waitlist — Estado de éxito</h3>
+        <div class="screen">
+            <div class="screen-header">
+                <span>Waitlist Form — Éxito</span>
+                <span class="screen-size">Reemplaza el formulario tras envío exitoso</span>
+            </div>
+            <div class="content">
+                <div class="success-msg">
+                    <h4>¡Estás en la lista!</h4>
+                    <p>Eres aproximadamente el número <strong>47</strong> en la lista de espera.</p>
+                    <p style="color:#6b7280; font-size:13px; margin-top:8px;">Te enviaremos un email de confirmación.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ERROR STATES -->
+        <h3>Screen 1c: Waitlist — Estados de error</h3>
+        <div class="screen">
+            <div class="screen-header">
+                <span>Waitlist Form — Errores</span>
+                <span class="screen-size">Inline validation + server errors</span>
+            </div>
+            <div class="content">
+                <div class="error-msg">Has alcanzado el límite de intentos. Inténtalo más tarde.</div>
+                <div class="form-section" style="margin-top:16px;">
+                    <div class="form-group">
+                        <label class="form-label">Email <span class="required">*</span></label>
+                        <div class="form-input" style="border-color:#ef4444;">correo-invalido</div>
+                        <p style="color:#dc2626; font-size:13px; margin-top:4px;">El email no es válido.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMIN PANEL -->
+        <h3>Screen 2: Panel Admin — Gestión Waitlist (Backpack CRUD — Stitch: "Panel de Administración")</h3>
+        <div class="screen">
+            <div class="screen-header">
+                <span>Admin Panel — /admin/waitlist-entry</span>
+                <span class="screen-size">Desktop 1440px (Backpack CRUD)</span>
+            </div>
+            <div class="content">
+                <h3 style="margin-bottom:16px;">Lista de Espera <span style="color:#94a3b8; font-weight:400; font-size:14px;">— 156 registros</span></h3>
+                <button class="btn-export">📥 Exportar CSV</button>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Compra con</th>
+                            <th>Estado</th>
+                            <th>Fecha registro</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Juan García</td>
+                            <td>juan@example.com</td>
+                            <td>Familia</td>
+                            <td><span class="badge badge-pending">Pendiente</span></td>
+                            <td>10/04/2026</td>
+                            <td><button class="btn-sm btn-invite">✉ Invitar</button></td>
+                        </tr>
+                        <tr>
+                            <td>Ana López</td>
+                            <td>ana@example.com</td>
+                            <td>Pareja</td>
+                            <td><span class="badge badge-invited">Invitado</span></td>
+                            <td>09/04/2026</td>
+                            <td><span style="color:#94a3b8; font-size:12px;">Invitación enviada</span></td>
+                        </tr>
+                        <tr>
+                            <td>Carlos Ruiz</td>
+                            <td>carlos@example.com</td>
+                            <td>Solo</td>
+                            <td><span class="badge badge-pending">Pendiente</span></td>
+                            <td>08/04/2026</td>
+                            <td><button class="btn-sm btn-invite">✉ Invitar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ANNOTATIONS -->
+        <h2>4. Annotations</h2>
+
+        <div class="annotation">
+            <strong>Design System: Stitch "Editorial Intelligence"</strong>
+            <p>Colores principales: Deep Teal #003E54 (primario), Emerald #10B981 (acento). Material Design con Tailwind CSS. Light mode. Tipografía sans-serif system.</p>
+        </div>
+
+        <div class="annotation">
+            <strong>Responsive: Mobile-first</strong>
+            <p>Landing responsive en 3 breakpoints: mobile (375px), tablet (768px), desktop (1440px). Features grid pasa de 3 columnas a 1 en mobile. Formulario centrado max-width 480px.</p>
+        </div>
+
+        <div class="annotation">
+            <strong>Performance: Carga &lt;2s en 3G</strong>
+            <p>React SPA con Vite build + Tailwind purge. Lazy load PrivacyPage. Sin scripts de terceros, sin analytics, sin cookies de tracking.</p>
+        </div>
+
+        <div class="annotation">
+            <strong>Admin: Backpack CRUD existente</strong>
+            <p>El panel admin usa Backpack CRUD (ya instalado). No se diseña UI custom para admin. Backpack proporciona tabla, filtros y acciones. Se añaden botones custom "Invitar" y "Exportar CSV".</p>
+        </div>
+
+        <div class="annotation">
+            <strong>Accesibilidad</strong>
+            <p>Labels asociados a inputs con htmlFor/id. Roles ARIA en alertas de error. Contraste WCAG AA en textos principales. Focus visible en inputs y botones.</p>
+        </div>
+    </div>
+</body>
+</html>

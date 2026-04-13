@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#002a1a",
+                        "surface-container-highest": "#e0e3e5",
+                        "outline-variant": "#c1c7cd",
+                        "tertiary-container": "#00422b",
+                        "secondary": "#00677d",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#10b981",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001e2b",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-high": "#e6e8ea",
+                        "outline": "#71787d",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-surface": "#191c1e",
+                        "on-tertiary-fixed": "#002113",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#34647b",
+                        "surface-dim": "#d8dadc",
+                        "inverse-primary": "#9ecde8",
+                        "surface-variant": "#e0e3e5",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#005c70",
+                        "on-primary-fixed-variant": "#174c62",
+                        "on-secondary-fixed": "#001f27",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "secondary-fixed": "#b3ebff",
+                        "secondary-container": "#50d9fe",
+                        "primary-container": "#003e54",
+                        "on-primary-container": "#7aa9c3",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#41484c",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#4cd6fb",
+                        "background": "#f7f9fb",
+                        "primary-fixed": "#c1e8ff",
+                        "primary": "#002736",
+                        "on-background": "#191c1e",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-bright": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#9ecde8",
+                        "surface-container": "#eceef0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f7f9fb] dark:bg-[#002736] flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#002736] dark:text-[#f7f9fb] hover:opacity-80 transition-opacity scale-95 active:transition-transform cursor-pointer" data-icon="menu">menu</span>
+<h1 class="font-bold tracking-tighter text-2xl text-[#002736] dark:text-[#f7f9fb]">Superia</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-surface-container-highest">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Close-up portrait of a professional man with a friendly expression in soft studio lighting with a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0Dr8xZ0TLrbgDTFLMaPvRTpwtZ0D5jNS8C_Dpvq11Dh6kED8_ismI2EHV9ZfZUSzPS5VL8Tiuh6vyxOMV9YHMrWctC4UHhluwOkTQgkqmDoIbkX12JD0vOZfMBcrOHKrsdUmo_K3HnxENmpwJfUXv43S1mS0gN6tgUt1ZBoY83xseh5_qe2o9aP0fYRBw0QrE8cq_Go59y9i3d_fmX5HUnQX8Zm6cLWGxFgLEgII9gtOtgZGtFesFDv6OjUOT-HwaDSRwTHd3JbU"/>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto space-y-8">
+<!-- Screen Title -->
+<div class="mb-8 ml-2">
+<p class="text-tertiary-container font-bold text-xs uppercase tracking-[0.2em] mb-1">Análisis de Hogar</p>
+<h2 class="text-3xl font-bold tracking-tight text-primary">Mis estadísticas</h2>
+</div>
+<!-- Section 1: Bar Chart - Gasto estimado -->
+<section class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_4px_24px_0_rgba(0,39,54,0.04)]">
+<h3 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-8">Gasto estimado (últimos 6 meses)</h3>
+<div class="flex items-end justify-between h-48 gap-3">
+<div class="flex flex-col items-center flex-1">
+<div class="w-full bg-secondary-container/20 rounded-t-lg h-[40%] transition-all hover:bg-secondary-container/40"></div>
+<span class="text-[10px] font-bold text-on-surface-variant mt-3">OCT</span>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="w-full bg-secondary-container/20 rounded-t-lg h-[55%] transition-all hover:bg-secondary-container/40"></div>
+<span class="text-[10px] font-bold text-on-surface-variant mt-3">NOV</span>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="w-full bg-secondary-container/20 rounded-t-lg h-[75%] transition-all hover:bg-secondary-container/40"></div>
+<span class="text-[10px] font-bold text-on-surface-variant mt-3">DIC</span>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="w-full bg-secondary-container/20 rounded-t-lg h-[65%] transition-all hover:bg-secondary-container/40"></div>
+<span class="text-[10px] font-bold text-on-surface-variant mt-3">ENE</span>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="w-full bg-secondary-container/20 rounded-t-lg h-[85%] transition-all hover:bg-secondary-container/40"></div>
+<span class="text-[10px] font-bold text-on-surface-variant mt-3">FEB</span>
+</div>
+<div class="flex flex-col items-center flex-1">
+<!-- Current Month Highlight -->
+<div class="w-full bg-secondary rounded-t-lg h-[92%] relative shadow-[0_-4px_12px_rgba(0,180,216,0.3)]">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] px-2 py-1 rounded font-bold">€342</div>
+</div>
+<span class="text-[10px] font-bold text-primary mt-3">MAR</span>
+</div>
+</div>
+</section>
+<!-- Section 2: Donut Chart - Gasto por Categoría -->
+<section class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_4px_24px_0_rgba(0,39,54,0.04)]">
+<h3 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-8">Gasto por Categoría</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<!-- Visual Donut placeholder -->
+<div class="relative w-40 h-40 mx-auto">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#eceef0" stroke-width="3.5"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#003e54" stroke-dasharray="35 65" stroke-dashoffset="0" stroke-width="3.5"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#50d9fe" stroke-dasharray="25 75" stroke-dashoffset="-35" stroke-width="3.5"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#10b981" stroke-dasharray="20 80" stroke-dashoffset="-60" stroke-width="3.5"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#4edea3" stroke-dasharray="10 90" stroke-dashoffset="-80" stroke-width="3.5"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#c1c7cd" stroke-dasharray="10 90" stroke-dashoffset="-90" stroke-width="3.5"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-bold text-primary">€840</span>
+<span class="text-[9px] uppercase tracking-tighter text-on-surface-variant font-bold">Total Mes</span>
+</div>
+</div>
+<!-- Legend -->
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<span class="text-xs font-bold text-on-surface-variant">Frutas</span>
+</div>
+<span class="text-xs font-bold text-primary">35%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary-container"></div>
+<span class="text-xs font-bold text-on-surface-variant">Lácteos</span>
+</div>
+<span class="text-xs font-bold text-primary">25%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-on-tertiary-container"></div>
+<span class="text-xs font-bold text-on-surface-variant">Carnes</span>
+</div>
+<span class="text-xs font-bold text-primary">20%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim"></div>
+<span class="text-xs font-bold text-on-surface-variant">Bebidas</span>
+</div>
+<span class="text-xs font-bold text-primary">10%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+<span class="text-xs font-bold text-on-surface-variant">Otros</span>
+</div>
+<span class="text-xs font-bold text-primary">10%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: List - Tus 5 productos más comprados -->
+<section class="space-y-4">
+<h3 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant ml-2">Tus 5 productos más comprados</h3>
+<div class="space-y-1">
+<!-- Product Item 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl flex items-center justify-between transition-all hover:scale-[1.01]">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="egg">egg</span>
+</div>
+<div>
+<p class="font-bold text-primary">Leche entera</p>
+<span class="text-[10px] font-bold uppercase tracking-wider text-secondary-container py-0.5 px-2 bg-secondary-container/10 rounded-full">Lácteos</span>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-primary">12 veces</p>
+</div>
+</div>
+<!-- Product Item 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl flex items-center justify-between transition-all hover:scale-[1.01]">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="nutrition">nutrition</span>
+</div>
+<div>
+<p class="font-bold text-primary">Plátanos</p>
+<span class="text-[10px] font-bold uppercase tracking-wider text-primary py-0.5 px-2 bg-primary/5 rounded-full">Frutas</span>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-primary">10 veces</p>
+</div>
+</div>
+<!-- Product Item 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl flex items-center justify-between transition-all hover:scale-[1.01]">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined" data-icon="set_meal">set_meal</span>
+</div>
+<div>
+<p class="font-bold text-primary">Pechuga de Pollo</p>
+<span class="text-[10px] font-bold uppercase tracking-wider text-on-tertiary-container py-0.5 px-2 bg-on-tertiary-container/10 rounded-full">Carnes</span>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-primary">8 veces</p>
+</div>
+</div>
+<!-- Product Item 4 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl flex items-center justify-between transition-all hover:scale-[1.01]">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low flex items-center justify-center text-tertiary-fixed-dim">
+<span class="material-symbols-outlined" data-icon="water_drop">water_drop</span>
+</div>
+<div>
+<p class="font-bold text-primary">Agua Mineral</p>
+<span class="text-[10px] font-bold uppercase tracking-wider text-tertiary-fixed-dim py-0.5 px-2 bg-tertiary-fixed-dim/10 rounded-full">Bebidas</span>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-primary">7 veces</p>
+</div>
+</div>
+<!-- Product Item 5 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl flex items-center justify-between transition-all hover:scale-[1.01]">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="egg_alt">egg_alt</span>
+</div>
+<div>
+<p class="font-bold text-primary">Huevos L</p>
+<span class="text-[10px] font-bold uppercase tracking-wider text-secondary-container py-0.5 px-2 bg-secondary-container/10 rounded-full">Lácteos</span>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-primary">6 veces</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Disclaimer -->
+<footer class="pb-12 pt-4 px-2">
+<div class="flex items-start gap-3 p-4 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-outline text-lg" data-icon="info">info</span>
+<p class="text-xs text-on-surface-variant/80 leading-relaxed italic">Los importes son estimaciones salvo que hayas confirmado el precio real.</p>
+</div>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-3xl bg-white/70 dark:bg-[#003e54]/70 backdrop-blur-md shadow-[0_-4px_24px_0_rgba(0,39,54,0.06)] border-t border-[#002736]/5 flex justify-around items-center h-20 px-8 pb-safe w-full">
+<div class="flex flex-col items-center justify-center text-[#002736]/40 dark:text-[#f7f9fb]/40 transition-all duration-300 ease-out hover:text-[#003e54] dark:hover:text-[#6ffbbe] cursor-pointer">
+<span class="material-symbols-outlined" data-icon="format_list_bulleted">format_list_bulleted</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Lists</span>
+</div>
+<!-- Active Tab: Stats -->
+<div class="flex flex-col items-center justify-center text-[#002736] dark:text-[#6ffbbe] scale-110 transition-all duration-300 ease-out cursor-pointer">
+<span class="material-symbols-outlined" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Stats</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#002736]/40 dark:text-[#f7f9fb]/40 transition-all duration-300 ease-out hover:text-[#003e54] dark:hover:text-[#6ffbbe] cursor-pointer">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Pantry</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#002736]/40 dark:text-[#f7f9fb]/40 transition-all duration-300 ease-out hover:text-[#003e54] dark:hover:text-[#6ffbbe] cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Settings</span>
+</div>
+</nav>
+</body></html>

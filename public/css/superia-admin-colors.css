@@ -1,0 +1,89 @@
+/**
+ * Superia Admin — Custom skin colors for Backpack theme-tabler
+ * Overrides Tabler CSS variables for the dark sidebar (vertical_dark layout)
+ */
+
+/* Sidebar (dark menu) variables */
+[data-menu-theme=dark] {
+    --tblr-navbar-bg: #002736;
+    --tblr-navbar-border-color: transparent;
+    --tblr-navbar-color: rgba(255, 255, 255, 0.6);
+    --tblr-navbar-active-bg: #003e54;
+    --tblr-navbar-active-color: #6ffbbe;
+    --tblr-navbar-brand-color: #ffffff;
+    --tblr-navbar-hover-color: #ffffff;
+    --tblr-navbar-hover-bg: rgba(0, 62, 84, 0.5);
+}
+
+/* Primary brand colors */
+:root,
+[data-bs-theme=light] {
+    --tblr-primary: #003e54;
+    --tblr-primary-rgb: 0, 62, 84;
+    --tblr-primary-border-subtle: rgba(0, 62, 84, .1);
+    --tblr-primary-border-color: rgba(0, 62, 84, .2);
+    --tblr-primary-bg: rgba(0, 62, 84, .05);
+    --tblr-primary-text: #003e54;
+    --tblr-link-color-rgb: 0, 62, 84;
+    --tblr-link-color: #003e54;
+}
+
+/* Sidebar specific overrides for vertical_dark */
+[data-menu-theme=dark].navbar {
+    background-color: #002736 !important;
+}
+
+[data-menu-theme=dark] .navbar-brand {
+    color: #ffffff !important;
+}
+
+[data-menu-theme=dark] .nav-link {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-menu-theme=dark] .nav-link:hover {
+    color: #ffffff !important;
+    background-color: rgba(0, 62, 84, 0.5) !important;
+}
+
+[data-menu-theme=dark] .nav-link.active,
+[data-menu-theme=dark] .active > .nav-link {
+    color: #6ffbbe !important;
+    background-color: #003e54 !important;
+}
+
+[data-menu-theme=dark] .dropdown-menu {
+    background-color: #002736 !important;
+    border: none !important;
+}
+
+[data-menu-theme=dark] .dropdown-item {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+[data-menu-theme=dark] .dropdown-item:hover {
+    color: #ffffff !important;
+    background-color: rgba(0, 62, 84, 0.5) !important;
+}
+
+[data-menu-theme=dark] .dropdown-item.active {
+    color: #6ffbbe !important;
+    background-color: #003e54 !important;
+}
+
+[data-menu-theme=dark] .dropdown-header {
+    color: rgba(111, 251, 190, 0.7) !important;
+}
+
+[data-menu-theme=dark] .text-muted {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+[data-menu-theme=dark] .navbar-collapse .dropdown-toggle::after {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Logo white on dark sidebar */
+[data-menu-theme=dark] .navbar-brand img {
+    filter: brightness(0) invert(1);
+}

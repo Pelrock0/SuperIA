@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#002113",
+                        "surface-tint": "#34647b",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed-dim": "#9ecde8",
+                        "on-background": "#191c1e",
+                        "inverse-surface": "#2d3133",
+                        "surface-container": "#eceef0",
+                        "on-surface-variant": "#41484c",
+                        "primary-container": "#003e54",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#00422b",
+                        "secondary-fixed-dim": "#4cd6fb",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary": "#002736",
+                        "primary-fixed": "#c1e8ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed": "#b3ebff",
+                        "tertiary": "#002a1a",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-secondary-container": "#005c70",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "on-primary-container": "#7aa9c3",
+                        "outline-variant": "#c1c7cd",
+                        "on-primary-fixed-variant": "#174c62",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed": "#001f27",
+                        "outline": "#71787d",
+                        "on-tertiary-container": "#10b981",
+                        "on-error-container": "#93000a",
+                        "secondary": "#00677d",
+                        "secondary-container": "#50d9fe",
+                        "on-primary-fixed": "#001e2b",
+                        "inverse-primary": "#9ecde8",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-surface": "#191c1e",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-background min-h-screen flex flex-col items-center justify-start overflow-hidden">
+<!-- Background Content (Dimmed) -->
+<div class="w-full max-w-md h-screen bg-surface-container opacity-40 flex flex-col">
+<!-- TopAppBar Placeholder -->
+<header class="flex justify-between items-center px-6 py-4 w-full bg-[#f7f9fb]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="text-xl font-extrabold tracking-tight text-primary">Superia</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest"></div>
+</header>
+<main class="p-6 space-y-6">
+<h1 class="text-3xl font-bold tracking-tighter text-primary px-2">Mi Lista</h1>
+<div class="space-y-4">
+<div class="h-24 bg-surface-container-lowest rounded-xl shadow-sm"></div>
+<div class="h-24 bg-surface-container-lowest rounded-xl shadow-sm"></div>
+<div class="h-24 bg-surface-container-lowest rounded-xl shadow-sm"></div>
+</div>
+</main>
+</div>
+<!-- Backdrop Dimmer Overlay -->
+<div class="fixed inset-0 bg-primary/40 backdrop-blur-[2px] z-40"></div>
+<!-- Bottom Sheet Container -->
+<div class="fixed bottom-0 w-full max-w-md h-[751px] bg-surface-container-lowest z-50 rounded-t-[32px] shadow-[0_-8px_40px_-10px_rgba(0,39,54,0.2)] flex flex-col overflow-hidden">
+<!-- Handle -->
+<div class="flex justify-center py-4">
+<div class="w-12 h-1.5 bg-outline-variant rounded-full"></div>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto px-6 pb-24 space-y-8">
+<!-- Item Name Input -->
+<div class="space-y-2 mt-2">
+<label class="text-[11px] font-bold tracking-[0.05em] text-outline uppercase px-1">Producto</label>
+<div class="relative flex items-center">
+<input autofocus="" class="w-full bg-transparent border-none p-0 text-3xl font-bold text-on-surface focus:ring-0 placeholder:text-surface-variant" placeholder="¿Qué necesitas?" type="text" value="Tomat"/>
+<div class="w-0.5 h-8 bg-primary animate-pulse"></div>
+</div>
+</div>
+<!-- Autocomplete Suggestions -->
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline">search</span>
+<span class="font-medium text-on-surface">Tomates cherry</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-md tracking-wider">VERDURA</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline">search</span>
+<span class="font-medium text-on-surface">Tomates de pera</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-md tracking-wider">VERDURA</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline">search</span>
+<span class="font-medium text-on-surface">Salsa de tomate</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-surface-container-highest text-outline rounded-md tracking-wider">DESPENSA</span>
+</div>
+<!-- AI Enrichment -->
+<div class="flex items-center gap-2 px-1">
+<span class="material-symbols-outlined text-on-tertiary-container text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<p class="text-xs italic text-on-tertiary-container flex items-center">Buscando más<span class="flex ml-0.5"><span class="animate-bounce">.</span><span class="animate-bounce [animation-delay:0.2s]">.</span><span class="animate-bounce [animation-delay:0.4s]">.</span></span></p>
+</div>
+</div>
+<!-- Warning Banner -->
+<div class="bg-[#FFF7ED] p-4 rounded-xl space-y-3 shadow-sm">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-orange-600">warning</span>
+<p class="text-sm font-medium text-orange-900">Ya tienes Tomates en la lista. ¿Aumentar cantidad?</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 px-4 py-2 bg-white/60 text-xs font-bold text-orange-900 rounded-lg hover:bg-white transition-colors">Añadir igualmente</button>
+<button class="flex-1 px-4 py-2 bg-orange-600 text-xs font-bold text-white rounded-lg hover:bg-orange-700 transition-colors">Aumentar cantidad</button>
+</div>
+</div>
+<!-- Quantity & Unit & Price -->
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="text-[11px] font-bold tracking-[0.05em] text-outline uppercase px-1">Cantidad</label>
+<div class="flex items-center bg-surface-container-low rounded-xl p-1">
+<input class="w-full bg-transparent border-none text-lg font-bold text-on-surface focus:ring-0 px-3" type="number" value="1"/>
+<select class="bg-surface-container-high border-none rounded-lg text-sm font-bold text-primary-container focus:ring-0 mr-1">
+<option>kg</option>
+<option>ud</option>
+<option>g</option>
+<option>l</option>
+</select>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[11px] font-bold tracking-[0.05em] text-outline uppercase px-1">Precio est.</label>
+<div class="flex items-center bg-surface-container-low rounded-xl px-3 py-2.5">
+<span class="text-on-surface-variant font-bold">€</span>
+<input class="w-full bg-transparent border-none text-lg font-bold text-on-surface focus:ring-0 py-0 pl-1" type="text" value="0,00"/>
+</div>
+</div>
+</div>
+<!-- Category Selector -->
+<div class="space-y-2">
+<label class="text-[11px] font-bold tracking-[0.05em] text-outline uppercase px-1">Categoría</label>
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide no-scrollbar">
+<button class="shrink-0 px-5 py-2.5 bg-primary-container text-white rounded-full text-sm font-bold shadow-md">Frutas</button>
+<button class="shrink-0 px-5 py-2.5 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-bold">Lácteos</button>
+<button class="shrink-0 px-5 py-2.5 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-bold">Carnes</button>
+<button class="shrink-0 px-5 py-2.5 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-bold">Bebidas</button>
+<button class="shrink-0 px-5 py-2.5 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-bold">Limpieza</button>
+<button class="shrink-0 px-5 py-2.5 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-bold">Otros</button>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="absolute bottom-0 w-full p-6 bg-surface-container-lowest/80 backdrop-blur-md space-y-4">
+<button class="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-white font-bold rounded-xl shadow-lg active:scale-95 transition-transform">
+                Añadir
+            </button>
+<button class="w-full text-center text-sm font-bold text-outline hover:text-primary transition-colors">
+                Cancelar
+            </button>
+</div>
+</div>
+</body></html>

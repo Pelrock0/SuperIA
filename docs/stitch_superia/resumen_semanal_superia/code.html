@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-fixed-dim": "#9ecde8",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "primary-fixed": "#c1e8ff",
+                        "tertiary-container": "#00422b",
+                        "secondary-fixed": "#b3ebff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "outline": "#71787d",
+                        "on-secondary-container": "#005c70",
+                        "secondary-container": "#50d9fe",
+                        "on-secondary-fixed": "#001f27",
+                        "tertiary": "#002a1a",
+                        "outline-variant": "#c1c7cd",
+                        "inverse-surface": "#2d3133",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-primary-fixed-variant": "#174c62",
+                        "on-background": "#191c1e",
+                        "surface-tint": "#34647b",
+                        "on-tertiary-fixed": "#002113",
+                        "on-surface": "#191c1e",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#10b981",
+                        "on-surface-variant": "#41484c",
+                        "surface-container": "#eceef0",
+                        "error": "#ba1a1a",
+                        "surface": "#f7f9fb",
+                        "on-primary-container": "#7aa9c3",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#6ffbbe",
+                        "background": "#f7f9fb",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary-fixed": "#001e2b",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "primary": "#002736",
+                        "error-container": "#ffdad6",
+                        "secondary": "#00677d",
+                        "primary-container": "#003e54",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "secondary-fixed-dim": "#4cd6fb",
+                        "inverse-primary": "#9ecde8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 24px 48px -12px rgba(0, 39, 54, 0.08);
+        }
+        .glass-header {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen pb-32 selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 sticky z-50 bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#003E54] dark:text-[#003E54] hover:bg-slate-100/50 dark:hover:bg-white/5 transition-colors p-2 rounded-full">
+                menu
+            </button>
+<h1 class="font-['Inter'] font-bold tracking-tight text-xl text-[#003E54] dark:text-[#003E54]">Tu compra de esta semana 🛒</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/50 shadow-sm">
+<img alt="Profile photo" class="w-full h-full object-cover" data-alt="Close up portrait of a professional woman with a friendly expression in a modern office environment with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh_3TmdTcGLhvjg8E7snSrXqmNtdN8anm_xI1OgGsHCtzLtWXUqur5z8cB88XjW9SJMQhmo74KR4rvN5b7snlrH_oZWu4BskEh0_FHKh0Q93mhWVGS_1zJaWqr2srkU01hkbdaMZn1moKeYgMXUabeKHC6oLQuW8U1pr9vAZpWbttyauqE--l-yCbpK46pOVNJmhKun8RJhdCJFcQsPSpEsU2rS52TIdyoO0GYu_gdReDYMpAtkV2F-IezHTL5DGM94fvie8IhF4o"/>
+</div>
+</header>
+<main class="max-w-2xl mx-auto px-6 py-8">
+<!-- Subtitle & Context -->
+<section class="mb-10 ml-2">
+<p class="text-slate-500 font-medium tracking-wide text-sm">Basado en tus últimas 4 semanas</p>
+<div class="mt-4 flex items-center gap-3 bg-tertiary-fixed/30 p-3 rounded-xl inline-flex">
+<span class="material-symbols-outlined text-on-tertiary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-on-tertiary-fixed text-xs font-bold uppercase tracking-widest">IA Sugerencia Inteligente</span>
+</div>
+</section>
+<!-- Section: REPOSICIÓN -->
+<section class="mb-12">
+<div class="flex items-end justify-between mb-6 ml-2">
+<h2 class="text-[#003E54] font-black text-2xl tracking-tighter">REPOSICIÓN</h2>
+<span class="text-xs font-bold text-primary-container opacity-60 uppercase tracking-[0.2em]">Sugerido</span>
+</div>
+<div class="space-y-3">
+<!-- Item 1: Leche -->
+<div class="group flex items-center justify-between bg-surface-container-lowest p-5 rounded-2xl editorial-shadow transition-all hover:scale-[1.01] active:scale-95">
+<div class="flex items-center gap-4">
+<div class="relative flex items-center">
+<input checked="" class="w-6 h-6 rounded-lg border-2 border-primary-container text-primary-container focus:ring-primary-fixed focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+</div>
+<div>
+<span class="text-on-surface font-bold text-lg block">Leche Entera</span>
+<span class="text-slate-400 text-xs font-medium uppercase tracking-tighter">Lácteos</span>
+</div>
+</div>
+<div class="bg-surface-container-low px-4 py-1.5 rounded-full">
+<span class="text-[#003E54] font-black text-sm">2 Unid.</span>
+</div>
+</div>
+<!-- Item 2: Huevos -->
+<div class="group flex items-center justify-between bg-surface-container-lowest p-5 rounded-2xl editorial-shadow transition-all hover:scale-[1.01] active:scale-95">
+<div class="flex items-center gap-4">
+<div class="relative flex items-center">
+<input checked="" class="w-6 h-6 rounded-lg border-2 border-primary-container text-primary-container focus:ring-primary-fixed focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+</div>
+<div>
+<span class="text-on-surface font-bold text-lg block">Huevos Camperos</span>
+<span class="text-slate-400 text-xs font-medium uppercase tracking-tighter">Despensa</span>
+</div>
+</div>
+<div class="bg-surface-container-low px-4 py-1.5 rounded-full">
+<span class="text-[#003E54] font-black text-sm">12 Unid.</span>
+</div>
+</div>
+<!-- Item 3: Café -->
+<div class="group flex items-center justify-between bg-surface-container-lowest p-5 rounded-2xl editorial-shadow transition-all hover:scale-[1.01] active:scale-95">
+<div class="flex items-center gap-4">
+<div class="relative flex items-center">
+<input checked="" class="w-6 h-6 rounded-lg border-2 border-primary-container text-primary-container focus:ring-primary-fixed focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+</div>
+<div>
+<span class="text-on-surface font-bold text-lg block">Café en Grano</span>
+<span class="text-slate-400 text-xs font-medium uppercase tracking-tighter">Bebidas</span>
+</div>
+</div>
+<div class="bg-surface-container-low px-4 py-1.5 rounded-full">
+<span class="text-[#003E54] font-black text-sm">1 Pack</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: COMPLEMENTARIOS -->
+<section class="mb-12">
+<div class="flex items-end justify-between mb-6 ml-2">
+<h2 class="text-secondary font-black text-2xl tracking-tighter uppercase opacity-80">Complementarios</h2>
+<span class="text-xs font-bold text-secondary opacity-40 uppercase tracking-[0.2em]">Descubrir</span>
+</div>
+<div class="space-y-3">
+<!-- Item 4: Galletas -->
+<div class="group flex items-center justify-between bg-surface-container-lowest/60 p-5 rounded-2xl border border-dashed border-outline-variant transition-all hover:bg-surface-container-lowest hover:border-transparent hover:editorial-shadow">
+<div class="flex items-center gap-4">
+<div class="relative flex items-center">
+<input class="w-6 h-6 rounded-lg border-2 border-slate-300 text-secondary focus:ring-secondary-fixed focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+</div>
+<div>
+<span class="text-slate-600 font-bold text-lg block">Galletas Artesanas</span>
+<span class="text-slate-400 text-xs font-medium uppercase tracking-tighter">Dulces</span>
+</div>
+</div>
+<div class="px-4 py-1.5 rounded-full border border-slate-100">
+<span class="text-slate-400 font-bold text-sm">1 Unid.</span>
+</div>
+</div>
+<!-- Item 5: Fruta -->
+<div class="group flex items-center justify-between bg-surface-container-lowest/60 p-5 rounded-2xl border border-dashed border-outline-variant transition-all hover:bg-surface-container-lowest hover:border-transparent hover:editorial-shadow">
+<div class="flex items-center gap-4">
+<div class="relative flex items-center">
+<input class="w-6 h-6 rounded-lg border-2 border-slate-300 text-secondary focus:ring-secondary-fixed focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+</div>
+<div>
+<span class="text-slate-600 font-bold text-lg block">Fruta de temporada</span>
+<span class="text-slate-400 text-xs font-medium uppercase tracking-tighter">Fresco</span>
+</div>
+</div>
+<div class="px-4 py-1.5 rounded-full border border-slate-100">
+<span class="text-slate-400 font-bold text-sm">2 Kg.</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Actions -->
+<div class="mt-12 flex flex-col items-center gap-6">
+<button class="w-full bg-[#003E54] text-white font-bold py-5 rounded-2xl editorial-shadow hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">shopping_basket</span>
+                Crear lista con 5 productos
+            </button>
+<button class="text-slate-500 font-bold text-sm hover:text-[#003E54] transition-colors uppercase tracking-widest underline decoration-slate-200 underline-offset-8">
+                Recordármelo más tarde
+            </button>
+<div class="mt-8 flex items-center gap-3 bg-surface-container-low px-4 py-3 rounded-full border border-white/50">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Desactivar resumen semanal</span>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-3xl bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-lg no-border shadow-[0_-4px_24px_rgba(0,39,54,0.06)] flex justify-around items-center px-4 pb-6 pt-3">
+<a class="flex flex-col items-center justify-center bg-[#003E54] text-white rounded-2xl px-5 py-2.5 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">Resumen</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2.5 hover:text-[#003E54] dark:hover:text-white transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">Despensa</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2.5 hover:text-[#003E54] dark:hover:text-white transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">IA</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2.5 hover:text-[#003E54] dark:hover:text-white transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">Ajustes</span>
+</a>
+</nav>
+</body></html>

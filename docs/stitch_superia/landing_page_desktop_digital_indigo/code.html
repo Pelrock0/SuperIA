@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Superia - La compra, más inteligente</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#777586",
+                        "primary-fixed": "#e3dfff",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "inverse-primary": "#c3c0ff",
+                        "secondary": "#4953bc",
+                        "on-surface-variant": "#464554",
+                        "on-secondary-fixed-variant": "#2f3aa3",
+                        "surface": "#f8f9fb",
+                        "on-primary-fixed": "#100069",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#6bff8f",
+                        "surface-variant": "#e1e2e4",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-secondary-container": "#17228f",
+                        "on-tertiary-container": "#48df75",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e7e8ea",
+                        "inverse-on-surface": "#f0f1f3",
+                        "secondary-fixed": "#e0e0ff",
+                        "surface-bright": "#f8f9fb",
+                        "secondary-container": "#8792fe",
+                        "on-primary-container": "#c1beff",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c7c4d7",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f8f9fb",
+                        "surface-container": "#edeef0",
+                        "primary": "#2a14b4",
+                        "primary-container": "#4338ca",
+                        "surface-dim": "#d9dadc",
+                        "surface-tint": "#5148d7",
+                        "tertiary": "#00451b",
+                        "secondary-fixed-dim": "#bdc2ff",
+                        "on-tertiary-fixed": "#002109",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f3f4f6",
+                        "tertiary-container": "#005f28",
+                        "on-primary-fixed-variant": "#372abf",
+                        "on-background": "#191c1e",
+                        "on-surface": "#191c1e",
+                        "inverse-surface": "#2e3132",
+                        "on-secondary-fixed": "#000767",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ai-glow {
+            background: linear-gradient(45deg, #005f28, #4ae176);
+        }
+        .glass-effect {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed selection:text-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_8px_24px_rgba(42,20,180,0.06)]">
+<div class="flex justify-between items-center px-6 py-4 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-indigo-700 dark:text-indigo-400" data-icon="sparkles">colors_spark</span>
+<span class="text-2xl font-bold tracking-tighter text-indigo-800 dark:text-indigo-300 font-['Inter']">Superia</span>
+</div>
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:opacity-80 transition-opacity" href="#features">Características</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:opacity-80 transition-opacity" href="#privacy">Privacidad</a>
+<a class="bg-primary text-on-primary px-5 py-2.5 rounded-xl font-semibold hover:opacity-90 active:scale-95 transition-all shadow-sm" href="#signup">Únete</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border-2 border-indigo-100">
+<img alt="User" data-alt="minimalist 3d avatar of a professional young man with glasses and a friendly expression on a soft purple background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjBAfstUkWJLMp7fqyfzGUD7bC878EqdT96n69yezN0Y8Z7ygcNb9s0DhK1PlUObZq_rWvh9JrqwuIeJOlmGijg8lxG94fwo53w_nspWyesliHPeZxtCfHilc0ULsfTnpCmiP2K0blM6Gj-hzOhVWwId5UMsNgxbpiAq9qcAef-S3pznfCsVqwwT5nQEJ82Ex1KbM_Owe5v2M1ubdIVhi2JVN20I3IXppDWcNKdJoRg3uTXnozQ1loWau5xZCsxH3p5W9leFUtgWg"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center min-h-[819px]">
+<div class="space-y-8">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-container/10 border border-tertiary-container/20 gap-2">
+<span class="material-symbols-outlined text-on-tertiary-container text-sm" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-[11px] font-bold uppercase tracking-wider text-on-tertiary-container font-['Inter']">Nueva Era de Compras</span>
+</div>
+<h1 class="text-6xl md:text-7xl font-bold tracking-tight text-primary leading-[1.05]">
+                    La compra, más inteligente
+                </h1>
+<p class="text-xl text-on-surface-variant max-w-lg leading-relaxed">
+                    Listas de compra con IA que aprende de ti. Organiza tu despensa, optimiza tus rutas y ahorra tiempo con sugerencias predictivas.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<a class="bg-primary text-on-primary px-8 py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/20 active:scale-95 transition-all flex items-center justify-center gap-3" href="#signup">
+                        Únete a la lista de espera
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-4 bg-indigo-500/10 rounded-[3rem] blur-3xl group-hover:bg-indigo-500/15 transition-colors"></div>
+<div class="relative bg-surface-container-lowest rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(42,20,180,0.12)] border border-white/50 overflow-hidden aspect-[9/19] max-w-[320px] mx-auto">
+<img class="w-full h-full object-cover" data-alt="premium smartphone mockup displaying a clean minimalist grocery list app interface with indigo accents and smart product chips" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs_u-I37EP8jAB31VCf5i0oP_0TGd2KmwXFv30WYu5ZOnxLjeDX1OiLfkeZ8YuoB3UXS8yx-Q7-ywqBp1ACublS7wnjRMOO6Fp3ac8I4zKwgSHY__PYH88MqyJnAHCJn9I2xdybMVzXJXLgaliIS5mKdhjn1eQYkMaALGsOCOFTrITOPrYcBv5e1cA7zvYOdql1Sdk_vXQS2mq0mgkB_gLQzsHczjVBfHPanlEeGAKRW6_9Ym5boBx7sN9Y7rRGTQ6OiYua4Eis4Y"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent pointer-events-none"></div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="max-w-7xl mx-auto px-6 py-24" id="features">
+<div class="mb-16">
+<h2 class="text-4xl font-bold tracking-tight text-primary">Diseñada para tu ritmo</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Feature 1 -->
+<div class="md:col-span-2 bg-surface-container-low p-10 rounded-[2.5rem] flex flex-col justify-between group overflow-hidden relative">
+<div class="relative z-10">
+<div class="w-14 h-14 bg-tertiary-container rounded-2xl flex items-center justify-center mb-6 shadow-sm">
+<span class="material-symbols-outlined text-tertiary-fixed text-3xl" data-icon="sparkle">spark</span>
+</div>
+<h3 class="text-3xl font-bold text-primary mb-4 tracking-tight">IA que te sugiere</h3>
+<p class="text-lg text-on-surface-variant max-w-md">Nuestra inteligencia aprende tus hábitos y predice qué necesitas antes de que se agote. Optimización real basada en datos.</p>
+</div>
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-tertiary-fixed/10 rounded-full blur-3xl group-hover:bg-tertiary-fixed/20 transition-all duration-700"></div>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container-lowest border border-surface-container-high p-10 rounded-[2.5rem] flex flex-col items-start hover:shadow-xl transition-shadow">
+<div class="w-14 h-14 bg-secondary-container/20 rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="groups">groups</span>
+</div>
+<h3 class="text-2xl font-bold text-primary mb-4 tracking-tight">Listas compartidas</h3>
+<p class="text-on-surface-variant">Sincronización en tiempo real para familias y compañeros. Di adiós a los duplicados y olvidos.</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-primary text-on-primary p-10 rounded-[2.5rem] flex flex-col md:flex-row gap-8 items-center col-span-1 md:col-span-3">
+<div class="w-20 h-20 bg-white/10 rounded-3xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-4xl" data-icon="bar_chart">bar_chart</span>
+</div>
+<div>
+<h3 class="text-3xl font-bold mb-2 tracking-tight">Historial y estadísticas</h3>
+<p class="text-on-primary/80 text-lg">Visualiza tus gastos, categorías más frecuentes y ahorros generados por las sugerencias inteligentes de Superia.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Privacy Section -->
+<section class="max-w-7xl mx-auto px-6 py-24" id="privacy">
+<div class="bg-surface-container-high rounded-[3rem] p-12 md:p-20 relative overflow-hidden">
+<div class="relative z-10 grid md:grid-cols-2 gap-16 items-center">
+<div>
+<span class="material-symbols-outlined text-6xl text-primary mb-8" data-icon="shield">shield</span>
+<h2 class="text-4xl md:text-5xl font-bold tracking-tight text-primary mb-6">Tus listas son tuyas.</h2>
+<p class="text-xl text-on-surface-variant mb-10 leading-relaxed">Sin publicidad. Sin venta de datos. Creemos en la privacidad por diseño, no como una opción.</p>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-medium text-primary">Encriptado de extremo a extremo</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-medium text-primary">Sin rastreadores</span>
+</div>
+</div>
+</div>
+<div class="bg-white/40 glass-effect p-8 rounded-3xl border border-white/50 shadow-2xl">
+<img class="rounded-2xl w-full grayscale opacity-80" data-alt="abstract close-up of sophisticated hardware components and digital security layers in cool indigo and cyan lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClDfQgQPq0S_1_PKLWf1mWHoXPkNclv255lvYrE_YmeMavTAXQ1aLfrmi7YZxeZbdn1vnwoEYXFBjEinFhpMzVOsdCK4GxpuHq0QTRPVEv-wQEwSX4GlCfkL7pZEsMGAwYb3DQRXXBdOvmJ_1WGIfoNI2abExncJkynDI5rO2WnXNZFB6q3JYQPiT6FF4fGXGi6-xIQWC3JaABmN7-pwR-Qa9nJ9FmQySFR6gXYK1wRaWYTG4ptbgJXw2dCyFRLRyUZrwf90F1D6I"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Signup Form Section -->
+<section class="max-w-3xl mx-auto px-6 py-24 text-center" id="signup">
+<h2 class="text-4xl font-bold tracking-tight text-primary mb-4">Empieza a comprar mejor</h2>
+<p class="text-on-surface-variant text-lg mb-12">Estamos lanzando en fases. Apúntate para recibir tu invitación exclusiva.</p>
+<form class="bg-surface-container-lowest p-8 md:p-12 rounded-[2.5rem] shadow-[0_24px_48px_rgba(42,20,180,0.08)] border border-surface-variant/30 text-left space-y-8">
+<div class="grid md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[11px] font-bold uppercase tracking-widest text-slate-500 px-1">Nombre Completo</label>
+<input class="w-full bg-surface-container-high border-none rounded-xl px-5 py-4 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-slate-400" placeholder="Ej. Alex García" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[11px] font-bold uppercase tracking-widest text-slate-500 px-1">Email</label>
+<input class="w-full bg-surface-container-high border-none rounded-xl px-5 py-4 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-slate-400" placeholder="alex@ejemplo.com" type="email"/>
+</div>
+</div>
+<div class="space-y-4">
+<label class="text-[11px] font-bold uppercase tracking-widest text-slate-500 px-1">¿Con quién haces la compra?</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<label class="relative flex items-center justify-center p-4 rounded-xl bg-surface-container-low border-2 border-transparent cursor-pointer hover:bg-surface-container-high transition-all has-[:checked]:border-primary/30 has-[:checked]:bg-primary-fixed/30">
+<input checked="" class="hidden" name="shopping_type" type="radio"/>
+<span class="font-medium text-primary">Solo</span>
+</label>
+<label class="relative flex items-center justify-center p-4 rounded-xl bg-surface-container-low border-2 border-transparent cursor-pointer hover:bg-surface-container-high transition-all has-[:checked]:border-primary/30 has-[:checked]:bg-primary-fixed/30">
+<input class="hidden" name="shopping_type" type="radio"/>
+<span class="font-medium text-primary">Pareja</span>
+</label>
+<label class="relative flex items-center justify-center p-4 rounded-xl bg-surface-container-low border-2 border-transparent cursor-pointer hover:bg-surface-container-high transition-all has-[:checked]:border-primary/30 has-[:checked]:bg-primary-fixed/30">
+<input class="hidden" name="shopping_type" type="radio"/>
+<span class="font-medium text-primary">Familia</span>
+</label>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-5 rounded-2xl font-bold text-xl hover:shadow-xl hover:shadow-primary/20 active:scale-[0.98] transition-all" type="submit">
+                    Apuntarme
+                </button>
+<p class="text-center text-[13px] text-slate-400 px-4">Al apuntarte, aceptas recibir actualizaciones sobre el lanzamiento de Superia. Odiamos el spam tanto como tú.</p>
+</form>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-white dark:bg-slate-900 py-16 px-6">
+<div class="max-w-7xl mx-auto border-t border-slate-100 dark:border-slate-800 pt-16 grid md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-2">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-indigo-700" data-icon="sparkles">colors_spark</span>
+<span class="text-2xl font-bold tracking-tighter text-indigo-800 font-['Inter']">Superia</span>
+</div>
+<p class="text-slate-500 max-w-sm mb-8 leading-relaxed">Transformando la tarea más cotidiana en una experiencia de alta eficiencia asistida por IA.</p>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary cursor-pointer hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary cursor-pointer hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="alternate_email">alternate_email</span>
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-primary mb-6">Producto</h4>
+<ul class="space-y-4 text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="#">Funciones</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">IA Engine</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacidad</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Precios</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-primary mb-6">Compañía</h4>
+<ul class="space-y-4 text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="#">Sobre nosotros</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contacto</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Legal</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-slate-50 flex flex-col md:row justify-between items-center gap-4 text-sm text-slate-400">
+<p>© 2024 Superia AI. Hecho con inteligencia.</p>
+<div class="flex gap-8">
+<a href="#">Términos</a>
+<a href="#">Privacidad</a>
+<a href="#">Cookies</a>
+</div>
+</div>
+</footer>
+<!-- Bottom Bar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-8px_24px_rgba(42,20,180,0.06)]">
+<div class="flex flex-col items-center justify-center bg-indigo-100/50 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 rounded-2xl px-5 py-2 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="format_list_bulleted">format_list_bulleted</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Listas</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Explorar</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Ajustes</span>
+</div>
+</nav>
+</body></html>

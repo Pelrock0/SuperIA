@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#50d9fe",
+                    "background": "#f7f9fb",
+                    "on-tertiary-fixed": "#002113",
+                    "on-surface-variant": "#41484c",
+                    "primary-container": "#003e54",
+                    "outline": "#71787d",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#e6e8ea",
+                    "inverse-primary": "#9ecde8",
+                    "secondary": "#00677d",
+                    "primary-fixed-dim": "#9ecde8",
+                    "on-secondary-container": "#005c70",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f2f4f6",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#004e5f",
+                    "on-secondary-fixed": "#001f27",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-primary-fixed-variant": "#174c62",
+                    "surface": "#f7f9fb",
+                    "on-background": "#191c1e",
+                    "surface-dim": "#d8dadc",
+                    "on-tertiary-container": "#10b981",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "surface-tint": "#34647b",
+                    "primary": "#002736",
+                    "on-primary-container": "#7aa9c3",
+                    "tertiary": "#002a1a",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-surface": "#191c1e",
+                    "tertiary-fixed": "#6ffbbe",
+                    "outline-variant": "#c1c7cd",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#001e2b",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#2d3133",
+                    "primary-fixed": "#c1e8ff",
+                    "surface-variant": "#e0e3e5",
+                    "secondary-fixed": "#b3ebff",
+                    "tertiary-container": "#00422b",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container": "#eceef0",
+                    "secondary-fixed-dim": "#4cd6fb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-mesh {
+            background: radial-gradient(at 0% 0%, rgba(111, 251, 190, 0.05) 0px, transparent 50%),
+                        radial-gradient(at 100% 0%, rgba(80, 217, 254, 0.05) 0px, transparent 50%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body min-h-screen selection:bg-tertiary-fixed selection:text-on-tertiary-fixed">
+<!-- Top Navigation Anchor -->
+<nav class="w-full sticky top-0 z-50 bg-[#f7f9fb] dark:bg-slate-950 flex items-center px-6 py-4 w-full">
+<div class="flex items-center justify-between w-full">
+<div class="flex items-center gap-4">
+<button class="text-[#002736] dark:text-slate-100 hover:opacity-80 transition-opacity scale-98 transition-transform">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<input class="bg-transparent border-none p-0 font-['Inter'] font-bold tracking-tight text-xl text-[#002736] dark:text-slate-100 focus:ring-0 w-40" type="text" value="Compra Semanal"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-slate-500 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+<button class="text-slate-500 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="max-w-2xl mx-auto px-6 pb-32 bg-mesh">
+<!-- Progress Section -->
+<div class="mt-4 mb-8">
+<div class="flex justify-between items-end mb-2">
+<span class="text-label-md font-bold text-primary tracking-tight">4 de 12 ítems comprados</span>
+<span class="text-label-sm font-medium text-on-surface-variant">33%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-1/3 transition-all duration-1000 ease-out"></div>
+</div>
+</div>
+<!-- AI Suggestion Prompt (Editorial Style) -->
+<div class="bg-tertiary-container text-white p-6 rounded-xl mb-10 relative overflow-hidden group">
+<div class="relative z-10">
+<p class="text-tertiary-fixed font-bold text-xs uppercase tracking-widest mb-1">IA Sugerencia</p>
+<h3 class="headline-sm font-bold tracking-tight mb-2">¿Preparando Paella?</h3>
+<p class="body-md text-on-primary-container opacity-90 leading-relaxed max-w-[80%]">He detectado ingredientes para arroz. ¿Te falta azafrán o garrafó fresco?</p>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-8xl opacity-10 rotate-12" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<!-- Group: Frutas y Verduras -->
+<section class="mb-10">
+<div class="flex items-center gap-2 mb-4 ml-2">
+<span class="text-lg">🥦</span>
+<h2 class="font-headline font-bold text-primary tracking-tight">Frutas y verduras</h2>
+</div>
+<div class="space-y-3">
+<!-- Item Card -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_rgba(0,39,54,0.03)] hover:scale-[1.01] transition-transform">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-md border-2 border-outline-variant flex items-center justify-center cursor-pointer"></div>
+<span class="font-medium text-on-surface">Aguacates maduros</span>
+</div>
+<span class="px-3 py-1 bg-surface-container-low rounded-lg text-xs font-bold text-primary-container">3 uds</span>
+</div>
+<!-- Item Card -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_rgba(0,39,54,0.03)]">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-md border-2 border-outline-variant flex items-center justify-center cursor-pointer"></div>
+<span class="font-medium text-on-surface">Cebollas dulces</span>
+</div>
+<span class="px-3 py-1 bg-surface-container-low rounded-lg text-xs font-bold text-primary-container">1 kg</span>
+</div>
+</div>
+</section>
+<!-- Group: Lácteos -->
+<section class="mb-10">
+<div class="flex items-center gap-2 mb-4 ml-2">
+<span class="text-lg">🥛</span>
+<h2 class="font-headline font-bold text-primary tracking-tight">Lácteos</h2>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_rgba(0,39,54,0.03)]">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-md border-2 border-outline-variant flex items-center justify-center cursor-pointer"></div>
+<span class="font-medium text-on-surface">Yogur Griego Nat.</span>
+</div>
+<span class="px-3 py-1 bg-surface-container-low rounded-lg text-xs font-bold text-primary-container">1 pack</span>
+</div>
+</div>
+</section>
+<!-- Group: Ya en el carro (Checked) -->
+<section class="mt-12 pt-8 opacity-60">
+<div class="flex items-center justify-between mb-4 ml-2">
+<h2 class="font-headline font-bold text-on-surface-variant tracking-tight">Ya en el carro</h2>
+<span class="text-xs font-bold text-outline uppercase tracking-wider">4 ítems</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-md bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="check">check</span>
+</div>
+<span class="font-medium text-on-surface-variant line-through">Leche desnatada</span>
+</div>
+<span class="px-3 py-1 bg-surface-container-high rounded-lg text-xs font-bold text-outline">6 packs</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-md bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="check">check</span>
+</div>
+<span class="font-medium text-on-surface-variant line-through">Tomates pera</span>
+</div>
+<span class="px-3 py-1 bg-surface-container-high rounded-lg text-xs font-bold text-outline">2 kg</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating AI Sparkle -->
+<button class="fixed right-6 bottom-32 w-14 h-14 bg-on-tertiary-container text-white rounded-2xl shadow-xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95 z-40 group">
+<span class="material-symbols-outlined text-3xl transition-transform duration-500 group-hover:rotate-12" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</button>
+<!-- Sticky Footer Input Shell -->
+<div class="fixed bottom-0 left-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl px-6 pb-10 pt-4">
+<div class="max-w-2xl mx-auto flex items-center gap-3">
+<div class="relative flex-1">
+<input class="w-full bg-surface-container-low border-none rounded-2xl px-6 py-4 text-on-surface placeholder:text-slate-400 focus:ring-2 focus:ring-primary/10 font-medium" placeholder="Añadir ítem..." type="text"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-primary-container">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+<button class="p-4 bg-primary text-white rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+</div>
+</div>
+<!-- Navigation Drawer Fallback Logic (Suppressed for task focus as per instructions) -->
+</body></html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Historial de Compras - Superia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "surface-tint": "#34647b",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed": "#001f27",
+                      "error-container": "#ffdad6",
+                      "on-secondary-container": "#005c70",
+                      "secondary-fixed-dim": "#4cd6fb",
+                      "on-tertiary-container": "#10b981",
+                      "on-primary-fixed-variant": "#174c62",
+                      "tertiary-container": "#00422b",
+                      "inverse-primary": "#9ecde8",
+                      "surface-container-low": "#f2f4f6",
+                      "on-primary-container": "#7aa9c3",
+                      "secondary-container": "#50d9fe",
+                      "primary-fixed-dim": "#9ecde8",
+                      "primary-container": "#003e54",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed": "#001e2b",
+                      "on-tertiary-fixed": "#002113",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "surface-container": "#eceef0",
+                      "on-error": "#ffffff",
+                      "error": "#ba1a1a",
+                      "on-background": "#191c1e",
+                      "surface-variant": "#e0e3e5",
+                      "primary-fixed": "#c1e8ff",
+                      "surface": "#f7f9fb",
+                      "inverse-on-surface": "#eff1f3",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-secondary-fixed-variant": "#004e5f",
+                      "tertiary-fixed": "#6ffbbe",
+                      "outline-variant": "#c1c7cd",
+                      "inverse-surface": "#2d3133",
+                      "outline": "#71787d",
+                      "surface-dim": "#d8dadc",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#e6e8ea",
+                      "secondary-fixed": "#b3ebff",
+                      "on-surface-variant": "#41484c",
+                      "on-surface": "#191c1e",
+                      "background": "#f7f9fb",
+                      "tertiary": "#002a1a",
+                      "surface-bright": "#f7f9fb",
+                      "secondary": "#00677d",
+                      "on-error-container": "#93000a",
+                      "primary": "#002736"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Inter"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f7f9fb]/70 dark:bg-[#191c1e]/70 backdrop-blur-xl flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#002736] dark:text-[#f7f9fb] hover:opacity-80 transition-opacity active:scale-95 duration-150" data-icon="arrow_back">arrow_back</button>
+<h1 class="text-[#002736] dark:text-[#f7f9fb] font-bold text-lg tracking-tight Inter">Historial de Compras</h1>
+</div>
+<button class="material-symbols-outlined text-[#43474e] dark:text-[#c1c7ce]" data-icon="filter_list">filter_list</button>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto">
+<!-- Monthly Group: March -->
+<section class="mb-10">
+<h2 class="text-xs uppercase tracking-[0.15em] font-bold text-outline mb-6 ml-1">Marzo 2026</h2>
+<div class="space-y-4">
+<!-- Row 1: Regular -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0_4px_24px_rgba(0,39,54,0.04)] flex items-center justify-between hover:bg-surface-container-low transition-colors duration-200">
+<div class="flex flex-col gap-1">
+<span class="font-bold text-primary tracking-tight">Compra Mensual</span>
+<span class="text-sm text-on-surface-variant font-medium">12 mar 2026</span>
+</div>
+<div class="bg-surface-container-high px-4 py-2 rounded-full">
+<span class="text-xs font-bold text-primary">18 ítems · 43€</span>
+</div>
+</div>
+<!-- Row 2: Expanded State -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_8px_32px_rgba(0,39,54,0.08)] overflow-hidden border border-primary/5">
+<div class="p-5 flex items-center justify-between">
+<div class="flex flex-col gap-1">
+<span class="font-bold text-primary tracking-tight">Compra Semanal</span>
+<span class="text-sm text-on-surface-variant font-medium">05 mar 2026</span>
+</div>
+<div class="bg-primary/5 px-4 py-2 rounded-full border border-primary/10">
+<span class="text-xs font-bold text-primary">6 ítems · 14€</span>
+</div>
+</div>
+<div class="px-5 pb-5 pt-2 space-y-4">
+<div class="bg-surface-container-low/50 rounded-lg p-4 space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></div>
+<span class="text-sm font-medium text-on-surface-variant">Leche semi-desnatada (2x)</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></div>
+<span class="text-sm font-medium text-on-surface-variant">Huevos ecológicos XL</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></div>
+<span class="text-sm font-medium text-on-surface-variant">Pan artesano de masa madre</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold text-outline ml-5">+3 productos más</span>
+</div>
+</div>
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-white font-bold py-4 rounded-xl text-sm tracking-wide shadow-lg shadow-primary/10 active:scale-[0.98] transition-all">
+                            Usar como base
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Monthly Group: February -->
+<section class="mb-10">
+<h2 class="text-xs uppercase tracking-[0.15em] font-bold text-outline mb-6 ml-1">Febrero 2026</h2>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0_4px_24px_rgba(0,39,54,0.04)] flex items-center justify-between">
+<div class="flex flex-col gap-1">
+<span class="font-bold text-primary tracking-tight">Cena Especial</span>
+<span class="text-sm text-on-surface-variant font-medium">28 feb 2026</span>
+</div>
+<div class="bg-surface-container-high px-4 py-2 rounded-full">
+<span class="text-xs font-bold text-primary">12 ítems · 89€</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0_4px_24px_rgba(0,39,54,0.04)] flex items-center justify-between">
+<div class="flex flex-col gap-1">
+<span class="font-bold text-primary tracking-tight">Compra Despensa</span>
+<span class="text-sm text-on-surface-variant font-medium">14 feb 2026</span>
+</div>
+<div class="bg-surface-container-high px-4 py-2 rounded-full">
+<span class="text-xs font-bold text-primary">24 ítems · 62€</span>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Insights Tip (Mediterranean Style) -->
+<div class="mt-12 bg-tertiary-fixed/30 p-6 rounded-3xl relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-xs font-bold text-tertiary uppercase tracking-widest">Sugerencia AI</span>
+</div>
+<p class="text-sm text-tertiary/80 leading-relaxed font-medium">Tu compra de "Leche" ha sido recurrente cada 14 días. ¿Quieres que la programemos automáticamente para tu próxima lista?</p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" data-icon="receipt_long">receipt_long</span>
+</div>
+</div>
+<!-- Hidden Empty State Placeholder -->
+<div class="hidden flex-col items-center justify-center py-20 text-center px-10">
+<div class="w-24 h-24 bg-surface-container-low rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl text-outline" data-icon="history">history</span>
+</div>
+<p class="text-on-surface font-bold text-lg mb-2">Historial vacío</p>
+<p class="text-on-surface-variant text-sm">Completa tu primera lista para ver el historial y optimizar tus compras.</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#f7f9fb]/70 dark:bg-[#191c1e]/70 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-4px_24px_rgba(0,39,54,0.06)]">
+<a class="flex flex-col items-center justify-center text-[#43474e] dark:text-[#c1c7ce] px-4 py-1.5 hover:bg-[#003e54]/5 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-medium text-[11px] tracking-wide Inter">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#43474e] dark:text-[#c1c7ce] px-4 py-1.5 hover:bg-[#003e54]/5 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="kitchen">kitchen</span>
+<span class="font-medium text-[11px] tracking-wide Inter">Despensa</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#002736] dark:text-[#6ffbbe] bg-[#003e54]/10 dark:bg-[#6ffbbe]/10 rounded-2xl px-4 py-1.5" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="receipt_long" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-medium text-[11px] tracking-wide Inter">Historial</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#43474e] dark:text-[#c1c7ce] px-4 py-1.5 hover:bg-[#003e54]/5 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-medium text-[11px] tracking-wide Inter">Perfil</span>
+</a>
+</nav>
+</body></html>

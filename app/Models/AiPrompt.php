@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
 class AiPrompt extends Model
 {
+    use CrudTrait;
     protected $fillable = ['slug', 'name', 'description', 'content', 'is_active'];
 
     protected $casts = [

@@ -382,5 +382,26 @@
         "asset_disk_path": "basset/www.gravatar.com/avatar/7a70ee3f05ee8c5f3c2280793839e391512f339e8dbd780654b89eeef5360a42.jpg",
         "asset_attributes": [],
         "asset_content_hash": ""
+    },
+    "https://www.gravatar.com/avatar/5317dd6f57bd50f286c5dc8689191d6de33408ec4a6856a6a0de62d3338e5885.jpg?s=80&d=blank&r=g": {
+        "asset_name": "https://www.gravatar.com/avatar/5317dd6f57bd50f286c5dc8689191d6de33408ec4a6856a6a0de62d3338e5885.jpg?s=80&d=blank&r=g",
+        "asset_path": "https://www.gravatar.com/avatar/5317dd6f57bd50f286c5dc8689191d6de33408ec4a6856a6a0de62d3338e5885.jpg?s=80&d=blank&r=g",
+        "asset_disk_path": "basset/www.gravatar.com/avatar/5317dd6f57bd50f286c5dc8689191d6de33408ec4a6856a6a0de62d3338e5885.jpg",
+        "asset_attributes": [],
+        "asset_content_hash": ""
+    },
+    "https://www.gravatar.com/avatar/38e6a46b2d66663937b4d848f0ca3952fecb6de291d8b3febcbff50af6594931.jpg?s=80&d=blank&r=g": {
+        "asset_name": "https://www.gravatar.com/avatar/38e6a46b2d66663937b4d848f0ca3952fecb6de291d8b3febcbff50af6594931.jpg?s=80&d=blank&r=g",
+        "asset_path": "https://www.gravatar.com/avatar/38e6a46b2d66663937b4d848f0ca3952fecb6de291d8b3febcbff50af6594931.jpg?s=80&d=blank&r=g",
+        "asset_disk_path": "basset/www.gravatar.com/avatar/38e6a46b2d66663937b4d848f0ca3952fecb6de291d8b3febcbff50af6594931.jpg",
+        "asset_attributes": [],
+        "asset_content_hash": ""
+    },
+    "https://www.gravatar.com/avatar/ef83d8c298d4944b777ce4fc5c5710f89ea76bf20839bad40fc4d3fab1c07428.jpg?s=80&d=blank&r=g": {
+        "asset_name": "https://www.gravatar.com/avatar/ef83d8c298d4944b777ce4fc5c5710f89ea76bf20839bad40fc4d3fab1c07428.jpg?s=80&d=blank&r=g",
+        "asset_path": "https://www.gravatar.com/avatar/ef83d8c298d4944b777ce4fc5c5710f89ea76bf20839bad40fc4d3fab1c07428.jpg?s=80&d=blank&r=g",
+        "asset_disk_path": "basset/www.gravatar.com/avatar/ef83d8c298d4944b777ce4fc5c5710f89ea76bf20839bad40fc4d3fab1c07428.jpg",
+        "asset_attributes": [],
+        "asset_content_hash": ""
     }
 }

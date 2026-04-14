@@ -6,6 +6,7 @@
     <x-backpack::menu-dropdown-item title="Usuarios" icon="la la-user" :link="backpack_url('user')" />
     <x-backpack::menu-dropdown-item title="Lista de espera" icon="la la-clock" :link="backpack_url('waitlist-entry')" />
     <x-backpack::menu-dropdown-item title="Consumo IA" icon="la la-robot" :link="backpack_url('ai-usage')" />
+    <x-backpack::menu-dropdown-item title="Prompts IA" icon="la la-comment-dots" :link="backpack_url('ai-prompt')" />
     <x-backpack::menu-dropdown-item title="Roles" icon="la la-group" :link="backpack_url('role')" />
     <x-backpack::menu-dropdown-item title="Permisos" icon="la la-key" :link="backpack_url('permission')" />
     <x-backpack::menu-dropdown-item title="Ajustes" icon="la la-cog" :link="backpack_url('setting')" />

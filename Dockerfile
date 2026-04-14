@@ -59,8 +59,9 @@ COPY --from=node-build /app/public/build public/build
 RUN composer dump-autoload --optimize \
     && php artisan package:discover --ansi || true
 
-# Permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+# Create storage directories and set permissions
+RUN mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions storage/logs bootstrap/cache \
+    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Nginx config

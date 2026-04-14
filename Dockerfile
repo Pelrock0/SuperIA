@@ -1,0 +1,119 @@
+# ---- Build stage: Node assets ----
+FROM node:20-alpine AS node-build
+WORKDIR /app
+COPY package.json package-lock.json* ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# ---- PHP stage ----
+FROM php:8.4-fpm-alpine AS php
+
+# Install system dependencies
+RUN apk add --no-cache \
+    nginx \
+    supervisor \
+    curl \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    libzip-dev \
+    oniguruma-dev \
+    icu-dev \
+    linux-headers
+
+# Install PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+    bcmath \
+    ctype \
+    curl \
+    fileinfo \
+    gd \
+    intl \
+    mbstring \
+    pdo \
+    pdo_mysql \
+    opcache \
+    zip \
+    pcntl
+
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/html
+
+# Copy composer files first for better caching
+COPY composer.json composer.lock ./
+
+# Install dependencies (no dev in production)
+RUN composer install --optimize-autoloader --no-dev --no-scripts --no-interaction
+
+# Copy application code
+COPY . .
+
+# Copy built assets from node stage
+COPY --from=node-build /app/public/build public/build
+
+# Run post-install scripts
+RUN composer dump-autoload --optimize \
+    && php artisan package:discover --ansi || true
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Nginx config
+RUN mkdir -p /run/nginx
+COPY <<'NGINX' /etc/nginx/http.d/default.conf
+server {
+    listen 8080;
+    server_name _;
+    root /var/www/html/public;
+    index index.php;
+
+    client_max_body_size 20M;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_buffering off;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+NGINX
+
+# Supervisor config
+COPY <<'SUPERVISOR' /etc/supervisord.conf
+[supervisord]
+nodaemon=true
+logfile=/dev/stdout
+logfile_maxbytes=0
+
+[program:nginx]
+command=nginx -g "daemon off;"
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
+
+[program:php-fpm]
+command=php-fpm
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
+SUPERVISOR
+
+EXPOSE 8080
+
+# Start: migrate + supervisor (nginx + php-fpm)
+CMD php artisan migrate --force && /usr/bin/supervisord -c /etc/supervisord.conf

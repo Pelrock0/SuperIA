@@ -135,5 +135,5 @@ CMD php artisan storage:link --force && \
     php artisan config:clear && \
     (php artisan cache:clear || true) && \
     php artisan view:clear && \
-    (php artisan basset:cache || true) && \
+    (php artisan basset:fresh || true) && \
     /usr/bin/supervisord -c /etc/supervisord.conf

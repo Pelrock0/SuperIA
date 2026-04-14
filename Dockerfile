@@ -59,9 +59,11 @@ COPY --from=node-build /app/public/build public/build
 RUN composer dump-autoload --optimize \
     && php artisan package:discover --ansi || true
 
-# Create storage directories and set permissions
+# Create storage directories, cache basset assets, set permissions
 RUN mkdir -p storage/framework/views storage/framework/cache/data storage/framework/sessions storage/logs storage/app/public/basset bootstrap/cache \
-    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && ln -sf /var/www/html/storage/app/public /var/www/html/public/storage \
+    && php artisan basset:cache || true \
+    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public/storage \
     && chmod -R 777 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
@@ -123,5 +125,4 @@ CMD php artisan storage:link --force && \
     php artisan config:clear && \
     (php artisan cache:clear || true) && \
     php artisan view:clear && \
-    php artisan basset:clear && \
     /usr/bin/supervisord -c /etc/supervisord.conf

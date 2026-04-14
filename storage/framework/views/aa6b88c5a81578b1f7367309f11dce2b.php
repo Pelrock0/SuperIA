@@ -1,1 +1,0 @@
-</<?php echo e($field['wrapper']['element'] ?? 'div'); ?>><?php /**PATH I:\proyectos\SuperIA\vendor\backpack\crud\src\resources\views\crud/fields/inc/wrapper_end.blade.php ENDPATH**/ ?>

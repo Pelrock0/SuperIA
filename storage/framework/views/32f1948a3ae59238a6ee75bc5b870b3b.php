@@ -1,3 +1,0 @@
-<div class="w-100 justify-content-center d-none d-lg-flex sidebar-shortcuts">
-    <?php echo $__env->renderWhen(backpack_theme_config('options.showColorModeSwitcher'), backpack_view('layouts.partials.switch_theme'), array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1])); ?>
-</div><?php /**PATH I:\proyectos\SuperIA\vendor/backpack/theme-tabler/resources/views/layouts/partials/sidebar_shortcuts.blade.php ENDPATH**/ ?>

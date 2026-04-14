@@ -1,1 +1,0 @@
-<?php echo $__env->make(backpack_view('auth.login.' . backpack_theme_config('auth_layout')), array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH I:\proyectos\SuperIA\vendor/backpack/theme-tabler/resources/views/auth/login.blade.php ENDPATH**/ ?>

@@ -1,0 +1,322 @@
+uid=1_0 RootWebArea "SuperIA" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?id=b2672bac-a1e9-4350-a7d8-3499daf489be#build"
+  uid=1_1 banner
+    uid=1_2 link "Railway Logo" description="Dashboard" url="https://railway.com/dashboard"
+      uid=1_3 image "Railway Logo"
+    uid=1_4 button "clever-abundance" expandable haspopup="menu"
+    uid=1_5 button "production" expandable haspopup="menu"
+    uid=1_6 navigation
+      uid=1_7 button "Toggle activity"
+      uid=1_8 button "3" expandable haspopup="menu"
+      uid=1_9 button "30 days or $5.00 left" expandable haspopup="menu"
+      uid=1_10 button "Agent" description="Toggle agent"
+  uid=1_11 navigation "Project navigation"
+    uid=1_12 link "Architecture" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10?environmentId=fa71964b-3c2c-4250-94dd-43628399a303"
+    uid=1_13 link "Observability" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/observability?environmentId=fa71964b-3c2c-4250-94dd-43628399a303"
+    uid=1_14 link "Logs" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/logs?environmentId=fa71964b-3c2c-4250-94dd-43628399a303"
+    uid=1_15 link "Settings" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/settings?environmentId=fa71964b-3c2c-4250-94dd-43628399a303"
+    uid=1_16 button expandable haspopup="menu"
+  uid=1_17 button "SuperIA Build failed 15 minutes ago" description="Press enter or space to select a node. You can then use the arrow keys to move the node around. Press delete to remove it and escape to cancel."
+    uid=1_18 link "SuperIA Build failed 15 minutes ago" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?environmentId=fa71964b-3c2c-4250-94dd-43628399a303"
+  uid=1_19 toolbar "Canvas options" orientation="horizontal"
+    uid=1_20 button "Canvas settings" expandable haspopup="menu"
+    uid=1_21 button "Zoom in"
+    uid=1_22 button "Zoom out"
+    uid=1_23 button "Center canvas"
+    uid=1_24 button "Undo"
+    uid=1_25 button "Redo"
+    uid=1_26 button "Visibility layers" expandable haspopup="menu"
+  uid=1_27 generic atomic live="assertive" relevant="additions text"
+  uid=1_28 button
+  uid=1_29 button "SuperIA"
+  uid=1_30 link url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10?"
+  uid=1_31 link "Deployments" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?environmentId=fa71964b-3c2c-4250-94dd-43628399a303"
+    uid=1_32 StaticText "Deployments"
+  uid=1_33 link "Variables" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf/variables?environmentId=fa71964b-3c2c-4250-94dd-43628399a303"
+    uid=1_34 StaticText "Variables"
+  uid=1_35 link "Metrics" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf/metrics?environmentId=fa71964b-3c2c-4250-94dd-43628399a303"
+    uid=1_36 StaticText "Metrics"
+  uid=1_37 link "Settings" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf/settings?environmentId=fa71964b-3c2c-4250-94dd-43628399a303"
+    uid=1_38 StaticText "Settings"
+  uid=1_39 link "Unexposed service" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf/settings?#networking-public"
+    uid=1_40 StaticText "Unexposed service"
+  uid=1_41 link "europe-west4-drams3a" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf/settings?#deploy-region-config"
+    uid=1_42 StaticText "europe-west4-drams3a"
+  uid=1_43 link "1 Replica" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf/settings?#deploy-region-config"
+    uid=1_44 StaticText "1"
+    uid=1_45 StaticText " "
+    uid=1_46 StaticText "Replica"
+  uid=2_0 link "FAILED Remove nixpacks.toml configuration file, which included setup for PHP 8.4 extensions. 1 minute ago via GitHub Deployment actions View logs" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?id=b2672bac-a1e9-4350-a7d8-3499daf489be#build"
+    uid=2_1 StaticText "FAILED"
+    uid=2_2 StaticText "Remove nixpacks.toml configuration file, which included setup for PHP 8.4 extensions."
+    uid=2_3 StaticText "1 minute ago"
+    uid=2_4 StaticText " "
+    uid=2_5 StaticText "via"
+    uid=2_6 StaticText " "
+    uid=2_7 StaticText "GitHub"
+    uid=2_8 button "Deployment actions" expandable haspopup="menu"
+    uid=2_9 link "View logs" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?id=b2672bac-a1e9-4350-a7d8-3499daf489be#build"
+      uid=2_10 StaticText "View logs"
+  uid=2_11 button "Deployment failed during build process (00:33)" expandable expanded
+  uid=2_12 region "Deployment failed during build process (00:33)"
+    uid=2_13 StaticText "Initialization"
+    uid=2_14 StaticText "("
+    uid=2_15 StaticText "00:02"
+    uid=2_16 StaticText ")"
+    uid=2_17 StaticText "Build"
+    uid=2_18 StaticText " ›"
+    uid=2_19 StaticText " "
+    uid=2_20 StaticText "Build image"
+    uid=2_21 StaticText "("
+    uid=2_22 StaticText "00:29"
+    uid=2_23 StaticText ")"
+    uid=2_24 StaticText "Failed to build an image. "
+    uid=2_25 link "Please check the build logs for more details." focusable focused url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?id=b2672bac-a1e9-4350-a7d8-3499daf489be#build"
+      uid=2_26 StaticText "Please check the build logs for more details."
+    uid=2_27 StaticText "Deploy"
+    uid=2_28 StaticText "Not started"
+    uid=2_29 StaticText "Post-deploy"
+    uid=2_30 StaticText "Not started"
+  uid=1_85 button "HISTORY" expandable expanded
+  uid=1_86 region "HISTORY"
+    uid=2_31 link "FAILED Enhance project functionality by adding new Chrome DevTools commands, integrating CrudTrait into AiPrompt model, and updating the login cover with a new logo design. Additionally, several unused view files have been removed to streamline the codebase. 16 minutes ago via GitHub Deployment actions View logs" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?id=a83c04d3-209a-44be-8c5f-ab948835660e#build"
+      uid=2_32 StaticText "FAILED"
+      uid=2_33 StaticText "Enhance project functionality by adding new Chrome DevTools commands, integrating CrudTrait into AiPrompt model, and updating the login cover with a new logo design. Additionally, several unused view files have been removed to streamline the codebase."
+      uid=2_34 StaticText "16 minutes ago"
+      uid=2_35 StaticText " "
+      uid=2_36 StaticText "via"
+      uid=2_37 StaticText " "
+      uid=2_38 StaticText "GitHub"
+      uid=2_39 button "Deployment actions" expandable haspopup="menu"
+      uid=2_40 link "View logs" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?id=a83c04d3-209a-44be-8c5f-ab948835660e#build"
+        uid=2_41 StaticText "View logs"
+    uid=2_42 button "Deployment failed during build process (00:33)" expandable expanded
+    uid=2_43 region "Deployment failed during build process (00:33)"
+      uid=2_44 StaticText "Initialization"
+      uid=2_45 StaticText "("
+      uid=2_46 StaticText "00:03"
+      uid=2_47 StaticText ")"
+      uid=2_48 StaticText "Build"
+      uid=2_49 StaticText " ›"
+      uid=2_50 StaticText " "
+      uid=2_51 StaticText "Build image"
+      uid=2_52 StaticText "("
+      uid=2_53 StaticText "00:27"
+      uid=2_54 StaticText ")"
+      uid=2_55 StaticText "Failed to build an image. "
+      uid=2_56 link "Please check the build logs for more details." url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?id=a83c04d3-209a-44be-8c5f-ab948835660e#build"
+        uid=2_57 StaticText "Please check the build logs for more details."
+      uid=2_58 link "composer install --optimize-autoloader --no-scripts --no-interaction Installing dependencies from lock file (including require-dev) Verifying lock file contents can be installed on current platform. Your lock file does not contain a compatible set of packages. Please run composer update. Problem 1 - dragon-code/support is locked to version 6.16.0 and an update of this package was not requested. - dragon-code/support 6.16.0 requires ext-bcmath * -> it is missing from your system. Install or enable PHP's bcmath extension. Problem 2 - symfony/filesystem is locked to version v8.0.8 and an update of this package was not requested. - symfony/filesystem v8.0.8 requires php >=8.4 -> your php version (8.2.30) does not satisfy that requirement. Problem 3 - laravel-lang/routes is locked to version 1.10.1 and an update of this package was not requested. - dragon-code/support 6.16.0 requires ext-bcmath * -> it is missing from your system. Install or enable PHP's bcmath extension. - laravel-lang/routes 1.10.1 requires dragon-code/support ^6.13 -> satisfiable by dragon-code/support[6.16.0]. To enable extensions, verify that they are enabled in your .ini files: - /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini - /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini - /usr/local/etc/php/conf.d/php.ini You can also run `php --ini` in a terminal to see which files are used by PHP in CLI mode. Alternatively, you can run Composer with `--ignore-platform-req=ext-bcmath` to temporarily ignore these required extensions. process "composer install --optimize-autoloader --no-scripts --no-interaction" did not complete successfully: exit code: 2" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?id=a83c04d3-209a-44be-8c5f-ab948835660e&context=2026-04-14T11%3A11%3A17.231509806Z#build"
+        uid=2_59 StaticText "composer install --optimize-autoloader --no-scripts --no-interaction"
+        uid=2_60 generic
+          uid=2_61 StaticText "Installing dependencies from lock file (including require-dev)
+"
+          uid=2_62 StaticText "Verifying lock file contents can be installed on current platform.
+"
+          uid=2_63 StaticText "Your lock file does not contain a compatible set of packages. Please run composer update.
+
+  Problem 1
+    - dragon-code/support is locked to version 6.16.0 and an update of this package was not requested.
+    - dragon-code/support 6.16.0 requires ext-bcmath * -> it is missing from your system. Install or enable PHP's bcmath extension.
+  Problem 2
+    - symfony/filesystem is locked to version v8.0.8 and an update of this package was not requested.
+    - symfony/filesystem v8.0.8 requires php >=8.4 -> your php version (8.2.30) does not satisfy that requirement.
+  Problem 3
+    - laravel-lang/routes is locked to version 1.10.1 and an update of this package was not requested.
+    - dragon-code/support 6.16.0 requires ext-bcmath * -> it is missing from your system. Install or enable PHP's bcmath extension.
+    - laravel-lang/routes 1.10.1 requires dragon-code/support ^6.13 -> satisfiable by dragon-code/support[6.16.0].
+
+To enable extensions, verify that they are enabled in your .ini files:
+    - /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+    - /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini
+    - /usr/local/etc/php/conf.d/php.ini
+You can also run `php --ini` in a terminal to see which files are used by PHP in CLI mode.
+Alternatively, you can run Composer with `--ignore-platform-req=ext-bcmath` to temporarily ignore these required extensions.
+"
+          uid=2_64 StaticText "process "composer install --optimize-autoloader --no-scripts --no-interaction" did not complete successfully: exit code: 2"
+      uid=2_65 StaticText "Deploy"
+      uid=2_66 StaticText "Not started"
+      uid=2_67 StaticText "Post-deploy"
+      uid=2_68 StaticText "Not started"
+    uid=2_69 link "FAILED Initial commit: SuperIA (Superia) full project Laravel 12 + React 19 + MySQL stack with AI-powered shopping list features. Includes all epics (0-10), 878+ tests, Backpack admin, JWT auth, and CLI workflow tooling. 15 hours ago via GitHub Deployment actions View logs" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?id=d9bfead4-3018-4c53-9d50-7ba631f744a2"
+      uid=2_70 StaticText "FAILED"
+      uid=2_71 StaticText "Initial commit: SuperIA (Superia) full project Laravel 12 + React 19 + MySQL stack with AI-powered shopping list features. Includes all epics (0-10), 878+ tests, Backpack admin, JWT auth, and CLI workflow tooling."
+      uid=2_72 StaticText "15 hours ago"
+      uid=2_73 StaticText " "
+      uid=2_74 StaticText "via"
+      uid=2_75 StaticText " "
+      uid=2_76 StaticText "GitHub"
+      uid=2_77 button "Deployment actions" expandable haspopup="menu"
+      uid=2_78 link "View logs" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?id=d9bfead4-3018-4c53-9d50-7ba631f744a2#build"
+        uid=2_79 StaticText "View logs"
+  uid=3_0 link "SuperIA" url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?environmentId=fa71964b-3c2c-4250-94dd-43628399a303"
+    uid=3_1 StaticText "SuperIA"
+  uid=3_2 StaticText "/"
+  uid=3_3 button "b2672bac"
+  uid=3_4 StaticText "Failed"
+  uid=3_5 button "Deployment actions" expandable haspopup="menu"
+  uid=3_6 StaticText "Apr 14, 2026, 1:25 PM GMT+2"
+  uid=3_7 link url="https://railway.com/project/f67bd18e-d2e5-4e68-81d6-8760f933ee10/service/309dd072-398f-42ce-8954-d414f8fc0aaf?environmentId=fa71964b-3c2c-4250-94dd-43628399a303"
+  uid=3_8 link "Get Help" description="Railway Help Station" url="https://backboard.railway.com/csc/auth/login?redirect_uri=https://station-server.railway.com/auth/callback"
+    uid=3_9 StaticText "Get Help"
+  uid=3_10 tablist orientation="horizontal"
+    uid=3_11 tab "Details" selectable
+    uid=3_12 tab "Build Logs" selectable selected
+    uid=3_13 tab "Deploy Logs" selectable
+    uid=3_14 tab "Network Flow Logs" selectable
+  uid=3_15 tabpanel "Build Logs"
+    uid=3_16 textbox multiline
+    uid=3_17 button "Options" expandable haspopup="menu"
+    uid=3_18 StaticText "Time (CEST)"
+    uid=3_19 StaticText "Message"
+    uid=3_20 button "Layout settings" expandable haspopup="dialog"
+    uid=3_21 StaticText "You reached the "
+    uid=3_22 StaticText "start"
+    uid=3_23 StaticText " of the range"
+    uid=3_24 StaticText "Apr 14, 2026, 1:20 PM"
+    uid=3_25 button
+    uid=3_26 StaticText "Apr 14 2026 13:25:49"
+    uid=3_27 button "  "
+    uid=3_28 button
+    uid=3_29 StaticText "Apr 14 2026 13:25:56"
+    uid=3_30 button "[Region: europe-west4]"
+    uid=3_31 button
+    uid=3_32 StaticText "Apr 14 2026 13:25:56"
+    uid=3_33 button "========================="
+    uid=3_34 button
+    uid=3_35 StaticText "Apr 14 2026 13:25:56"
+    uid=3_36 button "Using Detected Dockerfile"
+    uid=3_37 button
+    uid=3_38 StaticText "Apr 14 2026 13:25:56"
+    uid=3_39 button "========================="
+    uid=3_40 button
+    uid=3_41 StaticText "Apr 14 2026 13:25:56"
+    uid=3_42 button
+    uid=3_43 button
+    uid=3_44 StaticText "Apr 14 2026 13:25:56"
+    uid=3_45 button "context: j6jq-2H7f"
+    uid=3_46 button
+    uid=3_47 StaticText "Apr 14 2026 13:25:56"
+    uid=3_48 button "internal load build definition from Dockerfile 0ms"
+    uid=3_49 button
+    uid=3_50 StaticText "Apr 14 2026 13:25:56"
+    uid=3_51 button "internal load metadata for docker.io/library/composer:2 918ms"
+    uid=3_52 button
+    uid=3_53 StaticText "Apr 14 2026 13:25:56"
+    uid=3_54 button "internal load metadata for docker.io/library/node:20-alpine 359ms"
+    uid=3_55 button
+    uid=3_56 StaticText "Apr 14 2026 13:25:56"
+    uid=3_57 button "internal load metadata for docker.io/library/php:8.4-fpm-alpine 951ms"
+    uid=3_58 button
+    uid=3_59 StaticText "Apr 14 2026 13:25:57"
+    uid=3_60 button "auth library/composer:pull token for registry-1.docker.io 0ms"
+    uid=3_61 button
+    uid=3_62 StaticText "Apr 14 2026 13:25:57"
+    uid=3_63 button "auth library/php:pull token for registry-1.docker.io 1ms"
+    uid=3_64 button
+    uid=3_65 StaticText "Apr 14 2026 13:25:57"
+    uid=3_66 button "internal load .dockerignore 0ms"
+    uid=3_67 button
+    uid=3_68 StaticText "Apr 14 2026 13:25:57"
+    uid=3_69 button "internal preparing inline document 0ms"
+    uid=3_70 button
+    uid=3_71 StaticText "Apr 14 2026 13:25:57"
+    uid=3_72 button "internal preparing inline document 0ms"
+    uid=3_73 button
+    uid=3_74 StaticText "Apr 14 2026 13:25:57"
+    uid=3_75 button "php FROM docker.io/library/php:8.4-fpm-alpine@sha256:6ff171465812d52950ff2917162d06a61609240f865b5d692215727c7740f24c 36ms"
+    uid=3_76 button
+    uid=3_77 StaticText "Apr 14 2026 13:25:57"
+    uid=3_78 button "node-build FROM docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c 45ms"
+    uid=3_79 button
+    uid=3_80 StaticText "Apr 14 2026 13:25:57"
+    uid=3_81 button "internal load build context 0ms"
+    uid=3_82 button
+    uid=3_83 StaticText "Apr 14 2026 13:25:57"
+    uid=3_84 button "FROM docker.io/library/composer:2@sha256:698d3801b2a622ace460c4743c781282fcbcb733a4cbf8b31c44731e846585e8 51ms"
+    uid=3_85 button
+    uid=3_86 StaticText "Apr 14 2026 13:25:57"
+    uid=3_87 button "node-build WORKDIR /app cached 0ms"
+    uid=3_88 button
+    uid=3_89 StaticText "Apr 14 2026 13:25:57"
+    uid=3_90 button "node-build COPY package.json package-lock.json* ./ 34ms"
+    uid=3_91 button
+    uid=3_92 StaticText "Apr 14 2026 13:25:57"
+    uid=3_93 button "node-build RUN npm ci 4s npm notice"
+    uid=3_94 button
+    uid=3_95 StaticText "Apr 14 2026 13:25:57"
+    uid=3_96 button "php RUN apk add --no-cache nginx supervisor curl libpng-dev libjpeg-turbo-dev freetype-dev libzip-dev oniguruma-dev icu-dev linux-headers 1s OK: 95.8 MiB in 87 packages"
+    uid=3_97 button
+    uid=3_98 StaticText "Apr 14 2026 13:25:57"
+    uid=3_99 button "php RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) bcmath ctype curl fileinfo gd intl mbstring pdo pdo_mysql opcache zip pcntl 14s ( 1/24) Upgrading musl (1.2.5-r22 -> 1.2.5-r23) ( 2/24) Installing m4 (1.4.20-r0) ( 3/24) Installing perl (5.42.2-r0) ( 4/24) Installing autoconf (2.72-r1) ( 5/24) Installing dpkg-dev (1.22.21-r0) ( 6/24) Installing libmd (1.1.0-r0) ( 7/24) Installing dpkg (1.22.21-r0) ( 8/24) Installing libmagic (5.46-r2) ( 9/24) Installing file (5.46-r2) (10/24) Installing libstdc++-dev (15.2.0-r2) (11/24) Installing jansson (2.14.1-r0) (12/24) Installing binutils (2.45.1-r0) (13/24) Installing libgomp (15.2.0-r2) (14/24) Installing libatomic (15.2.0-r2) (15/24) Installing gmp (6.3.0-r4) (16/24) Installing isl26 (0.26-r1) (17/24) Installing mpfr4 (4.2.2-r0) (18/24) Installing mpc1 (1.3.1-r1) (19/24) Installing gcc (15.2.0-r2) (20/24) Installing musl-dev (1.2.5-r23) (21/24) Installing g++ (15.2.0-r2) (22/24) Installing make (4.4.1-r3) (23/24) Installing re2c (4.3.1-r0)"
+    uid=3_100 button
+    uid=3_101 StaticText "Apr 14 2026 13:25:57"
+    uid=3_102 button "node-build COPY . . 186ms"
+    uid=3_103 button
+    uid=3_104 StaticText "Apr 14 2026 13:25:57"
+    uid=3_105 button "node-build RUN npm run build 5s ✓ built in 5.01s"
+    uid=3_106 button
+    uid=3_107 StaticText "Apr 14 2026 13:26:15"
+    uid=3_108 button "Dockerfile:26"
+    uid=3_109 button
+    uid=3_110 StaticText "Apr 14 2026 13:26:15"
+    uid=3_111 button "-------------------"
+    uid=3_112 button
+    uid=3_113 StaticText "Apr 14 2026 13:26:15"
+    uid=3_114 button "25 | # Install PHP extensions"
+    uid=3_115 button
+    uid=3_116 StaticText "Apr 14 2026 13:26:15"
+    uid=3_117 button "26 | >>> RUN docker-php-ext-configure gd --with-freetype --with-jpeg \"
+    uid=3_118 button
+    uid=3_119 StaticText "Apr 14 2026 13:26:15"
+    uid=3_120 button "27 | >>> && docker-php-ext-install -j$(nproc) \"
+    uid=3_121 button
+    uid=3_122 StaticText "Apr 14 2026 13:26:15"
+    uid=3_123 button "28 | >>> bcmath \"
+    uid=3_124 button
+    uid=3_125 StaticText "Apr 14 2026 13:26:15"
+    uid=3_126 button "29 | >>> ctype \"
+    uid=3_127 button
+    uid=3_128 StaticText "Apr 14 2026 13:26:15"
+    uid=3_129 button "30 | >>> curl \"
+    uid=3_130 button
+    uid=3_131 StaticText "Apr 14 2026 13:26:15"
+    uid=3_132 button "31 | >>> fileinfo \"
+    uid=3_133 button
+    uid=3_134 StaticText "Apr 14 2026 13:26:15"
+    uid=3_135 button "32 | >>> gd \"
+    uid=3_136 button
+    uid=3_137 StaticText "Apr 14 2026 13:26:15"
+    uid=3_138 button "33 | >>> intl \"
+    uid=3_139 button
+    uid=3_140 StaticText "Apr 14 2026 13:26:15"
+    uid=3_141 button "34 | >>> mbstring \"
+    uid=3_142 button
+    uid=3_143 StaticText "Apr 14 2026 13:26:15"
+    uid=3_144 button "35 | >>> pdo \"
+    uid=3_145 button
+    uid=3_146 StaticText "Apr 14 2026 13:26:15"
+    uid=3_147 button "36 | >>> pdo_mysql \"
+    uid=3_148 button
+    uid=3_149 StaticText "Apr 14 2026 13:26:15"
+    uid=3_150 button "37 | >>> opcache \"
+    uid=3_151 button
+    uid=3_152 StaticText "Apr 14 2026 13:26:15"
+    uid=3_153 button "38 | >>> zip \"
+    uid=3_154 button
+    uid=3_155 StaticText "Apr 14 2026 13:26:15"
+    uid=3_156 button "39 | >>> pcntl"
+    uid=3_157 button
+    uid=3_158 StaticText "Apr 14 2026 13:26:15"
+    uid=3_159 button "40 |"
+    uid=3_160 button
+    uid=3_161 StaticText "Apr 14 2026 13:26:15"
+    uid=3_162 button "-------------------"
+    uid=3_163 button
+    uid=3_164 StaticText "Apr 14 2026 13:26:15"
+    uid=3_165 button "ERROR: failed to build: failed to solve: process "/bin/sh -c docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) bcmath ctype curl fileinfo gd intl mbstring pdo pdo_mysql opcache zip pcntl" did not complete successfully: exit code: 1"
+    uid=3_166 StaticText "You reached the "
+    uid=3_167 StaticText "end"
+    uid=3_168 StaticText " of the range"
+    uid=3_169 StaticText "Apr 14, 2026, 1:31 PM"
+    uid=3_170 button "Jump to top"
+    uid=3_171 button "Jump to bottom"

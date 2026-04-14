@@ -14,6 +14,7 @@ RUN apk add --no-cache \
     nginx \
     supervisor \
     curl \
+    curl-dev \
     libpng-dev \
     libjpeg-turbo-dev \
     freetype-dev \
@@ -26,7 +27,6 @@ RUN apk add --no-cache \
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
     bcmath \
-    ctype \
     curl \
     fileinfo \
     gd \

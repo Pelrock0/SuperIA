@@ -43,6 +43,13 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
+# Backpack auth (private repo)
+ARG BACKPACK_USERNAME
+ARG BACKPACK_PASSWORD
+RUN if [ -n "$BACKPACK_USERNAME" ]; then \
+    composer config --global http-basic.backpackforlaravel.com "$BACKPACK_USERNAME" "$BACKPACK_PASSWORD"; \
+    fi
+
 # Copy composer files first for better caching
 COPY composer.json composer.lock ./
 

@@ -31,9 +31,7 @@
                 @if(request()->is('loginDoubleAuth'))
                     <span>{{ __('opa.views.login_double_auth') }}</span>
                 @endif
-                @if(env("APP_ENV") == 'local' || (request()->is('loginDoubleAuth') && env("LOGIN_DOUBLE_AUTH_ENABLED") == 'true'))
-                    @include(backpack_view('auth.login.inc.form'))
-                @endif
+                @include(backpack_view('auth.login.inc.form'))
 
 
 

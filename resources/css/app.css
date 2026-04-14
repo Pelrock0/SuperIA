@@ -10,3 +10,127 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* ── Landing page responsive ── */
+.auth-waitlist-short {
+    display: none;
+}
+
+/* ── Landing page mobile responsive ── */
+@media (max-width: 768px) {
+    .hero-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 1.5rem !important;
+        gap: 2rem !important;
+    }
+    .hero-grid > .hero-text {
+        grid-column: span 1 !important;
+        text-align: center;
+    }
+    .hero-grid > .hero-text h1 {
+        font-size: 2.5rem !important;
+    }
+    .hero-grid > .hero-text p {
+        font-size: 1rem !important;
+    }
+    .hero-grid > .hero-text .hero-cta {
+        justify-content: center;
+    }
+    .hero-grid > .hero-phone {
+        grid-column: span 1 !important;
+    }
+    .hero-grid > .hero-phone > div:first-child {
+        max-width: 16rem !important;
+        margin: 0 auto;
+    }
+    .hero-section {
+        min-height: auto !important;
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .features-section {
+        padding: 4rem 1.5rem !important;
+    }
+
+    .data-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+    .data-grid > .data-shield {
+        grid-column: span 1 !important;
+    }
+    .data-grid > .data-text {
+        grid-column: span 1 !important;
+    }
+    .data-grid > .data-text h2 {
+        font-size: 2rem !important;
+    }
+    .data-section {
+        padding: 4rem 1.5rem !important;
+    }
+
+    .waitlist-section {
+        padding: 4rem 1rem !important;
+    }
+    .waitlist-card {
+        border-radius: 1.5rem !important;
+        padding: 1.5rem !important;
+    }
+    .waitlist-card > div {
+        padding: 1rem !important;
+    }
+    .waitlist-inputs-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .waitlist-companion-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .landing-header {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+        height: 4rem !important;
+        box-sizing: border-box !important;
+    }
+    .landing-header .landing-auth {
+        gap: 0.5rem !important;
+        flex-shrink: 0;
+    }
+    .landing-header .landing-auth .auth-login-link {
+        font-size: 0.75rem !important;
+    }
+    .landing-header .landing-auth .auth-waitlist-btn {
+        font-size: 0.75rem !important;
+        padding: 0.4rem 0.75rem !important;
+    }
+    .auth-waitlist-full {
+        display: none !important;
+    }
+    .auth-waitlist-short {
+        display: inline !important;
+    }
+    .landing-nav {
+        display: none !important;
+    }
+    .landing-logo svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+    .landing-logo span {
+        font-size: 1rem !important;
+    }
+
+    .landing-footer {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 2rem 1.5rem !important;
+    }
+    .landing-footer > div:last-child {
+        flex-wrap: wrap !important;
+        gap: 1rem !important;
+    }
+}

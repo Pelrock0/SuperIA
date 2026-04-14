@@ -11,6 +11,7 @@ export default function LandingPage() {
         <div style={{ minHeight: '100vh', backgroundColor: '#f7f9fb', fontFamily: "'Inter', sans-serif" }}>
             {/* TopAppBar */}
             <header
+                className="landing-header"
                 style={{
                     position: 'fixed',
                     top: 0,
@@ -30,7 +31,7 @@ export default function LandingPage() {
                 }}
             >
                 <SuperiaLogo />
-                <nav className="hidden md:flex" style={{ display: undefined, alignItems: 'center', gap: '2rem' }}>
+                <nav className="landing-nav" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
                     <a
                         href="#features"
                         style={{
@@ -47,9 +48,10 @@ export default function LandingPage() {
                         Lista de espera
                     </a>
                 </nav>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div className="landing-auth" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <Link
                         to="/login"
+                        className="auth-login-link"
                         style={{
                             color: '#003E54',
                             fontWeight: 600,
@@ -61,6 +63,7 @@ export default function LandingPage() {
                     </Link>
                     <a
                         href="#waitlist"
+                        className="auth-waitlist-btn"
                         style={{
                             backgroundColor: '#003E54',
                             color: '#ffffff',
@@ -69,9 +72,11 @@ export default function LandingPage() {
                             padding: '0.5rem 1.25rem',
                             borderRadius: '9999px',
                             textDecoration: 'none',
+                            whiteSpace: 'nowrap',
                         }}
                     >
-                        Unirse a la waitlist
+                        <span className="auth-waitlist-full">Unirse a la waitlist</span>
+                        <span className="auth-waitlist-short">Waitlist</span>
                     </a>
                 </div>
             </header>
@@ -81,7 +86,7 @@ export default function LandingPage() {
                 <FeaturesSection />
                 <DataCommitment />
 
-                <section id="waitlist" style={{ padding: '8rem 3rem', backgroundColor: '#ffffff', position: 'relative', overflow: 'hidden' }}>
+                <section id="waitlist" className="waitlist-section" style={{ padding: '8rem 3rem', backgroundColor: '#ffffff', position: 'relative', overflow: 'hidden' }}>
                     <WaitlistForm />
                     {/* Background element */}
                     <div
@@ -100,6 +105,7 @@ export default function LandingPage() {
 
             {/* Footer */}
             <footer
+                className="landing-footer"
                 style={{
                     backgroundColor: '#f1f5f9',
                     width: '100%',

@@ -172,15 +172,18 @@ export default function LoginPage() {
                     </div>
 
                     <div className="text-center mt-6">
-                        <span
+                        <a
+                            href="/#waitlist"
                             className="inline-block text-sm font-medium px-4 py-2 rounded-full"
-                            style={{ color: '#003e54', backgroundColor: '#c1e8ff' }}
+                            style={{ color: '#003e54', backgroundColor: '#c1e8ff', textDecoration: 'none' }}
                         >
                             ✦ ¿No tienes cuenta?
-                        </span>
+                        </a>
                         <p className="text-sm mt-3" style={{ color: '#41484c' }}>
-                            Estas en lista de espera, te avisaremos pronto para que
-                            disfrutes de la experiencia <strong style={{ color: '#002736' }}>Superia</strong>.
+                            <a href="/#waitlist" style={{ color: '#003e54', textDecoration: 'underline' }}>
+                                Únete a la lista de espera
+                            </a>{' '}
+                            y te avisaremos cuando esté lista la experiencia <strong style={{ color: '#002736' }}>Superia</strong>.
                         </p>
                     </div>
                 </div>

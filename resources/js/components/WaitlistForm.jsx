@@ -78,6 +78,7 @@ export default function WaitlistForm() {
 
     return (
         <div
+            className="waitlist-card"
             style={{
                 maxWidth: '56rem',
                 margin: '0 auto',
@@ -123,7 +124,7 @@ export default function WaitlistForm() {
                         </div>
                     )}
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                    <div className="waitlist-inputs-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                             <label
                                 htmlFor="name"
@@ -221,7 +222,7 @@ export default function WaitlistForm() {
                         >
                             &iquest;Con qui&eacute;n haces la compra?
                         </legend>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
+                        <div className="waitlist-companion-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
                             {COMPANION_OPTIONS.map((opt) => (
                                 <label
                                     key={opt.value}

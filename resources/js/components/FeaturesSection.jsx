@@ -42,6 +42,7 @@ export default function FeaturesSection() {
     return (
         <section
             id="features"
+            className="features-section"
             style={{
                 padding: '8rem 3rem',
                 backgroundColor: '#f2f4f6',
@@ -74,6 +75,7 @@ export default function FeaturesSection() {
                     </h2>
                 </div>
                 <div
+                    className="features-grid"
                     style={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(3, 1fr)',

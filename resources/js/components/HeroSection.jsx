@@ -3,6 +3,7 @@ import React from 'react';
 export default function HeroSection() {
     return (
         <section
+            className="hero-section"
             style={{
                 position: 'relative',
                 minHeight: '921px',
@@ -14,6 +15,7 @@ export default function HeroSection() {
             }}
         >
             <div
+                className="hero-grid"
                 style={{
                     maxWidth: '1280px',
                     margin: '0 auto',
@@ -26,6 +28,7 @@ export default function HeroSection() {
             >
                 {/* Left column - text */}
                 <div
+                    className="hero-text"
                     style={{
                         gridColumn: 'span 6',
                         display: 'flex',
@@ -59,7 +62,7 @@ export default function HeroSection() {
                     >
                         Listas de compra con IA que aprende de ti. Redescubre el placer de organizar tu hogar con el asistente digital definitivo.
                     </p>
-                    <div style={{ display: 'flex', gap: '1rem' }}>
+                    <div className="hero-cta" style={{ display: 'flex', gap: '1rem' }}>
                         <a
                             href="#waitlist"
                             style={{
@@ -83,6 +86,7 @@ export default function HeroSection() {
 
                 {/* Right column - phone mockup */}
                 <div
+                    className="hero-phone"
                     style={{
                         gridColumn: 'span 6',
                         position: 'relative',

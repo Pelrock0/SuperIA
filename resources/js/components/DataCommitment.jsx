@@ -2,8 +2,9 @@ import React from 'react';
 
 export default function DataCommitment() {
     return (
-        <section style={{ padding: '8rem 3rem', overflow: 'hidden' }}>
+        <section className="data-section" style={{ padding: '8rem 3rem', overflow: 'hidden' }}>
             <div
+                className="data-grid"
                 style={{
                     maxWidth: '1280px',
                     margin: '0 auto',
@@ -14,7 +15,7 @@ export default function DataCommitment() {
                 }}
             >
                 {/* Shield visual */}
-                <div style={{ gridColumn: 'span 5', position: 'relative' }}>
+                <div className="data-shield" style={{ gridColumn: 'span 5', position: 'relative' }}>
                     <div
                         style={{
                             aspectRatio: '1 / 1',
@@ -60,6 +61,7 @@ export default function DataCommitment() {
 
                 {/* Text content */}
                 <div
+                    className="data-text"
                     style={{
                         gridColumn: '7 / -1',
                         display: 'flex',

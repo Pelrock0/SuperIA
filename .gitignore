@@ -19,6 +19,8 @@
 /storage/*.key
 /storage/pail
 /storage/framework/psalm
+/storage/framework/views
+/storage/app/public/basset
 /vendor
 Homestead.json
 Homestead.yaml

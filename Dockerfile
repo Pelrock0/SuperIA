@@ -116,6 +116,16 @@ stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
 stderr_logfile=/dev/stderr
 stderr_logfile_maxbytes=0
+
+[program:queue-worker]
+command=php /var/www/html/artisan queue:work --sleep=3 --tries=3 --max-time=3600
+autostart=true
+autorestart=true
+numprocs=1
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
 SUPERVISOR
 
 EXPOSE 8080
@@ -125,4 +135,5 @@ CMD php artisan storage:link --force && \
     php artisan config:clear && \
     (php artisan cache:clear || true) && \
     php artisan view:clear && \
+    (php artisan basset:cache || true) && \
     /usr/bin/supervisord -c /etc/supervisord.conf

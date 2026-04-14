@@ -131,6 +131,7 @@ SUPERVISOR
 EXPOSE 8080
 
 CMD php artisan storage:link --force && \
+    chmod -R 777 /var/www/html/storage && \
     php artisan migrate --force && \
     php artisan config:clear && \
     (php artisan cache:clear || true) && \

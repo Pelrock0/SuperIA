@@ -60,7 +60,7 @@ RUN composer dump-autoload --optimize \
     && php artisan package:discover --ansi || true
 
 # Create storage directories and set permissions
-RUN mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions storage/logs bootstrap/cache \
+RUN mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions storage/logs storage/app/public/basset bootstrap/cache \
     && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
@@ -116,4 +116,4 @@ SUPERVISOR
 
 EXPOSE 8080
 
-CMD php artisan migrate --force && /usr/bin/supervisord -c /etc/supervisord.conf
+CMD php artisan storage:link --force && php artisan migrate --force && /usr/bin/supervisord -c /etc/supervisord.conf

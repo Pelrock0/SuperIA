@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Support\Ai\ClaudeClient;
 use App\Support\Ai\ClaudeClientInterface;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
+
         // Override PermissionManager's UserCrudController with ours
         // so we can add is_active, plan, ai_daily_limit_override fields
         $this->app->booted(function () {

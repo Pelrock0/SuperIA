@@ -144,7 +144,7 @@ export default function AddItemModal({ listId, existingItems = [], onAdd, onIncr
                 </div>
 
                 {/* Scrollable content */}
-                <div style={{ flex: 1, overflowY: 'auto', padding: '0 24px 160px', display: 'flex', flexDirection: 'column', gap: 32 }}>
+                <div style={{ flex: 1, overflowY: 'auto', padding: '0 24px 24px', display: 'flex', flexDirection: 'column', gap: 32 }}>
                     {/* Product name input */}
                     <div style={{ marginTop: 8 }}>
                         <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: '#71787d', marginBottom: 8, paddingLeft: 4 }}>
@@ -156,6 +156,8 @@ export default function AddItemModal({ listId, existingItems = [], onAdd, onIncr
                                 type="text"
                                 value={name}
                                 onChange={(e) => handleNameChange(e.target.value)}
+                                onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSubmit(); } }}
+                                enterKeyHint="send"
                                 placeholder="¿Que necesitas?"
                                 data-testid="modal-product-input"
                                 style={{
@@ -331,42 +333,39 @@ export default function AddItemModal({ listId, existingItems = [], onAdd, onIncr
                             ))}
                         </div>
                     </div>
-                </div>
 
-                {/* Action area */}
-                <div style={{
-                    position: 'absolute', bottom: 0, width: '100%',
-                    padding: 24,
-                    background: 'rgba(255,255,255,0.8)',
-                    backdropFilter: 'blur(12px)',
-                    display: 'flex', flexDirection: 'column', gap: 12,
-                }}>
-                    <button
-                        onClick={handleSubmit}
-                        disabled={!name.trim() || isSubmitting}
-                        data-testid="modal-add-button"
-                        style={{
-                            width: '100%', padding: 16,
-                            background: name.trim() ? 'linear-gradient(to right, #002736, #003e54)' : '#e6e8ea',
-                            color: name.trim() ? '#ffffff' : '#71787d',
-                            fontWeight: 700, fontSize: 16, borderRadius: 12,
-                            border: 'none', cursor: name.trim() ? 'pointer' : 'default',
-                            fontFamily: "'Inter', sans-serif",
-                        }}
-                    >
-                        {isSubmitting ? 'Anadiendo...' : 'Anadir'}
-                    </button>
-                    <button
-                        onClick={onClose}
-                        style={{
-                            width: '100%', textAlign: 'center',
-                            fontSize: 14, fontWeight: 700, color: '#71787d',
-                            background: 'none', border: 'none', cursor: 'pointer',
-                            padding: 8,
-                        }}
-                    >
-                        Cancelar
-                    </button>
+                    {/* Action area — inside scroll so keyboard doesn't cover it */}
+                    <div style={{
+                        display: 'flex', flexDirection: 'column', gap: 12,
+                        paddingTop: 8,
+                    }}>
+                        <button
+                            onClick={handleSubmit}
+                            disabled={!name.trim() || isSubmitting}
+                            data-testid="modal-add-button"
+                            style={{
+                                width: '100%', padding: 16,
+                                background: name.trim() ? 'linear-gradient(to right, #002736, #003e54)' : '#e6e8ea',
+                                color: name.trim() ? '#ffffff' : '#71787d',
+                                fontWeight: 700, fontSize: 16, borderRadius: 12,
+                                border: 'none', cursor: name.trim() ? 'pointer' : 'default',
+                                fontFamily: "'Inter', sans-serif",
+                            }}
+                        >
+                            {isSubmitting ? 'Anadiendo...' : 'Anadir'}
+                        </button>
+                        <button
+                            onClick={onClose}
+                            style={{
+                                width: '100%', textAlign: 'center',
+                                fontSize: 14, fontWeight: 700, color: '#71787d',
+                                background: 'none', border: 'none', cursor: 'pointer',
+                                padding: 8, paddingBottom: 'max(8px, env(safe-area-inset-bottom))',
+                            }}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
                 </div>
             </div>
         </>

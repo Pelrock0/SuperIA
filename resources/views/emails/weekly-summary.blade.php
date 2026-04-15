@@ -1,49 +1,73 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Superia — Tu resumen semanal</title>
-</head>
-<body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #1a1a1a;">
-    <h1 style="color: #1a1a1a;">¡Hola, {{ $userName }}!</h1>
+@extends('emails.layout', ['subject' => 'Superia — Tu resumen semanal'])
 
-    <p>Este es tu resumen semanal de compra. Estas son las cosas que probablemente necesitas esta semana, basadas en tu historial y en lo que suele comprarse en esta época del año:</p>
+@section('content')
+    <h1 style="margin: 0 0 24px; font-size: 26px; font-weight: 800; color: #002736; letter-spacing: -0.03em;">
+        Hola, {{ $userName }}
+    </h1>
+
+    <p style="margin: 0 0 24px; font-size: 15px; line-height: 1.6; color: #191c1e;">
+        Este es tu resumen semanal. Cosas que probablemente necesitas esta semana, basadas en tu historial:
+    </p>
 
     @if (count($products) > 0)
-        <ul style="padding-left: 20px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 24px;">
             @foreach ($products as $product)
                 @if (is_array($product) && isset($product['nombre']))
-                    <li style="margin-bottom: 8px;">
-                        <strong>{{ $product['nombre'] }}</strong>
-                        @if (!empty($product['cantidad_tipica']) && !empty($product['unidad_tipica']))
-                            <span style="color: #666;">({{ $product['cantidad_tipica'] }} {{ $product['unidad_tipica'] }})</span>
-                        @endif
-                        @if (!empty($product['reason']))
-                            <br><small style="color: #888;">{{ $product['reason'] }}</small>
-                        @endif
-                    </li>
+                    <tr>
+                        <td style="padding: 12px 16px; border-bottom: 1px solid #f2f4f6; vertical-align: top;">
+                            <p style="margin: 0; font-size: 15px; font-weight: 600; color: #002736;">
+                                {{ $product['nombre'] }}
+                                @if (!empty($product['cantidad_tipica']) && !empty($product['unidad_tipica']))
+                                    <span style="font-weight: 400; color: #71787d; font-size: 13px;">
+                                        &middot; {{ $product['cantidad_tipica'] }} {{ $product['unidad_tipica'] }}
+                                    </span>
+                                @endif
+                            </p>
+                            @if (!empty($product['reason']))
+                                <p style="margin: 4px 0 0; font-size: 12px; color: #a3a9ae; line-height: 1.4;">{{ $product['reason'] }}</p>
+                            @endif
+                        </td>
+                    </tr>
                 @endif
             @endforeach
-        </ul>
+        </table>
     @else
-        <p style="color: #666;">Esta semana no hemos encontrado sugerencias claras. Vuelve a consultarnos la semana que viene.</p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f2f4f6; border-radius: 12px; margin-bottom: 24px;">
+            <tr>
+                <td style="padding: 20px 24px; text-align: center;">
+                    <p style="margin: 0; font-size: 14px; color: #71787d;">
+                        Esta semana no hemos encontrado sugerencias claras. Vuelve a consultarnos la semana que viene.
+                    </p>
+                </td>
+            </tr>
+        </table>
     @endif
 
-    <p style="margin-top: 30px;">
-        <a href="{{ $appUrl }}" style="background: #1a1a1a; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
-            Ver en la app y convertir en lista
-        </a>
-    </p>
+    {{-- CTA button --}}
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center" style="padding: 8px 0 16px;">
+                <!--[if mso]>
+                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="{{ $appUrl }}" style="width:320px;height:48px;" arcsize="17%" fillcolor="#002736" stroke="f">
+                    <v:textbox inset="0,0,0,0" style="mso-fit-shape-to-text:false;v-text-anchor:middle;">
+                        <center style="color:#ffffff;font-size:15px;font-weight:700;">Ver en la app y convertir en lista</center>
+                    </v:textbox>
+                </v:roundrect>
+                <![endif]-->
+                <!--[if !mso]><!-->
+                <a href="{{ $appUrl }}"
+                   style="display: inline-block; padding: 14px 40px; background: linear-gradient(to right, #002736, #003e54); color: #ffffff; font-size: 15px; font-weight: 700; text-decoration: none; border-radius: 12px; letter-spacing: -0.01em;">
+                    Ver en la app y convertir en lista
+                </a>
+                <!--<![endif]-->
+            </td>
+        </tr>
+    </table>
+@endsection
 
-    <p style="margin-top: 40px; color: #666; font-size: 14px;">
-        Tus datos son tuyos. Nunca los venderemos ni los usaremos para publicidad.
-    </p>
-
-    <p style="color: #999; font-size: 12px;">
+@section('footer-extra')
+    <p style="margin: 8px 0 0; font-size: 11px; color: #a3a9ae;">
         Si ya no quieres recibir este resumen,
-        <a href="{{ $unsubscribeUrl }}" style="color: #999;">cancela tu suscripción</a>.
+        <a href="{{ $unsubscribeUrl }}" style="color: #71787d; text-decoration: underline;">cancela tu suscripcion</a>.
     </p>
-
-    <p style="color: #999; font-size: 12px;">— El equipo de Superia</p>
-</body>
-</html>
+@endsection

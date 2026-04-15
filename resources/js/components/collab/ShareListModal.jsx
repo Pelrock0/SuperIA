@@ -50,7 +50,18 @@ export default function ShareListModal({ listId, onClose }) {
     const handleCopy = async () => {
         if (!activeToken) return;
         try {
-            await navigator.clipboard.writeText(activeToken.url);
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(activeToken.url);
+            } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = activeToken.url;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            }
             setCopiedId(activeToken.id);
             setTimeout(() => setCopiedId(null), 2000);
         } catch {

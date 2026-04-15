@@ -86,6 +86,7 @@ export default function SharedListPage() {
     const [consented, setConsented] = useState(false);
     const [editingItem, setEditingItem] = useState(null);
     const [error, setError] = useState('');
+    const [inputFocused, setInputFocused] = useState(false);
     const heartbeatRef = useRef(null);
 
     const isEdit = mode === 'edit';
@@ -412,7 +413,11 @@ export default function SharedListPage() {
                 </div>
 
                 {isEdit && (
-                    <div style={{ marginBottom: '24px' }}>
+                    <div
+                        style={{ marginBottom: '24px' }}
+                        onFocusCapture={() => setInputFocused(true)}
+                        onBlurCapture={() => setInputFocused(false)}
+                    >
                         <AddItemInput onAdd={handleAdd} isLoading={false} />
                     </div>
                 )}
@@ -579,7 +584,7 @@ export default function SharedListPage() {
                 </div>
             </main>
 
-            {/* Bottom Action Banner */}
+            {/* Bottom Action Banner — hidden when input focused (iOS keyboard overlap) */}
             <div
                 style={{
                     position: 'fixed',
@@ -593,6 +598,10 @@ export default function SharedListPage() {
                     boxShadow: '0 -4px 24px rgba(0, 39, 54, 0.1)',
                     borderRadius: '32px 32px 0 0',
                     overflow: 'hidden',
+                    transition: 'transform 0.25s ease, opacity 0.25s ease',
+                    transform: inputFocused ? 'translateY(100%)' : 'translateY(0)',
+                    opacity: inputFocused ? 0 : 1,
+                    pointerEvents: inputFocused ? 'none' : 'auto',
                 }}
             >
                 <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>

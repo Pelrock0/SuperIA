@@ -110,7 +110,7 @@ N/A — This feature has no AI surface. No LLM calls, no prompts, no agent behav
 ## Test Gate: FEAT-SHARED-AUTH
 
 ### Result
-- **Status**: PASS
+- **Status**: FAIL
 - **Date**: 2026-04-15
 - **Stack**: Laravel
 
@@ -119,8 +119,8 @@ N/A — This feature has no AI surface. No LLM calls, no prompts, no agent behav
 | Metric | Value |
 |--------|-------|
 | Tests Run | Yes |
-| Total Tests | 18 |
-| Passing | 18 |
+| Total Tests | 630 (full suite), 18 feature-specific |
+| Passing | 630 |
 | Failing | 0 |
 
 ### Acceptance Criteria Coverage
@@ -133,7 +133,7 @@ N/A — This feature has no AI surface. No LLM calls, no prompts, no agent behav
 | AC-4 | Acceso directo desde dashboard | `test_collaborator_can_read_items`, `test_collaborator_edit_can_add_items` | Covered |
 | AC-5 | Revocacion en cascada | `test_revoking_token_removes_collaborators` | Covered |
 | AC-6 | Panel de colaboradores (propietario) | `test_owner_can_list_collaborators`, `test_non_owner_cannot_list_collaborators` | Covered |
-| AC-7 | Vinculacion retroactiva | Covered via `ListCollaboratorService::linkRetroactive` unit logic (service tested in integration) | Covered |
+| AC-7 | Vinculacion retroactiva al registrarse | MISSING | **Missing** |
 | AC-8 | Proteccion de duplicados | `test_save_is_idempotent` | Covered |
 | AC-9 | Propietario no se auto-vincula | `test_owner_cannot_save_own_list` | Covered |
 | AC-10 | Permisos respetados | `test_collaborator_read_only_cannot_add_items`, `test_read_only_collaborator_cannot_delete_items`, `test_read_only_collaborator_cannot_increment_quantity` | Covered |
@@ -144,7 +144,7 @@ N/A — This feature has no AI surface. No LLM calls, no prompts, no agent behav
 |-----------|----------|-------|--------|-------|
 | Happy Path | YES | 7 | OK | Save, save-status, dashboard, read items, add items, list collaborators, read-only save |
 | Failure Path | YES | 4 | OK | Auth required (401), owner self-save (409), non-collaborator access (403), non-owner list collaborators (403) |
-| Edge Cases | YES | 2 | OK | Idempotent save, read-only token mode |
+| Edge Cases | YES | 2 | MISSING | Idempotent save covered. Missing: retroactive linking with empty sessionUuids, revoked token sessions, owner's own sessions |
 | Security Path | YES | 5 | OK | Unauthenticated save (401), read-only cannot add (403), read-only cannot delete (403), read-only cannot increment (403), non-collaborator cannot access (403) |
 
 ### Database Test Configuration
@@ -164,10 +164,20 @@ N/A — This feature has no AI surface. No LLM calls, no prompts, no agent behav
 | Input validation | N/A | No user input beyond JWT + token param (both validated by middleware) |
 
 ### Missing Tests
-None.
+
+1. **[AC-7] Retroactive linking — happy path**: Register with `session_uuids` that match existing `list_collaborator_sessions`. Verify `list_collaborators` rows created with correct `user_id`, `shopping_list_id`, `mode`, and `share_token_id`.
+2. **[AC-7] Retroactive linking — empty sessionUuids**: Register with empty array. Verify no collaborators created, no errors.
+3. **[AC-7] Retroactive linking — revoked token skipped**: Register with session UUID belonging to a revoked token. Verify no collaborator created for that list.
+4. **[AC-7] Retroactive linking — owner's own list skipped**: Register user whose email matches a list owner, with session UUID for that list. Verify no self-link created.
 
 ### Configuration Issues
 None.
 
 ### Verdict
-**PASS**: All 10 acceptance criteria mapped to tests. Happy, failure, edge, and security paths covered. DatabaseTransactions with real MySQL. 18/18 tests passing.
+**FAIL**: AC-7 (retroactive linking at registration) has zero test coverage. `ListCollaboratorService::linkRetroactive` is implemented but never exercised by any test. `RegistrationServiceTest::test_register_creates_user_and_updates_waitlist` calls `register()` without `sessionUuids`, and no integration test exists for `POST /api/auth/register` with `session_uuids`. The method contains conditional logic (skip revoked tokens, skip owner's own lists, `firstOrCreate` dedup) that is entirely untested.
+
+Must fix before progression:
+- [ ] Add test: retroactive linking happy path (register with valid session UUIDs → collaborators created)
+- [ ] Add test: retroactive linking skips revoked tokens
+- [ ] Add test: retroactive linking skips owner's own lists
+- [ ] Add test: retroactive linking with empty array (no-op)

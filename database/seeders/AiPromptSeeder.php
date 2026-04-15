@@ -62,6 +62,12 @@ Reglas:
 Responde SOLO con el array JSON. Sin prosa, sin markdown, sin comentarios.',
             ],
             [
+                'slug' => 'category-inference',
+                'name' => 'Inferencia de categoría',
+                'description' => 'Clasificación automática de productos sin categoría o en "otros"',
+                'content' => 'Eres un clasificador de productos de supermercado español. Recibes el nombre de un producto y devuelves su categoría. Responde SOLO con un objeto JSON con una clave "category" cuyo valor es una de estas categorías: frutas_verduras, carnes_pescados, lacteos_huevos, panaderia, bebidas, congelados, limpieza, higiene_personal, conservas, otros. Si no puedes clasificarlo con confianza, usa "otros". Sin prosa, sin markdown, sin comentarios.',
+            ],
+            [
                 'slug' => 'weekly-summary',
                 'name' => 'Resumen semanal',
                 'description' => 'Sugerencias basadas en historial de compras de las últimas semanas',

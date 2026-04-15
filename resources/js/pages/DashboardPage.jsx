@@ -9,7 +9,7 @@ import WeeklySummaryBanner from '../components/dashboard/WeeklySummaryBanner';
 export default function DashboardPage() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
-    const [lists, setLists] = useState({ active: [], archived: [] });
+    const [lists, setLists] = useState({ active: [], archived: [], collaborated: [] });
     const [isLoading, setIsLoading] = useState(true);
     const [showCreateModal, setShowCreateModal] = useState(false);
     const [createError, setCreateError] = useState('');
@@ -89,7 +89,7 @@ export default function DashboardPage() {
         );
     }
 
-    const hasLists = lists.active.length > 0 || lists.archived.length > 0;
+    const hasLists = lists.active.length > 0 || lists.archived.length > 0 || (lists.collaborated || []).length > 0;
 
     return (
         <div className="min-h-screen pb-32" style={{ backgroundColor: '#f7f9fb', fontFamily: "'Inter', sans-serif" }}>
@@ -262,6 +262,42 @@ export default function DashboardPage() {
                                 </div>
                             ))}
                         </div>
+
+                        {(lists.collaborated || []).length > 0 && (
+                            <div className="mb-10">
+                                <h3 className="text-lg font-semibold mb-4" style={{ color: '#41484c' }}>
+                                    <span className="material-symbols-outlined align-middle mr-1" style={{ fontSize: 20 }}>group</span>
+                                    Listas compartidas conmigo ({lists.collaborated.length})
+                                </h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {lists.collaborated.map((list) => (
+                                        <div
+                                            key={`collab-${list.id}`}
+                                            className="rounded-[20px] p-6 cursor-pointer transition-all hover:shadow-lg"
+                                            style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 100%)', boxShadow: '0 4px 24px 0 rgba(0,39,54,0.06)', border: '1px solid #e0f2fe' }}
+                                            onClick={() => navigate(`/app/listas/${list.id}`)}
+                                        >
+                                            <div className="flex justify-between items-start mb-4">
+                                                <div className="p-3 rounded-2xl" style={{ backgroundColor: 'rgba(0,39,54,0.06)' }}>
+                                                    <span className="material-symbols-outlined" style={{ color: '#002736' }}>shopping_cart</span>
+                                                </div>
+                                                <span className="text-[11px] font-bold px-2 py-1 rounded-lg" style={{ color: '#005236', backgroundColor: '#d1fae5' }}>
+                                                    COLABORADOR
+                                                </span>
+                                            </div>
+                                            <h4 className="text-xl font-bold mb-1" style={{ color: '#002736' }}>{list.name}</h4>
+                                            <p className="text-xs mb-4" style={{ color: '#71787d' }}>
+                                                de {list.owner_name} &middot; {list.collaborator_mode === 'edit' ? 'Puede editar' : 'Solo lectura'}
+                                            </p>
+                                            <div className="flex items-center gap-2" style={{ color: '#41484c' }}>
+                                                <span className="material-symbols-outlined text-sm">checklist</span>
+                                                <span className="text-sm font-medium">{list.items_completed || 0} / {list.items_total || 0} articulos</span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                         {lists.archived.length > 0 && (
                             <div className="mb-10">

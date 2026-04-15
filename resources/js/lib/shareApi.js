@@ -23,3 +23,8 @@ export async function getActivityLog(listId) {
     const response = await api.get(`/lists/${listId}/activity`);
     return response.data.data.entries;
 }
+
+export async function getCollaborators(listId) {
+    const response = await api.get(`/lists/${listId}/collaborators`);
+    return response.data.data;
+}

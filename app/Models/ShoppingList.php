@@ -69,4 +69,9 @@ class ShoppingList extends Model
     {
         return $this->hasMany(ListActivityLog::class);
     }
+
+    public function collaborators(): HasMany
+    {
+        return $this->hasMany(ListCollaborator::class);
+    }
 }

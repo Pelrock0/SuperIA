@@ -7,6 +7,7 @@ use App\Http\Requests\HeartbeatRequest;
 use App\Http\Requests\UpdateItemRequest;
 use App\Models\ListItem;
 use App\Services\CollaboratorPresenceService;
+use App\Services\ListCollaboratorService;
 use App\Services\ListItemService;
 use App\Support\ShareTokenContext;
 use Illuminate\Http\JsonResponse;
@@ -17,6 +18,7 @@ class SharedListController extends Controller
     public function __construct(
         private ListItemService $items,
         private CollaboratorPresenceService $presence,
+        private ListCollaboratorService $collaborators,
     ) {}
 
     public function show(Request $request, string $tokenParam): JsonResponse
@@ -96,6 +98,50 @@ class SharedListController extends Controller
         $this->presence->heartbeat($context, $request->validated('session_uuid'));
 
         return response()->json(['data' => ['status' => 'ok']]);
+    }
+
+    public function saveToAccount(Request $request, string $tokenParam): JsonResponse
+    {
+        $context = $this->context($request);
+        $user = auth('api')->user();
+
+        if (! $user) {
+            abort(401, 'Debes iniciar sesion para guardar esta lista.');
+        }
+
+        if ($context->list->user_id === $user->id) {
+            abort(409, 'Ya eres el propietario de esta lista.');
+        }
+
+        $collaborator = $this->collaborators->linkUser($user, $context);
+
+        return response()->json([
+            'data' => [
+                'linked' => true,
+                'mode' => $collaborator->mode->value,
+            ],
+        ], 201);
+    }
+
+    public function saveStatus(Request $request, string $tokenParam): JsonResponse
+    {
+        $context = $this->context($request);
+        $user = auth('api')->user();
+
+        if (! $user) {
+            return response()->json(['data' => ['linked' => false, 'authenticated' => false]]);
+        }
+
+        $isOwner = $context->list->user_id === $user->id;
+        $isLinked = $this->collaborators->isLinked($user->id, $context->list->id);
+
+        return response()->json([
+            'data' => [
+                'authenticated' => true,
+                'is_owner' => $isOwner,
+                'linked' => $isLinked,
+            ],
+        ]);
     }
 
     private function context(Request $request): ShareTokenContext

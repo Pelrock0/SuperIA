@@ -51,21 +51,18 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     }
 
     /**
-     * Register the Telescope gate.
+     * Register the Telescope authorization.
      *
-     * This gate determines who can access Telescope in non-local environments.
+     * Checks both the default web guard and the Backpack guard,
+     * since admin users authenticate via Backpack (separate session guard).
      */
     #[\Override]
-    protected function gate(): void
+    protected function authorization(): void
     {
-        Gate::define('viewTelescope', function (?User $user) {
-            // Allow access from Backpack guard (admin panel) if user is superadmin
-            $backpackUser = backpack_auth()->user();
-            if ($backpackUser instanceof User && $backpackUser->hasRole('superadmin')) {
-                return true;
-            }
+        Telescope::auth(function () {
+            $user = backpack_auth()->user() ?? auth()->user();
 
-            return $user?->hasRole('superadmin') ?? false;
+            return $user instanceof User && $user->hasRole('superadmin');
         });
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\ShareTokenMode;
+use App\Models\ListCollaborator;
 use App\Models\ListShareToken;
 use App\Models\ShoppingList;
 use App\Support\ShareTokenContext;
@@ -38,6 +39,7 @@ class ShareTokenService
             }
 
             $token->sessions()->delete();
+            ListCollaborator::where('share_token_id', $token->id)->delete();
 
             $this->syncIsShared($token->shoppingList);
 

@@ -13,14 +13,17 @@ class RegistrationService
 {
     public function __construct(
         private WaitlistService $waitlistService,
-    ) {}
+        private ?ListCollaboratorService $collaboratorService = null,
+    ) {
+        $this->collaboratorService ??= new ListCollaboratorService();
+    }
 
     public function validateInvitationToken(string $token): ?WaitlistEntry
     {
         return $this->waitlistService->findByInvitationToken($token);
     }
 
-    public function register(string $token, string $name, string $password): User
+    public function register(string $token, string $name, string $password, array $sessionUuids = []): User
     {
         $entry = $this->waitlistService->findByInvitationToken($token);
 
@@ -47,6 +50,10 @@ class RegistrationService
         });
 
         $this->sendVerificationEmail($user);
+
+        if (! empty($sessionUuids)) {
+            $this->collaboratorService->linkRetroactive($user, $sessionUuids);
+        }
 
         return $user;
     }

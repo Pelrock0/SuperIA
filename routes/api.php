@@ -99,6 +99,7 @@ Route::middleware(['auth:api', \App\Http\Middleware\JwtVersionCheck::class])->gr
 
     // Collaboration views (owner side)
     Route::get('/lists/{list}/collaborators/count', [ShoppingListController::class, 'collaboratorsCount']);
+    Route::get('/lists/{list}/collaborators', [ShoppingListController::class, 'collaborators']);
     Route::get('/lists/{list}/activity', [ShoppingListController::class, 'activityLog']);
 
     // Weekly summary (Epic 5C - HU-505)
@@ -126,6 +127,8 @@ Route::middleware(['auth:api', \App\Http\Middleware\JwtVersionCheck::class])->gr
 Route::middleware([\App\Http\Middleware\ValidateShareToken::class, 'throttle:60,1'])->group(function () {
     Route::get('/shared/{tokenParam}', [SharedListController::class, 'show']);
     Route::post('/shared/{tokenParam}/heartbeat', [SharedListController::class, 'heartbeat']);
+    Route::get('/shared/{tokenParam}/save-status', [SharedListController::class, 'saveStatus']);
+    Route::post('/shared/{tokenParam}/save', [SharedListController::class, 'saveToAccount']);
 });
 
 Route::middleware([\App\Http\Middleware\ValidateShareToken::class.':write', 'throttle:60,1'])->group(function () {

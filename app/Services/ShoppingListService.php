@@ -5,11 +5,18 @@ namespace App\Services;
 use App\Enums\ListStatus;
 use App\Models\ShoppingList;
 use App\Models\User;
+use App\Services\ListCollaboratorService;
 use Illuminate\Support\Facades\DB;
 
 class ShoppingListService
 {
     private const FREEMIUM_LIMIT = 3;
+
+    public function __construct(
+        private ?ListCollaboratorService $collaboratorService = null,
+    ) {
+        $this->collaboratorService ??= new ListCollaboratorService();
+    }
 
     public function getListsForUser(User $user): array
     {
@@ -18,9 +25,12 @@ class ShoppingListService
             ->orderBy('updated_at', 'desc')
             ->get();
 
+        $collaborated = $this->collaboratorService->collaboratedListsForUser($user);
+
         return [
             'active' => $lists->where('status', ListStatus::Active)->values(),
             'archived' => $lists->where('status', ListStatus::Archived)->values(),
+            'collaborated' => $collaborated->values(),
         ];
     }
 

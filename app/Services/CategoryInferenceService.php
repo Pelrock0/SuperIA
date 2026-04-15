@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\ProductCategory;
+use App\Jobs\InferItemCategoryJob;
 use App\Models\ProductoCatalogo;
 
 class CategoryInferenceService
@@ -28,5 +29,13 @@ class CategoryInferenceService
         }
 
         return $product->categoria;
+    }
+
+    /**
+     * Dispatch an async AI inference job for an item that has no category.
+     */
+    public function dispatchAiInference(int $listItemId): void
+    {
+        InferItemCategoryJob::dispatch($listItemId);
     }
 }

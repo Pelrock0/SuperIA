@@ -79,13 +79,13 @@ describe('AddItemInput', () => {
     it('disables submit when name is empty', () => {
         render(<AddItemInput onAdd={vi.fn()} isLoading={false} />);
 
-        expect(screen.getByRole('button', { name: /anadir/i })).toBeDisabled();
+        expect(screen.getByRole('button', { name: /anadir producto/i })).toBeDisabled();
     });
 
     it('disables submit while loading', () => {
         render(<AddItemInput onAdd={vi.fn()} isLoading={true} />);
 
-        expect(screen.getByRole('button', { name: /\.\.\./i })).toBeDisabled();
+        expect(screen.getByRole('button', { name: /anadir producto/i })).toBeDisabled();
     });
 
     it('clears the input after successful submit', async () => {

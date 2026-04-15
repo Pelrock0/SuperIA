@@ -46,6 +46,11 @@ class FakeClaudeClient implements ClaudeClientInterface
     /** @var array<int, array{context: array<string, mixed>}> */
     public array $weeklySummaryCalls = [];
 
+    public ?string $cannedCategory = 'otros';
+
+    /** @var array<int, array{product: string}> */
+    public array $categoryInferenceCalls = [];
+
     #[\Override]
     public function suggest(string $userQuery, array $anonymizedContext): array
     {
@@ -149,6 +154,23 @@ class FakeClaudeClient implements ClaudeClientInterface
 
         return [
             'products' => $this->cannedWeeklySummary,
+            'estimated_cost_usd' => $this->cannedCost,
+        ];
+    }
+
+    #[\Override]
+    public function inferCategory(string $productName): array
+    {
+        $this->categoryInferenceCalls[] = ['product' => $productName];
+
+        if ($this->shouldThrow !== null) {
+            throw $this->shouldThrow instanceof ClaudeException
+                ? $this->shouldThrow
+                : new ClaudeException($this->shouldThrow->getMessage(), 0, $this->shouldThrow);
+        }
+
+        return [
+            'category' => $this->cannedCategory,
             'estimated_cost_usd' => $this->cannedCost,
         ];
     }

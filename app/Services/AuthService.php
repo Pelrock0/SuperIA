@@ -68,6 +68,13 @@ class AuthService
     public function logout(): void
     {
         JWTAuth::invalidate(JWTAuth::getToken());
+
+        // Also invalidate any web/backpack session to prevent stale session
+        // from redirecting admin/login away (guard shares session driver).
+        if (request()->hasSession()) {
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+        }
     }
 
     public function refresh(): string

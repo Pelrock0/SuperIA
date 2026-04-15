@@ -43,7 +43,7 @@ class ListItemService
 
     public function create(ShoppingList $list, array $data, ?ShareTokenContext $context = null): array
     {
-        return DB::transaction(function () use ($list, $data, $context) {
+        $result = DB::transaction(function () use ($list, $data, $context) {
             $category = $data['category'] ?? null;
             if ($category === null) {
                 $inferred = $this->categoryInference->infer($data['name']);
@@ -64,6 +64,13 @@ class ListItemService
 
             return ['item' => $item, 'counters' => $counters];
         });
+
+        // If no category was resolved, dispatch async AI inference
+        if ($result['item']->category === null) {
+            $this->categoryInference->dispatchAiInference($result['item']->id);
+        }
+
+        return $result;
     }
 
     public function update(ListItem $item, array $data, ?ShareTokenContext $context = null): ListItem

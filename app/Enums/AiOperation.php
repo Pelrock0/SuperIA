@@ -9,4 +9,5 @@ enum AiOperation: string
     case Summary = 'summary';
     case Complement = 'complement';
     case Replenishment = 'replenishment';
+    case CategoryInference = 'category_inference';
 }

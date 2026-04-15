@@ -78,4 +78,14 @@ interface ClaudeClientInterface
      * @throws \App\Support\Ai\Exceptions\ClaudeException on any failure
      */
     public function generateWeeklySummary(array $context): array;
+
+    /**
+     * Infer the category for a single product name.
+     *
+     * @param  string  $productName  sanitized product name
+     * @return array{category: ?string, estimated_cost_usd: float}
+     *
+     * @throws \App\Support\Ai\Exceptions\ClaudeException on any failure
+     */
+    public function inferCategory(string $productName): array;
 }

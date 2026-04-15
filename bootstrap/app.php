@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -18,6 +19,12 @@ return Application::configure(basePath: dirname(__DIR__))
                 return route('backpack.auth.login');
             }
             return '/login';
+        });
+        RedirectIfAuthenticated::redirectUsing(function ($request) {
+            if ($request->is('admin') || $request->is('admin/*')) {
+                return backpack_url('dashboard');
+            }
+            return '/app';
         });
     })
     ->withExceptions(function (Exceptions $exceptions): void {

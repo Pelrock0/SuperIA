@@ -106,9 +106,14 @@ export default function ItemAutocomplete({
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
             setActiveIndex((i) => (i <= 0 ? suggestions.length - 1 : i - 1));
-        } else if (e.key === 'Enter' && activeIndex >= 0) {
-            e.preventDefault();
-            handleSelect(suggestions[activeIndex]);
+        } else if (e.key === 'Enter') {
+            if (activeIndex >= 0) {
+                e.preventDefault();
+                handleSelect(suggestions[activeIndex]);
+            } else {
+                // No suggestion selected — close dropdown and let form submit
+                setIsOpen(false);
+            }
         } else if (e.key === 'Escape') {
             setIsOpen(false);
             setActiveIndex(-1);
@@ -128,6 +133,7 @@ export default function ItemAutocomplete({
                 placeholder={placeholder}
                 maxLength={80}
                 disabled={disabled}
+                enterKeyHint="send"
                 role="combobox"
                 aria-autocomplete="list"
                 aria-expanded={isOpen}

@@ -106,9 +106,11 @@ export default function AddItemInput({ onAdd, onIncrementExisting, isLoading, ex
             <button
                 type="submit"
                 disabled={isLoading || !name.trim()}
-                className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 disabled:opacity-50 transition-colors shrink-0"
+                className="bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 disabled:opacity-50 transition-colors shrink-0 flex items-center justify-center w-10 h-10 sm:w-auto sm:h-auto sm:px-4 sm:py-2"
+                aria-label="Anadir producto"
             >
-                {isLoading ? '...' : 'Anadir'}
+                <span className="material-symbols-outlined sm:hidden" style={{ fontSize: '20px' }}>add</span>
+                <span className="hidden sm:inline">{isLoading ? '...' : 'Anadir'}</span>
             </button>
 
             {duplicateMatch && (

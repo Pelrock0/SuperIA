@@ -99,26 +99,116 @@ export default function HeroSection() {
                         style={{
                             position: 'relative',
                             width: '100%',
-                            maxWidth: '28rem',
-                            aspectRatio: '9 / 19',
-                            borderRadius: '3rem',
-                            padding: '1rem',
+                            maxWidth: '20rem',
+                            borderRadius: '2.5rem',
+                            padding: '12px',
                             backgroundColor: '#003e54',
                             boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
                             overflow: 'hidden',
-                            border: '8px solid #003e54',
                         }}
                     >
-                        <img
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX7exqSa2AhWeBiD9Aj6jusE663YCLlmtbs-CrQ6kMpnJBOiM6mW5SytwlW8WtCgMdswnMmkdgIVpWqxRLxVSAf57O-hxK-wSBzXCsjBAfNSdUARz02Qwm0UXXkP20OJtjVdu5Soqdy2ZPFnA-pene0StNrakWWRGoE3DtoXOCn_Vku2fooP549VfYNLDs1I-1DISMA2pmX3HROYwIMSupSiiaTmbSNxm5SHPZMMMN0zhWeqduU4s9hQacb2A3Olg5N6l1uWs_5Xg"
-                            alt="smartphone screen showing a clean modern mobile application interface with minimalist product lists and soft pastel colors"
+                        {/* Phone screen */}
+                        <div
                             style={{
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
+                                backgroundColor: '#f7f9fb',
                                 borderRadius: '2rem',
+                                overflow: 'hidden',
+                                fontFamily: "'Inter', sans-serif",
                             }}
-                        />
+                        >
+                            {/* Status bar */}
+                            <div style={{ padding: '8px 20px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11px', fontWeight: 600, color: '#002736' }}>
+                                <span>9:41</span>
+                                <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+                                    <span style={{ fontSize: '10px' }}>●●●●</span>
+                                    <span style={{ fontSize: '10px' }}>WiFi</span>
+                                    <span style={{ fontSize: '10px' }}>🔋</span>
+                                </div>
+                            </div>
+
+                            {/* App header */}
+                            <div style={{ padding: '12px 20px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <div style={{ width: '28px', height: '28px', backgroundColor: '#002736', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <span style={{ color: '#fff', fontWeight: 800, fontSize: '16px' }}>S</span>
+                                    </div>
+                                    <span style={{ fontWeight: 700, fontSize: '18px', color: '#002736', letterSpacing: '-0.03em' }}>Superia</span>
+                                </div>
+                                <div style={{ display: 'flex', gap: '8px', opacity: 0.4 }}>
+                                    <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#002736' }}>history</span>
+                                    <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#002736' }}>settings</span>
+                                </div>
+                            </div>
+
+                            {/* Greeting */}
+                            <div style={{ padding: '8px 20px 12px' }}>
+                                <h3 style={{ margin: 0, fontSize: '22px', fontWeight: 800, color: '#002736', letterSpacing: '-0.03em' }}>Hola, Laura</h3>
+                                <p style={{ margin: '2px 0 0', fontSize: '12px', color: '#71787d' }}>Tienes 2 listas activas.</p>
+                            </div>
+
+                            {/* AI card */}
+                            <div style={{ margin: '0 16px 12px', borderRadius: '16px', background: 'linear-gradient(135deg, #002736, #003e54)', padding: '16px', position: 'relative', overflow: 'hidden' }}>
+                                <div style={{ display: 'flex', gap: '6px', alignItems: 'center', marginBottom: '8px' }}>
+                                    <span style={{ fontSize: '9px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#002736', backgroundColor: '#6ffbbe', padding: '2px 8px', borderRadius: '9999px' }}>AI Concierge</span>
+                                    <span className="material-symbols-outlined" style={{ fontSize: '14px', color: '#6ffbbe' }}>auto_awesome</span>
+                                </div>
+                                <p style={{ margin: 0, fontSize: '14px', fontWeight: 700, color: '#fff' }}>Genera listas con IA</p>
+                                <p style={{ margin: '4px 0 10px', fontSize: '10px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.4 }}>Describe lo que necesitas y la IA creara tu lista.</p>
+                                <span style={{ fontSize: '11px', fontWeight: 700, color: '#002736', backgroundColor: '#6ffbbe', padding: '6px 14px', borderRadius: '8px', display: 'inline-block' }}>Generar lista ✨</span>
+                                <div style={{ position: 'absolute', right: '-8px', bottom: '-8px', opacity: 0.1 }}>
+                                    <span className="material-symbols-outlined" style={{ fontSize: '72px', color: '#fff' }}>shopping_basket</span>
+                                </div>
+                            </div>
+
+                            {/* List card */}
+                            <div style={{ margin: '0 16px 8px', borderRadius: '16px', backgroundColor: '#fff', padding: '14px 16px', boxShadow: '0 1px 3px rgba(0,39,54,0.06)' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <div style={{ width: '32px', height: '32px', backgroundColor: '#f2f4f6', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <span className="material-symbols-outlined" style={{ fontSize: '16px', color: '#41484c' }}>shopping_cart</span>
+                                        </div>
+                                        <div>
+                                            <p style={{ margin: 0, fontSize: '14px', fontWeight: 700, color: '#002736' }}>🛒 Semanal</p>
+                                            <p style={{ margin: 0, fontSize: '10px', color: '#71787d' }}>3 / 8 articulos</p>
+                                        </div>
+                                    </div>
+                                    <span style={{ fontSize: '9px', color: '#71787d', backgroundColor: '#f2f4f6', padding: '2px 8px', borderRadius: '9999px' }}>Hoy</span>
+                                </div>
+                                {/* Mini item list */}
+                                <div style={{ borderTop: '1px solid #f2f4f6', paddingTop: '8px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                    {[
+                                        { name: 'Leche entera', cat: 'Lacteos', done: true },
+                                        { name: 'Pan integral', cat: 'Panaderia', done: true },
+                                        { name: 'Pollo', cat: 'Carnes', done: true },
+                                        { name: 'Manzanas', cat: 'Frutas', done: false },
+                                        { name: 'Arroz', cat: 'Otros', done: false },
+                                    ].map((item, i) => (
+                                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                            <div style={{ width: '14px', height: '14px', borderRadius: '4px', border: `1.5px solid ${item.done ? '#002736' : '#c1c7cd'}`, backgroundColor: item.done ? '#002736' : 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                                {item.done && <span style={{ color: '#fff', fontSize: '9px', lineHeight: 1 }}>✓</span>}
+                                            </div>
+                                            <span style={{ fontSize: '11px', color: item.done ? '#a3a9ae' : '#191c1e', textDecoration: item.done ? 'line-through' : 'none', flex: 1 }}>{item.name}</span>
+                                            <span style={{ fontSize: '8px', color: '#71787d', backgroundColor: '#f2f4f6', padding: '1px 6px', borderRadius: '9999px' }}>{item.cat}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Second list teaser */}
+                            <div style={{ margin: '0 16px 16px', borderRadius: '16px', backgroundColor: '#fff', padding: '12px 16px', boxShadow: '0 1px 3px rgba(0,39,54,0.06)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <div style={{ width: '32px', height: '32px', backgroundColor: '#f2f4f6', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <span className="material-symbols-outlined" style={{ fontSize: '16px', color: '#41484c' }}>shopping_cart</span>
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <p style={{ margin: 0, fontSize: '14px', fontWeight: 700, color: '#002736' }}>🏠 Limpieza</p>
+                                    <p style={{ margin: 0, fontSize: '10px', color: '#71787d' }}>0 / 4 articulos</p>
+                                </div>
+                                <span style={{ fontSize: '9px', color: '#005236', backgroundColor: '#6ffbbe', padding: '2px 8px', borderRadius: '9999px', fontWeight: 600 }}>COMPARTIDA</span>
+                            </div>
+
+                            {/* Bottom nav hint */}
+                            <div style={{ height: '4px' }} />
+                        </div>
                     </div>
                     {/* Decorative background blur */}
                     <div

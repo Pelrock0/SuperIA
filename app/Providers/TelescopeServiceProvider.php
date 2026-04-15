@@ -58,8 +58,14 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     #[\Override]
     protected function gate(): void
     {
-        Gate::define('viewTelescope', function (User $user) {
-            return $user->hasRole('superadmin');
+        Gate::define('viewTelescope', function (?User $user) {
+            // Allow access from Backpack guard (admin panel) if user is superadmin
+            $backpackUser = backpack_auth()->user();
+            if ($backpackUser instanceof User && $backpackUser->hasRole('superadmin')) {
+                return true;
+            }
+
+            return $user?->hasRole('superadmin') ?? false;
         });
     }
 }

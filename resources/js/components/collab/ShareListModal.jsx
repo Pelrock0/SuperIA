@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { createShareToken, listShareTokens, revokeShareToken } from '../../lib/shareApi';
+import { createShareToken, getCollaborators, listShareTokens, revokeShareToken } from '../../lib/shareApi';
 
 export default function ShareListModal({ listId, onClose }) {
     const [tokens, setTokens] = useState([]);
@@ -8,6 +8,7 @@ export default function ShareListModal({ listId, onClose }) {
     const [generatingMode, setGeneratingMode] = useState(null);
     const [copiedId, setCopiedId] = useState(null);
     const [error, setError] = useState('');
+    const [collaborators, setCollaborators] = useState([]);
 
     const loadTokens = async () => {
         try {
@@ -20,7 +21,16 @@ export default function ShareListModal({ listId, onClose }) {
         }
     };
 
-    useEffect(() => { loadTokens(); }, [listId]);
+    const loadCollaborators = async () => {
+        try {
+            const data = await getCollaborators(listId);
+            setCollaborators(data);
+        } catch {
+            // ignore — not critical
+        }
+    };
+
+    useEffect(() => { loadTokens(); loadCollaborators(); }, [listId]);
 
     const activeToken = tokens.find(t => t.mode === selectedMode);
 
@@ -226,6 +236,33 @@ export default function ShareListModal({ listId, onClose }) {
                                     </button>
                                 </div>
                             </div>
+
+                            {/* Collaborators */}
+                            {collaborators.length > 0 && (
+                                <div style={{ marginBottom: 24 }}>
+                                    <label style={{ display: 'block', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#71787d', marginBottom: 8 }}>
+                                        Colaboradores vinculados ({collaborators.length})
+                                    </label>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                                        {collaborators.map((c) => (
+                                            <div key={c.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 14px', background: '#f2f4f6', borderRadius: 12 }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                                    <div style={{ width: 32, height: 32, borderRadius: 9999, background: '#002736', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: 13 }}>
+                                                        {c.name?.charAt(0)?.toUpperCase() || '?'}
+                                                    </div>
+                                                    <div>
+                                                        <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: '#191c1e' }}>{c.name}</p>
+                                                        <p style={{ margin: 0, fontSize: 11, color: '#71787d' }}>{c.email}</p>
+                                                    </div>
+                                                </div>
+                                                <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', padding: '2px 8px', borderRadius: 6, background: c.mode === 'edit' ? '#d1fae5' : '#e0f2fe', color: c.mode === 'edit' ? '#005236' : '#0369a1' }}>
+                                                    {c.mode === 'edit' ? 'Edicion' : 'Lectura'}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
 
                             {/* Revoke */}
                             {activeToken && (

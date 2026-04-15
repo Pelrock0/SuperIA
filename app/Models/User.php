@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -86,5 +87,12 @@ class User extends Authenticatable implements JWTSubject
     public function weeklySummaries(): HasMany
     {
         return $this->hasMany(WeeklySummary::class);
+    }
+
+    public function collaboratedLists(): BelongsToMany
+    {
+        return $this->belongsToMany(ShoppingList::class, 'list_collaborators')
+            ->withPivot('mode', 'share_token_id')
+            ->withTimestamps();
     }
 }

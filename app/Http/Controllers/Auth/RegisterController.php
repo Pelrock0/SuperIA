@@ -42,6 +42,7 @@ class RegisterController extends Controller
                 $request->validated('token'),
                 $request->validated('name'),
                 $request->validated('password'),
+                $request->input('session_uuids', []),
             );
 
             return response()->json([

@@ -38,4 +38,18 @@ export async function sendHeartbeat(tokenParam, sessionUuid) {
     await sharedApi.post(`/shared/${tokenParam}/heartbeat`, { session_uuid: sessionUuid });
 }
 
+export async function fetchSaveStatus(tokenParam, jwtToken) {
+    const response = await sharedApi.get(`/shared/${tokenParam}/save-status`, {
+        headers: jwtToken ? { Authorization: `Bearer ${jwtToken}` } : {},
+    });
+    return response.data.data;
+}
+
+export async function saveToAccount(tokenParam, jwtToken) {
+    const response = await sharedApi.post(`/shared/${tokenParam}/save`, {}, {
+        headers: { Authorization: `Bearer ${jwtToken}` },
+    });
+    return response.data.data;
+}
+
 export default sharedApi;

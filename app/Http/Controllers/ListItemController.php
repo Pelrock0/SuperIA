@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateItemRequest;
 use App\Http\Requests\IncrementQuantityRequest;
 use App\Http\Requests\UpdateItemRequest;
+use App\Models\ListCollaborator;
 use App\Models\ListItem;
 use App\Models\ShoppingList;
 use App\Services\ListItemService;
@@ -27,7 +28,7 @@ class ListItemController extends Controller
 
     public function store(CreateItemRequest $request, ShoppingList $list): JsonResponse
     {
-        $this->authorizeListOwnership($list);
+        $this->authorizeListWrite($list);
 
         $result = $this->service->create($list, $request->validated());
 
@@ -36,7 +37,7 @@ class ListItemController extends Controller
 
     public function update(UpdateItemRequest $request, ShoppingList $list, ListItem $item): JsonResponse
     {
-        $this->authorizeListOwnership($list);
+        $this->authorizeListWrite($list);
         $this->authorizeItemBelongsToList($item, $list);
 
         $item = $this->service->update($item, $request->validated());
@@ -60,7 +61,7 @@ class ListItemController extends Controller
 
     public function destroy(ShoppingList $list, ListItem $item): JsonResponse
     {
-        $this->authorizeListOwnership($list);
+        $this->authorizeListWrite($list);
         $this->authorizeItemBelongsToList($item, $list);
 
         $result = $this->service->delete($item);
@@ -70,7 +71,7 @@ class ListItemController extends Controller
 
     public function clearCompleted(ShoppingList $list): JsonResponse
     {
-        $this->authorizeListOwnership($list);
+        $this->authorizeListWrite($list);
 
         $result = $this->service->clearCompleted($list);
 
@@ -79,7 +80,7 @@ class ListItemController extends Controller
 
     public function incrementQuantity(IncrementQuantityRequest $request, ShoppingList $list, ListItem $item): JsonResponse
     {
-        $this->authorizeListOwnership($list);
+        $this->authorizeListWrite($list);
         $this->authorizeItemBelongsToList($item, $list);
 
         $current = (float) ($item->quantity ?? 0);
@@ -90,8 +91,39 @@ class ListItemController extends Controller
 
     private function authorizeListOwnership(ShoppingList $list): void
     {
-        if ($list->user_id !== auth('api')->id()) {
+        $userId = auth('api')->id();
+
+        if ($list->user_id === $userId) {
+            return;
+        }
+
+        $collaborator = ListCollaborator::where('user_id', $userId)
+            ->where('shopping_list_id', $list->id)
+            ->first();
+
+        if (! $collaborator) {
             abort(403, 'No tienes acceso a esta lista.');
+        }
+    }
+
+    private function authorizeListWrite(ShoppingList $list): void
+    {
+        $userId = auth('api')->id();
+
+        if ($list->user_id === $userId) {
+            return;
+        }
+
+        $collaborator = ListCollaborator::where('user_id', $userId)
+            ->where('shopping_list_id', $list->id)
+            ->first();
+
+        if (! $collaborator) {
+            abort(403, 'No tienes acceso a esta lista.');
+        }
+
+        if (! $collaborator->mode->allowsWrite()) {
+            abort(403, 'No tienes permisos de edicion en esta lista.');
         }
     }
 

@@ -4,10 +4,13 @@ import {
     addSharedItem,
     deleteSharedItem,
     fetchSharedList,
+    fetchSaveStatus,
+    saveToAccount,
     sendHeartbeat,
     toggleSharedItem,
     updateSharedItem,
 } from '../lib/sharedListApi';
+import { getToken } from '../lib/api';
 import ConsentBanner from '../components/collab/ConsentBanner';
 import RevokedLinkView from '../components/collab/RevokedLinkView';
 import AddItemInput from '../components/items/AddItemInput';
@@ -87,6 +90,7 @@ export default function SharedListPage() {
     const [editingItem, setEditingItem] = useState(null);
     const [error, setError] = useState('');
     const [inputFocused, setInputFocused] = useState(false);
+    const [saveState, setSaveState] = useState({ authenticated: false, isOwner: false, linked: false, saving: false });
     const heartbeatRef = useRef(null);
 
     const isEdit = mode === 'edit';
@@ -114,7 +118,14 @@ export default function SharedListPage() {
     useEffect(() => {
         setConsented(readSessionFlag(consentKey) === '1');
         loadList();
-    }, [loadList, consentKey]);
+        // Check save status for authenticated users
+        const jwt = getToken();
+        if (jwt) {
+            fetchSaveStatus(tokenParam, jwt)
+                .then((data) => setSaveState((prev) => ({ ...prev, ...data, authenticated: data.authenticated ?? false, isOwner: data.is_owner ?? false })))
+                .catch(() => {});
+        }
+    }, [loadList, consentKey, tokenParam]);
 
     useEffect(() => {
         if (!consented || status !== 'ready') return undefined;
@@ -160,6 +171,18 @@ export default function SharedListPage() {
     const handleConsent = () => {
         writeSessionFlag(consentKey, '1');
         setConsented(true);
+    };
+
+    const handleSaveToAccount = async () => {
+        const jwt = getToken();
+        if (!jwt) return;
+        setSaveState((prev) => ({ ...prev, saving: true }));
+        try {
+            await saveToAccount(tokenParam, jwt);
+            setSaveState((prev) => ({ ...prev, linked: true, saving: false }));
+        } catch {
+            setSaveState((prev) => ({ ...prev, saving: false }));
+        }
     };
 
     const handleAdd = async (data) => {
@@ -407,9 +430,35 @@ export default function SharedListPage() {
                         {list.emoji && <span style={{ marginRight: '8px' }}>{list.emoji}</span>}
                         {list.name}
                     </h2>
-                    <p style={{ color: '#41484c', fontWeight: 500, margin: 0 }}>
+                    <p style={{ color: '#41484c', fontWeight: 500, margin: '0 0 12px 0' }}>
                         {counters.items_completed} de {counters.items_total} items comprados
                     </p>
+                    {saveState.authenticated && !saveState.isOwner && (
+                        <button
+                            onClick={handleSaveToAccount}
+                            disabled={saveState.linked || saveState.saving}
+                            data-testid="save-to-account"
+                            style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '6px',
+                                padding: '8px 16px',
+                                borderRadius: '12px',
+                                border: 'none',
+                                cursor: saveState.linked ? 'default' : 'pointer',
+                                fontWeight: 600,
+                                fontSize: '13px',
+                                fontFamily: "'Inter', sans-serif",
+                                background: saveState.linked ? '#e6f9ee' : '#002736',
+                                color: saveState.linked ? '#005236' : '#ffffff',
+                            }}
+                        >
+                            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
+                                {saveState.linked ? 'check_circle' : 'bookmark_add'}
+                            </span>
+                            {saveState.saving ? 'Guardando...' : saveState.linked ? 'Guardada en mis listas' : 'Guardar en mis listas'}
+                        </button>
+                    )}
                 </div>
 
                 {isEdit && (

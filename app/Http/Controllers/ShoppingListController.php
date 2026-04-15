@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateListRequest;
 use App\Models\ShoppingList;
 use App\Services\ActivityLogService;
 use App\Services\CollaboratorPresenceService;
+use App\Services\ListCollaboratorService;
 use App\Services\ShoppingListService;
 use Illuminate\Http\JsonResponse;
 
@@ -16,6 +17,7 @@ class ShoppingListController extends Controller
         private ShoppingListService $service,
         private CollaboratorPresenceService $presence,
         private ActivityLogService $activityLog,
+        private ListCollaboratorService $collaboratorService,
     ) {}
 
     public function index(): JsonResponse
@@ -112,6 +114,15 @@ class ShoppingListController extends Controller
         ])->values();
 
         return response()->json(['data' => ['entries' => $entries]]);
+    }
+
+    public function collaborators(ShoppingList $list): JsonResponse
+    {
+        $this->authorizeOwnership($list);
+
+        return response()->json([
+            'data' => $this->collaboratorService->collaboratorsForList($list),
+        ]);
     }
 
     private function authorizeOwnership(ShoppingList $list): void

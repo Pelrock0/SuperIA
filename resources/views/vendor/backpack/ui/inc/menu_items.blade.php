@@ -10,4 +10,5 @@
     <x-backpack::menu-dropdown-item title="Roles" icon="la la-group" :link="backpack_url('role')" />
     <x-backpack::menu-dropdown-item title="Permisos" icon="la la-key" :link="backpack_url('permission')" />
     <x-backpack::menu-dropdown-item title="Ajustes" icon="la la-cog" :link="backpack_url('setting')" />
+    <x-backpack::menu-dropdown-item title="Telescope" icon="la la-search" :link="url('/telescope')" />
 </x-backpack::menu-dropdown>

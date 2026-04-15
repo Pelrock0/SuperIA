@@ -4,11 +4,14 @@ namespace Tests\Feature;
 
 use App\Enums\ShareTokenMode;
 use App\Models\ListCollaborator;
+use App\Models\ListCollaboratorSession;
 use App\Models\ListShareToken;
 use App\Models\ShoppingList;
 use App\Models\User;
+use App\Services\ListCollaboratorService;
 use App\Services\ShareTokenService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -342,5 +345,87 @@ class ListCollaboratorTest extends TestCase
         $this->withHeaders($this->authHeaders($collaborator))
             ->patchJson("/api/lists/{$list->id}/items/{$item->id}/increment-quantity", ['quantity' => 1])
             ->assertForbidden();
+    }
+
+    // --- AC-7: Retroactive linking ---
+
+    public function test_retroactive_linking_creates_collaborators_from_sessions(): void
+    {
+        $owner = User::factory()->create();
+        $newUser = User::factory()->create();
+        [$list, $token] = $this->createSharedList($owner);
+
+        $uuid = (string) Str::uuid();
+        ListCollaboratorSession::factory()->create([
+            'list_share_token_id' => $token->id,
+            'session_uuid' => $uuid,
+        ]);
+
+        $service = app(ListCollaboratorService::class);
+        $linked = $service->linkRetroactive($newUser, [$uuid]);
+
+        $this->assertEquals(1, $linked);
+        $this->assertDatabaseHas('list_collaborators', [
+            'user_id' => $newUser->id,
+            'shopping_list_id' => $list->id,
+            'mode' => 'edit',
+            'share_token_id' => $token->id,
+        ]);
+    }
+
+    public function test_retroactive_linking_with_empty_uuids_returns_zero(): void
+    {
+        $user = User::factory()->create();
+
+        $service = app(ListCollaboratorService::class);
+        $linked = $service->linkRetroactive($user, []);
+
+        $this->assertEquals(0, $linked);
+    }
+
+    public function test_retroactive_linking_skips_revoked_tokens(): void
+    {
+        $owner = User::factory()->create();
+        $newUser = User::factory()->create();
+        $list = ShoppingList::factory()->for($owner)->create();
+        $token = ListShareToken::factory()->revoked()->create([
+            'shopping_list_id' => $list->id,
+        ]);
+
+        $uuid = (string) Str::uuid();
+        ListCollaboratorSession::factory()->create([
+            'list_share_token_id' => $token->id,
+            'session_uuid' => $uuid,
+        ]);
+
+        $service = app(ListCollaboratorService::class);
+        $linked = $service->linkRetroactive($newUser, [$uuid]);
+
+        $this->assertEquals(0, $linked);
+        $this->assertDatabaseMissing('list_collaborators', [
+            'user_id' => $newUser->id,
+            'shopping_list_id' => $list->id,
+        ]);
+    }
+
+    public function test_retroactive_linking_skips_own_lists(): void
+    {
+        $owner = User::factory()->create();
+        [$list, $token] = $this->createSharedList($owner);
+
+        $uuid = (string) Str::uuid();
+        ListCollaboratorSession::factory()->create([
+            'list_share_token_id' => $token->id,
+            'session_uuid' => $uuid,
+        ]);
+
+        $service = app(ListCollaboratorService::class);
+        $linked = $service->linkRetroactive($owner, [$uuid]);
+
+        $this->assertEquals(0, $linked);
+        $this->assertDatabaseMissing('list_collaborators', [
+            'user_id' => $owner->id,
+            'shopping_list_id' => $list->id,
+        ]);
     }
 }

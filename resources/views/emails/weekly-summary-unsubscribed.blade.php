@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Superia — Suscripción cancelada</title>
-</head>
-<body style="font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; color: #1a1a1a; text-align: center;">
-    <h1 style="color: #1a1a1a;">Te has dado de baja</h1>
+@extends('emails.layout', ['subject' => 'Superia — Suscripcion cancelada'])
 
-    <p>{{ $userName }}, ya no recibirás el resumen semanal por email.</p>
+@section('content')
+    <div style="text-align: center;">
+        <h1 style="margin: 0 0 24px; font-size: 26px; font-weight: 800; color: #002736; letter-spacing: -0.03em;">
+            Te has dado de baja
+        </h1>
 
-    <p style="color: #666; font-size: 14px;">
-        Puedes volver a activarlo en cualquier momento desde los ajustes de tu cuenta en la app.
-    </p>
+        <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.6; color: #191c1e;">
+            {{ $userName }}, ya no recibiras el resumen semanal por email.
+        </p>
 
-    <p style="color: #999; font-size: 12px;">— El equipo de Superia</p>
-</body>
-</html>
+        <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #71787d;">
+            Puedes volver a activarlo en cualquier momento desde los ajustes de tu cuenta en la app.
+        </p>
+    </div>
+@endsection

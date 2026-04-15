@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import SuperiaLogo from '../components/SuperiaLogo';
 
@@ -18,8 +18,7 @@ export default function LoginPage() {
     const [error, setError] = useState('');
 
     if (isAuthenticated) {
-        navigate('/app', { replace: true });
-        return null;
+        return <Navigate to="/app" replace />;
     }
 
     const handleChange = (e) => {

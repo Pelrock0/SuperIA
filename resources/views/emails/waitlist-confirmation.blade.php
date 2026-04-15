@@ -1,22 +1,27 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Superia — Lista de espera</title>
-</head>
-<body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-    <h1 style="color: #1a1a1a;">¡Hola, {{ $userName }}!</h1>
+@extends('emails.layout', ['subject' => 'Superia — Lista de espera'])
 
-    <p>Gracias por apuntarte a la lista de espera de <strong>Superia</strong>.</p>
+@section('content')
+    <h1 style="margin: 0 0 24px; font-size: 26px; font-weight: 800; color: #002736; letter-spacing: -0.03em;">
+        Hola, {{ $userName }}
+    </h1>
 
-    <p>Eres aproximadamente el número <strong>{{ $position }}</strong> en la lista.</p>
-
-    <p>Te avisaremos en cuanto tengamos tu invitación lista. Mientras tanto, gracias por confiar en nosotros.</p>
-
-    <p style="margin-top: 30px; color: #666; font-size: 14px;">
-        Tus datos son tuyos. Nunca los venderemos ni los usaremos para publicidad.
+    <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.6; color: #191c1e;">
+        Gracias por apuntarte a la lista de espera de <strong>Superia</strong>.
     </p>
 
-    <p style="color: #999; font-size: 12px;">— El equipo de Superia</p>
-</body>
-</html>
+    <p style="margin: 0 0 24px; font-size: 15px; line-height: 1.6; color: #191c1e;">
+        Tu posicion en la cola es la <strong style="color: #002736; font-size: 20px;">#{{ $position }}</strong>.
+        Te avisaremos en cuanto tengamos tu invitacion lista.
+    </p>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f2f4f6; border-radius: 12px;">
+        <tr>
+            <td style="padding: 20px 24px;">
+                <p style="margin: 0; font-size: 13px; color: #41484c; line-height: 1.5;">
+                    <span style="font-weight: 700; color: #002736;">Mientras tanto...</span><br>
+                    Preparamos algo especial para ti. Gracias por confiar en nosotros.
+                </p>
+            </td>
+        </tr>
+    </table>
+@endsection

@@ -18,12 +18,12 @@ class WaitlistService
         if ($existing) {
             return [
                 'message' => 'Te has registrado en la lista de espera',
-                'position' => $this->approximatePosition($existing->position),
+                'position' => $this->pendingPosition($existing),
             ];
         }
 
         $entry = DB::transaction(function () use ($name, $email, $shoppingCompanion) {
-            $position = WaitlistEntry::count() + 1;
+            $position = WaitlistEntry::where('status', 'pending')->count() + 1;
 
             return WaitlistEntry::create([
                 'name' => $name,
@@ -34,13 +34,15 @@ class WaitlistService
             ]);
         });
 
+        $queuePosition = $this->pendingPosition($entry);
+
         Mail::to($entry->email)->queue(
-            new WaitlistConfirmationMail($entry->name, $this->approximatePosition($entry->position))
+            new WaitlistConfirmationMail($entry->name, $queuePosition)
         );
 
         return [
             'message' => 'Te has registrado en la lista de espera',
-            'position' => $this->approximatePosition($entry->position),
+            'position' => $queuePosition,
         ];
     }
 
@@ -78,9 +80,10 @@ class WaitlistService
         return $entry;
     }
 
-    private function approximatePosition(int $realPosition): int
+    private function pendingPosition(WaitlistEntry $entry): int
     {
-        $offset = random_int(-5, 5);
-        return max(1, $realPosition + $offset);
+        return WaitlistEntry::where('status', 'pending')
+            ->where('id', '<=', $entry->id)
+            ->count();
     }
 }

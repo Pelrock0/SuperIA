@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import SuperiaLogo from '../components/SuperiaLogo';
+import { isSupported as isWebauthnSupported, probeEnabled as probeWebauthnEnabled } from '../lib/webauthnApi';
 
 export default function LoginPage() {
     const navigate = useNavigate();
-    const { login, isAuthenticated } = useAuth();
+    const { login, loginWithPasskey, isAuthenticated } = useAuth();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -16,10 +17,34 @@ export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [status, setStatus] = useState('idle');
     const [error, setError] = useState('');
+    const [webauthnAvailable, setWebauthnAvailable] = useState(false);
+    const [webauthnStatus, setWebauthnStatus] = useState('idle');
+
+    useEffect(() => {
+        if (!isWebauthnSupported()) {
+            return;
+        }
+        probeWebauthnEnabled().then((enabled) => {
+            setWebauthnAvailable(enabled);
+        }).catch(() => setWebauthnAvailable(false));
+    }, []);
 
     if (isAuthenticated) {
         return <Navigate to="/app" replace />;
     }
+
+    const handleBiometricLogin = async (useEmail) => {
+        setWebauthnStatus('loading');
+        setError('');
+        try {
+            await loginWithPasskey(useEmail ? formData.email : null);
+            navigate('/app', { replace: true });
+        } catch (err) {
+            const msg = err.response?.data?.error?.message || err.message || 'Autenticacion biometrica fallida.';
+            setError(msg);
+            setWebauthnStatus('error');
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -168,6 +193,40 @@ export default function LoginPage() {
                                 {status === 'loading' ? 'Entrando...' : 'Iniciar sesión →'}
                             </button>
                         </form>
+
+                        {webauthnAvailable && (
+                            <div className="mt-6" data-testid="webauthn-section">
+                                <div className="flex items-center gap-3 my-4">
+                                    <div className="flex-1 h-px" style={{ backgroundColor: '#c1c7cd' }}></div>
+                                    <span className="text-xs" style={{ color: '#71787d' }}>o</span>
+                                    <div className="flex-1 h-px" style={{ backgroundColor: '#c1c7cd' }}></div>
+                                </div>
+                                <div className="space-y-2">
+                                    <button
+                                        type="button"
+                                        onClick={() => handleBiometricLogin(true)}
+                                        disabled={!formData.email || webauthnStatus === 'loading'}
+                                        className="w-full py-3 px-6 rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                                        style={{ border: '1px solid #002736', color: '#002736', backgroundColor: 'transparent' }}
+                                        data-testid="webauthn-login-email"
+                                    >
+                                        <span className="material-symbols-outlined" aria-hidden="true">fingerprint</span>
+                                        {webauthnStatus === 'loading' ? 'Verificando...' : 'Entrar con biometría'}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => handleBiometricLogin(false)}
+                                        disabled={webauthnStatus === 'loading'}
+                                        className="w-full py-3 px-6 rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                                        style={{ color: '#003e54', backgroundColor: 'transparent' }}
+                                        data-testid="webauthn-login-passkey"
+                                    >
+                                        <span className="material-symbols-outlined" aria-hidden="true">key</span>
+                                        Entrar con passkey
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     <div className="text-center mt-6">

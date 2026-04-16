@@ -18,9 +18,15 @@ vi.mock('react-router-dom', async () => {
 vi.mock('../context/AuthContext', () => ({
     useAuth: () => ({
         login: mockLogin,
+        loginWithPasskey: vi.fn(),
         isAuthenticated: false,
         isLoading: false,
     }),
+}));
+
+vi.mock('../lib/webauthnApi', () => ({
+    isSupported: vi.fn(() => false),
+    probeEnabled: vi.fn(() => Promise.resolve(false)),
 }));
 
 describe('LoginPage', () => {

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import api, { getToken, setToken, removeToken } from '../lib/api';
+import { authenticate as webauthnAuthenticate } from '../lib/webauthnApi';
 
 const AuthContext = createContext(null);
 
@@ -38,6 +39,12 @@ export function AuthProvider({ children }) {
         return userData;
     };
 
+    const loginWithPasskey = async (email = null) => {
+        const { user: userData } = await webauthnAuthenticate(email);
+        setUser(userData);
+        return userData;
+    };
+
     const logout = async () => {
         try {
             await api.post('/auth/logout');
@@ -54,6 +61,7 @@ export function AuthProvider({ children }) {
         isAuthenticated: !!user,
         isLoading,
         login,
+        loginWithPasskey,
         logout,
         refreshUser: fetchUser,
     };

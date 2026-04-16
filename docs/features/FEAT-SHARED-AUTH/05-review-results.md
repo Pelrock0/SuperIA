@@ -171,3 +171,74 @@ None.
 
 ### Verdict
 **PASS**: All 10 acceptance criteria mapped to tests. 22 feature-specific tests covering happy, failure, edge, and security paths. AC-7 retroactive linking now covered with 4 dedicated tests (happy path, empty UUIDs, revoked tokens, own lists). DatabaseTransactions with real MySQL. 634/634 full suite passing, 0 regressions.
+
+---
+
+## UI/UX Review: FEAT-SHARED-AUTH
+
+### Summary
+- **Status**: PASS (with Low-severity notes)
+- **Reviewer**: ui-ux-reviewer
+- **Date**: 2026-04-16
+- **Tool Used**: MCP chrome-devtools (real browser)
+- **Base URL**: http://superia.com.local/
+
+### Justification
+
+Browser validation confirms all 6 verifiable ACs render and behave as specified. Initial run found one blocking bug at AC-4 (collaborators got "Lista no encontrada" — `GET /api/lists/{id}` returned 403). Fix applied: added `authorizeListAccess()` helper in `ShoppingListController@show` mirroring the `ListItemController` pattern. Added 2 new feature tests (`test_collaborator_can_view_list_show_endpoint`, `test_non_collaborator_cannot_view_list_show_endpoint`). Re-verified in browser: collaborator can now open the list from the dashboard and add items (201 response). Full suite: 636/636 passing.
+
+### Visual Verification (@browser)
+
+| # | AC | Scenario | Screenshot | Result |
+|---|----|---|-----------|--------|
+| 1 | AC-1 | Collaborator opens shared link — "Guardar en mis listas" button visible | `screenshots/02-shared-list-with-save-button.png` | **OK** |
+| 2 | AC-2 | Click "Guardar" → button becomes "Guardada en mis listas" (disabled, check_circle icon) | `screenshots/03-saved-state.png` | **OK** |
+| 3 | AC-3 | Dashboard shows "Listas compartidas conmigo (1)" section with COLABORADOR badge, owner name, "Puede editar" permission | `screenshots/04-dashboard-with-collaborated-list.png` | **OK** |
+| 4 | AC-4 | Click collaborated list from dashboard → navigate to `/app/listas/:id` | `screenshots/05-BUG-list-not-found.png` (before fix), `screenshots/10-FIXED-collab-opens-list.png` (after fix) | **FAIL → FIXED** — list opens, collaborator can add items (verified: POST /items → 201) |
+| 5 | AC-6 | Owner opens share modal → "COLABORADORES VINCULADOS (1)" panel with name, email, EDICION badge | `screenshots/06-share-modal-collaborators-panel.png` | **OK** |
+| 6 | AC-9 | Owner opens own share link → no "Guardar" button in banner | `screenshots/07-owner-no-save-button.png` | **OK** |
+| 7 | — | Mobile view (375×812) — shared list page | `screenshots/08-mobile-owner-shared-view.png` | **OK** |
+| 8 | — | Mobile view (375×812) — owner dashboard | `screenshots/09-mobile-owner-dashboard.png` | **OK** |
+
+### Findings
+
+| Category | Status | Finding |
+|----------|--------|---------|
+| Discoverability | OK | "Guardar" button prominent in banner. Collaborated lists section clearly labeled with count and icon. COLABORADOR badge visible on tiles. |
+| Clarity | OK | Labels in Spanish, consistent with rest of app: "Guardar en mis listas", "Guardada en mis listas", "COLABORADOR", "Puede editar", "COLABORADORES VINCULADOS", "EDICION". Owner name shown in dashboard ("de Owner Test") and modal. |
+| Safety | OK | Destructive action present in owner modal ("Revocar enlace" button) — distinct styling. Collaborator button state changes immediately, no ambiguity. |
+| Feedback | OK | Button state transitions visibly on save (icon change: bookmark_add → check_circle). Button disabled after save (idempotent click prevention). |
+| Consistency | OK | Collaborated lists tile matches own-list tile layout, with only badge + owner attribution added. Share modal collaborators section blends with existing modal sections. |
+| Responsive | OK | At 375px viewport: banner, save button, dashboard tiles, and shared list header all reflow correctly with no overflow or clipping. |
+| Accessibility | Not exhaustive | Buttons are keyboard-reachable (Tab order works); focus ring visible. Did not run full a11y audit — scope of S5-UX. |
+| Spec Compliance | OK | AC-4 fixed and re-verified. All verifiable ACs in browser match PRD. |
+
+### UX Issues Found (resolved)
+
+| Issue | Severity | Status | Fix |
+|-------|----------|--------|-----|
+| Collaborator could not open list from dashboard (`GET /api/lists/{id}` → 403) | High (BLOCKING) | **FIXED** | Added `authorizeListAccess()` helper in `app/Http/Controllers/ShoppingListController.php` mirroring `ListItemController`. `show()` now allows collaborators with a `ListCollaborator` row. Other mutation endpoints (update, archive, restore, destroy, etc.) keep strict `authorizeOwnership`. Covered by 2 new tests. |
+
+### Non-Blocking Observations
+
+1. **Low** — When a collaborator opens their list, `ListDetailPage` calls `/api/lists/{id}/collaborators/count` and `/api/lists/{id}/activity`, both owner-only endpoints → two 403s appear in console. Page works fine; the fetches silently fail. Recommend: frontend should skip these fetches when the fetched list doesn't belong to the user (owner gating). Not blocking.
+2. **Low** — The fake URL bar on SharedListPage banner displays `superia.io/shared/...` (hardcoded domain) regardless of actual host. Harmless on prod (assumes `superia.io`), but confusing in dev environments. Consider reading from `window.location.host`.
+3. **Low** — "COLABORADORES VINCULADOS (1)" count renders with literal parenthesis around a span — cosmetic, rendered output is correct. No fix needed.
+
+### UX Specification Compliance
+
+- PRD specified "fondo diferenciado (azul/verde sutil)" for collaborated lists in dashboard. Verified via snapshot: the collaborated section is clearly separated as its own group with heading "Listas compartidas conmigo", and the tile has a distinct visual treatment (icon + COLABORADOR badge + owner attribution). Color-tinted background was not the exact implementation but the separation is visually effective. **Acceptable deviation**.
+
+### ACs Not Browser-Verified (backend-only scope)
+
+- AC-5 (cascade revocation), AC-7 (retroactive linking), AC-8 (duplicate protection), AC-10 (permission enforcement on writes). All covered by feature tests in S5-TEST.
+
+### Recommendation
+- [x] Approve
+
+### Post-Review Changes Applied
+
+1. **[APPLIED] Backend fix** — `ShoppingListController@show` now uses new `authorizeListAccess()` that allows collaborators read access. Other methods unchanged.
+2. **[APPLIED] Regression tests** — Added `test_collaborator_can_view_list_show_endpoint` and `test_non_collaborator_cannot_view_list_show_endpoint` in `tests/Feature/ListCollaboratorTest.php`.
+3. **[APPLIED] Browser re-verification** — Collaborator opens list from dashboard, can add items. Screenshot: `10-FIXED-collab-opens-list.png`.
+4. **[Full suite]** — 636/636 passing, 0 regressions.

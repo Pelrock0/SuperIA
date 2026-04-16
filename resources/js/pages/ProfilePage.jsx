@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../lib/api';
 import HistoryList from '../components/profile/HistoryList';
+import WebauthnCredentialsList from '../components/profile/WebauthnCredentialsList';
 import { updateWeeklySummaryEmail } from '../lib/weeklySummaryApi';
 
 /* ── Design tokens (Stitch / Material 3) ── */
@@ -461,6 +462,8 @@ export default function ProfilePage() {
                             </div>
                         )}
                     </div>
+
+                    <WebauthnCredentialsList />
                 </section>
 
                 {/* ── PRIVACIDAD Y DATOS ── */}

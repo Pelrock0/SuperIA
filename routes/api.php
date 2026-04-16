@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\WebauthnController;
 use App\Http\Controllers\ComplementController;
 use App\Http\Controllers\ListItemController;
 use App\Http\Controllers\ProductSuggestionController;
@@ -38,6 +39,14 @@ Route::prefix('auth')->group(function () {
         ->middleware('throttle:3,60');
     Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])
         ->middleware('throttle:5,60');
+
+    // WebAuthn authentication (public endpoints)
+    Route::middleware([\App\Http\Middleware\EnsureWebauthnEnabled::class])->prefix('webauthn')->group(function () {
+        Route::post('/authenticate/begin', [WebauthnController::class, 'beginAuthentication'])
+            ->middleware('throttle:20,1');
+        Route::post('/authenticate/complete', [WebauthnController::class, 'completeAuthentication'])
+            ->middleware('throttle:20,1');
+    });
 });
 
 // Auth (protected)
@@ -56,6 +65,20 @@ Route::middleware(['auth:api', \App\Http\Middleware\JwtVersionCheck::class])->gr
     Route::delete('/profile/history', [ProfileController::class, 'clearHistory']);
     Route::delete('/profile/history/{producto}', [ProfileController::class, 'forgetProduct'])
         ->where('producto', '.*');
+
+    // WebAuthn: registration + credential management (authenticated)
+    Route::middleware([\App\Http\Middleware\EnsureWebauthnEnabled::class])->group(function () {
+        Route::post('/auth/webauthn/register/begin', [WebauthnController::class, 'beginRegistration'])
+            ->middleware('throttle:20,1');
+        Route::post('/auth/webauthn/register/complete', [WebauthnController::class, 'completeRegistration'])
+            ->middleware('throttle:20,1');
+        Route::get('/profile/webauthn-credentials', [WebauthnController::class, 'listCredentials'])
+            ->middleware('throttle:60,1');
+        Route::patch('/profile/webauthn-credentials/{webauthnCredential}', [WebauthnController::class, 'updateCredential'])
+            ->middleware('throttle:20,1');
+        Route::delete('/profile/webauthn-credentials/{webauthnCredential}', [WebauthnController::class, 'deleteCredential'])
+            ->middleware('throttle:20,1');
+    });
 
     // Product suggestions (Epic 5A)
     Route::get('/suggestions', [ProductSuggestionController::class, 'index'])

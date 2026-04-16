@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateListRequest;
 use App\Http\Requests\UpdateListRequest;
+use App\Models\ListCollaborator;
 use App\Models\ShoppingList;
 use App\Services\ActivityLogService;
 use App\Services\CollaboratorPresenceService;
@@ -45,7 +46,7 @@ class ShoppingListController extends Controller
 
     public function show(ShoppingList $list): JsonResponse
     {
-        $this->authorizeOwnership($list);
+        $this->authorizeListAccess($list);
 
         return response()->json(['data' => $list]);
     }
@@ -128,6 +129,23 @@ class ShoppingListController extends Controller
     private function authorizeOwnership(ShoppingList $list): void
     {
         if ($list->user_id !== auth('api')->id()) {
+            abort(403, 'No tienes acceso a esta lista.');
+        }
+    }
+
+    private function authorizeListAccess(ShoppingList $list): void
+    {
+        $userId = auth('api')->id();
+
+        if ($list->user_id === $userId) {
+            return;
+        }
+
+        $collaborator = ListCollaborator::where('user_id', $userId)
+            ->where('shopping_list_id', $list->id)
+            ->first();
+
+        if (! $collaborator) {
             abort(403, 'No tienes acceso a esta lista.');
         }
     }

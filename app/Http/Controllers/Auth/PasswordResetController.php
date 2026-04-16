@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Models\User;
+use App\Services\WebauthnService;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Password;
 
 class PasswordResetController extends Controller
 {
+    public function __construct(
+        private readonly WebauthnService $webauthnService,
+    ) {}
+
     public function forgotPassword(ForgotPasswordRequest $request): JsonResponse
     {
         ResetPassword::createUrlUsing(function ($notifiable, string $token) {
@@ -37,6 +42,7 @@ class PasswordResetController extends Controller
                     'password' => $password,
                 ]);
                 $user->incrementJwtVersion();
+                $this->webauthnService->revokeAllForUser($user);
             }
         );
 

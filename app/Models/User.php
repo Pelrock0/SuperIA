@@ -95,4 +95,9 @@ class User extends Authenticatable implements JWTSubject
             ->withPivot('mode', 'share_token_id')
             ->withTimestamps();
     }
+
+    public function webauthnCredentials(): HasMany
+    {
+        return $this->hasMany(WebauthnCredential::class);
+    }
 }

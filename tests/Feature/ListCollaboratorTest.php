@@ -188,6 +188,35 @@ class ListCollaboratorTest extends TestCase
 
     // --- AC-4: Collaborator can access list items ---
 
+    public function test_collaborator_can_view_list_show_endpoint(): void
+    {
+        $owner = User::factory()->create();
+        $collaborator = User::factory()->create();
+        $list = ShoppingList::factory()->for($owner)->create();
+
+        ListCollaborator::create([
+            'user_id' => $collaborator->id,
+            'shopping_list_id' => $list->id,
+            'mode' => 'edit',
+        ]);
+
+        $this->withHeaders($this->authHeaders($collaborator))
+            ->getJson("/api/lists/{$list->id}")
+            ->assertOk()
+            ->assertJsonPath('data.id', $list->id);
+    }
+
+    public function test_non_collaborator_cannot_view_list_show_endpoint(): void
+    {
+        $owner = User::factory()->create();
+        $stranger = User::factory()->create();
+        $list = ShoppingList::factory()->for($owner)->create();
+
+        $this->withHeaders($this->authHeaders($stranger))
+            ->getJson("/api/lists/{$list->id}")
+            ->assertForbidden();
+    }
+
     public function test_collaborator_can_read_items(): void
     {
         $owner = User::factory()->create();

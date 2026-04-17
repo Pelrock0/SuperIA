@@ -43,6 +43,6 @@ describe('PrivacyPage', () => {
                 <PrivacyPage />
             </BrowserRouter>
         );
-        expect(screen.getByText(/Volver a Superia/)).toBeInTheDocument();
+        expect(screen.getByText(/Volver a Superlistia/)).toBeInTheDocument();
     });
 });

@@ -11,7 +11,7 @@
                             <path d="M20 10C17 10 16 8 16 8C16 8 18.5 6 20 6" stroke="#10B981" stroke-linecap="round" stroke-width="1.5"/>
                             <path d="M28 16C28 12.6863 25.3137 10 22 10H18C14.6863 10 12 12.6863 12 16C12 19.3137 14.6863 22 18 22H22C25.3137 22 28 24.6863 28 28C28 31.3137 25.3137 34 22 34H18C14.6863 34 12 31.3137 12 28" stroke="#003E54" stroke-linecap="round" stroke-width="4"/>
                         </svg>
-                        <span style="font-size:24px;font-weight:800;color:#003E54;letter-spacing:-0.02em">Superia</span>
+                        <span style="font-size:24px;font-weight:800;color:#003E54;letter-spacing:-0.02em">Superlistia</span>
                     </div>
                     <br>
                     <span style="font-size:10px;color:#10B981;text-transform:uppercase;letter-spacing:0.1em;font-weight:700">ADMIN CONSOLE</span>

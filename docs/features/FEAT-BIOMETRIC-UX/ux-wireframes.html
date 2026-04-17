@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Wireframes - FEAT-BIOMETRIC-UX</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+        .wireframe-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        h1 { font-size: 32px; color: #1a202c; margin-bottom: 8px; font-weight: 700; }
+        .feature-id { color: #718096; font-size: 14px; margin-bottom: 40px; font-weight: 500; }
+        h2 { font-size: 24px; color: #2d3748; margin: 50px 0 20px; padding-bottom: 10px; border-bottom: 2px solid #e2e8f0; font-weight: 600; }
+        .user-flow { display: flex; gap: 15px; align-items: center; margin: 30px 0; padding: 30px; background: #f7fafc; border-radius: 8px; overflow-x: auto; }
+        .flow-step { flex: 0 0 220px; padding: 24px; background: white; border: 2px solid #cbd5e0; border-radius: 8px; text-align: center; }
+        .flow-step.current { border-color: #4299e1; background: #ebf8ff; }
+        .flow-step-number { display: inline-block; width: 36px; height: 36px; background: #4299e1; color: white; border-radius: 50%; line-height: 36px; font-weight: bold; margin-bottom: 12px; font-size: 16px; }
+        .flow-step h3 { font-size: 15px; color: #2d3748; margin-bottom: 8px; font-weight: 600; }
+        .flow-step p { font-size: 13px; color: #718096; line-height: 1.5; }
+        .flow-arrow { flex: 0 0 auto; font-size: 24px; color: #a0aec0; }
+        .screen { border: 3px solid #2d3748; border-radius: 8px; margin: 30px 0; background: white; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .screen-header { background: #2d3748; color: white; padding: 12px 24px; font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .screen-size { color: #a0aec0; font-size: 11px; font-weight: 400; }
+        .app-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .logo { width: 140px; height: 45px; background: rgba(255,255,255,0.25); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 11px; letter-spacing: 1px; }
+        .nav-menu { display: flex; gap: 12px; }
+        .nav-item { padding: 10px 20px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 6px; color: white; font-size: 13px; cursor: pointer; }
+        .nav-item.active { background: rgba(255,255,255,0.4); }
+        .content { padding: 40px 30px; min-height: 400px; }
+        .page-title { font-size: 28px; color: #1a202c; margin-bottom: 8px; font-weight: 700; }
+        .page-subtitle { font-size: 15px; color: #718096; margin-bottom: 30px; }
+        .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 24px; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-label { font-size: 13px; font-weight: 600; color: #4a5568; margin-bottom: 8px; }
+        .form-label.required::after { content: " *"; color: #f56565; }
+        .form-input { height: 44px; padding: 0 16px; background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 14px; display: flex; align-items: center; color: #a0aec0; }
+        .form-input.focused { border-color: #4299e1; background: white; color: #2d3748; }
+        .form-input.error { border-color: #f56565; background: #fff5f5; }
+        .form-textarea { min-height: 120px; padding: 12px 16px; align-items: flex-start; }
+        .form-select { height: 44px; padding: 0 16px; background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 14px; display: flex; align-items: center; justify-content: space-between; color: #a0aec0; }
+        .form-select::after { content: "▼"; font-size: 10px; color: #718096; }
+        .form-error { margin-top: 6px; font-size: 12px; color: #f56565; }
+        .button-group { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+        .btn { padding: 12px 28px; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-block; }
+        .btn-primary { background: #4299e1; color: white; }
+        .btn-secondary { background: #e2e8f0; color: #4a5568; }
+        .btn-danger { background: #f56565; color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin: 30px 0; }
+        .card { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; }
+        .card-image { width: 100%; height: 180px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 6px; margin-bottom: 16px; }
+        .card-title { font-size: 18px; font-weight: 600; color: #2d3748; margin-bottom: 8px; }
+        .card-text { font-size: 14px; color: #718096; line-height: 1.6; }
+        .table-container { overflow-x: auto; margin: 30px 0; border-radius: 8px; border: 1px solid #e2e8f0; }
+        .table { width: 100%; border-collapse: collapse; background: white; }
+        .table th { background: #f7fafc; padding: 16px; text-align: left; font-size: 13px; font-weight: 600; color: #4a5568; border-bottom: 2px solid #e2e8f0; }
+        .table td { padding: 16px; border-bottom: 1px solid #f7fafc; font-size: 14px; color: #2d3748; }
+        .table tr:hover { background: #f7fafc; }
+        .annotation { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 20px 24px; margin: 30px 0; border-radius: 0 8px 8px 0; }
+        .annotation-title { font-weight: 600; color: #92400e; margin-bottom: 12px; font-size: 14px; }
+        .annotation-content { color: #92400e; font-size: 13px; line-height: 1.7; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .badge-success { background: #c6f6d5; color: #22543d; }
+        .badge-warning { background: #fef5e7; color: #744210; }
+        .badge-danger { background: #fed7d7; color: #742a2a; }
+        .states-container { display: flex; gap: 24px; margin: 30px 0; flex-wrap: wrap; }
+        .state-box { flex: 1; min-width: 200px; padding: 20px; background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 8px; }
+        .state-label { font-size: 12px; font-weight: 600; color: #718096; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+        @media (max-width: 768px) {
+            .wireframe-container { padding: 20px; }
+            .user-flow { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); }
+            .form-row { grid-template-columns: 1fr; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <h1>Wireframes - Onboarding biométrico natural</h1>
+        <div class="feature-id">Feature ID: FEAT-BIOMETRIC-UX | Created: 2026-04-17</div>
+
+        <h2>🔄 User Flow — camino feliz</h2>
+        <div class="user-flow">
+            <div class="flow-step">
+                <div class="flow-step-number">1</div>
+                <h3>LoginPage</h3>
+                <p>Usuario ve CTA "Entrar con biometría" encima del form email+password</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step current">
+                <div class="flow-step-number">2</div>
+                <h3>Login email+pass</h3>
+                <p>Primera vez: no tiene credencial, introduce email+password</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-step-number">3</div>
+                <h3>Modal post-login</h3>
+                <p>"¿Activar biometría en este dispositivo?"</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-step-number">4</div>
+                <h3>Activar ahora</h3>
+                <p>Prompt nativo del SO (Face ID/Touch ID/huella)</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-step-number">5</div>
+                <h3>Próximos logins</h3>
+                <p>Un tap en "Entrar con biometría", sin email</p>
+            </div>
+        </div>
+
+        <h2>🔄 User Flow — declinado y re-prompt</h2>
+        <div class="user-flow">
+            <div class="flow-step">
+                <div class="flow-step-number">1</div>
+                <h3>Modal</h3>
+                <p>Usuario pulsa "Ahora no"</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-step-number">2</div>
+                <h3>localStorage</h3>
+                <p>Se guarda declined_at = now</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-step-number">3</div>
+                <h3>&lt; 30 días</h3>
+                <p>No se vuelve a mostrar en logins siguientes</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step current">
+                <div class="flow-step-number">4</div>
+                <h3>Re-prompt</h3>
+                <p>Tras 30d O localStorage limpio (dispositivo nuevo) → modal vuelve</p>
+            </div>
+        </div>
+
+        <h2>📱 Screen 1: LoginPage refactorizado (desktop)</h2>
+        <div class="screen">
+            <div class="screen-header">
+                <span>Desktop View</span>
+                <span class="screen-size">1440 x 900</span>
+            </div>
+            <div style="padding: 60px 30px; background: linear-gradient(135deg, #f7f9fb 0%, #e6f2f8 50%, #f0fdf4 100%); min-height: 600px;">
+                <div style="max-width: 440px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
+                    <div style="text-align: center; margin-bottom: 24px;">
+                        <div class="logo" style="margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">SUPERIA</div>
+                    </div>
+                    <div class="page-title" style="text-align: center; font-size: 22px;">Bienvenido</div>
+                    <div class="page-subtitle" style="text-align: center; margin-bottom: 24px;">Entra en tu cuenta</div>
+
+                    <button class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <span style="font-size: 20px;">👆</span> Entrar con biometría
+                    </button>
+
+                    <div style="display: flex; align-items: center; gap: 12px; margin: 24px 0;">
+                        <div style="flex: 1; height: 1px; background: #e2e8f0;"></div>
+                        <div style="font-size: 12px; color: #a0aec0; font-weight: 500;">O CON EMAIL</div>
+                        <div style="flex: 1; height: 1px; background: #e2e8f0;"></div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label class="form-label">Email</label>
+                        <div class="form-input">tu@email.com</div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label class="form-label">Contraseña</label>
+                        <div class="form-input">••••••••</div>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%; padding: 14px;">Entrar</button>
+
+                    <div style="text-align: center; margin-top: 20px; font-size: 13px; color: #718096;">
+                        ¿Olvidaste tu contraseña? · ¿No tienes cuenta?
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="annotation">
+            <div class="annotation-title">💡 Decisión de diseño — jerarquía invertida</div>
+            <div class="annotation-content">
+                Antes: dos botones biométricos confusos debajo del form (LoginPage.jsx:208 y :219).
+                Ahora: un único CTA primario "Entrar con biometría" (passkey discovery, sin email) encima del formulario tradicional, con separador "O CON EMAIL".
+                Visible sólo si <code>isWebauthnSupported()</code> = true.
+                En navegadores sin soporte, el formulario email+password aparece directamente (sin el CTA ni el separador).
+            </div>
+        </div>
+
+        <h2>📱 Screen 2: BiometricOptInModal (desktop)</h2>
+        <div class="screen">
+            <div class="screen-header">
+                <span>Desktop View — Modal sobre Dashboard</span>
+                <span class="screen-size">1440 x 900</span>
+            </div>
+            <div class="app-header">
+                <div class="logo">SUPERIA</div>
+                <div class="nav-menu">
+                    <div class="nav-item active">Mis listas</div>
+                    <div class="nav-item">Generar con IA</div>
+                    <div class="nav-item">Ajustes</div>
+                </div>
+            </div>
+            <div style="position: relative; min-height: 500px; background: rgba(45,55,72,0.6); padding: 80px 30px; display: flex; align-items: center; justify-content: center;">
+                <div style="background: white; border-radius: 12px; padding: 40px; max-width: 480px; width: 100%; box-shadow: 0 25px 50px rgba(0,0,0,0.25); position: relative;">
+                    <div style="position: absolute; top: 16px; right: 16px; width: 28px; height: 28px; border-radius: 50%; background: #f7fafc; display: flex; align-items: center; justify-content: center; color: #718096; font-size: 16px; cursor: pointer;">✕</div>
+
+                    <div style="font-size: 48px; text-align: center; margin-bottom: 16px;">🔐</div>
+                    <div style="font-size: 22px; font-weight: 700; color: #1a202c; text-align: center; margin-bottom: 12px; line-height: 1.3;">
+                        ¿Activar biometría en este dispositivo?
+                    </div>
+                    <div style="font-size: 15px; color: #4a5568; text-align: center; margin-bottom: 28px; line-height: 1.5;">
+                        Entra más rápido la próxima vez con Face ID, Touch ID o huella. Sólo funciona con tu propio dispositivo.
+                    </div>
+
+                    <div style="display: flex; gap: 12px; flex-direction: column;">
+                        <button class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            Activar ahora
+                        </button>
+                        <button class="btn btn-secondary" style="width: 100%; padding: 14px; font-size: 14px;">
+                            Ahora no
+                        </button>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 16px; font-size: 12px; color: #a0aec0;">
+                        Podrás activarla más tarde desde Ajustes → Seguridad
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="annotation">
+            <div class="annotation-title">💡 Decisión de diseño — modal no bloqueante y dismissible</div>
+            <div class="annotation-content">
+                El modal se puede cerrar con X / ESC / click fuera / botón "Ahora no" — todos equivalentes semánticamente a declinar.
+                Nota al pie recuerda la alternativa manual (ajustes), para que el usuario no sienta que pierde la oportunidad.
+                CTA primario con gradiente corporativo (mismo gradiente que LoginPage).
+                Icono 🔐 genérico — NO logos de marcas (Apple/Microsoft) para evitar restricciones de uso de marca.
+            </div>
+        </div>
+
+        <h2>📱 Screen 3: Modal en móvil</h2>
+        <div class="screen" style="max-width: 420px;">
+            <div class="screen-header">
+                <span>Mobile View</span>
+                <span class="screen-size">375 x 812</span>
+            </div>
+            <div style="position: relative; min-height: 650px; background: rgba(45,55,72,0.6); display: flex; align-items: flex-end;">
+                <div style="background: white; border-radius: 16px 16px 0 0; padding: 28px 24px 32px; width: 100%; box-shadow: 0 -10px 40px rgba(0,0,0,0.2);">
+                    <div style="width: 40px; height: 4px; background: #cbd5e0; border-radius: 2px; margin: 0 auto 24px;"></div>
+
+                    <div style="font-size: 40px; text-align: center; margin-bottom: 12px;">🔐</div>
+                    <div style="font-size: 18px; font-weight: 700; color: #1a202c; text-align: center; margin-bottom: 10px; line-height: 1.3;">
+                        ¿Activar biometría?
+                    </div>
+                    <div style="font-size: 14px; color: #4a5568; text-align: center; margin-bottom: 24px; line-height: 1.5;">
+                        Entra más rápido con Face ID, Touch ID o huella.
+                    </div>
+
+                    <button class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-bottom: 10px;">
+                        Activar ahora
+                    </button>
+                    <button class="btn btn-secondary" style="width: 100%; padding: 14px; font-size: 14px;">
+                        Ahora no
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="annotation">
+            <div class="annotation-title">📱 Responsive — bottom sheet en móvil</div>
+            <div class="annotation-content">
+                En viewport &lt; 640px el modal se convierte en bottom-sheet (anclado abajo, bordes redondeados sólo arriba, "drag handle" visual).
+                Patrón nativo iOS/Android → sensación familiar para el usuario justo antes del prompt biométrico del SO.
+            </div>
+        </div>
+
+        <h2>🎯 Component States — BiometricOptInModal</h2>
+        <div class="states-container">
+            <div class="state-box">
+                <div class="state-label">Idle (default)</div>
+                <div style="background: white; padding: 14px; border-radius: 8px; font-size: 12px;">
+                    Botones activos. Sin mensaje de error.
+                </div>
+            </div>
+            <div class="state-box">
+                <div class="state-label">Loading (tras "Activar")</div>
+                <div style="background: white; padding: 14px; border-radius: 8px; font-size: 12px;">
+                    Botón "Activar" muestra spinner + texto "Verificando…". Botón "Ahora no" deshabilitado.
+                </div>
+            </div>
+            <div class="state-box">
+                <div class="state-label">Error (fallo WebAuthn)</div>
+                <div style="background: #fff5f5; padding: 14px; border-radius: 8px; font-size: 12px; color: #742a2a;">
+                    Mensaje inline: "No se pudo activar la biometría. Inténtalo de nuevo." Botones vuelven a estado idle.
+                </div>
+            </div>
+            <div class="state-box">
+                <div class="state-label">Success</div>
+                <div style="background: #c6f6d5; padding: 14px; border-radius: 8px; font-size: 12px; color: #22543d;">
+                    Modal se cierra. Toast breve: "Biometría activada" (3 seg).
+                </div>
+            </div>
+        </div>
+
+        <h2>🎯 Component States — LoginPage CTA biométrico</h2>
+        <div class="states-container">
+            <div class="state-box">
+                <div class="state-label">Soporte WebAuthn</div>
+                <button class="btn btn-primary" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">👆 Entrar con biometría</button>
+            </div>
+            <div class="state-box">
+                <div class="state-label">Verificando</div>
+                <button class="btn btn-primary" disabled style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">⏳ Verificando...</button>
+            </div>
+            <div class="state-box">
+                <div class="state-label">Sin soporte / flag off</div>
+                <div style="background: white; padding: 14px; border-radius: 8px; font-size: 12px; color: #718096;">
+                    CTA no renderizado. Form email+password directo.
+                </div>
+            </div>
+            <div class="state-box">
+                <div class="state-label">Error de autenticación</div>
+                <div style="background: #fff5f5; padding: 14px; border-radius: 8px; font-size: 12px; color: #742a2a;">
+                    "Autenticación biométrica fallida." CTA activo de nuevo.
+                </div>
+            </div>
+        </div>
+
+        <h2>🔀 Alternativas consideradas</h2>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Opción</th>
+                        <th>Pros</th>
+                        <th>Contras</th>
+                        <th>Decisión</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Modal post-login tras primera sesión</td>
+                        <td>Momento receptivo; descubrimiento natural</td>
+                        <td>Puede sentirse invasivo</td>
+                        <td><span class="badge badge-success">Seleccionado</span></td>
+                    </tr>
+                    <tr>
+                        <td>Banner persistente en dashboard</td>
+                        <td>No interrumpe; siempre visible</td>
+                        <td>Se ignora; noise en dashboard</td>
+                        <td><span class="badge badge-danger">Rechazado</span></td>
+                    </tr>
+                    <tr>
+                        <td>Prompt en registro inmediato</td>
+                        <td>Máxima adopción</td>
+                        <td>Vincula credencial a cuenta sin email verificado — riesgo seguridad</td>
+                        <td><span class="badge badge-danger">Rechazado</span></td>
+                    </tr>
+                    <tr>
+                        <td>Email de invitación post-registro</td>
+                        <td>No fricción en sesión activa</td>
+                        <td>Baja tasa de click; requiere link handling</td>
+                        <td><span class="badge badge-danger">Rechazado</span></td>
+                    </tr>
+                    <tr>
+                        <td>Tooltip/onboarding tour</td>
+                        <td>Educativo</td>
+                        <td>Complejidad implementación; usuarios saltan tours</td>
+                        <td><span class="badge badge-danger">Rechazado</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>⚠️ UX Risks</h2>
+        <div class="annotation">
+            <div class="annotation-title">Riesgos identificados</div>
+            <div class="annotation-content">
+                • <strong>Dispositivo compartido</strong>: familiar podría aceptar por error. Mitigado: el prompt nativo del SO exige biometría del titular real; copy refuerza "tu propio dispositivo".<br>
+                • <strong>Modal percibido como spam</strong>: cooldown de 30 días + botón "Ahora no" visible mitigan fatiga.<br>
+                • <strong>Confusión entre "Activar" y "Entrar"</strong>: distinguir copy — activar = configurar; entrar = autenticar.<br>
+                • <strong>Usuarios que limpian cookies</strong>: perderán el cooldown y verán el modal de nuevo. Aceptado por diseño (consecuencia de decisión per-dispositivo).<br>
+                • <strong>Fallo del prompt del SO</strong>: si el usuario cancela, el mensaje de error debe ser neutro (no dar detalles técnicos) y permitir reintento sin cerrar el modal.
+            </div>
+        </div>
+
+        <h2>❓ Open Questions</h2>
+        <div class="annotation">
+            <div class="annotation-title">Ninguna</div>
+            <div class="annotation-content">
+                Todas las decisiones UX quedaron cerradas en S1 (ver 01-scope.md — Resolved Decisions).
+                Ajustes finos de copy y microinteracciones se revisarán en S5-UX.
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

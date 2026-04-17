@@ -21,7 +21,7 @@ class WaitlistConfirmationMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Superia — Estás en la lista de espera',
+            subject: 'Superlistia — Estás en la lista de espera',
         );
     }
 

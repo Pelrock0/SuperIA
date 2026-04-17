@@ -19,7 +19,7 @@ return [
     */
     'rp' => [
         'id' => env('WEBAUTHN_RP_ID', 'superia.com.local'),
-        'name' => env('WEBAUTHN_RP_NAME', 'Superia'),
+        'name' => env('WEBAUTHN_RP_NAME', 'Superlistia'),
     ],
 
     /*

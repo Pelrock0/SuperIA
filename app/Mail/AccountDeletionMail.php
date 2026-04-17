@@ -20,7 +20,7 @@ class AccountDeletionMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Superia — Tu cuenta ha sido eliminada',
+            subject: 'Superlistia — Tu cuenta ha sido eliminada',
         );
     }
 

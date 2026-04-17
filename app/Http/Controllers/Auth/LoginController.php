@@ -39,6 +39,7 @@ class LoginController extends Controller
                     'id' => $result['user']->id,
                     'name' => $result['user']->name,
                     'email' => $result['user']->email,
+                    'email_verified_at' => $result['user']->email_verified_at,
                 ],
                 'token' => $result['token'],
             ],

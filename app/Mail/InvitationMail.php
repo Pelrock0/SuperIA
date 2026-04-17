@@ -23,7 +23,7 @@ class InvitationMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Superia — Tu invitación está lista',
+            subject: 'Superlistia — Tu invitación está lista',
         );
     }
 

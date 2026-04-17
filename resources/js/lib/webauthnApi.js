@@ -202,3 +202,61 @@ export async function renameCredential(id, name) {
 export async function deleteCredential(id) {
     await api.delete(`/profile/webauthn-credentials/${id}`);
 }
+
+// --- Device prompt state (localStorage) ---
+
+export const DEVICE_REGISTERED_KEY = 'webauthn_device_registered';
+export const DEVICE_REGISTERED_AT_KEY = 'webauthn_device_registered_at';
+export const PROMPT_DECLINED_AT_KEY = 'biometric_prompt_declined_at';
+
+function safeStorage() {
+    try {
+        return typeof window !== 'undefined' ? window.localStorage : null;
+    } catch {
+        return null;
+    }
+}
+
+export function markDeviceRegistered() {
+    const store = safeStorage();
+    if (!store) return;
+    try {
+        store.setItem(DEVICE_REGISTERED_KEY, '1');
+        store.setItem(DEVICE_REGISTERED_AT_KEY, new Date().toISOString());
+    } catch {
+        // storage full or disabled; silent fail
+    }
+}
+
+export function markPromptDeclined() {
+    const store = safeStorage();
+    if (!store) return;
+    try {
+        store.setItem(PROMPT_DECLINED_AT_KEY, new Date().toISOString());
+    } catch {
+        // silent
+    }
+}
+
+export function hasDeviceMarker() {
+    const store = safeStorage();
+    if (!store) return false;
+    try {
+        return store.getItem(DEVICE_REGISTERED_KEY) === '1';
+    } catch {
+        return false;
+    }
+}
+
+export function getDeclinedAt() {
+    const store = safeStorage();
+    if (!store) return null;
+    try {
+        const value = store.getItem(PROMPT_DECLINED_AT_KEY);
+        if (!value) return null;
+        const parsed = new Date(value);
+        return Number.isNaN(parsed.getTime()) ? null : parsed;
+    } catch {
+        return null;
+    }
+}

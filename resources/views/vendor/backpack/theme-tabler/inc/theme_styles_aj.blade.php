@@ -4,7 +4,7 @@
 --}}
 <script>
 document.documentElement.setAttribute("data-bs-theme", "light");
-/* Force sidebar to dark theme for Superia teal design */
+/* Force sidebar to dark theme for Superlistia teal design */
 document.addEventListener("DOMContentLoaded", function() {
     var aside = document.querySelector("aside.navbar");
     if (aside) aside.setAttribute("data-menu-theme", "dark");

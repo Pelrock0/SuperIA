@@ -34,10 +34,26 @@ vi.mock('../lib/api', () => ({
 vi.mock('../components/dashboard/ReplenishmentBanner', () => ({ default: () => null }));
 vi.mock('../components/dashboard/WeeklySummaryBanner', () => ({ default: () => null }));
 
+vi.mock('../hooks/useBiometricPromptDecision', () => ({
+    useBiometricPromptDecision: vi.fn(() => false),
+}));
+
+vi.mock('../components/auth/BiometricOptInModal', () => ({
+    default: ({ onClose }) => (
+        <div data-testid="mock-biometric-modal">
+            <button type="button" data-testid="mock-biometric-close" onClick={onClose}>close</button>
+        </div>
+    ),
+}));
+
 import api from '../lib/api';
+import { useBiometricPromptDecision } from '../hooks/useBiometricPromptDecision';
 
 describe('DashboardPage', () => {
-    beforeEach(() => vi.clearAllMocks());
+    beforeEach(() => {
+        vi.clearAllMocks();
+        useBiometricPromptDecision.mockReturnValue(false);
+    });
 
     function renderPage() {
         return render(<MemoryRouter><DashboardPage /></MemoryRouter>);
@@ -119,6 +135,33 @@ describe('DashboardPage', () => {
         renderPage();
         await waitFor(() => {
             expect(screen.getByText('COMPARTIDA')).toBeInTheDocument();
+        });
+    });
+
+    describe('biometric opt-in modal', () => {
+        it('does not render modal when hook returns false', async () => {
+            useBiometricPromptDecision.mockReturnValue(false);
+            api.get.mockResolvedValueOnce({ data: { data: { active: [], archived: [] } } });
+            renderPage();
+            await waitFor(() => expect(screen.getByText('Sin listas todavia')).toBeInTheDocument());
+            expect(screen.queryByTestId('mock-biometric-modal')).not.toBeInTheDocument();
+        });
+
+        it('renders modal when hook returns true', async () => {
+            useBiometricPromptDecision.mockReturnValue(true);
+            api.get.mockResolvedValueOnce({ data: { data: { active: [], archived: [] } } });
+            renderPage();
+            await waitFor(() => expect(screen.getByTestId('mock-biometric-modal')).toBeInTheDocument());
+        });
+
+        it('hides modal after dismiss for the rest of the session', async () => {
+            useBiometricPromptDecision.mockReturnValue(true);
+            api.get.mockResolvedValueOnce({ data: { data: { active: [], archived: [] } } });
+            renderPage();
+            const modal = await screen.findByTestId('mock-biometric-modal');
+            expect(modal).toBeInTheDocument();
+            await userEvent.click(screen.getByTestId('mock-biometric-close'));
+            expect(screen.queryByTestId('mock-biometric-modal')).not.toBeInTheDocument();
         });
     });
 });

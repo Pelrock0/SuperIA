@@ -54,7 +54,7 @@ class UserCrudController extends PermissionManagerUserCrudController
             'label' => 'Cuenta activa',
             'type' => 'checkbox',
             'hint' => 'Si se desactiva, el usuario no puede iniciar sesión.',
-            'tab' => 'Superia',
+            'tab' => 'Superlistia',
         ]);
         CRUD::addField([
             'name' => 'plan',
@@ -64,14 +64,14 @@ class UserCrudController extends PermissionManagerUserCrudController
             'allows_null' => false,
             'default' => 'free',
             'hint' => 'Define el límite diario de operaciones IA compartidas.',
-            'tab' => 'Superia',
+            'tab' => 'Superlistia',
         ]);
         CRUD::addField([
             'name' => 'ai_daily_limit_override',
             'label' => 'Límite IA diario (override)',
             'type' => 'number',
             'hint' => 'Vacio = usa el limite del plan. Si se pone un número, sobreescribe el plan para este usuario.',
-            'tab' => 'Superia',
+            'tab' => 'Superlistia',
         ]);
     }
 }

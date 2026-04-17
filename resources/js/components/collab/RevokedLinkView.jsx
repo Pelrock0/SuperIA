@@ -17,7 +17,7 @@ export default function RevokedLinkView() {
                     to="/"
                     className="inline-block bg-indigo-600 text-white py-2 px-5 rounded-lg font-medium hover:bg-indigo-700"
                 >
-                    Ir a Superia
+                    Ir a Superlistia
                 </Link>
             </div>
         </div>

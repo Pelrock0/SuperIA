@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../lib/api';
-import SuperiaLogo from '../components/SuperiaLogo';
+import SuperlistiaLogo from '../components/SuperlistiaLogo';
 
 export default function ForgotPasswordPage() {
     const [email, setEmail] = useState('');
@@ -32,7 +32,7 @@ export default function ForgotPasswordPage() {
         >
             <div className="flex justify-center pt-8 mb-8">
                 <Link to="/">
-                    <SuperiaLogo size="lg" />
+                    <SuperlistiaLogo size="lg" />
                 </Link>
             </div>
 

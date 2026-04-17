@@ -24,8 +24,24 @@ class LoginTest extends TestCase
         ]);
 
         $response->assertOk()
-            ->assertJsonStructure(['data' => ['user', 'token']])
+            ->assertJsonStructure(['data' => ['user' => ['id', 'name', 'email', 'email_verified_at'], 'token']])
             ->assertJsonPath('data.user.email', $user->email);
+    }
+
+    public function test_login_response_includes_email_verified_at_for_verified_users(): void
+    {
+        $user = User::factory()->createOne([
+            'password' => 'Password1',
+            'email_verified_at' => now(),
+        ]);
+
+        $response = $this->postJson('/api/auth/login', [
+            'email' => $user->email,
+            'password' => 'Password1',
+        ]);
+
+        $response->assertOk();
+        $this->assertNotNull($response->json('data.user.email_verified_at'));
     }
 
     public function test_login_clears_failed_attempts_on_success(): void

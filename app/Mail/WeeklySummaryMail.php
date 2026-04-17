@@ -24,7 +24,7 @@ class WeeklySummaryMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Superia — Tu resumen semanal',
+            subject: 'Superlistia — Tu resumen semanal',
         );
     }
 

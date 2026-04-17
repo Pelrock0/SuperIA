@@ -11,7 +11,7 @@ describe('ConsentBanner', () => {
 
     it('falls back to default text when owner name missing', () => {
         render(<ConsentBanner ownerName={null} onAccept={vi.fn()} />);
-        expect(screen.getByText(/lista compartida por un usuario de superia/i)).toBeInTheDocument();
+        expect(screen.getByText(/lista compartida por un usuario de superlistia/i)).toBeInTheDocument();
     });
 
     it('renders retention disclosure', () => {

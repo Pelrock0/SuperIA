@@ -10,6 +10,13 @@ import {
     listCredentials,
     renameCredential,
     deleteCredential,
+    markDeviceRegistered,
+    markPromptDeclined,
+    hasDeviceMarker,
+    getDeclinedAt,
+    DEVICE_REGISTERED_KEY,
+    DEVICE_REGISTERED_AT_KEY,
+    PROMPT_DECLINED_AT_KEY,
 } from './webauthnApi';
 import api from './api';
 
@@ -134,6 +141,68 @@ describe('webauthnApi', () => {
             });
 
             await expect(registerCredential('MyDevice')).rejects.toThrow(/cancelado/i);
+        });
+    });
+
+    describe('device prompt state', () => {
+        beforeEach(() => {
+            window.localStorage.clear();
+        });
+
+        it('markDeviceRegistered writes both keys', () => {
+            markDeviceRegistered();
+            expect(window.localStorage.getItem(DEVICE_REGISTERED_KEY)).toBe('1');
+            expect(window.localStorage.getItem(DEVICE_REGISTERED_AT_KEY)).toMatch(/\d{4}-\d{2}-\d{2}T/);
+        });
+
+        it('hasDeviceMarker returns true after marker written', () => {
+            expect(hasDeviceMarker()).toBe(false);
+            markDeviceRegistered();
+            expect(hasDeviceMarker()).toBe(true);
+        });
+
+        it('hasDeviceMarker returns false when key missing or other value', () => {
+            expect(hasDeviceMarker()).toBe(false);
+            window.localStorage.setItem(DEVICE_REGISTERED_KEY, '0');
+            expect(hasDeviceMarker()).toBe(false);
+        });
+
+        it('markPromptDeclined writes ISO timestamp', () => {
+            markPromptDeclined();
+            const raw = window.localStorage.getItem(PROMPT_DECLINED_AT_KEY);
+            expect(raw).toMatch(/\d{4}-\d{2}-\d{2}T/);
+        });
+
+        it('getDeclinedAt returns null when key missing', () => {
+            expect(getDeclinedAt()).toBeNull();
+        });
+
+        it('getDeclinedAt returns Date object when stored', () => {
+            markPromptDeclined();
+            const result = getDeclinedAt();
+            expect(result).toBeInstanceOf(Date);
+            expect(Number.isNaN(result.getTime())).toBe(false);
+        });
+
+        it('getDeclinedAt returns null for invalid stored value', () => {
+            window.localStorage.setItem(PROMPT_DECLINED_AT_KEY, 'not-a-date');
+            expect(getDeclinedAt()).toBeNull();
+        });
+
+        it('storage helpers are safe when setItem throws', () => {
+            const originalSetItem = window.localStorage.setItem;
+            window.localStorage.setItem = () => { throw new Error('quota'); };
+            expect(() => markDeviceRegistered()).not.toThrow();
+            expect(() => markPromptDeclined()).not.toThrow();
+            window.localStorage.setItem = originalSetItem;
+        });
+
+        it('storage helpers are safe when getItem throws', () => {
+            const originalGetItem = window.localStorage.getItem;
+            window.localStorage.getItem = () => { throw new Error('blocked'); };
+            expect(hasDeviceMarker()).toBe(false);
+            expect(getDeclinedAt()).toBeNull();
+            window.localStorage.getItem = originalGetItem;
         });
     });
 

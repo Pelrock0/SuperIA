@@ -7,7 +7,7 @@ export default function PrivacyPage() {
             <header className="bg-gray-50 py-6 px-4 border-b">
                 <div className="max-w-3xl mx-auto">
                     <Link to="/" className="text-indigo-600 hover:text-indigo-800 font-medium">
-                        ← Volver a Superia
+                        ← Volver a Superlistia
                     </Link>
                 </div>
             </header>
@@ -55,7 +55,7 @@ export default function PrivacyPage() {
 
                 <h2>6. Cookies y tracking</h2>
                 <p>
-                    Superia <strong>no utiliza cookies de tracking, analytics de terceros ni píxeles
+                    Superlistia <strong>no utiliza cookies de tracking, analytics de terceros ni píxeles
                     de seguimiento</strong>. Solo usamos cookies técnicas estrictamente necesarias
                     para el funcionamiento de la sesión.
                 </p>
@@ -72,19 +72,19 @@ export default function PrivacyPage() {
                 </ul>
                 <p>
                     Para ejercer cualquiera de estos derechos, contacta con nosotros en
-                    <strong> privacidad@superia.app</strong>.
+                    <strong> privacidad@superlistia.com</strong>.
                 </p>
 
                 <h2>8. Contacto</h2>
                 <p>
                     Responsable del tratamiento: TX APPS<br />
-                    Email: privacidad@superia.app
+                    Email: privacidad@superlistia.com
                 </p>
             </main>
 
             <footer className="py-8 px-4 bg-gray-900 text-gray-400 text-sm">
                 <div className="max-w-3xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <p>© {new Date().getFullYear()} Superia. Todos los derechos reservados.</p>
+                    <p>© {new Date().getFullYear()} Superlistia. Todos los derechos reservados.</p>
                     <div className="flex gap-6">
                         <Link to="/privacy" className="hover:text-white transition-colors">
                             Política de privacidad

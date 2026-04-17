@@ -145,7 +145,7 @@ export default function AIGeneratePage() {
                         arrow_back
                     </span>
                     <h1 style={{ fontSize: '20px', fontWeight: 700, letterSpacing: '-0.025em', color: '#002736', margin: 0 }}>
-                        Superia
+                        Superlistia
                     </h1>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#10b981' }}>

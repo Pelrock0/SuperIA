@@ -80,9 +80,9 @@ export default function ShareListModal({ listId, onClose }) {
     };
 
     const shareUrl = activeToken?.url || '';
-    const shareText = `Te comparto mi lista de compra en Superia: ${shareUrl}`;
+    const shareText = `Te comparto mi lista de compra en Superlistia: ${shareUrl}`;
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
-    const emailUrl = `mailto:?subject=${encodeURIComponent('Lista compartida - Superia')}&body=${encodeURIComponent(shareText)}`;
+    const emailUrl = `mailto:?subject=${encodeURIComponent('Lista compartida - Superlistia')}&body=${encodeURIComponent(shareText)}`;
 
     return (
         <>

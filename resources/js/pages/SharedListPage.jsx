@@ -265,7 +265,7 @@ export default function SharedListPage() {
                 <div style={{ textAlign: 'center' }}>
                     <p style={{ color: '#41484c', marginBottom: '16px' }}>{error || 'No se pudo cargar la lista.'}</p>
                     <Link to="/" style={{ color: '#00677d', fontWeight: 700, textDecoration: 'none' }}>
-                        Ir a Superia
+                        Ir a Superlistia
                     </Link>
                 </div>
             </div>
@@ -341,7 +341,7 @@ export default function SharedListPage() {
                                 margin: 0,
                             }}
                         >
-                            Superia
+                            Superlistia
                         </h1>
                     </div>
                     <span className="material-symbols-outlined" style={{ color: '#002736' }}>account_circle</span>
@@ -692,7 +692,7 @@ export default function SharedListPage() {
                             fontFamily: "'Inter', sans-serif",
                         }}
                     >
-                        Empezar con Superia
+                        Empezar con Superlistia
                         <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_forward</span>
                     </Link>
                 </div>

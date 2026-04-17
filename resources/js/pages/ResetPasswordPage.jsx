@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import api from '../lib/api';
-import SuperiaLogo from '../components/SuperiaLogo';
+import SuperlistiaLogo from '../components/SuperlistiaLogo';
 
 export default function ResetPasswordPage() {
     const [searchParams] = useSearchParams();
@@ -26,7 +26,7 @@ export default function ResetPasswordPage() {
             >
                 <div className="flex justify-center pt-8 mb-8">
                     <Link to="/">
-                        <SuperiaLogo size="lg" />
+                        <SuperlistiaLogo size="lg" />
                     </Link>
                 </div>
                 <div className="flex-1 flex items-start justify-center px-4">
@@ -94,7 +94,7 @@ export default function ResetPasswordPage() {
             >
                 <div className="flex justify-center pt-8 mb-8">
                     <Link to="/">
-                        <SuperiaLogo size="lg" />
+                        <SuperlistiaLogo size="lg" />
                     </Link>
                 </div>
                 <div className="flex-1 flex items-start justify-center px-4">
@@ -154,7 +154,7 @@ export default function ResetPasswordPage() {
         >
             <div className="flex justify-center pt-8 mb-8">
                 <Link to="/">
-                    <SuperiaLogo size="lg" />
+                    <SuperlistiaLogo size="lg" />
                 </Link>
             </div>
 

@@ -11,7 +11,7 @@ export default function ConsentBanner({ ownerName, onAccept }) {
         >
             <div className="bg-white rounded-t-2xl sm:rounded-2xl shadow-xl max-w-md w-full p-6">
                 <h2 id="consent-title" className="text-lg font-bold text-gray-900 mb-2">
-                    Lista compartida por {ownerName || 'un usuario de Superia'}
+                    Lista compartida por {ownerName || 'un usuario de Superlistia'}
                 </h2>
                 <p className="text-sm text-gray-600 mb-4">
                     Al usar esta lista aceptas que registramos tu actividad durante 30 dias solo como proposito

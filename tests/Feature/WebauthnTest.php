@@ -20,7 +20,7 @@ class WebauthnTest extends TestCase
         parent::setUp();
         config()->set('webauthn.enabled', true);
         config()->set('webauthn.rp.id', 'superia.com.local');
-        config()->set('webauthn.rp.name', 'Superia');
+        config()->set('webauthn.rp.name', 'Superlistia');
         config()->set('webauthn.origins', ['http://superia.com.local']);
     }
 

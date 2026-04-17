@@ -6,7 +6,7 @@ import EmptyState from './EmptyState';
 describe('EmptyState', () => {
     it('renders welcome message and CTA', () => {
         render(<EmptyState onCreateClick={vi.fn()} />);
-        expect(screen.getByText(/bienvenido a superia/i)).toBeInTheDocument();
+        expect(screen.getByText(/bienvenido a superlistia/i)).toBeInTheDocument();
         expect(screen.getByRole('button', { name: /crear mi primera lista/i })).toBeInTheDocument();
     });
 

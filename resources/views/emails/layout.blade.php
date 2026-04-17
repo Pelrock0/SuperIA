@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light">
     <meta name="supported-color-schemes" content="light">
-    <title>{{ $subject ?? 'Superia' }}</title>
+    <title>{{ $subject ?? 'Superlistia' }}</title>
     <!--[if mso]>
     <noscript>
         <xml>
@@ -44,7 +44,7 @@
                                         <!--<![endif]-->
                                     </td>
                                     <td style="vertical-align: middle; padding-left: 12px;">
-                                        <span style="font-size: 22px; font-weight: 700; color: #002736; letter-spacing: -0.03em;">Superia</span>
+                                        <span style="font-size: 22px; font-weight: 700; color: #002736; letter-spacing: -0.03em;">Superlistia</span>
                                     </td>
                                 </tr>
                             </table>
@@ -78,7 +78,7 @@
                                 @yield('footer-extra')
                             @endif
                             <p style="margin: 12px 0 0; font-size: 11px; color: #a3a9ae;">
-                                &copy; {{ date('Y') }} Superia &middot; La compra, mas inteligente
+                                &copy; {{ date('Y') }} Superlistia &middot; La compra, mas inteligente
                             </p>
                         </td>
                     </tr>

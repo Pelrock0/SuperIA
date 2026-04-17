@@ -20,7 +20,7 @@ class BudgetCapExceededAlert extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Superia AI — Budget cap exceeded',
+            subject: 'Superlistia AI — Budget cap exceeded',
         );
     }
 

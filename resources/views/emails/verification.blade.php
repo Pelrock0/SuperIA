@@ -1,4 +1,4 @@
-@extends('emails.layout', ['subject' => 'Superia — Verifica tu email'])
+@extends('emails.layout', ['subject' => 'Superlistia — Verifica tu email'])
 
 @section('content')
     <h1 style="margin: 0 0 24px; font-size: 26px; font-weight: 800; color: #002736; letter-spacing: -0.03em;">
@@ -6,7 +6,7 @@
     </h1>
 
     <p style="margin: 0 0 24px; font-size: 15px; line-height: 1.6; color: #191c1e;">
-        Gracias por registrarte en <strong>Superia</strong>. Solo queda un paso: verificar tu email.
+        Gracias por registrarte en <strong>Superlistia</strong>. Solo queda un paso: verificar tu email.
     </p>
 
     {{-- CTA button --}}

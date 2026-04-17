@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import api, { getToken, setToken, removeToken } from '../lib/api';
-import { authenticate as webauthnAuthenticate } from '../lib/webauthnApi';
+import { authenticate as webauthnAuthenticate, markDeviceRegistered } from '../lib/webauthnApi';
 
 const AuthContext = createContext(null);
 
@@ -41,6 +41,7 @@ export function AuthProvider({ children }) {
 
     const loginWithPasskey = async (email = null) => {
         const { user: userData } = await webauthnAuthenticate(email);
+        markDeviceRegistered();
         setUser(userData);
         return userData;
     };

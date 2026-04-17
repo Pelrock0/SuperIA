@@ -132,7 +132,7 @@ export default function HeroSection() {
                                     <div style={{ width: '28px', height: '28px', backgroundColor: '#002736', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                         <span style={{ color: '#fff', fontWeight: 800, fontSize: '16px' }}>S</span>
                                     </div>
-                                    <span style={{ fontWeight: 700, fontSize: '18px', color: '#002736', letterSpacing: '-0.03em' }}>Superia</span>
+                                    <span style={{ fontWeight: 700, fontSize: '18px', color: '#002736', letterSpacing: '-0.03em' }}>Superlistia</span>
                                 </div>
                                 <div style={{ display: 'flex', gap: '8px', opacity: 0.4 }}>
                                     <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#002736' }}>history</span>

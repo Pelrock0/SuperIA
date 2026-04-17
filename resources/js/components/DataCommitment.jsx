@@ -115,7 +115,7 @@ export default function DataCommitment() {
                     </div>
 
                     <p style={{ color: '#41484c', lineHeight: 1.625, margin: 0 }}>
-                        Creemos que la privacidad no es una opci&oacute;n, sino un derecho fundamental. Superia est&aacute; construida sobre una arquitectura de privacidad desde el dise&ntilde;o.
+                        Creemos que la privacidad no es una opci&oacute;n, sino un derecho fundamental. Superlistia est&aacute; construida sobre una arquitectura de privacidad desde el dise&ntilde;o.
                     </p>
                 </div>
             </div>

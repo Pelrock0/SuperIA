@@ -5,6 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import LoginPage from './LoginPage';
 
 const mockLogin = vi.fn();
+const mockLoginWithPasskey = vi.fn();
 const mockNavigate = vi.fn();
 
 vi.mock('react-router-dom', async () => {
@@ -18,7 +19,7 @@ vi.mock('react-router-dom', async () => {
 vi.mock('../context/AuthContext', () => ({
     useAuth: () => ({
         login: mockLogin,
-        loginWithPasskey: vi.fn(),
+        loginWithPasskey: mockLoginWithPasskey,
         isAuthenticated: false,
         isLoading: false,
     }),
@@ -28,6 +29,8 @@ vi.mock('../lib/webauthnApi', () => ({
     isSupported: vi.fn(() => false),
     probeEnabled: vi.fn(() => Promise.resolve(false)),
 }));
+
+import * as webauthnApi from '../lib/webauthnApi';
 
 describe('LoginPage', () => {
     beforeEach(() => {
@@ -120,5 +123,118 @@ describe('LoginPage', () => {
         renderPage();
         expect(screen.getByText(/No tienes cuenta/)).toBeInTheDocument();
         expect(screen.getByText(/lista de espera/)).toBeInTheDocument();
+    });
+
+    describe('biometric CTA', () => {
+        beforeEach(() => {
+            webauthnApi.isSupported.mockReturnValue(false);
+            webauthnApi.probeEnabled.mockResolvedValue(false);
+        });
+
+        it('does NOT render CTA when WebAuthn not supported', async () => {
+            webauthnApi.isSupported.mockReturnValue(false);
+            renderPage();
+            await waitFor(() => expect(screen.queryByTestId('webauthn-section')).not.toBeInTheDocument());
+            expect(screen.queryByTestId('webauthn-login-passkey')).not.toBeInTheDocument();
+            expect(screen.queryByTestId('webauthn-login-email')).not.toBeInTheDocument();
+        });
+
+        it('does NOT render CTA when probeEnabled returns false', async () => {
+            webauthnApi.isSupported.mockReturnValue(true);
+            webauthnApi.probeEnabled.mockResolvedValue(false);
+            renderPage();
+            await waitFor(() => expect(webauthnApi.probeEnabled).toHaveBeenCalled());
+            expect(screen.queryByTestId('webauthn-section')).not.toBeInTheDocument();
+        });
+
+        it('renders primary CTA above form when supported and enabled', async () => {
+            webauthnApi.isSupported.mockReturnValue(true);
+            webauthnApi.probeEnabled.mockResolvedValue(true);
+            renderPage();
+            const cta = await screen.findByTestId('webauthn-login-passkey');
+            expect(cta).toHaveTextContent(/Entrar con biometría/i);
+            expect(screen.getByText(/o con email/i)).toBeInTheDocument();
+        });
+
+        it('clicking CTA invokes loginWithPasskey(null) and navigates', async () => {
+            const user = userEvent.setup();
+            webauthnApi.isSupported.mockReturnValue(true);
+            webauthnApi.probeEnabled.mockResolvedValue(true);
+            mockLoginWithPasskey.mockResolvedValueOnce({ id: 1 });
+            renderPage();
+            const cta = await screen.findByTestId('webauthn-login-passkey');
+            await user.click(cta);
+            await waitFor(() => expect(mockLoginWithPasskey).toHaveBeenCalledWith(null));
+            expect(mockNavigate).toHaveBeenCalledWith('/app', { replace: true });
+        });
+
+        it('shows biometric error message on failure', async () => {
+            const user = userEvent.setup();
+            webauthnApi.isSupported.mockReturnValue(true);
+            webauthnApi.probeEnabled.mockResolvedValue(true);
+            mockLoginWithPasskey.mockRejectedValueOnce(new Error('Autenticacion cancelada.'));
+            renderPage();
+            const cta = await screen.findByTestId('webauthn-login-passkey');
+            await user.click(cta);
+            await waitFor(() => {
+                expect(screen.getByRole('alert')).toHaveTextContent(/cancelada/i);
+            });
+        });
+
+        it('shows verifying state while passkey login pending', async () => {
+            const user = userEvent.setup();
+            webauthnApi.isSupported.mockReturnValue(true);
+            webauthnApi.probeEnabled.mockResolvedValue(true);
+            mockLoginWithPasskey.mockImplementation(() => new Promise(() => {}));
+            renderPage();
+            const cta = await screen.findByTestId('webauthn-login-passkey');
+            await user.click(cta);
+            expect(cta).toHaveTextContent(/Verificando/);
+            expect(cta).toBeDisabled();
+        });
+
+        it('does NOT render removed email+biometric button', async () => {
+            webauthnApi.isSupported.mockReturnValue(true);
+            webauthnApi.probeEnabled.mockResolvedValue(true);
+            renderPage();
+            await screen.findByTestId('webauthn-section');
+            expect(screen.queryByTestId('webauthn-login-email')).not.toBeInTheDocument();
+        });
+
+        it('falls back to idle state when probeEnabled rejects', async () => {
+            webauthnApi.isSupported.mockReturnValue(true);
+            webauthnApi.probeEnabled.mockRejectedValue(new Error('net'));
+            renderPage();
+            await waitFor(() => expect(webauthnApi.probeEnabled).toHaveBeenCalled());
+            expect(screen.queryByTestId('webauthn-section')).not.toBeInTheDocument();
+        });
+
+        it('surfaces response error message from server on biometric failure', async () => {
+            const user = userEvent.setup();
+            webauthnApi.isSupported.mockReturnValue(true);
+            webauthnApi.probeEnabled.mockResolvedValue(true);
+            mockLoginWithPasskey.mockRejectedValueOnce({
+                response: { data: { error: { message: 'Firma inválida.' } } },
+            });
+            renderPage();
+            const cta = await screen.findByTestId('webauthn-login-passkey');
+            await user.click(cta);
+            await waitFor(() => {
+                expect(screen.getByRole('alert')).toHaveTextContent(/Firma inválida/i);
+            });
+        });
+
+        it('shows generic biometric error when err has no message or response', async () => {
+            const user = userEvent.setup();
+            webauthnApi.isSupported.mockReturnValue(true);
+            webauthnApi.probeEnabled.mockResolvedValue(true);
+            mockLoginWithPasskey.mockRejectedValueOnce({});
+            renderPage();
+            const cta = await screen.findByTestId('webauthn-login-passkey');
+            await user.click(cta);
+            await waitFor(() => {
+                expect(screen.getByRole('alert')).toHaveTextContent(/Autenticacion biometrica fallida/i);
+            });
+        });
     });
 });

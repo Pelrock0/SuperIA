@@ -102,7 +102,7 @@ describe('ShareListModal', () => {
         await waitFor(() => {
             const email = screen.getByTestId('share-email');
             expect(email.getAttribute('href')).toContain('mailto:');
-            expect(email.getAttribute('href')).toContain('Superia');
+            expect(email.getAttribute('href')).toContain('Superlistia');
         });
     });
 

@@ -5,6 +5,8 @@ import api from '../lib/api';
 import CreateListModal from '../components/lists/CreateListModal';
 import ReplenishmentBanner from '../components/dashboard/ReplenishmentBanner';
 import WeeklySummaryBanner from '../components/dashboard/WeeklySummaryBanner';
+import BiometricOptInModal from '../components/auth/BiometricOptInModal';
+import { useBiometricPromptDecision } from '../hooks/useBiometricPromptDecision';
 
 export default function DashboardPage() {
     const { user, logout } = useAuth();
@@ -15,6 +17,8 @@ export default function DashboardPage() {
     const [createError, setCreateError] = useState('');
     const [actionError, setActionError] = useState('');
     const [listMenu, setListMenu] = useState(null);
+    const [biometricModalDismissed, setBiometricModalDismissed] = useState(false);
+    const shouldPromptBiometric = useBiometricPromptDecision(user);
 
     const fetchLists = useCallback(async () => {
         try {
@@ -100,7 +104,7 @@ export default function DashboardPage() {
                         <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style={{ backgroundColor: '#003e54' }}>
                             {user?.name?.[0]?.toUpperCase() || 'U'}
                         </div>
-                        <h1 className="font-bold tracking-tighter text-2xl" style={{ color: '#002736' }}>Superia</h1>
+                        <h1 className="font-bold tracking-tighter text-2xl" style={{ color: '#002736' }}>Superlistia</h1>
                     </div>
                     <div className="flex items-center gap-4">
                         <Link to="/app/historial" className="hover:opacity-80 transition-opacity">
@@ -337,6 +341,10 @@ export default function DashboardPage() {
 
             {showCreateModal && (
                 <CreateListModal onClose={() => setShowCreateModal(false)} onSubmit={handleCreate} error={createError} />
+            )}
+
+            {shouldPromptBiometric && !biometricModalDismissed && (
+                <BiometricOptInModal onClose={() => setBiometricModalDismissed(true)} />
             )}
         </div>
     );

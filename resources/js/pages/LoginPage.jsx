@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import SuperiaLogo from '../components/SuperiaLogo';
+import SuperlistiaLogo from '../components/SuperlistiaLogo';
 import { isSupported as isWebauthnSupported, probeEnabled as probeWebauthnEnabled } from '../lib/webauthnApi';
 
 export default function LoginPage() {
@@ -33,11 +33,11 @@ export default function LoginPage() {
         return <Navigate to="/app" replace />;
     }
 
-    const handleBiometricLogin = async (useEmail) => {
+    const handleBiometricLogin = async () => {
         setWebauthnStatus('loading');
         setError('');
         try {
-            await loginWithPasskey(useEmail ? formData.email : null);
+            await loginWithPasskey(null);
             navigate('/app', { replace: true });
         } catch (err) {
             const msg = err.response?.data?.error?.message || err.message || 'Autenticacion biometrica fallida.';
@@ -80,7 +80,7 @@ export default function LoginPage() {
         >
             <div className="flex justify-center pt-8 mb-8">
                 <Link to="/">
-                    <SuperiaLogo size="lg" />
+                    <SuperlistiaLogo size="lg" />
                 </Link>
             </div>
 
@@ -100,6 +100,27 @@ export default function LoginPage() {
                         <p className="text-center mb-8" style={{ color: '#41484c' }}>
                             Tu lista de compra inteligente te espera.
                         </p>
+
+                        {webauthnAvailable && (
+                            <div className="mb-6" data-testid="webauthn-section">
+                                <button
+                                    type="button"
+                                    onClick={handleBiometricLogin}
+                                    disabled={webauthnStatus === 'loading'}
+                                    className="w-full py-3 px-6 rounded-lg font-semibold text-white transition-all disabled:opacity-60 flex items-center justify-center gap-2"
+                                    style={{ background: 'linear-gradient(to right, #002736, #003e54)' }}
+                                    data-testid="webauthn-login-passkey"
+                                >
+                                    <span className="material-symbols-outlined" aria-hidden="true">fingerprint</span>
+                                    {webauthnStatus === 'loading' ? 'Verificando...' : 'Entrar con biometría'}
+                                </button>
+                                <div className="flex items-center gap-3 my-5">
+                                    <div className="flex-1 h-px" style={{ backgroundColor: '#c1c7cd' }}></div>
+                                    <span className="text-xs uppercase tracking-wide" style={{ color: '#71787d' }}>o con email</span>
+                                    <div className="flex-1 h-px" style={{ backgroundColor: '#c1c7cd' }}></div>
+                                </div>
+                            </div>
+                        )}
 
                         <form onSubmit={handleSubmit} className="space-y-5" data-testid="login-form">
                             {verified === 'success' && (
@@ -131,7 +152,7 @@ export default function LoginPage() {
                                     required
                                     className="w-full px-4 py-3 rounded-lg text-base transition-colors outline-none"
                                     style={{ border: '1px solid #c1c7cd', backgroundColor: '#f7f9fb', color: '#191c1e' }}
-                                    placeholder="ejemplo@superia.es"
+                                    placeholder="ejemplo@superlistia.com"
                                     onFocus={(e) => e.target.style.borderColor = '#002736'}
                                     onBlur={(e) => e.target.style.borderColor = '#c1c7cd'}
                                 />
@@ -194,39 +215,6 @@ export default function LoginPage() {
                             </button>
                         </form>
 
-                        {webauthnAvailable && (
-                            <div className="mt-6" data-testid="webauthn-section">
-                                <div className="flex items-center gap-3 my-4">
-                                    <div className="flex-1 h-px" style={{ backgroundColor: '#c1c7cd' }}></div>
-                                    <span className="text-xs" style={{ color: '#71787d' }}>o</span>
-                                    <div className="flex-1 h-px" style={{ backgroundColor: '#c1c7cd' }}></div>
-                                </div>
-                                <div className="space-y-2">
-                                    <button
-                                        type="button"
-                                        onClick={() => handleBiometricLogin(true)}
-                                        disabled={!formData.email || webauthnStatus === 'loading'}
-                                        className="w-full py-3 px-6 rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-                                        style={{ border: '1px solid #002736', color: '#002736', backgroundColor: 'transparent' }}
-                                        data-testid="webauthn-login-email"
-                                    >
-                                        <span className="material-symbols-outlined" aria-hidden="true">fingerprint</span>
-                                        {webauthnStatus === 'loading' ? 'Verificando...' : 'Entrar con biometría'}
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => handleBiometricLogin(false)}
-                                        disabled={webauthnStatus === 'loading'}
-                                        className="w-full py-3 px-6 rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-                                        style={{ color: '#003e54', backgroundColor: 'transparent' }}
-                                        data-testid="webauthn-login-passkey"
-                                    >
-                                        <span className="material-symbols-outlined" aria-hidden="true">key</span>
-                                        Entrar con passkey
-                                    </button>
-                                </div>
-                            </div>
-                        )}
                     </div>
 
                     <div className="text-center mt-6">
@@ -241,7 +229,7 @@ export default function LoginPage() {
                             <a href="/#waitlist" style={{ color: '#003e54', textDecoration: 'underline' }}>
                                 Únete a la lista de espera
                             </a>{' '}
-                            y te avisaremos cuando esté lista la experiencia <strong style={{ color: '#002736' }}>Superia</strong>.
+                            y te avisaremos cuando esté lista la experiencia <strong style={{ color: '#002736' }}>Superlistia</strong>.
                         </p>
                     </div>
                 </div>

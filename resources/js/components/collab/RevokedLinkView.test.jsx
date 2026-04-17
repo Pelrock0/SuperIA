@@ -31,6 +31,6 @@ describe('RevokedLinkView', () => {
             </MemoryRouter>
         );
 
-        expect(screen.getByRole('link', { name: /ir a superia/i })).toHaveAttribute('href', '/');
+        expect(screen.getByRole('link', { name: /ir a superlistia/i })).toHaveAttribute('href', '/');
     });
 });

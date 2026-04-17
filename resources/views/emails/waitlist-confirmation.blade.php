@@ -1,4 +1,4 @@
-@extends('emails.layout', ['subject' => 'Superia — Lista de espera'])
+@extends('emails.layout', ['subject' => 'Superlistia — Lista de espera'])
 
 @section('content')
     <h1 style="margin: 0 0 24px; font-size: 26px; font-weight: 800; color: #002736; letter-spacing: -0.03em;">
@@ -6,7 +6,7 @@
     </h1>
 
     <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.6; color: #191c1e;">
-        Gracias por apuntarte a la lista de espera de <strong>Superia</strong>.
+        Gracias por apuntarte a la lista de espera de <strong>Superlistia</strong>.
     </p>
 
     <p style="margin: 0 0 24px; font-size: 15px; line-height: 1.6; color: #191c1e;">

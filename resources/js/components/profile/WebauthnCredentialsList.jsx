@@ -5,6 +5,7 @@ import {
     registerCredential,
     renameCredential,
     deleteCredential,
+    markDeviceRegistered,
 } from '../../lib/webauthnApi';
 
 export default function WebauthnCredentialsList() {
@@ -48,6 +49,7 @@ export default function WebauthnCredentialsList() {
         try {
             const name = defaultDeviceName();
             await registerCredential(name);
+            markDeviceRegistered();
             await load();
         } catch (err) {
             setError(err.message || 'No se pudo registrar el dispositivo.');

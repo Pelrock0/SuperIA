@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function SuperiaLogo({ size = 'md', showText = true }) {
+export default function SuperlistiaLogo({ size = 'md', showText = true }) {
     const sizes = {
         sm: { svg: 24, text: 'text-lg' },
         md: { svg: 32, text: 'text-2xl' },
@@ -17,7 +17,7 @@ export default function SuperiaLogo({ size = 'md', showText = true }) {
             </svg>
             {showText && (
                 <span className={`font-bold tracking-tighter ${s.text}`} style={{ color: '#003E54' }}>
-                    Superia
+                    Superlistia
                 </span>
             )}
         </div>

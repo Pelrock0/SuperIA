@@ -1,4 +1,4 @@
-@extends('emails.layout', ['subject' => 'Superia — Tu resumen semanal'])
+@extends('emails.layout', ['subject' => 'Superlistia — Tu resumen semanal'])
 
 @section('content')
     <h1 style="margin: 0 0 24px; font-size: 26px; font-weight: 800; color: #002736; letter-spacing: -0.03em;">

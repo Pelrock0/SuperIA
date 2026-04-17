@@ -1,4 +1,4 @@
-@extends('emails.layout', ['subject' => 'Superia — Suscripcion cancelada'])
+@extends('emails.layout', ['subject' => 'Superlistia — Suscripcion cancelada'])
 
 @section('content')
     <div style="text-align: center;">

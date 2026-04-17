@@ -7,7 +7,7 @@ export default function LegalPage() {
             <header className="bg-gray-50 py-6 px-4 border-b">
                 <div className="max-w-3xl mx-auto">
                     <Link to="/" className="text-indigo-600 hover:text-indigo-800 font-medium">
-                        ← Volver a Superia
+                        ← Volver a Superlistia
                     </Link>
                 </div>
             </header>
@@ -25,14 +25,14 @@ export default function LegalPage() {
                 <ul>
                     <li><strong>Titular:</strong> TX APPS</li>
                     <li><strong>Domicilio:</strong> Barcelona, España</li>
-                    <li><strong>Email de contacto:</strong> legal@superia.app</li>
-                    <li><strong>Actividad:</strong> Desarrollo y operación de la plataforma digital Superia</li>
+                    <li><strong>Email de contacto:</strong> legal@superlistia.com</li>
+                    <li><strong>Actividad:</strong> Desarrollo y operación de la plataforma digital Superlistia</li>
                 </ul>
 
                 <h2>2. Objeto</h2>
                 <p>
                     El presente sitio web tiene como finalidad poner a disposición de los usuarios
-                    la plataforma Superia, un asistente digital de listas de compra con inteligencia
+                    la plataforma Superlistia, un asistente digital de listas de compra con inteligencia
                     artificial.
                 </p>
 
@@ -83,13 +83,13 @@ export default function LegalPage() {
                 <h2>8. Contacto</h2>
                 <p>
                     Para cualquier consulta legal:<br />
-                    Email: <strong>legal@superia.app</strong>
+                    Email: <strong>legal@superlistia.com</strong>
                 </p>
             </main>
 
             <footer className="py-8 px-4 bg-gray-900 text-gray-400 text-sm">
                 <div className="max-w-3xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <p>© {new Date().getFullYear()} Superia. Todos los derechos reservados.</p>
+                    <p>© {new Date().getFullYear()} Superlistia. Todos los derechos reservados.</p>
                     <div className="flex gap-6">
                         <Link to="/privacy" className="hover:text-white transition-colors">
                             Política de privacidad

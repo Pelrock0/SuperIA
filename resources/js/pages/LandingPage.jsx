@@ -4,7 +4,7 @@ import HeroSection from '../components/HeroSection';
 import FeaturesSection from '../components/FeaturesSection';
 import DataCommitment from '../components/DataCommitment';
 import WaitlistForm from '../components/WaitlistForm';
-import SuperiaLogo from '../components/SuperiaLogo';
+import SuperlistiaLogo from '../components/SuperlistiaLogo';
 
 export default function LandingPage() {
     return (
@@ -30,7 +30,7 @@ export default function LandingPage() {
                     WebkitBackdropFilter: 'blur(24px)',
                 }}
             >
-                <SuperiaLogo />
+                <SuperlistiaLogo />
                 <nav className="landing-nav" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
                     <a
                         href="#features"
@@ -119,10 +119,10 @@ export default function LandingPage() {
             >
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <div style={{ fontSize: '1.125rem', fontWeight: 700, color: '#003E54' }}>
-                        Superia Digital Concierge
+                        Superlistia Digital Concierge
                     </div>
                     <p style={{ color: '#64748b', fontSize: '0.875rem' }}>
-                        &copy; {new Date().getFullYear()} Superia Digital Concierge
+                        &copy; {new Date().getFullYear()} Superlistia Digital Concierge
                     </p>
                 </div>
                 <div style={{ display: 'flex', gap: '2rem' }}>

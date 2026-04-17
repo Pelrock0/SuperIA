@@ -7,7 +7,7 @@ export default function TermsPage() {
             <header className="bg-gray-50 py-6 px-4 border-b">
                 <div className="max-w-3xl mx-auto">
                     <Link to="/" className="text-indigo-600 hover:text-indigo-800 font-medium">
-                        ← Volver a Superia
+                        ← Volver a Superlistia
                     </Link>
                 </div>
             </header>
@@ -19,18 +19,18 @@ export default function TermsPage() {
                 <h2>1. Objeto</h2>
                 <p>
                     Los presentes Términos de Servicio regulan el acceso y uso de la plataforma
-                    <strong> Superia</strong>, un asistente digital de listas de compra con inteligencia
+                    <strong> Superlistia</strong>, un asistente digital de listas de compra con inteligencia
                     artificial, operado por <strong>TX APPS</strong>.
                 </p>
 
                 <h2>2. Aceptación</h2>
                 <p>
-                    Al registrarte o utilizar Superia, aceptas estos términos en su totalidad.
+                    Al registrarte o utilizar Superlistia, aceptas estos términos en su totalidad.
                     Si no estás de acuerdo con alguna de las condiciones, no debes utilizar el servicio.
                 </p>
 
                 <h2>3. Descripción del servicio</h2>
-                <p>Superia ofrece las siguientes funcionalidades:</p>
+                <p>Superlistia ofrece las siguientes funcionalidades:</p>
                 <ul>
                     <li>Creación y gestión de listas de compra</li>
                     <li>Sugerencias personalizadas mediante inteligencia artificial</li>
@@ -41,7 +41,7 @@ export default function TermsPage() {
 
                 <h2>4. Registro y cuenta</h2>
                 <p>
-                    Para usar Superia necesitas crear una cuenta con un email válido y una contraseña
+                    Para usar Superlistia necesitas crear una cuenta con un email válido y una contraseña
                     segura (mínimo 8 caracteres, una mayúscula y un número). Eres responsable de
                     mantener la confidencialidad de tus credenciales.
                 </p>
@@ -57,7 +57,7 @@ export default function TermsPage() {
 
                 <h2>6. Propiedad intelectual</h2>
                 <p>
-                    El diseño, código, marca y contenido de Superia son propiedad de TX APPS.
+                    El diseño, código, marca y contenido de Superlistia son propiedad de TX APPS.
                     Tus datos y listas de compra son de tu propiedad y puedes exportarlos o
                     eliminarlos en cualquier momento.
                 </p>
@@ -65,7 +65,7 @@ export default function TermsPage() {
                 <h2>7. Inteligencia artificial</h2>
                 <p>
                     Las sugerencias generadas por IA son orientativas y no constituyen consejo
-                    nutricional, médico o profesional. Superia no se hace responsable de las
+                    nutricional, médico o profesional. Superlistia no se hace responsable de las
                     decisiones de compra basadas en las sugerencias del sistema.
                 </p>
 
@@ -78,7 +78,7 @@ export default function TermsPage() {
 
                 <h2>9. Planes y precios</h2>
                 <p>
-                    Superia ofrece un plan gratuito con funcionalidades básicas y un plan premium
+                    Superlistia ofrece un plan gratuito con funcionalidades básicas y un plan premium
                     con mayor capacidad de operaciones de IA. Los precios pueden actualizarse con
                     un aviso mínimo de 30 días.
                 </p>
@@ -92,7 +92,7 @@ export default function TermsPage() {
 
                 <h2>11. Limitación de responsabilidad</h2>
                 <p>
-                    Superia se ofrece «tal cual». No nos responsabilizamos de daños indirectos,
+                    Superlistia se ofrece «tal cual». No nos responsabilizamos de daños indirectos,
                     pérdida de datos por causas ajenas a nuestro control, ni de la exactitud de
                     las sugerencias de IA.
                 </p>
@@ -113,13 +113,13 @@ export default function TermsPage() {
                 <h2>14. Contacto</h2>
                 <p>
                     Para cualquier consulta sobre estos términos:<br />
-                    Email: <strong>legal@superia.app</strong>
+                    Email: <strong>legal@superlistia.com</strong>
                 </p>
             </main>
 
             <footer className="py-8 px-4 bg-gray-900 text-gray-400 text-sm">
                 <div className="max-w-3xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <p>© {new Date().getFullYear()} Superia. Todos los derechos reservados.</p>
+                    <p>© {new Date().getFullYear()} Superlistia. Todos los derechos reservados.</p>
                     <div className="flex gap-6">
                         <Link to="/privacy" className="hover:text-white transition-colors">
                             Política de privacidad

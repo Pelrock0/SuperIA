@@ -1,4 +1,4 @@
-@extends('emails.layout', ['subject' => 'Superia — Tu invitacion esta lista'])
+@extends('emails.layout', ['subject' => 'Superlistia — Tu invitacion esta lista'])
 
 @section('content')
     <h1 style="margin: 0 0 24px; font-size: 26px; font-weight: 800; color: #002736; letter-spacing: -0.03em;">
@@ -6,7 +6,7 @@
     </h1>
 
     <p style="margin: 0 0 24px; font-size: 15px; line-height: 1.6; color: #191c1e;">
-        Tu invitacion para unirte a <strong>Superia</strong> esta lista. Haz clic en el boton para crear tu cuenta.
+        Tu invitacion para unirte a <strong>Superlistia</strong> esta lista. Haz clic en el boton para crear tu cuenta.
     </p>
 
     {{-- CTA button --}}

@@ -7,7 +7,7 @@ export default function SustainabilityPage() {
             <header className="bg-gray-50 py-6 px-4 border-b">
                 <div className="max-w-3xl mx-auto">
                     <Link to="/" className="text-indigo-600 hover:text-indigo-800 font-medium">
-                        ← Volver a Superia
+                        ← Volver a Superlistia
                     </Link>
                 </div>
             </header>
@@ -18,7 +18,7 @@ export default function SustainabilityPage() {
 
                 <h2>Nuestra misión</h2>
                 <p>
-                    Superia nace con la convicción de que la tecnología puede ayudar a las familias
+                    Superlistia nace con la convicción de que la tecnología puede ayudar a las familias
                     a comprar mejor, desperdiciar menos y ser más conscientes de su consumo. No
                     somos solo una app de listas de compra: somos una herramienta para un hogar
                     más sostenible.
@@ -27,7 +27,7 @@ export default function SustainabilityPage() {
                 <h2>Reducción del desperdicio alimentario</h2>
                 <p>
                     En España se desperdician más de <strong>1.300 millones de kilos de alimentos
-                    al año</strong> en los hogares. Superia ayuda a combatir este problema:
+                    al año</strong> en los hogares. Superlistia ayuda a combatir este problema:
                 </p>
                 <ul>
                     <li>
@@ -46,7 +46,7 @@ export default function SustainabilityPage() {
 
                 <h2>Privacidad como valor sostenible</h2>
                 <p>
-                    La sostenibilidad también es digital. Superia no utiliza cookies de tracking,
+                    La sostenibilidad también es digital. Superlistia no utiliza cookies de tracking,
                     no vende datos a terceros y no bombardea con publicidad. Un modelo de negocio
                     limpio que respeta tanto tu privacidad como los recursos digitales.
                 </p>
@@ -70,7 +70,7 @@ export default function SustainabilityPage() {
 
                 <h2>Consumo local</h2>
                 <p>
-                    Superia está diseñada para el contexto español. Las sugerencias de IA priorizan
+                    Superlistia está diseñada para el contexto español. Las sugerencias de IA priorizan
                     productos de temporada y formatos habituales en supermercados locales, fomentando
                     un consumo más cercano y sostenible.
                 </p>
@@ -86,13 +86,13 @@ export default function SustainabilityPage() {
                 <h2>Contacto</h2>
                 <p>
                     Si tienes ideas o propuestas relacionadas con sostenibilidad, escríbenos a:<br />
-                    Email: <strong>sostenibilidad@superia.app</strong>
+                    Email: <strong>sostenibilidad@superlistia.com</strong>
                 </p>
             </main>
 
             <footer className="py-8 px-4 bg-gray-900 text-gray-400 text-sm">
                 <div className="max-w-3xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <p>© {new Date().getFullYear()} Superia. Todos los derechos reservados.</p>
+                    <p>© {new Date().getFullYear()} Superlistia. Todos los derechos reservados.</p>
                     <div className="flex gap-6">
                         <Link to="/privacy" className="hover:text-white transition-colors">
                             Política de privacidad

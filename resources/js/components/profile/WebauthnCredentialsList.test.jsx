@@ -8,6 +8,7 @@ const mockList = vi.fn();
 const mockRegister = vi.fn();
 const mockRename = vi.fn();
 const mockDelete = vi.fn();
+const mockMarkDeviceRegistered = vi.fn();
 
 vi.mock('../../lib/webauthnApi', () => ({
     isSupported: (...args) => mockIsSupported(...args),
@@ -15,6 +16,7 @@ vi.mock('../../lib/webauthnApi', () => ({
     registerCredential: (...args) => mockRegister(...args),
     renameCredential: (...args) => mockRename(...args),
     deleteCredential: (...args) => mockDelete(...args),
+    markDeviceRegistered: (...args) => mockMarkDeviceRegistered(...args),
 }));
 
 describe('WebauthnCredentialsList', () => {
@@ -67,6 +69,7 @@ describe('WebauthnCredentialsList', () => {
         await user.click(addBtn);
 
         await waitFor(() => expect(mockRegister).toHaveBeenCalled());
+        expect(mockMarkDeviceRegistered).toHaveBeenCalled();
     });
 
     it('displays error when register fails', async () => {
@@ -79,6 +82,7 @@ describe('WebauthnCredentialsList', () => {
         await user.click(addBtn);
 
         await screen.findByText(/registro cancelado/i);
+        expect(mockMarkDeviceRegistered).not.toHaveBeenCalled();
     });
 
     it('revokes a credential after confirm', async () => {

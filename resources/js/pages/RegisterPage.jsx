@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import api from '../lib/api';
-import SuperiaLogo from '../components/SuperiaLogo';
+import SuperlistiaLogo from '../components/SuperlistiaLogo';
 
 export default function RegisterPage() {
     const [searchParams] = useSearchParams();
@@ -82,7 +82,7 @@ export default function RegisterPage() {
         return (
             <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#f7f9fb' }}>
                 <div className="max-w-md w-full text-center" data-testid="token-error">
-                    <SuperiaLogo size="lg" />
+                    <SuperlistiaLogo size="lg" />
                     <h1 className="text-2xl font-bold mt-8 mb-4" style={{ color: '#003e54' }}>Enlace no valido</h1>
                     <p className="mb-6" style={{ color: '#41484c' }}>{tokenError}</p>
                     <Link to="/" className="font-bold hover:opacity-70" style={{ color: '#002736' }}>
@@ -105,7 +105,7 @@ export default function RegisterPage() {
         return (
             <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#f7f9fb' }}>
                 <div className="max-w-md w-full text-center" data-testid="register-success">
-                    <SuperiaLogo size="lg" />
+                    <SuperlistiaLogo size="lg" />
                     <h1 className="text-2xl font-bold mt-8 mb-4" style={{ color: '#10b981' }}>Registro exitoso</h1>
                     <p className="mb-6" style={{ color: '#41484c' }}>{successMessage}</p>
                     <Link to="/login" className="font-bold hover:opacity-70" style={{ color: '#002736' }}>
@@ -121,7 +121,7 @@ export default function RegisterPage() {
             <main className="w-full max-w-md">
                 {/* Logo */}
                 <div className="flex justify-center mb-8">
-                    <SuperiaLogo size="lg" />
+                    <SuperlistiaLogo size="lg" />
                 </div>
 
                 {/* Card */}

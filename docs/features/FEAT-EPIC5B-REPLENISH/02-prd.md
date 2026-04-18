@@ -50,7 +50,7 @@ Both features lean on `producto_historial` (the table Epic 3 populates on every 
     - Exclude Y if it's already present in the current list (passed as `list_id` param).
   - Claude fallback: if `completed_lists < 5`, call Claude with prompt "Cuando alguien anade {X} a su lista de compra espanola, ¿que 2 productos complementarios suele necesitar? Responde en JSON con claves nombre, unidad_tipica, categoria." Sanitized via `PromptSanitizer`. Counts toward daily AI quota.
   - Endpoint: `GET /api/suggestions/complements?product={name}&list_id={id}`. Called async by the frontend after a successful item creation. Best-effort, never blocks `POST /api/lists/{list}/items`.
-  - Frontend chip: `ComplementaryChip.jsx` renders inline below the recently added item row with "Quieres anadir tambien: [name]?" + accept (adds to list) and dismiss (hides locally, no persistence) buttons. Max 2 suggestions per item, fade out after 30s if ignored.
+  - Frontend chip: `ComplementaryChip.jsx` renders inline below the recently added item row with "Quieres añadir tambien: [name]?" + accept (adds to list) and dismiss (hides locally, no persistence) buttons. Max 2 suggestions per item, fade out after 30s if ignored.
 
 - **New DB tables**:
   - `user_silenced_products` (`id`, `user_id` FK cascade, `producto_nombre` string(80), `silenced_at` timestamp). Unique `(user_id, producto_nombre)`.
@@ -115,12 +115,12 @@ Both features lean on `producto_historial` (the table Epic 3 populates on every 
 
 ### AC-7: Replenishment — accept with 1 active list
 - **Given**: User has exactly 1 active list and the banner shows "Leche entera"
-- **When**: The user clicks "Anadir"
+- **When**: The user clicks "Añadir"
 - **Then**: A new item "Leche entera" is created in that list (via the existing `ListItemService::create`). The card disappears from the banner. The list counters update.
 
 ### AC-8: Replenishment — accept with multiple active lists
 - **Given**: User has 3 active lists and the banner shows "Leche entera"
-- **When**: The user clicks "Anadir"
+- **When**: The user clicks "Añadir"
 - **Then**: A `SelectListModal` opens listing the 3 lists. User picks one. Item is created in the selected list. Card disappears from the banner.
 
 ### AC-9: Replenishment — ignore creates 24h dismiss

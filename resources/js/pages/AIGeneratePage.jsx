@@ -38,9 +38,9 @@ export default function AIGeneratePage() {
             if (code === 'GENERATION_LIMIT') {
                 setError(message || 'Has alcanzado tu limite de 5 generaciones diarias.');
             } else if (code === 'AI_LIMIT') {
-                setError(message || 'Has alcanzado tu limite diario de operaciones IA.');
+                setError(message || 'Has alcanzado tu límite diario de operaciones IA.');
             } else {
-                setError(message || 'Error al generar la lista. Intentalo de nuevo.');
+                setError(message || 'Error al generar la lista. Inténtalo de nuevo.');
             }
         } finally {
             setIsGenerating(false);
@@ -56,7 +56,7 @@ export default function AIGeneratePage() {
             setMeta(result.meta);
         } catch (err) {
             const message = err.response?.data?.error?.message;
-            setError(message || 'Error al regenerar. Intentalo de nuevo.');
+            setError(message || 'Error al regenerar. Inténtalo de nuevo.');
         } finally {
             setIsGenerating(false);
         }
@@ -102,7 +102,7 @@ export default function AIGeneratePage() {
             setConfirmed(true);
             setTimeout(() => navigate(`/app/listas/${list.id}`), 1000);
         } catch (err) {
-            setError('Error al anadir items a la lista.');
+            setError('Error al añadir items a la lista.');
         } finally {
             setIsConfirming(false);
         }
@@ -225,7 +225,7 @@ export default function AIGeneratePage() {
                             id="description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            placeholder="Describe que necesitas... ej: Cena de cumpleanos para 8 personas, Semana de dieta mediterranea"
+                            placeholder="Describe qué necesitas... ej: Cena de cumpleaños para 8 personas, Semana de dieta mediterránea"
                             maxLength={500}
                             rows={5}
                             disabled={isGenerating}
@@ -503,7 +503,7 @@ export default function AIGeneratePage() {
                                         fontFamily: "'Inter', sans-serif",
                                     }}
                                 >
-                                    <span>Anadir {products.length} items a la lista</span>
+                                    <span>Añadir {products.length} items a la lista</span>
                                     <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>shopping_basket</span>
                                 </button>
                                 <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -528,7 +528,7 @@ export default function AIGeneratePage() {
                                         }}
                                     >
                                         <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>add_circle</span>
-                                        Anadir a lista nueva
+                                        Añadir a lista nueva
                                     </button>
                                 </div>
                             </>
@@ -554,7 +554,7 @@ export default function AIGeneratePage() {
                                         id="list-name"
                                         value={listName}
                                         onChange={(e) => setListName(e.target.value)}
-                                        placeholder="ej: Cena de cumpleanos"
+                                        placeholder="ej: Cena de cumpleaños"
                                         maxLength={60}
                                         data-testid="list-name-input"
                                         style={{

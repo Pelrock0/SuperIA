@@ -48,7 +48,7 @@ describe('StatsSection', () => {
     it('renders category labels in Spanish', () => {
         render(<StatsSection stats={fullStats} />);
         expect(screen.getByText('Frutas y verduras')).toBeInTheDocument();
-        expect(screen.getByText('Lacteos y huevos')).toBeInTheDocument();
+        expect(screen.getByText('Lácteos y huevos')).toBeInTheDocument();
     });
 
     it('renders product ranking', () => {
@@ -59,7 +59,7 @@ describe('StatsSection', () => {
 
     it('shows disclaimer on estimated amounts', () => {
         render(<StatsSection stats={fullStats} />);
-        expect(screen.getByText(/estimaciones salvo confirmacion/)).toBeInTheDocument();
+        expect(screen.getByText(/estimaciones salvo confirmación/)).toBeInTheDocument();
     });
 
     it('handles null stats', () => {

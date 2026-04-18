@@ -17,8 +17,8 @@ import { estimatePrices, confirmPrices } from '../lib/priceApi';
 const CATEGORY_LABELS = {
     frutas_verduras: 'Frutas y verduras',
     carnes_pescados: 'Carnes y pescados',
-    lacteos_huevos: 'Lacteos y huevos',
-    panaderia: 'Panaderia',
+    lacteos_huevos: 'Lácteos y huevos',
+    panaderia: 'Panadería',
     bebidas: 'Bebidas',
     congelados: 'Congelados',
     limpieza: 'Limpieza',
@@ -113,7 +113,7 @@ export default function ListDetailPage() {
             await fetchList();
             return true;
         } catch {
-            setError('Error al anadir el item.');
+            setError('Error al añadir el item.');
             return false;
         } finally {
             setAddLoading(false);
@@ -131,7 +131,7 @@ export default function ListDetailPage() {
             await api.post(`/lists/${id}/items`, payload);
             await fetchList();
         } catch {
-            setError('Error al anadir el complementario.');
+            setError('Error al añadir el complementario.');
         }
     };
 
@@ -653,7 +653,7 @@ export default function ListDetailPage() {
                             fontSize: 15,
                         }}
                     >
-                        Esta lista esta vacia. Anade tu primer producto.
+                        Esta lista está vacía. Añade tu primer producto.
                     </p>
                 ) : (
                     <>
@@ -801,7 +801,7 @@ export default function ListDetailPage() {
                             color: '#71787d', fontSize: 14, fontWeight: 500,
                         }}
                     >
-                        Anadir item...
+                        Añadir item...
                     </div>
                     <button
                         onClick={() => setShowAddModal(true)}

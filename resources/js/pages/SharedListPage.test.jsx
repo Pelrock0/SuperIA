@@ -181,7 +181,7 @@ describe('SharedListPage', () => {
         await waitFor(() => screen.getByTestId('add-item-form'));
 
         await user.type(screen.getByLabelText(/nombre del producto/i), 'Manzanas');
-        await user.click(screen.getByRole('button', { name: /anadir/i }));
+        await user.click(screen.getByRole('button', { name: /añadir/i }));
 
         await waitFor(() => {
             expect(addSharedItem).toHaveBeenCalledWith(TOKEN, { name: 'Manzanas' });
@@ -289,10 +289,10 @@ describe('SharedListPage', () => {
         await waitFor(() => screen.getByTestId('add-item-form'));
 
         await user.type(screen.getByLabelText(/nombre del producto/i), 'Manzanas');
-        await user.click(screen.getByRole('button', { name: /anadir/i }));
+        await user.click(screen.getByRole('button', { name: /añadir/i }));
 
         await waitFor(() => {
-            expect(screen.getByText(/error al anadir el item/i)).toBeInTheDocument();
+            expect(screen.getByText(/error al añadir el item/i)).toBeInTheDocument();
         });
     });
 

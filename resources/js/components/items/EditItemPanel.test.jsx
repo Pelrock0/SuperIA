@@ -27,7 +27,7 @@ describe('EditItemPanel', () => {
         expect(screen.getByLabelText(/nombre/i)).toHaveValue('Leche');
         expect(screen.getByLabelText(/cantidad/i)).toHaveValue(2);
         expect(screen.getByLabelText(/unidad/i)).toHaveValue('L');
-        expect(screen.getByLabelText(/categoria/i)).toHaveValue('lacteos_huevos');
+        expect(screen.getByLabelText(/categoría/i)).toHaveValue('lacteos_huevos');
     });
 
     it('calls onSave with updated data', async () => {

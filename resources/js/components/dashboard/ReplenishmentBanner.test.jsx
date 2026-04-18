@@ -173,7 +173,7 @@ describe('ReplenishmentBanner', () => {
         await user.click(screen.getByTestId('accept-Leche entera'));
 
         await waitFor(() => {
-            expect(screen.getByRole('alert')).toHaveTextContent(/error al anadir/i);
+            expect(screen.getByRole('alert')).toHaveTextContent(/error al añadir/i);
         });
     });
 

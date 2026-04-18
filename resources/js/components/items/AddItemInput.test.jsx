@@ -22,7 +22,7 @@ describe('AddItemInput', () => {
         render(<AddItemInput onAdd={onAdd} isLoading={false} />);
 
         await user.type(screen.getByRole('combobox'), 'Manzanas');
-        await user.click(screen.getByRole('button', { name: /anadir/i }));
+        await user.click(screen.getByRole('button', { name: /añadir/i }));
 
         expect(onAdd).toHaveBeenCalledWith({ name: 'Manzanas' });
     });
@@ -43,7 +43,7 @@ describe('AddItemInput', () => {
 
         expect(screen.getByTestId('prefilled-hint')).toBeInTheDocument();
 
-        await user.click(screen.getByRole('button', { name: /anadir/i }));
+        await user.click(screen.getByRole('button', { name: /añadir/i }));
 
         expect(onAdd).toHaveBeenCalledWith({
             name: 'Leche entera',
@@ -71,7 +71,7 @@ describe('AddItemInput', () => {
         await user.type(screen.getByRole('combobox'), ' con cacao');
         expect(screen.queryByTestId('prefilled-hint')).toBeNull();
 
-        await user.click(screen.getByRole('button', { name: /anadir/i }));
+        await user.click(screen.getByRole('button', { name: /añadir/i }));
 
         expect(onAdd).toHaveBeenCalledWith({ name: 'Leche con cacao' });
     });
@@ -79,13 +79,13 @@ describe('AddItemInput', () => {
     it('disables submit when name is empty', () => {
         render(<AddItemInput onAdd={vi.fn()} isLoading={false} />);
 
-        expect(screen.getByRole('button', { name: /anadir producto/i })).toBeDisabled();
+        expect(screen.getByRole('button', { name: /añadir producto/i })).toBeDisabled();
     });
 
     it('disables submit while loading', () => {
         render(<AddItemInput onAdd={vi.fn()} isLoading={true} />);
 
-        expect(screen.getByRole('button', { name: /anadir producto/i })).toBeDisabled();
+        expect(screen.getByRole('button', { name: /añadir producto/i })).toBeDisabled();
     });
 
     it('clears the input after successful submit', async () => {
@@ -95,7 +95,7 @@ describe('AddItemInput', () => {
         render(<AddItemInput onAdd={onAdd} isLoading={false} />);
 
         await user.type(screen.getByRole('combobox'), 'Pan');
-        await user.click(screen.getByRole('button', { name: /anadir/i }));
+        await user.click(screen.getByRole('button', { name: /añadir/i }));
 
         await waitFor(() => expect(screen.getByRole('combobox')).toHaveValue(''));
     });
@@ -107,7 +107,7 @@ describe('AddItemInput', () => {
         render(<AddItemInput onAdd={onAdd} isLoading={false} />);
 
         await user.type(screen.getByRole('combobox'), 'Pan');
-        await user.click(screen.getByRole('button', { name: /anadir/i }));
+        await user.click(screen.getByRole('button', { name: /añadir/i }));
 
         await waitFor(() => expect(onAdd).toHaveBeenCalled());
         expect(screen.getByRole('combobox')).toHaveValue('Pan');

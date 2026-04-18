@@ -1,0 +1,22 @@
+{
+    "title": "Welcome back",
+    "subtitle": "Your smart shopping list is waiting.",
+    "email_label": "Email",
+    "email_placeholder": "example@superlistia.com",
+    "password_label": "Password",
+    "show_password": "Show password",
+    "hide_password": "Hide password",
+    "remember": "Remember me",
+    "forgot": "Forgot my password",
+    "submit": "Sign in →",
+    "logging_in": "Signing in...",
+    "webauthn_cta": "Sign in with biometrics",
+    "webauthn_verifying": "Verifying...",
+    "webauthn_error": "Biometric authentication failed.",
+    "or_with_email": "or with email",
+    "verified_success": "Email verified successfully. You can now sign in.",
+    "verified_error": "The verification link is invalid or has expired.",
+    "no_account": "✦ Don't have an account?",
+    "join_waitlist": "Join the waitlist",
+    "waitlist_suffix": "and we'll notify you when the <1>Superlistia</1> experience is ready."
+}

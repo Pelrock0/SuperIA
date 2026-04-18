@@ -12,7 +12,7 @@ describe('SelectListModal', () => {
     it('renders title and list options', () => {
         render(<SelectListModal lists={lists} onSelect={vi.fn()} onCancel={vi.fn()} />);
 
-        expect(screen.getByRole('heading', { name: /anadir a que lista/i })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: /añadir a que lista/i })).toBeInTheDocument();
         expect(screen.getByText('Compra semanal')).toBeInTheDocument();
         expect(screen.getByText('Farmacia')).toBeInTheDocument();
     });

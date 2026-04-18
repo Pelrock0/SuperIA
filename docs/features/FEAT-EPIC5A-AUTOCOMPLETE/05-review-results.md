@@ -185,7 +185,7 @@ This is the **first Claude API integration in the codebase**. Every high-impact 
 | LLM03 | Supply Chain | PASS | Model ID from `config('ai.model')` (env-backed). No third-party MCP tools. No external model sources. |
 | LLM04 | Data & Model Poisoning | N/A | No fine-tuning, no RAG, no embedding store. |
 | LLM05 | Improper Output Handling | PASS | JSON parsed strictly. Invalid entries silently dropped. Category string not trusted — validated against `ProductCategory` enum at write time. All rendering via React JSX (auto-escapes). No `eval`, `exec`, shell, SQL from Claude output. |
-| LLM06 | Excessive Agency | PASS | Zero tools. Claude returns JSON array of suggestions. System does NOT execute any output as code. User must manually click "Anadir" to add a suggestion. |
+| LLM06 | Excessive Agency | PASS | Zero tools. Claude returns JSON array of suggestions. System does NOT execute any output as code. User must manually click "Añadir" to add a suggestion. |
 | LLM07 | System Prompt Leakage | PASS | System prompt is `private const`, no credentials inside. Even if leaked: reveals "suggest Spanish supermarket products, return JSON" — no security impact. Authorization enforced server-side. |
 | LLM08 | Vector & Embedding Weaknesses | N/A | No vector store, no embeddings. |
 | LLM09 | Misinformation | PASS | Suggestions are convenience hints for a shopping list, not authoritative advice. No medical/legal/financial context. Worst case: Claude suggests an odd product → user ignores it. |
@@ -371,7 +371,7 @@ This review is a **code-level JSX + Tailwind-class inspection** against the PRD,
 | Category | Status | Finding |
 |----------|--------|---------|
 | Discoverability | OK | Autocomplete dropdown appears below the add-item input with no extra user action needed. History section is visible on profile page between password and delete-account. Pre-fill hint (`prefilled-hint`) appears under the input when metadata came from a suggestion. |
-| Clarity | OK | Spanish labels throughout (`Anadir`, `Historial`, `IA`, `Limpiar todo`, `Olvidar`, `Mi historial de productos`, `Eliminar historial completo`, `Comprado N veces`, `Ultima: DD/MM/YYYY`). Source badges use short text. AI limit hint is explicit: "Has alcanzado tu limite diario de sugerencias IA". |
+| Clarity | OK | Spanish labels throughout (`Añadir`, `Historial`, `IA`, `Limpiar todo`, `Olvidar`, `Mi historial de productos`, `Eliminar historial completo`, `Comprado N veces`, `Ultima: DD/MM/YYYY`). Source badges use short text. AI limit hint is explicit: "Has alcanzado tu limite diario de sugerencias IA". |
 | Safety | OK | Clear-all is protected by a blocking confirm modal with irreversibility warning ("Esta accion no se puede deshacer"). Forget-one is immediate without confirm — acceptable, consistent with Epic 3 delete pattern and much less destructive than clearing everything. No undo, which is documented as a deliberate design choice. Destructive modal button uses red color, cancel is neutral gray. |
 | Feedback | OK | Loading states present (`history-loading`, autocomplete has no explicit loading but the dropdown is hidden until results arrive). Error states surface via red alert banners in the history list. Per-row forget shows "Olvidando..." while pending. `AddItemInput` shows `...` on the submit button while `isLoading`. Pre-fill hint makes it visually clear that metadata was populated from a suggestion. |
 | Consistency | OK | All components use the existing Tailwind design system (indigo-600 primary, rounded-lg cards, gray-50 page bg, shadow-sm sections, bg-red-50 errors). `ConfirmClearHistoryModal` mirrors the overlay pattern from Epic 2 `CreateListModal`, Epic 4 `ShareListModal`, and Epic 3 clear-completed confirm. `HistoryList` section styling matches the other profile sections (`bg-white rounded-lg shadow p-6` + `text-xl font-semibold` header). |
@@ -396,7 +396,7 @@ This review is a **code-level JSX + Tailwind-class inspection** against the PRD,
 - **Destructive actions have tiered protection**:
   - Clear-all: blocked by confirm modal with red button.
   - Forget-one: immediate but scoped (only affects that product name).
-  - Item addition from suggestion: never auto-submits — user still presses "Anadir".
+  - Item addition from suggestion: never auto-submits — user still presses "Añadir".
 - **Red button styling**: `bg-red-600 text-white hover:bg-red-700` on the clear-all confirm button. Contrasts with the neutral `bg-gray-200 text-gray-700` cancel. Visually distinct.
 - **No undo** on either clear-all or forget-one — design decision documented in implementation notes. Consistent with Epic 3's clear-completed and Epic 4's token-revoke patterns.
 

@@ -42,7 +42,7 @@ export default function ReplenishmentBanner({ activeLists = [], onAction }) {
             removeFromList(productoNombre);
             if (onAction) await onAction();
         } catch {
-            setError('Error al anadir el producto.');
+            setError('Error al añadir el producto.');
         } finally {
             setActionInProgress(null);
         }
@@ -137,7 +137,7 @@ export default function ReplenishmentBanner({ activeLists = [], onAction }) {
                                 className="text-xs bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 disabled:opacity-50"
                                 data-testid={`accept-${s.producto_nombre}`}
                             >
-                                Anadir
+                                Añadir
                             </button>
                             <button
                                 type="button"

@@ -5,7 +5,7 @@
 Epic 3 — Items dentro de una Lista. 6 user stories:
 
 - **HU-301**: Ver detalle de lista con items (pendientes arriba, comprados abajo, agrupados por categoria, contador progreso X de Y, gestos tactiles movil)
-- **HU-302**: Anadir item (nombre obligatorio max 80 chars, cantidad/unidad/categoria/precio opcional, unidades: kg/g/L/ml/ud/pack)
+- **HU-302**: Añadir item (nombre obligatorio max 80 chars, cantidad/unidad/categoria/precio opcional, unidades: kg/g/L/ml/ud/pack)
 - **HU-303**: Marcar item como comprado (toggle checkbox, tachado visual, baja al final, registrar en tabla `producto_historial` para alimentar Epic 5)
 - **HU-304**: Editar item (panel edicion: nombre, cantidad, unidad, categoria, precio)
 - **HU-305**: Eliminar item (swipe o boton, sin confirmacion, undo 5 segundos via snackbar)

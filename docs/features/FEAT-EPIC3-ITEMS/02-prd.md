@@ -133,10 +133,10 @@ Users can create and manage shopping lists but cannot add products to them. The 
 ## UX Decision
 
 - **UX Designer Required**: YES
-- **UX Artifacts**: Stitch MCP screens "Detalle lista" and "Anadir item" exist. Consumed at S4, reviewed at S5-UX.
+- **UX Artifacts**: Stitch MCP screens "Detalle lista" and "Añadir item" exist. Consumed at S4, reviewed at S5-UX.
 - **Screens involved**:
   - `ListDetailPage` — Stitch "Detalle lista" → `/app/listas/:id`
-  - `AddItemSheet` — Stitch "Anadir item" (inline input, not separate page)
+  - `AddItemSheet` — Stitch "Añadir item" (inline input, not separate page)
   - Edit panel (inline in ListDetailPage)
   - Undo snackbar (floating component)
 
@@ -155,7 +155,7 @@ Users can create and manage shopping lists but cannot add products to them. The 
 - Items without category appear under "Otros"
 - producto_historial is append-only — no edits, no deletes (except on account deletion via RGPD)
 - Undo is frontend-only: backend delete is immediate, frontend holds data 5s for re-creation
-- Stitch MCP screens "Detalle lista" and "Anadir item" are accessible
+- Stitch MCP screens "Detalle lista" and "Añadir item" are accessible
 
 ## Open Questions
 

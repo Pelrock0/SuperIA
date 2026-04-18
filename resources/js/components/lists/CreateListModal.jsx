@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const CATEGORIES = [
-    { value: '', label: 'Sin categoria' },
+    { value: '', label: 'Sin categoría' },
     { value: 'supermercado', label: 'Supermercado' },
     { value: 'mercado', label: 'Mercado' },
     { value: 'online', label: 'Online' },
@@ -83,7 +83,7 @@ export default function CreateListModal({ onClose, onSubmit, error }) {
 
                     <div>
                         <label htmlFor="list-category" className="block text-sm font-medium text-gray-700 mb-1">
-                            Categoria
+                            Categoría
                         </label>
                         <select
                             id="list-category"

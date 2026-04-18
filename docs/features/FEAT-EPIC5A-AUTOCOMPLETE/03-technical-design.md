@@ -628,7 +628,7 @@ No query caching in V1. Catalog caching deferred until real measurements justify
 | Madrid timezone hardcoded in config (chosen) | Explicit | Not ready for multi-region | **Selected** for MVP |
 | Per-user timezone | Respects users abroad | Out of MVP scope | Rejected |
 | Auto-submit on suggestion pick | Fewer clicks | Can't adjust quantity before saving | Rejected |
-| Manual "Anadir" after pick (chosen) | User control | One extra click | **Selected**: consistent with Epic 3 |
+| Manual "Añadir" after pick (chosen) | User control | One extra click | **Selected**: consistent with Epic 3 |
 
 ## Risks & Mitigations
 

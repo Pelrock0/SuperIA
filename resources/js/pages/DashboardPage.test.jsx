@@ -92,7 +92,7 @@ describe('DashboardPage', () => {
         renderPage();
         await waitFor(() => {
             expect(screen.getByText('Mi lista')).toBeInTheDocument();
-            expect(screen.getByText('1 / 3 articulos')).toBeInTheDocument();
+            expect(screen.getByText('1 / 3 artículos')).toBeInTheDocument();
         });
     });
 

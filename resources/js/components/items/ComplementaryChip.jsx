@@ -60,7 +60,7 @@ export default function ComplementaryChip({ productName, listId, onAccept, onDis
             className="flex flex-wrap items-center gap-2 mt-2 ml-8"
             data-testid="complementary-chip"
         >
-            <span className="text-xs text-gray-500">Tambien:</span>
+            <span className="text-xs text-gray-500">También:</span>
             {suggestions.map((s) => (
                 <button
                     key={s.nombre}

@@ -11,7 +11,7 @@ export default function RevokedLinkView() {
                 <div className="text-5xl mb-4" aria-hidden="true">🔒</div>
                 <h1 className="text-xl font-bold text-gray-900 mb-2">Enlace no disponible</h1>
                 <p className="text-sm text-gray-600 mb-6">
-                    Este enlace ya no esta activo. Pide uno nuevo al propietario de la lista.
+                    Este enlace ya no está activo. Pide uno nuevo al propietario de la lista.
                 </p>
                 <Link
                     to="/"

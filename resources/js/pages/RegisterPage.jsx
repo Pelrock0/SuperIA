@@ -70,7 +70,7 @@ export default function RegisterPage() {
                 const errData = error.response.data;
                 setErrors(errData.errors || { general: errData.error?.message });
             } else {
-                setErrors({ general: 'Ha ocurrido un error. Intentalo de nuevo.' });
+                setErrors({ general: 'Ha ocurrido un error. Inténtalo de nuevo.' });
             }
             setStatus('error');
         }

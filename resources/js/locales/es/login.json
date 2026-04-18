@@ -1,0 +1,22 @@
+{
+    "title": "Bienvenido de nuevo",
+    "subtitle": "Tu lista de compra inteligente te espera.",
+    "email_label": "Email",
+    "email_placeholder": "ejemplo@superlistia.com",
+    "password_label": "Password",
+    "show_password": "Mostrar contraseña",
+    "hide_password": "Ocultar contraseña",
+    "remember": "Recuérdame",
+    "forgot": "Olvidé mi contraseña",
+    "submit": "Iniciar sesión →",
+    "logging_in": "Entrando...",
+    "webauthn_cta": "Entrar con biometría",
+    "webauthn_verifying": "Verificando...",
+    "webauthn_error": "Autenticación biométrica fallida.",
+    "or_with_email": "o con email",
+    "verified_success": "Email verificado correctamente. Ya puedes iniciar sesión.",
+    "verified_error": "El enlace de verificación es inválido o ha expirado.",
+    "no_account": "✦ ¿No tienes cuenta?",
+    "join_waitlist": "Únete a la lista de espera",
+    "waitlist_suffix": "y te avisaremos cuando esté lista la experiencia <1>Superlistia</1>."
+}

@@ -90,7 +90,7 @@ Actualmente, cuando un usuario con cuenta en Superia abre un link compartido, es
 ### AC-10: Permisos respetados en acceso directo
 
 - **Given**: un colaborador con modo `read_only` accede a la lista desde su dashboard
-- **When**: intenta anadir o eliminar un item
+- **When**: intenta añadir o eliminar un item
 - **Then**: el backend devuelve 403. La UI no muestra controles de edicion.
 
 ## UX Decision

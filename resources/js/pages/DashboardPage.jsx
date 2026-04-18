@@ -149,7 +149,7 @@ export default function DashboardPage() {
                                 <span className="material-symbols-outlined" style={{ color: '#6ffbbe' }}>auto_awesome</span>
                             </div>
                             <h3 className="text-2xl font-bold leading-tight">Genera listas con IA</h3>
-                            <p className="max-w-xs" style={{ color: '#9ecde8' }}>Describe lo que necesitas y la IA creara tu lista de compra completa.</p>
+                            <p className="max-w-xs" style={{ color: '#9ecde8' }}>Describe lo que necesitas y la IA creará tu lista de compra completa.</p>
                             <Link
                                 to="/app/generar"
                                 className="px-6 py-3 rounded-xl font-bold w-fit mt-2 hover:opacity-90 transition-all active:scale-95 inline-block"
@@ -206,7 +206,7 @@ export default function DashboardPage() {
                                     <h4 className="text-xl font-bold mb-2" style={{ color: '#002736' }}>{list.name}</h4>
                                     <div className="flex items-center gap-2 mb-6" style={{ color: '#41484c' }}>
                                         <span className="material-symbols-outlined text-sm">checklist</span>
-                                        <span className="text-sm font-medium">{list.items_completed || 0} / {list.items_total || 0} articulos</span>
+                                        <span className="text-sm font-medium">{list.items_completed || 0} / {list.items_total || 0} artículos</span>
                                     </div>
                                     <div className="flex items-center justify-between">
                                         {list.is_shared && <span className="text-[12px] font-bold" style={{ color: '#00677d' }}>COMPARTIDA</span>}
@@ -295,7 +295,7 @@ export default function DashboardPage() {
                                             </p>
                                             <div className="flex items-center gap-2" style={{ color: '#41484c' }}>
                                                 <span className="material-symbols-outlined text-sm">checklist</span>
-                                                <span className="text-sm font-medium">{list.items_completed || 0} / {list.items_total || 0} articulos</span>
+                                                <span className="text-sm font-medium">{list.items_completed || 0} / {list.items_total || 0} artículos</span>
                                             </div>
                                         </div>
                                     ))}
@@ -315,7 +315,7 @@ export default function DashboardPage() {
                                             onClick={() => navigate(`/app/listas/${list.id}`)}
                                         >
                                             <h4 className="font-bold mb-1" style={{ color: '#002736' }}>{list.name}</h4>
-                                            <p className="text-xs" style={{ color: '#71787d' }}>{list.items_total || 0} articulos</p>
+                                            <p className="text-xs" style={{ color: '#71787d' }}>{list.items_total || 0} artículos</p>
                                             <div className="flex gap-2 mt-3">
                                                 <button onClick={(e) => { e.stopPropagation(); handleRestore(list.id); }} className="text-xs font-medium hover:opacity-70" style={{ color: '#00677d' }}>Restaurar</button>
                                                 <button onClick={(e) => { e.stopPropagation(); handleDelete(list.id); }} className="text-xs font-medium hover:opacity-70" style={{ color: '#ba1a1a' }}>Eliminar</button>

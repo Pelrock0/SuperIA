@@ -104,7 +104,7 @@ This feature is also the first use of Claude API in the product. Every following
 ### AC-6: Suggestion selection pre-fills item fields
 - **Given**: The dropdown shows "Leche entera, 1L, lacteos_huevos"
 - **When**: The user clicks that suggestion
-- **Then**: The add-item form populates name="Leche entera", quantity=1, unit="L", category="lacteos_huevos". The user still presses the existing "Anadir" button to create the item (no auto-submit).
+- **Then**: The add-item form populates name="Leche entera", quantity=1, unit="L", category="lacteos_huevos". The user still presses the existing "Añadir" button to create the item (no auto-submit).
 
 ### AC-7: Dropdown hides on no results
 - **Given**: A user types "xyzzz" and layers 1+2+3 all return empty

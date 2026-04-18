@@ -78,8 +78,8 @@ HIGH because:
 - **resources/js/pages/ProfilePage.jsx** — Nueva seccion "Mi historial de productos" con lista + boton limpiar
 - **resources/js/lib/suggestionsApi.js** — Cliente API dedicado
 - **tests/** — Full coverage: Unit tests para servicios, support, command; Feature tests para controladores, middleware, rate limit
-- **.env.example** — Anadir `CLAUDE_API_KEY`, `AI_BUDGET_CAP_MONTHLY_USD`, `AI_ADMIN_ALERT_EMAIL`
-- **composer.json** — Anadir `anthropic-ai/sdk` (o equivalente PHP oficial)
+- **.env.example** — Añadir `CLAUDE_API_KEY`, `AI_BUDGET_CAP_MONTHLY_USD`, `AI_ADMIN_ALERT_EMAIL`
+- **composer.json** — Añadir `anthropic-ai/sdk` (o equivalente PHP oficial)
 
 ## Resolved Questions
 

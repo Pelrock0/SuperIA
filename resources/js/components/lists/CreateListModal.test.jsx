@@ -19,7 +19,7 @@ describe('CreateListModal', () => {
         renderModal();
         expect(screen.getByText('Nueva lista')).toBeInTheDocument();
         expect(screen.getByLabelText(/nombre/i)).toBeInTheDocument();
-        expect(screen.getByLabelText(/categoria/i)).toBeInTheDocument();
+        expect(screen.getByLabelText(/categoría/i)).toBeInTheDocument();
         expect(screen.getByRole('button', { name: /crear lista/i })).toBeInTheDocument();
     });
 
@@ -43,7 +43,7 @@ describe('CreateListModal', () => {
 
         await user.type(screen.getByLabelText(/nombre/i), 'Compra');
         await user.click(screen.getByLabelText('🛒'));
-        await user.selectOptions(screen.getByLabelText(/categoria/i), 'supermercado');
+        await user.selectOptions(screen.getByLabelText(/categoría/i), 'supermercado');
         await user.click(screen.getByRole('button', { name: /crear lista/i }));
 
         expect(mockSubmit).toHaveBeenCalledWith({

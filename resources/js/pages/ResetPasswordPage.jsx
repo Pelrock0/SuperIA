@@ -78,7 +78,7 @@ export default function ResetPasswordPage() {
             setStatus('success');
         } catch (err) {
             const errData = err.response?.data?.error;
-            setError(errData?.message || 'Ha ocurrido un error. Intentalo de nuevo.');
+            setError(errData?.message || 'Ha ocurrido un error. Inténtalo de nuevo.');
             setStatus('error');
         }
     };

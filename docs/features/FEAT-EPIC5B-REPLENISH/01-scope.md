@@ -5,7 +5,7 @@
 Epic 5B — Alertas de reposicion inteligente + Sugerencias de ingredientes complementarios. 2 user stories:
 
 - **HU-503** (Alertas reposicion): Banner no intrusivo en el dashboard que sugiere productos habituales no presentes en ninguna lista activa del usuario. Logica sin IA primero (frecuencia + recencia), Claude API como fallback para patrones ambiguos. Max 3 sugerencias simultaneas. Acciones: aceptar / ignorar (24h) / silenciar (permanente).
-- **HU-504** (Complementarios): Chip bajo un item recien anadido sugiriendo productos que el usuario suele comprar juntos. Co-ocurrencia calculada en MySQL sobre `producto_historial` (ratio >= 0.60). Claude fallback para usuarios con <5 listas completadas. Best-effort, async, no bloquea el add path.
+- **HU-504** (Complementarios): Chip bajo un item recien añadido sugiriendo productos que el usuario suele comprar juntos. Co-ocurrencia calculada en MySQL sobre `producto_historial` (ratio >= 0.60). Claude fallback para usuarios con <5 listas completadas. Best-effort, async, no bloquea el add path.
 
 Consume la foundation de Epic 5A: `config/ai.php` (thresholds ya definidos), `ClaudeClientInterface`, `BudgetCap`, `AiUsageTracker`, `PromptSanitizer`, `HistoryAnonymizer`.
 
@@ -20,7 +20,7 @@ Consume la foundation de Epic 5A: `config/ai.php` (thresholds ya definidos), `Cl
 ## Justification
 
 HIGH because:
-1. **Dos superficies UI nuevas** con flujos distintos: dashboard banner con acciones multiples (accept/ignore/silence) + chip inline bajo item anadido con fetch async.
+1. **Dos superficies UI nuevas** con flujos distintos: dashboard banner con acciones multiples (accept/ignore/silence) + chip inline bajo item añadido con fetch async.
 2. **SQL no trivial para co-ocurrencia**: self-join sobre `producto_historial` agrupado por `lista_id`, calculando el ratio de pares sobre total de listas completadas del usuario. Performance sensible a medida que crece el historial.
 3. **Algoritmo de reposicion con heuristica de frecuencia media** (dias entre compras, factor configurable). Edge cases: primer producto del usuario, producto comprado solo una vez, frecuencia muy variable.
 4. **Dos nuevas tablas** (`user_silenced_products`, `ai_dismissed_suggestions`) con semantica distinta (permanente vs TTL 24h).
@@ -48,7 +48,7 @@ HIGH because:
   - `create_ai_dismissed_suggestions_table` (ignore TTL 24h per-user per-product)
 - **app/Models/** — `UserSilencedProduct`, `AiDismissedSuggestion`
 - **app/Enums/** — `ReplenishmentAction` (`accepted`, `ignored`, `silenced`) para documentacion y tests; no requiere columna en DB
-- **config/ai.php** — Anadir `replenishment_factor = 0.8` bajo `thresholds`
+- **config/ai.php** — Añadir `replenishment_factor = 0.8` bajo `thresholds`
 - **app/Services/** — New:
   - `ReplenishmentSuggestionService` (query frecuencia + recencia, max 3, excluye silenciados + dismissed + productos en listas activas)
   - `ComplementarySuggestionService` (co-ocurrencia local + Claude fallback)
@@ -56,7 +56,7 @@ HIGH because:
 - **app/Support/Ai/** — Extender `ClaudeClientInterface` con `suggestComplements(string $productName): array` + impl en `ClaudeClient` y `FakeClaudeClient`
 - **app/Http/Controllers/** — New:
   - `ReplenishmentController` (GET dashboard, POST accept, POST ignore, POST silence)
-  - `ComplementController` (GET complements para producto recien anadido)
+  - `ComplementController` (GET complements para producto recien añadido)
 - **app/Http/Requests/** — New FormRequests para accept/ignore/silence + complement query
 - **routes/api.php** — Nuevos endpoints bajo el grupo JWT existente
 - **resources/js/components/dashboard/** — Nuevo `ReplenishmentBanner.jsx` (hasta 3 chips, con 3 acciones por item) + `SelectListModal.jsx` (selector cuando >1 lista activa)

@@ -172,7 +172,7 @@ describe('LoginPage', () => {
             const user = userEvent.setup();
             webauthnApi.isSupported.mockReturnValue(true);
             webauthnApi.probeEnabled.mockResolvedValue(true);
-            mockLoginWithPasskey.mockRejectedValueOnce(new Error('Autenticacion cancelada.'));
+            mockLoginWithPasskey.mockRejectedValueOnce(new Error('Autenticación cancelada.'));
             renderPage();
             const cta = await screen.findByTestId('webauthn-login-passkey');
             await user.click(cta);
@@ -233,7 +233,7 @@ describe('LoginPage', () => {
             const cta = await screen.findByTestId('webauthn-login-passkey');
             await user.click(cta);
             await waitFor(() => {
-                expect(screen.getByRole('alert')).toHaveTextContent(/Autenticacion biometrica fallida/i);
+                expect(screen.getByRole('alert')).toHaveTextContent(/Autenticación biométrica fallida/i);
             });
         });
     });

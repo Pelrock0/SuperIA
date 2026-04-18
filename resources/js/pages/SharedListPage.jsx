@@ -19,8 +19,8 @@ import EditItemPanel from '../components/items/EditItemPanel';
 const CATEGORY_LABELS = {
     frutas_verduras: 'Frutas y verduras',
     carnes_pescados: 'Carnes y pescados',
-    lacteos_huevos: 'Lacteos y huevos',
-    panaderia: 'Panaderia',
+    lacteos_huevos: 'Lácteos y huevos',
+    panaderia: 'Panadería',
     bebidas: 'Bebidas',
     congelados: 'Congelados',
     limpieza: 'Limpieza',
@@ -192,7 +192,7 @@ export default function SharedListPage() {
             await loadList();
             return true;
         } catch {
-            setError('Error al anadir el item.');
+            setError('Error al añadir el item.');
             return false;
         }
     };
@@ -488,7 +488,7 @@ export default function SharedListPage() {
                             <span className="material-symbols-outlined" style={{ color: '#71787d' }}>inventory_2</span>
                         </div>
                         <p style={{ fontSize: '12px', fontWeight: 700, color: '#71787d', textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>
-                            Esta lista esta vacia.
+                            Esta lista está vacía.
                         </p>
                     </div>
                 ) : (

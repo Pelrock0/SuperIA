@@ -153,7 +153,7 @@ export default function HeroSection() {
                                     <span className="material-symbols-outlined" style={{ fontSize: '14px', color: '#6ffbbe' }}>auto_awesome</span>
                                 </div>
                                 <p style={{ margin: 0, fontSize: '14px', fontWeight: 700, color: '#fff' }}>Genera listas con IA</p>
-                                <p style={{ margin: '4px 0 10px', fontSize: '10px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.4 }}>Describe lo que necesitas y la IA creara tu lista.</p>
+                                <p style={{ margin: '4px 0 10px', fontSize: '10px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.4 }}>Describe lo que necesitas y la IA creará tu lista.</p>
                                 <span style={{ fontSize: '11px', fontWeight: 700, color: '#002736', backgroundColor: '#6ffbbe', padding: '6px 14px', borderRadius: '8px', display: 'inline-block' }}>Generar lista ✨</span>
                                 <div style={{ position: 'absolute', right: '-8px', bottom: '-8px', opacity: 0.1 }}>
                                     <span className="material-symbols-outlined" style={{ fontSize: '72px', color: '#fff' }}>shopping_basket</span>
@@ -169,7 +169,7 @@ export default function HeroSection() {
                                         </div>
                                         <div>
                                             <p style={{ margin: 0, fontSize: '14px', fontWeight: 700, color: '#002736' }}>🛒 Semanal</p>
-                                            <p style={{ margin: 0, fontSize: '10px', color: '#71787d' }}>3 / 8 articulos</p>
+                                            <p style={{ margin: 0, fontSize: '10px', color: '#71787d' }}>3 / 8 artículos</p>
                                         </div>
                                     </div>
                                     <span style={{ fontSize: '9px', color: '#71787d', backgroundColor: '#f2f4f6', padding: '2px 8px', borderRadius: '9999px' }}>Hoy</span>
@@ -177,8 +177,8 @@ export default function HeroSection() {
                                 {/* Mini item list */}
                                 <div style={{ borderTop: '1px solid #f2f4f6', paddingTop: '8px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                                     {[
-                                        { name: 'Leche entera', cat: 'Lacteos', done: true },
-                                        { name: 'Pan integral', cat: 'Panaderia', done: true },
+                                        { name: 'Leche entera', cat: 'Lácteos', done: true },
+                                        { name: 'Pan integral', cat: 'Panadería', done: true },
                                         { name: 'Pollo', cat: 'Carnes', done: true },
                                         { name: 'Manzanas', cat: 'Frutas', done: false },
                                         { name: 'Arroz', cat: 'Otros', done: false },
@@ -201,7 +201,7 @@ export default function HeroSection() {
                                 </div>
                                 <div style={{ flex: 1 }}>
                                     <p style={{ margin: 0, fontSize: '14px', fontWeight: 700, color: '#002736' }}>🏠 Limpieza</p>
-                                    <p style={{ margin: 0, fontSize: '10px', color: '#71787d' }}>0 / 4 articulos</p>
+                                    <p style={{ margin: 0, fontSize: '10px', color: '#71787d' }}>0 / 4 artículos</p>
                                 </div>
                                 <span style={{ fontSize: '9px', color: '#005236', backgroundColor: '#6ffbbe', padding: '2px 8px', borderRadius: '9999px', fontWeight: 600 }}>COMPARTIDA</span>
                             </div>

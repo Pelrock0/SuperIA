@@ -6,8 +6,8 @@ const COLORS = ['#4f46e5', '#7c3aed', '#ec4899', '#f59e0b', '#10b981'];
 const CATEGORY_LABELS = {
     frutas_verduras: 'Frutas y verduras',
     carnes_pescados: 'Carnes y pescados',
-    lacteos_huevos: 'Lacteos y huevos',
-    panaderia: 'Panaderia',
+    lacteos_huevos: 'Lácteos y huevos',
+    panaderia: 'Panadería',
     bebidas: 'Bebidas',
     congelados: 'Congelados',
     limpieza: 'Limpieza',
@@ -20,7 +20,7 @@ export default function StatsSection({ stats }) {
     if (!stats || !stats.has_enough_data) {
         return (
             <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6 text-center" data-testid="stats-not-enough">
-                <p className="text-gray-500 text-sm">Completa al menos 3 listas para ver estadisticas.</p>
+                <p className="text-gray-500 text-sm">Completa al menos 3 listas para ver estadísticas.</p>
             </div>
         );
     }
@@ -39,14 +39,14 @@ export default function StatsSection({ stats }) {
                             <Bar dataKey="total" fill="#4f46e5" radius={[4, 4, 0, 0]} />
                         </BarChart>
                     </ResponsiveContainer>
-                    <p className="text-xs text-gray-400 mt-2">Los importes son estimaciones salvo confirmacion real.</p>
+                    <p className="text-xs text-gray-400 mt-2">Los importes son estimaciones salvo confirmación real.</p>
                 </div>
             )}
 
             {/* Top Categories */}
             {stats.top_categories.length > 0 && (
                 <div className="bg-white border border-gray-200 rounded-lg p-6" data-testid="top-categories">
-                    <h3 className="text-sm font-semibold text-gray-900 mb-4">Categorias mas compradas</h3>
+                    <h3 className="text-sm font-semibold text-gray-900 mb-4">Categorías más compradas</h3>
                     <div className="flex gap-6">
                         <div className="w-32 h-32 flex-shrink-0">
                             <ResponsiveContainer width="100%" height="100%">

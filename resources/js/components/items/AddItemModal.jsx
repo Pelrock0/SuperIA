@@ -6,7 +6,7 @@ const DUPLICATE_THRESHOLD = 0.80;
 
 const CATEGORY_OPTIONS = [
     { value: 'frutas_verduras', label: 'Frutas', badge: '#6ffbbe', badgeText: '#002113' },
-    { value: 'lacteos_huevos', label: 'Lacteos', badge: '#b3ebff', badgeText: '#001f27' },
+    { value: 'lacteos_huevos', label: 'Lácteos', badge: '#b3ebff', badgeText: '#001f27' },
     { value: 'carnes_pescados', label: 'Carnes', badge: '#ffdad6', badgeText: '#93000a' },
     { value: 'bebidas', label: 'Bebidas', badge: '#c1e8ff', badgeText: '#001e2b' },
     { value: 'panaderia', label: 'Pan', badge: '#e6e8ea', badgeText: '#41484c' },
@@ -158,7 +158,7 @@ export default function AddItemModal({ listId, existingItems = [], onAdd, onIncr
                                 onChange={(e) => handleNameChange(e.target.value)}
                                 onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSubmit(); } }}
                                 enterKeyHint="send"
-                                placeholder="¿Que necesitas?"
+                                placeholder="¿Qué necesitas?"
                                 data-testid="modal-product-input"
                                 style={{
                                     width: '100%', background: 'transparent', border: 'none',
@@ -230,7 +230,7 @@ export default function AddItemModal({ listId, existingItems = [], onAdd, onIncr
                                         borderRadius: 8, border: 'none', cursor: 'pointer',
                                     }}
                                 >
-                                    Anadir igualmente
+                                    Añadir igualmente
                                 </button>
                                 <button
                                     onClick={handleIncrement}
@@ -309,7 +309,7 @@ export default function AddItemModal({ listId, existingItems = [], onAdd, onIncr
                     {/* Category selector */}
                     <div>
                         <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: '#71787d', marginBottom: 8, paddingLeft: 4 }}>
-                            Categoria
+                            Categoría
                         </label>
                         <div style={{
                             display: 'flex', flexWrap: 'wrap', gap: 8, paddingBottom: 8,
@@ -352,7 +352,7 @@ export default function AddItemModal({ listId, existingItems = [], onAdd, onIncr
                                 fontFamily: "'Inter', sans-serif",
                             }}
                         >
-                            {isSubmitting ? 'Anadiendo...' : 'Anadir'}
+                            {isSubmitting ? 'Añadiendo...' : 'Añadir'}
                         </button>
                         <button
                             onClick={onClose}

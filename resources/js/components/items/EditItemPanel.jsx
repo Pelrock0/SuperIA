@@ -11,11 +11,11 @@ const UNITS = [
 ];
 
 const CATEGORIES = [
-    { value: '', label: 'Sin categoria' },
+    { value: '', label: 'Sin categoría' },
     { value: 'frutas_verduras', label: 'Frutas y verduras' },
     { value: 'carnes_pescados', label: 'Carnes y pescados' },
-    { value: 'lacteos_huevos', label: 'Lacteos y huevos' },
-    { value: 'panaderia', label: 'Panaderia' },
+    { value: 'lacteos_huevos', label: 'Lácteos y huevos' },
+    { value: 'panaderia', label: 'Panadería' },
     { value: 'bebidas', label: 'Bebidas' },
     { value: 'congelados', label: 'Congelados' },
     { value: 'limpieza', label: 'Limpieza' },
@@ -77,7 +77,7 @@ export default function EditItemPanel({ item, onSave, onClose }) {
                     </div>
 
                     <div>
-                        <label htmlFor="edit-category" className="block text-sm font-medium text-gray-700 mb-1">Categoria</label>
+                        <label htmlFor="edit-category" className="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
                         <select id="edit-category" name="category" value={formData.category} onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                             {CATEGORIES.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
                         </select>

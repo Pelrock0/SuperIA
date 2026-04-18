@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+import { useTranslation, Trans } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import SuperlistiaLogo from '../components/SuperlistiaLogo';
 import { isSupported as isWebauthnSupported, probeEnabled as probeWebauthnEnabled } from '../lib/webauthnApi';
 
 export default function LoginPage() {
+    const { t, i18n } = useTranslation(['login', 'common']);
     const navigate = useNavigate();
     const { login, loginWithPasskey, isAuthenticated } = useAuth();
     const [formData, setFormData] = useState({
@@ -40,7 +42,7 @@ export default function LoginPage() {
             await loginWithPasskey(null);
             navigate('/app', { replace: true });
         } catch (err) {
-            const msg = err.response?.data?.error?.message || err.message || 'Autenticacion biometrica fallida.';
+            const msg = err.response?.data?.error?.message || err.message || t('login:webauthn_error');
             setError(msg);
             setWebauthnStatus('error');
         }
@@ -65,7 +67,7 @@ export default function LoginPage() {
             navigate('/app', { replace: true });
         } catch (err) {
             const errData = err.response?.data?.error;
-            setError(errData?.message || 'Ha ocurrido un error. Intentalo de nuevo.');
+            setError(errData?.message || t('common:generic_error'));
             setStatus('error');
         }
     };
@@ -95,10 +97,10 @@ export default function LoginPage() {
                         }}
                     >
                         <h1 className="text-3xl font-bold text-center mb-2" style={{ color: '#191c1e' }}>
-                            Bienvenido de nuevo
+                            {t('login:title')}
                         </h1>
                         <p className="text-center mb-8" style={{ color: '#41484c' }}>
-                            Tu lista de compra inteligente te espera.
+                            {t('login:subtitle')}
                         </p>
 
                         {webauthnAvailable && (
@@ -112,11 +114,11 @@ export default function LoginPage() {
                                     data-testid="webauthn-login-passkey"
                                 >
                                     <span className="material-symbols-outlined" aria-hidden="true">fingerprint</span>
-                                    {webauthnStatus === 'loading' ? 'Verificando...' : 'Entrar con biometría'}
+                                    {webauthnStatus === 'loading' ? t('login:webauthn_verifying') : t('login:webauthn_cta')}
                                 </button>
                                 <div className="flex items-center gap-3 my-5">
                                     <div className="flex-1 h-px" style={{ backgroundColor: '#c1c7cd' }}></div>
-                                    <span className="text-xs uppercase tracking-wide" style={{ color: '#71787d' }}>o con email</span>
+                                    <span className="text-xs uppercase tracking-wide" style={{ color: '#71787d' }}>{t('login:or_with_email')}</span>
                                     <div className="flex-1 h-px" style={{ backgroundColor: '#c1c7cd' }}></div>
                                 </div>
                             </div>
@@ -125,12 +127,12 @@ export default function LoginPage() {
                         <form onSubmit={handleSubmit} className="space-y-5" data-testid="login-form">
                             {verified === 'success' && (
                                 <div className="bg-green-50 text-green-700 p-3 rounded-lg text-sm" role="status">
-                                    Email verificado correctamente. Ya puedes iniciar sesión.
+                                    {t('login:verified_success')}
                                 </div>
                             )}
                             {verified === 'error' && (
                                 <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm" role="alert">
-                                    El enlace de verificacion es invalido o ha expirado.
+                                    {t('login:verified_error')}
                                 </div>
                             )}
                             {error && (
@@ -141,7 +143,7 @@ export default function LoginPage() {
 
                             <div>
                                 <label htmlFor="email" className="block text-xs font-medium uppercase tracking-wide mb-2" style={{ color: '#41484c' }}>
-                                    Email
+                                    {t('login:email_label')}
                                 </label>
                                 <input
                                     type="email"
@@ -152,7 +154,7 @@ export default function LoginPage() {
                                     required
                                     className="w-full px-4 py-3 rounded-lg text-base transition-colors outline-none"
                                     style={{ border: '1px solid #c1c7cd', backgroundColor: '#f7f9fb', color: '#191c1e' }}
-                                    placeholder="ejemplo@superlistia.com"
+                                    placeholder={t('login:email_placeholder')}
                                     onFocus={(e) => e.target.style.borderColor = '#002736'}
                                     onBlur={(e) => e.target.style.borderColor = '#c1c7cd'}
                                 />
@@ -160,7 +162,7 @@ export default function LoginPage() {
 
                             <div>
                                 <label htmlFor="password" className="block text-xs font-medium uppercase tracking-wide mb-2" style={{ color: '#41484c' }}>
-                                    Password
+                                    {t('login:password_label')}
                                 </label>
                                 <div className="relative">
                                     <input
@@ -179,7 +181,7 @@ export default function LoginPage() {
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
                                         className="absolute right-3 top-1/2 -translate-y-1/2 p-1 opacity-50 hover:opacity-100"
-                                        aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                                        aria-label={showPassword ? t('login:hide_password') : t('login:show_password')}
                                     >
                                         {showPassword ? '🙈' : '👁'}
                                     </button>
@@ -196,10 +198,10 @@ export default function LoginPage() {
                                         className="rounded"
                                         style={{ accentColor: '#002736' }}
                                     />
-                                    <span className="text-sm" style={{ color: '#41484c' }}>Recuérdame</span>
+                                    <span className="text-sm" style={{ color: '#41484c' }}>{t('login:remember')}</span>
                                 </label>
                                 <Link to="/forgot-password" className="text-sm hover:opacity-70 transition-opacity" style={{ color: '#41484c' }}>
-                                    Olvidé mi contraseña
+                                    {t('login:forgot')}
                                 </Link>
                             </div>
 
@@ -211,7 +213,7 @@ export default function LoginPage() {
                                 onMouseOver={(e) => { if (!e.target.disabled) e.target.style.backgroundColor = '#003e54'; }}
                                 onMouseOut={(e) => e.target.style.backgroundColor = '#002736'}
                             >
-                                {status === 'loading' ? 'Entrando...' : 'Iniciar sesión →'}
+                                {status === 'loading' ? t('login:logging_in') : t('login:submit')}
                             </button>
                         </form>
 
@@ -223,21 +225,24 @@ export default function LoginPage() {
                             className="inline-block text-sm font-medium px-4 py-2 rounded-full"
                             style={{ color: '#003e54', backgroundColor: '#c1e8ff', textDecoration: 'none' }}
                         >
-                            ✦ ¿No tienes cuenta?
+                            {t('login:no_account')}
                         </a>
                         <p className="text-sm mt-3" style={{ color: '#41484c' }}>
                             <a href="/#waitlist" style={{ color: '#003e54', textDecoration: 'underline' }}>
-                                Únete a la lista de espera
+                                {t('login:join_waitlist')}
                             </a>{' '}
-                            y te avisaremos cuando esté lista la experiencia <strong style={{ color: '#002736' }}>Superlistia</strong>.
+                            <Trans
+                                i18nKey="login:waitlist_suffix"
+                                components={{ 1: <strong style={{ color: '#002736' }} /> }}
+                            />
                         </p>
                     </div>
                 </div>
             </div>
 
             <div className="flex justify-center gap-6 py-6">
-                <span className="text-xs cursor-pointer hover:opacity-70" style={{ color: '#71787d' }}>Ayuda</span>
-                <span className="text-xs" style={{ color: '#71787d' }}>ES</span>
+                <span className="text-xs cursor-pointer hover:opacity-70" style={{ color: '#71787d' }}>{t('common:help')}</span>
+                <span className="text-xs" style={{ color: '#71787d' }}>{i18n.language.slice(0, 2).toUpperCase()}</span>
             </div>
         </div>
     );

@@ -503,7 +503,7 @@ public function index(ComplementQueryRequest $request): JsonResponse
 - Props: `productName`, `listId`, `onAccept(suggestion)`, `onDismiss()`
 - On mount: fetches `GET /api/suggestions/complements?product={productName}&list_id={listId}`
 - Renders `null` if no suggestions or if dismissed
-- Renders up to 2 pills: "Quieres anadir tambien: [name]" + accept button + dismiss x
+- Renders up to 2 pills: "Quieres añadir tambien: [name]" + accept button + dismiss x
 - Auto-hide after 30 seconds via `setTimeout`
 - Accept fires the chip's `onAccept` which triggers `ListItemService::create` via parent component
 

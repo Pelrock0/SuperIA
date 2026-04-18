@@ -11,11 +11,11 @@ export default function SelectListModal({ lists, onSelect, onCancel, productName
         >
             <div className="bg-white rounded-lg shadow-xl max-w-sm w-full p-6">
                 <h3 id="select-list-title" className="text-lg font-bold text-gray-900 mb-2">
-                    Anadir a que lista?
+                    Añadir a que lista?
                 </h3>
                 {productName && (
                     <p className="text-sm text-gray-600 mb-4">
-                        Elige la lista donde quieres anadir <span className="font-medium">{productName}</span>.
+                        Elige la lista donde quieres añadir <span className="font-medium">{productName}</span>.
                     </p>
                 )}
 

@@ -10,7 +10,7 @@ export default function ItemAutocomplete({
     value,
     onChange,
     onSelect,
-    placeholder = 'Anadir producto...',
+    placeholder = 'Añadir producto...',
     inputId = 'autocomplete-input',
     disabled = false,
 }) {

@@ -488,7 +488,7 @@ export default function ProfilePage() {
                                 <span className="material-symbols-outlined" style={{ color: T.secondary }}>mail</span>
                                 <div>
                                     <span style={{ fontWeight: 500, color: T.primary, fontSize: 14 }}>Resumen semanal por email</span>
-                                    <p style={{ color: T.onSurfaceVariant, fontSize: 12, margin: '2px 0 0' }}>Cada lunes recibiras lo que necesitas comprar.</p>
+                                    <p style={{ color: T.onSurfaceVariant, fontSize: 12, margin: '2px 0 0' }}>Cada lunes recibirás lo que necesitas comprar.</p>
                                 </div>
                             </div>
                             <button

@@ -91,7 +91,7 @@ export default function ActivityLogView({ listId }) {
                         <p className="text-xs text-gray-500" data-testid="activity-loading">Cargando actividad...</p>
                     ) : entries.length === 0 ? (
                         <p className="text-xs text-gray-500" data-testid="activity-empty">
-                            Aun no hay actividad en esta lista.
+                            Aún no hay actividad en esta lista.
                         </p>
                     ) : (
                         <ul className="space-y-2">

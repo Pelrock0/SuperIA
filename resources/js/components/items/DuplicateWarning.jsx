@@ -18,7 +18,7 @@ export default function DuplicateWarning({ matchedName, onAddAnyway, onIncrement
                     className="text-xs bg-white border border-amber-300 text-amber-800 px-3 py-1 rounded hover:bg-amber-100 disabled:opacity-50"
                     data-testid="add-anyway"
                 >
-                    Anadir de todas formas
+                    Añadir de todas formas
                 </button>
                 <button
                     type="button"

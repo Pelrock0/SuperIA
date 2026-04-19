@@ -17,11 +17,11 @@ const mockEstimate = {
 };
 
 describe('PriceBar', () => {
-    it('renders nothing when no estimate and not calculating', () => {
-        const { container } = render(
-            <PriceBar estimate={null} onRecalculate={vi.fn()} isCalculating={false} />,
-        );
-        expect(container.querySelector('[data-testid="price-bar"]')).toBeNull();
+    it('renders empty state when no estimate and not calculating', () => {
+        render(<PriceBar estimate={null} onRecalculate={vi.fn()} isCalculating={false} />);
+        expect(screen.getByTestId('price-bar')).toBeInTheDocument();
+        expect(screen.getByTestId('no-price-data')).toBeInTheDocument();
+        expect(screen.getByTestId('recalculate-button')).toBeInTheDocument();
     });
 
     it('shows calculating state', () => {

@@ -16,10 +16,13 @@ vi.mock('react-router-dom', async () => {
     };
 });
 
+const mockRefreshUser = vi.fn(() => Promise.resolve());
+
 vi.mock('../context/AuthContext', () => ({
     useAuth: () => ({
         login: mockLogin,
         loginWithPasskey: mockLoginWithPasskey,
+        refreshUser: mockRefreshUser,
         isAuthenticated: false,
         isLoading: false,
     }),
@@ -28,6 +31,9 @@ vi.mock('../context/AuthContext', () => ({
 vi.mock('../lib/webauthnApi', () => ({
     isSupported: vi.fn(() => false),
     probeEnabled: vi.fn(() => Promise.resolve(false)),
+    supportsConditionalMediation: vi.fn(() => Promise.resolve(false)),
+    authenticateConditional: vi.fn(() => Promise.resolve(null)),
+    markDeviceRegistered: vi.fn(),
 }));
 
 import * as webauthnApi from '../lib/webauthnApi';

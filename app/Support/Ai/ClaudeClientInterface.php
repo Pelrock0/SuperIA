@@ -88,4 +88,14 @@ interface ClaudeClientInterface
      * @throws \App\Support\Ai\Exceptions\ClaudeException on any failure
      */
     public function inferCategory(string $productName): array;
+
+    /**
+     * Estimate the price range for a single Spanish supermarket product by name.
+     *
+     * @param  string  $name  sanitized product name (already cleaned)
+     * @return array{precio_min: float, precio_max: float, estimated_cost_usd: float}
+     *
+     * @throws \App\Support\Ai\Exceptions\ClaudeException on any failure
+     */
+    public function estimateItemPrice(string $name): array;
 }

@@ -3,12 +3,12 @@ import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import SuperlistiaLogo from '../components/SuperlistiaLogo';
-import { isSupported as isWebauthnSupported, probeEnabled as probeWebauthnEnabled, supportsConditionalMediation, authenticateConditional, markDeviceRegistered } from '../lib/webauthnApi';
+import { isSupported as isWebauthnSupported, probeEnabled as probeWebauthnEnabled } from '../lib/webauthnApi';
 
 export default function LoginPage() {
     const { t, i18n } = useTranslation(['login', 'common']);
     const navigate = useNavigate();
-    const { login, loginWithPasskey, isAuthenticated, refreshUser } = useAuth();
+    const { login, loginWithPasskey, isAuthenticated } = useAuth();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -26,24 +26,9 @@ export default function LoginPage() {
         if (!isWebauthnSupported()) {
             return;
         }
-        const abortController = new AbortController();
-        probeWebauthnEnabled().then(async (enabled) => {
+        probeWebauthnEnabled().then((enabled) => {
             setWebauthnAvailable(enabled);
-            if (!enabled) return;
-            const conditional = await supportsConditionalMediation();
-            if (!conditional) return;
-            try {
-                const result = await authenticateConditional(abortController.signal);
-                if (result) {
-                    markDeviceRegistered();
-                    await refreshUser();
-                    navigate('/app', { replace: true });
-                }
-            } catch {
-                // silent — user can still use the button
-            }
         }).catch(() => setWebauthnAvailable(false));
-        return () => abortController.abort();
     }, []);
 
     if (isAuthenticated) {

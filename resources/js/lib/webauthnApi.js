@@ -149,6 +149,20 @@ export async function registerCredential(name) {
     return completeResp.data.data;
 }
 
+export function isConditionalMediationSupported() {
+    return typeof PublicKeyCredential !== 'undefined'
+        && typeof PublicKeyCredential.isConditionalMediationAvailable === 'function';
+}
+
+export async function supportsConditionalMediation() {
+    if (!isConditionalMediationSupported()) return false;
+    try {
+        return await PublicKeyCredential.isConditionalMediationAvailable();
+    } catch {
+        return false;
+    }
+}
+
 // --- Authentication ---
 
 export async function authenticate(email = null) {
@@ -164,7 +178,7 @@ export async function authenticate(email = null) {
 
     let assertion;
     try {
-        assertion = await navigator.credentials.get({ publicKey });
+        assertion = await navigator.credentials.get({ publicKey, mediation: 'optional' });
     } catch (err) {
         if (err?.name === 'NotAllowedError') {
             throw new Error('Autenticacion cancelada.');
@@ -175,6 +189,42 @@ export async function authenticate(email = null) {
     if (!assertion) {
         throw new Error('No se recibio respuesta del navegador.');
     }
+
+    const completeResp = await api.post('/auth/webauthn/authenticate/complete', {
+        handle,
+        credential: encodeAssertionCredential(assertion),
+    });
+
+    const { token, user } = completeResp.data.data;
+    setToken(token);
+
+    return { token, user };
+}
+
+export async function authenticateConditional(signal) {
+    if (!isSupported()) {
+        throw new Error('Tu dispositivo no soporta biometria.');
+    }
+
+    const beginResp = await api.post('/auth/webauthn/authenticate/begin', {});
+    const { handle, options } = beginResp.data.data;
+
+    const publicKey = decodeRequestOptions(options);
+
+    let assertion;
+    try {
+        assertion = await navigator.credentials.get({ publicKey, mediation: 'conditional', signal });
+    } catch (err) {
+        if (err?.name === 'AbortError') {
+            return null;
+        }
+        if (err?.name === 'NotAllowedError') {
+            throw new Error('Autenticacion cancelada.');
+        }
+        throw new Error('No se pudo autenticar con biometria.');
+    }
+
+    if (!assertion) return null;
 
     const completeResp = await api.post('/auth/webauthn/authenticate/complete', {
         handle,

@@ -5,12 +5,13 @@ import HeroSection from './HeroSection';
 describe('HeroSection', () => {
     it('renders headline', () => {
         render(<HeroSection />);
-        expect(screen.getByText(/La compra/)).toBeInTheDocument();
-        expect(screen.getByText(/más inteligente/)).toBeInTheDocument();
+        expect(screen.getByText(/La lista de la compra con IA/)).toBeInTheDocument();
+        expect(screen.getByText(/Sin anuncios/)).toBeInTheDocument();
     });
 
     it('renders description', () => {
         render(<HeroSection />);
-        expect(screen.getByText(/Listas de compra con IA/)).toBeInTheDocument();
+        expect(screen.getByText(/Aprende lo que compras/)).toBeInTheDocument();
+        expect(screen.getByText(/Hecha en España/)).toBeInTheDocument();
     });
 });

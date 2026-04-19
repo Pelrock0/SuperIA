@@ -4,7 +4,21 @@ export default function PriceBar({ estimate, onRecalculate, isCalculating }) {
     const [expanded, setExpanded] = useState(false);
 
     if (!estimate && !isCalculating) {
-        return null;
+        return (
+            <section className="bg-white border border-gray-200 rounded-lg p-4 mt-6" data-testid="price-bar">
+                <div className="flex items-center justify-between">
+                    <p className="text-sm text-gray-500" data-testid="no-price-data">Sin estimación de precios</p>
+                    <button
+                        type="button"
+                        onClick={onRecalculate}
+                        className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded hover:bg-gray-200 ml-3 flex-shrink-0"
+                        data-testid="recalculate-button"
+                    >
+                        Calcular
+                    </button>
+                </div>
+            </section>
+        );
     }
 
     const formatPrice = (value) => {

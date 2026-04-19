@@ -12,8 +12,9 @@ describe('DataCommitment', () => {
 
     it('renders privacy commitments with check marks', () => {
         render(<DataCommitment />);
-        expect(screen.getByText('Encriptado de extremo a extremo')).toBeInTheDocument();
-        expect(screen.getByText('Sin rastreadores de terceros')).toBeInTheDocument();
+        expect(screen.getByText('Sin rastreadores.')).toBeInTheDocument();
+        expect(screen.getByText('Sin venta de datos.')).toBeInTheDocument();
+        expect(screen.getByText('Conexión cifrada.')).toBeInTheDocument();
     });
 
     it('renders privacy description', () => {

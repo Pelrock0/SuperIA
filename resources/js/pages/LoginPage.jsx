@@ -3,12 +3,12 @@ import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import SuperlistiaLogo from '../components/SuperlistiaLogo';
-import { isSupported as isWebauthnSupported, probeEnabled as probeWebauthnEnabled } from '../lib/webauthnApi';
+import { isSupported as isWebauthnSupported, probeEnabled as probeWebauthnEnabled, supportsConditionalMediation, authenticateConditional, markDeviceRegistered } from '../lib/webauthnApi';
 
 export default function LoginPage() {
     const { t, i18n } = useTranslation(['login', 'common']);
     const navigate = useNavigate();
-    const { login, loginWithPasskey, isAuthenticated } = useAuth();
+    const { login, loginWithPasskey, isAuthenticated, refreshUser } = useAuth();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -26,9 +26,24 @@ export default function LoginPage() {
         if (!isWebauthnSupported()) {
             return;
         }
-        probeWebauthnEnabled().then((enabled) => {
+        const abortController = new AbortController();
+        probeWebauthnEnabled().then(async (enabled) => {
             setWebauthnAvailable(enabled);
+            if (!enabled) return;
+            const conditional = await supportsConditionalMediation();
+            if (!conditional) return;
+            try {
+                const result = await authenticateConditional(abortController.signal);
+                if (result) {
+                    markDeviceRegistered();
+                    await refreshUser();
+                    navigate('/app', { replace: true });
+                }
+            } catch {
+                // silent — user can still use the button
+            }
         }).catch(() => setWebauthnAvailable(false));
+        return () => abortController.abort();
     }, []);
 
     if (isAuthenticated) {
@@ -152,6 +167,7 @@ export default function LoginPage() {
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
+                                    autoComplete="username webauthn"
                                     className="w-full px-4 py-3 rounded-lg text-base transition-colors outline-none"
                                     style={{ border: '1px solid #c1c7cd', backgroundColor: '#f7f9fb', color: '#191c1e' }}
                                     placeholder={t('login:email_placeholder')}

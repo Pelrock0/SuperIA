@@ -3,20 +3,34 @@
 namespace App\Services;
 
 use App\Models\ListItem;
+use App\Models\PriceCache;
 use App\Models\ProductoCatalogo;
 use App\Models\ProductoHistorial;
 use App\Models\ShoppingList;
 use App\Models\User;
+use App\Support\Ai\ClaudeClientInterface;
+use App\Support\Ai\Exceptions\ClaudeException;
 use App\Support\Price\ListPriceEstimate;
 use App\Support\Price\PriceEstimate;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PriceEstimationService
 {
+    private const CLAUDE_DAILY_LIMIT = 50;
+
+    private const PRICE_CACHE_TTL_DAYS = 30;
+
+    public function __construct(private readonly ClaudeClientInterface $claude) {}
+
     /**
-     * Estimate price for a single item using the 2-layer pipeline.
+     * Estimate price for a single item using the 3-layer pipeline.
      * Layer 1: user's personal price history (most recent precio_real).
-     * Layer 2: static catalog average (precio_min/precio_max).
+     * Layer 2: static catalog exact match (precio_min/precio_max).
+     * Layer 3a: catalog LIKE fuzzy match.
+     * Layer 3b: price_cache lookup.
+     * Layer 3c: Claude direct estimation (throttled, writes to price_cache).
      */
     public function estimateForItem(User $user, ListItem $item): ?PriceEstimate
     {
@@ -53,7 +67,83 @@ class PriceEstimationService
             );
         }
 
+        // Layer 3a: fuzzy LIKE match in catalog (OR across significant words)
+        $words = array_values(array_filter(explode(' ', mb_strtolower($name)), fn ($w) => mb_strlen($w) > 2));
+        if (! empty($words)) {
+            $fuzzy = ProductoCatalogo::query()
+                ->whereNotNull('precio_min')
+                ->where(function ($q) use ($words) {
+                    foreach ($words as $word) {
+                        $q->orWhere('nombre', 'LIKE', '%'.$word.'%');
+                    }
+                })
+                ->first(['nombre', 'precio_min', 'precio_max']);
+
+            if ($fuzzy !== null) {
+                return new PriceEstimate(
+                    $name,
+                    (float) $fuzzy->precio_min,
+                    (float) $fuzzy->precio_max,
+                    'catalog_fuzzy',
+                );
+            }
+        }
+
+        // Layer 3b: price_cache lookup
+        $cached = PriceCache::query()
+            ->whereRaw('LOWER(input_name) = LOWER(?)', [$name])
+            ->first();
+
+        if ($cached !== null && ! $cached->isExpired() && $cached->precio_min !== null) {
+            return new PriceEstimate(
+                $name,
+                $cached->precio_min,
+                $cached->precio_max,
+                'cache',
+            );
+        }
+
+        // Layer 3c: Claude fallback (per-user daily throttle)
+        if ($this->withinThrottle($user->id)) {
+            try {
+                $result = $this->claude->estimateItemPrice($name);
+                $this->incrementThrottle($user->id);
+
+                PriceCache::updateOrCreate(
+                    ['input_name' => mb_strtolower($name)],
+                    [
+                        'precio_min' => $result['precio_min'],
+                        'precio_max' => $result['precio_max'],
+                        'expires_at' => now()->addDays(self::PRICE_CACHE_TTL_DAYS),
+                    ],
+                );
+
+                return new PriceEstimate(
+                    $name,
+                    $result['precio_min'],
+                    $result['precio_max'],
+                    'ai',
+                );
+            } catch (ClaudeException $e) {
+                Log::warning('price.layer3.claude_failed', ['item' => $name, 'error' => $e->getMessage()]);
+            }
+        }
+
         return null;
+    }
+
+    private function withinThrottle(int $userId): bool
+    {
+        $key = "price_throttle:{$userId}:".now()->toDateString();
+        return (int) Cache::get($key, 0) < self::CLAUDE_DAILY_LIMIT;
+    }
+
+    private function incrementThrottle(int $userId): void
+    {
+        $key = "price_throttle:{$userId}:".now()->toDateString();
+        $ttl = now()->endOfDay()->diffInSeconds(now());
+        Cache::add($key, 0, $ttl);
+        Cache::increment($key);
     }
 
     /**

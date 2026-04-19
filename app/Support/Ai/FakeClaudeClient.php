@@ -51,6 +51,13 @@ class FakeClaudeClient implements ClaudeClientInterface
     /** @var array<int, array{product: string}> */
     public array $categoryInferenceCalls = [];
 
+    public float $cannedItemPriceMin = 1.0;
+
+    public float $cannedItemPriceMax = 2.0;
+
+    /** @var array<int, array{name: string}> */
+    public array $itemPriceCalls = [];
+
     #[\Override]
     public function suggest(string $userQuery, array $anonymizedContext): array
     {
@@ -171,6 +178,24 @@ class FakeClaudeClient implements ClaudeClientInterface
 
         return [
             'category' => $this->cannedCategory,
+            'estimated_cost_usd' => $this->cannedCost,
+        ];
+    }
+
+    #[\Override]
+    public function estimateItemPrice(string $name): array
+    {
+        $this->itemPriceCalls[] = ['name' => $name];
+
+        if ($this->shouldThrow !== null) {
+            throw $this->shouldThrow instanceof ClaudeException
+                ? $this->shouldThrow
+                : new ClaudeException($this->shouldThrow->getMessage(), 0, $this->shouldThrow);
+        }
+
+        return [
+            'precio_min' => $this->cannedItemPriceMin,
+            'precio_max' => $this->cannedItemPriceMax,
             'estimated_cost_usd' => $this->cannedCost,
         ];
     }

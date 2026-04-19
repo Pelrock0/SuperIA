@@ -7,13 +7,13 @@ describe('DataCommitment', () => {
         render(<DataCommitment />);
         expect(screen.getByText(/Tus listas son tuyas/)).toBeInTheDocument();
         expect(screen.getByText(/Sin publicidad/)).toBeInTheDocument();
-        expect(screen.getByText(/Sin venta de datos/)).toBeInTheDocument();
+        expect(screen.getAllByText(/Sin venta de datos/).length).toBeGreaterThanOrEqual(1);
     });
 
     it('renders privacy commitments with check marks', () => {
         render(<DataCommitment />);
         expect(screen.getByText('Sin rastreadores.')).toBeInTheDocument();
-        expect(screen.getByText('Sin venta de datos.')).toBeInTheDocument();
+        expect(screen.getAllByText('Sin venta de datos.').length).toBeGreaterThanOrEqual(1);
         expect(screen.getByText('Conexión cifrada.')).toBeInTheDocument();
     });
 

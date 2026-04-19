@@ -6,13 +6,13 @@
         "cantidad_tipica": 1.5
     },
     {
-        "nombre": "Tomates pera",
+        "nombre": "Tomates de pera",
         "categoria": "frutas_verduras",
         "unidad_tipica": "kg",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Lechuga iceberg",
+        "nombre": "Lechuga romana",
         "categoria": "frutas_verduras",
         "unidad_tipica": "ud",
         "cantidad_tipica": 1
@@ -24,25 +24,13 @@
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Plátanos",
+        "nombre": "Plátanos de Canarias",
         "categoria": "frutas_verduras",
         "unidad_tipica": "kg",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Pechuga de pollo",
-        "categoria": "carnes_pescados",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Filete de merluza",
-        "categoria": "carnes_pescados",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 0.5
-    },
-    {
-        "nombre": "Carne picada mixta",
+        "nombre": "Pechuga de pollo fileteada",
         "categoria": "carnes_pescados",
         "unidad_tipica": "kg",
         "cantidad_tipica": 0.5
@@ -54,7 +42,19 @@
         "cantidad_tipica": 0.5
     },
     {
-        "nombre": "Gambas crudas",
+        "nombre": "Merluza en filetes",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 0.5
+    },
+    {
+        "nombre": "Sardinas frescas",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 0.5
+    },
+    {
+        "nombre": "Carne picada mixta",
         "categoria": "carnes_pescados",
         "unidad_tipica": "kg",
         "cantidad_tipica": 0.5
@@ -72,16 +72,16 @@
         "cantidad_tipica": 4
     },
     {
+        "nombre": "Queso manchego semicurado",
+        "categoria": "lacteos_huevos",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 0.25
+    },
+    {
         "nombre": "Huevos camperos",
         "categoria": "lacteos_huevos",
         "unidad_tipica": "ud",
         "cantidad_tipica": 12
-    },
-    {
-        "nombre": "Queso manchego curado",
-        "categoria": "lacteos_huevos",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 0.25
     },
     {
         "nombre": "Mantequilla sin sal",
@@ -90,25 +90,25 @@
         "cantidad_tipica": 250
     },
     {
+        "nombre": "Pan de barra",
+        "categoria": "panaderia",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 1
+    },
+    {
         "nombre": "Pan de molde integral",
         "categoria": "panaderia",
         "unidad_tipica": "ud",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Barra de pan",
-        "categoria": "panaderia",
-        "unidad_tipica": "ud",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Croissants",
+        "nombre": "Croissants de mantequilla",
         "categoria": "panaderia",
         "unidad_tipica": "pack",
-        "cantidad_tipica": 6
+        "cantidad_tipica": 4
     },
     {
-        "nombre": "Pan de centeno",
+        "nombre": "Bizcocho casero",
         "categoria": "panaderia",
         "unidad_tipica": "ud",
         "cantidad_tipica": 1
@@ -132,22 +132,22 @@
         "cantidad_tipica": 1
     },
     {
+        "nombre": "Refresco de cola",
+        "categoria": "bebidas",
+        "unidad_tipica": "L",
+        "cantidad_tipica": 2
+    },
+    {
         "nombre": "Cerveza rubia",
         "categoria": "bebidas",
         "unidad_tipica": "pack",
         "cantidad_tipica": 6
     },
     {
-        "nombre": "Vino tinto",
+        "nombre": "Vino tinto joven",
         "categoria": "bebidas",
         "unidad_tipica": "L",
         "cantidad_tipica": 0.75
-    },
-    {
-        "nombre": "Refresco de cola",
-        "categoria": "bebidas",
-        "unidad_tipica": "L",
-        "cantidad_tipica": 2
     },
     {
         "nombre": "Pizza margarita congelada",
@@ -158,38 +158,38 @@
     {
         "nombre": "Guisantes congelados",
         "categoria": "congelados",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 0.5
+        "unidad_tipica": "g",
+        "cantidad_tipica": 400
+    },
+    {
+        "nombre": "Croquetas de jamón congeladas",
+        "categoria": "congelados",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 500
+    },
+    {
+        "nombre": "Gambas peladas congeladas",
+        "categoria": "congelados",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 400
     },
     {
         "nombre": "Patatas fritas congeladas",
         "categoria": "congelados",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 750
+    },
+    {
+        "nombre": "Detergente para lavadora en polvo",
+        "categoria": "limpieza",
         "unidad_tipica": "kg",
-        "cantidad_tipica": 1
+        "cantidad_tipica": 3
     },
     {
-        "nombre": "Croquetas congeladas",
-        "categoria": "congelados",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Helado de vainilla",
-        "categoria": "congelados",
-        "unidad_tipica": "L",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Detergente para ropa líquido",
+        "nombre": "Lavavajillas a mano",
         "categoria": "limpieza",
-        "unidad_tipica": "L",
-        "cantidad_tipica": 2
-    },
-    {
-        "nombre": "Lavavajillas en pastillas",
-        "categoria": "limpieza",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 30
+        "unidad_tipica": "ml",
+        "cantidad_tipica": 750
     },
     {
         "nombre": "Lejía multiusos",
@@ -204,22 +204,22 @@
         "cantidad_tipica": 3
     },
     {
-        "nombre": "Fregasuelos limón",
+        "nombre": "Bolsas de basura",
         "categoria": "limpieza",
-        "unidad_tipica": "L",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Champú cabello normal",
-        "categoria": "higiene_personal",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 400
+        "unidad_tipica": "pack",
+        "cantidad_tipica": 20
     },
     {
         "nombre": "Gel de ducha",
         "categoria": "higiene_personal",
         "unidad_tipica": "ml",
-        "cantidad_tipica": 500
+        "cantidad_tipica": 750
+    },
+    {
+        "nombre": "Champú para cabello normal",
+        "categoria": "higiene_personal",
+        "unidad_tipica": "ml",
+        "cantidad_tipica": 400
     },
     {
         "nombre": "Pasta de dientes",
@@ -228,10 +228,10 @@
         "cantidad_tipica": 75
     },
     {
-        "nombre": "Desodorante roll-on",
+        "nombre": "Desodorante en spray",
         "categoria": "higiene_personal",
         "unidad_tipica": "ml",
-        "cantidad_tipica": 50
+        "cantidad_tipica": 200
     },
     {
         "nombre": "Papel higiénico",
@@ -264,10 +264,10 @@
         "cantidad_tipica": 350
     },
     {
-        "nombre": "Sardinas en aceite",
+        "nombre": "Espárragos blancos en conserva",
         "categoria": "conservas",
-        "unidad_tipica": "ud",
-        "cantidad_tipica": 3
+        "unidad_tipica": "g",
+        "cantidad_tipica": 500
     },
     {
         "nombre": "Aceite de oliva virgen extra",
@@ -276,7 +276,7 @@
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Arroz largo",
+        "nombre": "Arroz redondo",
         "categoria": "otros",
         "unidad_tipica": "kg",
         "cantidad_tipica": 1
@@ -288,13 +288,13 @@
         "cantidad_tipica": 500
     },
     {
-        "nombre": "Azúcar blanco",
+        "nombre": "Harina de trigo",
         "categoria": "otros",
         "unidad_tipica": "kg",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Harina de trigo",
+        "nombre": "Azúcar blanco",
         "categoria": "otros",
         "unidad_tipica": "kg",
         "cantidad_tipica": 1
@@ -306,9 +306,9 @@
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Plátanos de Canarias",
+        "nombre": "Lechuga iceberg",
         "categoria": "frutas_verduras",
-        "unidad_tipica": "kg",
+        "unidad_tipica": "ud",
         "cantidad_tipica": 1
     },
     {
@@ -324,55 +324,139 @@
         "cantidad_tipica": 0.5
     },
     {
-        "nombre": "Gambas peladas frescas",
+        "nombre": "Gambas frescas",
         "categoria": "carnes_pescados",
         "unidad_tipica": "kg",
-        "cantidad_tipica": 0.3
+        "cantidad_tipica": 0.5
     },
     {
-        "nombre": "Chuletas de cerdo",
+        "nombre": "Chuletas de cordero",
         "categoria": "carnes_pescados",
         "unidad_tipica": "kg",
-        "cantidad_tipica": 0.8
+        "cantidad_tipica": 0.5
     },
     {
-        "nombre": "Baguette",
+        "nombre": "Queso manchego curado",
+        "categoria": "lacteos_huevos",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 250
+    },
+    {
+        "nombre": "Baguette de trigo",
         "categoria": "panaderia",
         "unidad_tipica": "ud",
         "cantidad_tipica": 2
     },
     {
-        "nombre": "Pan de pueblo",
+        "nombre": "Pan de pueblo redondo",
         "categoria": "panaderia",
         "unidad_tipica": "ud",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Bolsas de basura",
-        "categoria": "limpieza",
+        "nombre": "Magdalenas caseras",
+        "categoria": "panaderia",
         "unidad_tipica": "pack",
-        "cantidad_tipica": 30
+        "cantidad_tipica": 12
     },
     {
-        "nombre": "Champú para cabello normal",
+        "nombre": "Zumo de naranja refrigerado",
+        "categoria": "bebidas",
+        "unidad_tipica": "L",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Cerveza lager",
+        "categoria": "bebidas",
+        "unidad_tipica": "pack",
+        "cantidad_tipica": 6
+    },
+    {
+        "nombre": "Vino tinto Rioja",
+        "categoria": "bebidas",
+        "unidad_tipica": "L",
+        "cantidad_tipica": 0.75
+    },
+    {
+        "nombre": "Helado de vainilla",
+        "categoria": "congelados",
+        "unidad_tipica": "L",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Detergente lavavajillas líquido",
+        "categoria": "limpieza",
+        "unidad_tipica": "ml",
+        "cantidad_tipica": 750
+    },
+    {
+        "nombre": "Suavizante para ropa",
+        "categoria": "limpieza",
+        "unidad_tipica": "L",
+        "cantidad_tipica": 1.5
+    },
+    {
+        "nombre": "Lejía doméstica",
+        "categoria": "limpieza",
+        "unidad_tipica": "L",
+        "cantidad_tipica": 1.5
+    },
+    {
+        "nombre": "Bolsas de basura 30L",
+        "categoria": "limpieza",
+        "unidad_tipica": "pack",
+        "cantidad_tipica": 20
+    },
+    {
+        "nombre": "Papel de cocina en rollo",
+        "categoria": "limpieza",
+        "unidad_tipica": "pack",
+        "cantidad_tipica": 3
+    },
+    {
+        "nombre": "Gel de ducha hidratante",
         "categoria": "higiene_personal",
         "unidad_tipica": "ml",
+        "cantidad_tipica": 500
+    },
+    {
+        "nombre": "Pasta de dientes con flúor",
+        "categoria": "higiene_personal",
+        "unidad_tipica": "ml",
+        "cantidad_tipica": 75
+    },
+    {
+        "nombre": "Atún en aceite de oliva en lata",
+        "categoria": "conservas",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 80
+    },
+    {
+        "nombre": "Tomate triturado en bote",
+        "categoria": "conservas",
+        "unidad_tipica": "g",
         "cantidad_tipica": 400
     },
     {
-        "nombre": "Desodorante en spray",
-        "categoria": "higiene_personal",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 200
-    },
-    {
-        "nombre": "Espárragos en conserva",
+        "nombre": "Garbanzos cocidos en conserva",
         "categoria": "conservas",
         "unidad_tipica": "g",
-        "cantidad_tipica": 300
+        "cantidad_tipica": 400
     },
     {
-        "nombre": "Arroz redondo",
+        "nombre": "Espárragos blancos en lata",
+        "categoria": "conservas",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 425
+    },
+    {
+        "nombre": "Arroz de grano largo",
+        "categoria": "otros",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Sal marina gruesa",
         "categoria": "otros",
         "unidad_tipica": "kg",
         "cantidad_tipica": 1
@@ -390,13 +474,7 @@
         "cantidad_tipica": 300
     },
     {
-        "nombre": "Brócoli",
-        "categoria": "frutas_verduras",
-        "unidad_tipica": "ud",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Cebolla blanca",
+        "nombre": "Calabacín verde",
         "categoria": "frutas_verduras",
         "unidad_tipica": "kg",
         "cantidad_tipica": 1
@@ -408,28 +486,46 @@
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Pechuga de pavo fileteada",
-        "categoria": "carnes_pescados",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 500
-    },
-    {
-        "nombre": "Merluza en rodajas",
-        "categoria": "carnes_pescados",
+        "nombre": "Cebolla morada",
+        "categoria": "frutas_verduras",
         "unidad_tipica": "kg",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Gambas frescas",
+        "nombre": "Filete de merluza fresco",
         "categoria": "carnes_pescados",
         "unidad_tipica": "kg",
         "cantidad_tipica": 0.5
     },
     {
-        "nombre": "Costillas de ternera",
+        "nombre": "Muslos de pollo",
         "categoria": "carnes_pescados",
         "unidad_tipica": "kg",
         "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Chuletas de cerdo",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 0.5
+    },
+    {
+        "nombre": "Ternera para guisar",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 0.5
+    },
+    {
+        "nombre": "Yogur griego natural",
+        "categoria": "lacteos_huevos",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 4
+    },
+    {
+        "nombre": "Huevos camperos medianos",
+        "categoria": "lacteos_huevos",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 12
     },
     {
         "nombre": "Nata para cocinar",
@@ -438,34 +534,280 @@
         "cantidad_tipica": 200
     },
     {
-        "nombre": "Leche entera brick",
-        "categoria": "lacteos_huevos",
-        "unidad_tipica": "L",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Yogur griego natural",
-        "categoria": "lacteos_huevos",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 4
-    },
-    {
         "nombre": "Croissant de mantequilla",
         "categoria": "panaderia",
         "unidad_tipica": "ud",
         "cantidad_tipica": 4
     },
     {
-        "nombre": "Baguette de semillas",
+        "nombre": "Pan de centeno en rebanadas",
+        "categoria": "panaderia",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 500
+    },
+    {
+        "nombre": "Barra de pan integral",
         "categoria": "panaderia",
         "unidad_tipica": "ud",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Magdalenas caseras",
+        "nombre": "Rosquillas de anís",
         "categoria": "panaderia",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 300
+    },
+    {
+        "nombre": "Agua mineral con gas",
+        "categoria": "bebidas",
+        "unidad_tipica": "L",
+        "cantidad_tipica": 1.5
+    },
+    {
+        "nombre": "Cerveza sin alcohol",
+        "categoria": "bebidas",
         "unidad_tipica": "pack",
-        "cantidad_tipica": 8
+        "cantidad_tipica": 6
+    },
+    {
+        "nombre": "Té verde en bolsitas",
+        "categoria": "bebidas",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 20
+    },
+    {
+        "nombre": "Refresco de limón",
+        "categoria": "bebidas",
+        "unidad_tipica": "L",
+        "cantidad_tipica": 2
+    },
+    {
+        "nombre": "Filete de bacalao congelado",
+        "categoria": "congelados",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 400
+    },
+    {
+        "nombre": "Verduras para wok congeladas",
+        "categoria": "congelados",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 500
+    },
+    {
+        "nombre": "Helado de chocolate",
+        "categoria": "congelados",
+        "unidad_tipica": "L",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Lavavajillas en pastillas",
+        "categoria": "limpieza",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 30
+    },
+    {
+        "nombre": "Bolsas de basura grandes",
+        "categoria": "limpieza",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 20
+    },
+    {
+        "nombre": "Limpiador de baño en spray",
+        "categoria": "limpieza",
+        "unidad_tipica": "ml",
+        "cantidad_tipica": 750
+    },
+    {
+        "nombre": "Champú para cabello graso",
+        "categoria": "higiene_personal",
+        "unidad_tipica": "ml",
+        "cantidad_tipica": 400
+    },
+    {
+        "nombre": "Desodorante en roll-on",
+        "categoria": "higiene_personal",
+        "unidad_tipica": "ml",
+        "cantidad_tipica": 50
+    },
+    {
+        "nombre": "Crema hidratante corporal",
+        "categoria": "higiene_personal",
+        "unidad_tipica": "ml",
+        "cantidad_tipica": 400
+    },
+    {
+        "nombre": "Cepillo de dientes suave",
+        "categoria": "higiene_personal",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 2
+    },
+    {
+        "nombre": "Papel higiénico de tres capas",
+        "categoria": "higiene_personal",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 12
+    },
+    {
+        "nombre": "Tomate triturado en lata",
+        "categoria": "conservas",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 400
+    },
+    {
+        "nombre": "Aceitunas rellenas de anchoa",
+        "categoria": "conservas",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 350
+    },
+    {
+        "nombre": "Alubias blancas cocidas",
+        "categoria": "conservas",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 400
+    },
+    {
+        "nombre": "Mejillones en escabeche",
+        "categoria": "conservas",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 115
+    },
+    {
+        "nombre": "Harina de trigo todo uso",
+        "categoria": "otros",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Azúcar moreno",
+        "categoria": "otros",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Lentejas secas pardinas",
+        "categoria": "otros",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 0.5
+    },
+    {
+        "nombre": "Brócoli",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Puerro",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 3
+    },
+    {
+        "nombre": "Rábanos",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "pack",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Ciruela roja",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Higo fresco",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 0.5
+    },
+    {
+        "nombre": "Apio",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Nectarina",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Coles de Bruselas",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 0.5
+    },
+    {
+        "nombre": "Muslo de pollo",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Costillas de cerdo",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Sepia fresca",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 0.5
+    },
+    {
+        "nombre": "Pechuga de pavo fileteada",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 0.5
+    },
+    {
+        "nombre": "Dorada fresca",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 2
+    },
+    {
+        "nombre": "Leche semidesnatada",
+        "categoria": "lacteos_huevos",
+        "unidad_tipica": "L",
+        "cantidad_tipica": 2
+    },
+    {
+        "nombre": "Nata para montar",
+        "categoria": "lacteos_huevos",
+        "unidad_tipica": "ml",
+        "cantidad_tipica": 200
+    },
+    {
+        "nombre": "Huevos de codorniz",
+        "categoria": "lacteos_huevos",
+        "unidad_tipica": "pack",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Queso de cabra rulo",
+        "categoria": "lacteos_huevos",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Pan de centeno",
+        "categoria": "panaderia",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Bizcocho de yogur",
+        "categoria": "panaderia",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Rosca de pan artesanal",
+        "categoria": "panaderia",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 1
     },
     {
         "nombre": "Zumo de naranja natural refrigerado",
@@ -480,304 +822,58 @@
         "cantidad_tipica": 1.5
     },
     {
-        "nombre": "Té frío de limón",
+        "nombre": "Té frío de melocotón",
         "categoria": "bebidas",
         "unidad_tipica": "L",
         "cantidad_tipica": 1.5
     },
     {
-        "nombre": "Cerveza sin alcohol",
-        "categoria": "bebidas",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 6
-    },
-    {
-        "nombre": "Vino tinto joven",
+        "nombre": "Caldo de verduras brick",
         "categoria": "bebidas",
         "unidad_tipica": "L",
-        "cantidad_tipica": 0.75
+        "cantidad_tipica": 1
     },
     {
-        "nombre": "Croquetas de jamón congeladas",
+        "nombre": "Croquetas caseras congeladas",
         "categoria": "congelados",
         "unidad_tipica": "g",
         "cantidad_tipica": 500
     },
     {
-        "nombre": "Limpiador de baño en spray",
-        "categoria": "limpieza",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 750
-    },
-    {
-        "nombre": "Bolsas de basura medianas",
-        "categoria": "limpieza",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 20
-    },
-    {
-        "nombre": "Abrillantador de suelos",
-        "categoria": "limpieza",
-        "unidad_tipica": "L",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Desengrasante multiusos",
-        "categoria": "limpieza",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 500
-    },
-    {
-        "nombre": "Champú para cabello graso",
-        "categoria": "higiene_personal",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 400
-    },
-    {
-        "nombre": "Crema hidratante corporal",
-        "categoria": "higiene_personal",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 300
-    },
-    {
-        "nombre": "Cepillo de dientes suave",
-        "categoria": "higiene_personal",
-        "unidad_tipica": "ud",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Papel higiénico húmedo",
-        "categoria": "higiene_personal",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 40
-    },
-    {
-        "nombre": "Lentejas en conserva",
-        "categoria": "conservas",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 400
-    },
-    {
-        "nombre": "Tomate triturado en bote",
-        "categoria": "conservas",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 800
-    },
-    {
-        "nombre": "Anchoas en aceite",
-        "categoria": "conservas",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 50
-    },
-    {
-        "nombre": "Mejillones en escabeche",
-        "categoria": "conservas",
-        "unidad_tipica": "ud",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Espárragos blancos en lata",
-        "categoria": "conservas",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 425
-    },
-    {
-        "nombre": "Arroz de grano largo",
-        "categoria": "otros",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Aceite de girasol",
-        "categoria": "otros",
-        "unidad_tipica": "L",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Harina de repostería",
-        "categoria": "otros",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Azúcar moreno",
-        "categoria": "otros",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Sal marina gruesa",
-        "categoria": "otros",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Pimientos rojos",
-        "categoria": "frutas_verduras",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Calabacín",
-        "categoria": "frutas_verduras",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Pechuga de pollo fileteada",
-        "categoria": "carnes_pescados",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 0.5
-    },
-    {
-        "nombre": "Salmón fresco en rodajas",
-        "categoria": "carnes_pescados",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 0.5
-    },
-    {
-        "nombre": "Mejillones frescos",
-        "categoria": "carnes_pescados",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Yogur natural azucarado",
-        "categoria": "lacteos_huevos",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 4
-    },
-    {
-        "nombre": "Huevos de codorniz",
-        "categoria": "lacteos_huevos",
-        "unidad_tipica": "ud",
-        "cantidad_tipica": 12
-    },
-    {
-        "nombre": "Leche evaporada",
-        "categoria": "lacteos_huevos",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 400
-    },
-    {
-        "nombre": "Croissants de mantequilla",
-        "categoria": "panaderia",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 6
-    },
-    {
-        "nombre": "Baguette rústica",
-        "categoria": "panaderia",
-        "unidad_tipica": "ud",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Pan de centeno en rebanadas",
-        "categoria": "panaderia",
-        "unidad_tipica": "ud",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Rosquillas de anís",
-        "categoria": "panaderia",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 6
-    },
-    {
-        "nombre": "Zumo de naranja refrigerado",
-        "categoria": "bebidas",
-        "unidad_tipica": "L",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Vino blanco seco",
-        "categoria": "bebidas",
-        "unidad_tipica": "L",
-        "cantidad_tipica": 0.75
-    },
-    {
-        "nombre": "Batido de chocolate",
-        "categoria": "bebidas",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 500
-    },
-    {
-        "nombre": "Pizzas congeladas de jamón y queso",
-        "categoria": "congelados",
-        "unidad_tipica": "ud",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Croquetas de bacalao congeladas",
-        "categoria": "congelados",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 500
-    },
-    {
-        "nombre": "Verduras para wok congeladas",
+        "nombre": "Pulpo cocido congelado",
         "categoria": "congelados",
         "unidad_tipica": "g",
         "cantidad_tipica": 400
     },
     {
-        "nombre": "Patatas fritas congeladas en gajos",
+        "nombre": "Patatas fritas para horno congeladas",
         "categoria": "congelados",
         "unidad_tipica": "g",
         "cantidad_tipica": 750
     },
     {
-        "nombre": "Calamares rebozados congelados",
+        "nombre": "Helado de vainilla tarrina",
         "categoria": "congelados",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 400
+        "unidad_tipica": "L",
+        "cantidad_tipica": 1
     },
     {
-        "nombre": "Limpiacristales en spray",
-        "categoria": "limpieza",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 750
-    },
-    {
-        "nombre": "Pastillas para lavavajillas",
+        "nombre": "Bayetas de microfibra",
         "categoria": "limpieza",
         "unidad_tipica": "pack",
-        "cantidad_tipica": 30
+        "cantidad_tipica": 1
     },
     {
-        "nombre": "Suavizante concentrado para ropa",
+        "nombre": "Suavizante concentrado",
         "categoria": "limpieza",
         "unidad_tipica": "L",
-        "cantidad_tipica": 1.5
+        "cantidad_tipica": 2
     },
     {
-        "nombre": "Estropajo de fibra",
-        "categoria": "limpieza",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 3
-    },
-    {
-        "nombre": "Desengrasante de cocina",
-        "categoria": "limpieza",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 500
-    },
-    {
-        "nombre": "Bolsas de basura grandes",
-        "categoria": "limpieza",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 20
-    },
-    {
-        "nombre": "Crema hidratante de manos",
-        "categoria": "higiene_personal",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 75
-    },
-    {
-        "nombre": "Desodorante en barra",
+        "nombre": "Cepillo de dientes",
         "categoria": "higiene_personal",
         "unidad_tipica": "ud",
-        "cantidad_tipica": 1
+        "cantidad_tipica": 2
     },
     {
         "nombre": "Espuma de afeitar",
@@ -786,56 +882,98 @@
         "cantidad_tipica": 200
     },
     {
-        "nombre": "Tomate frito en bote",
-        "categoria": "conservas",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 400
-    },
-    {
-        "nombre": "Espárragos blancos en conserva",
-        "categoria": "conservas",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 425
-    },
-    {
-        "nombre": "Alubias blancas cocidas",
-        "categoria": "conservas",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 400
-    },
-    {
-        "nombre": "Aceitunas rellenas de anchoa",
-        "categoria": "conservas",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 350
-    },
-    {
-        "nombre": "Sardinas en aceite vegetal",
-        "categoria": "conservas",
+        "nombre": "Toallitas húmedas desmaquillantes",
+        "categoria": "higiene_personal",
         "unidad_tipica": "pack",
-        "cantidad_tipica": 3
+        "cantidad_tipica": 1
     },
     {
-        "nombre": "Pimientos del piquillo",
+        "nombre": "Atún en aceite de oliva lata",
+        "categoria": "conservas",
+        "unidad_tipica": "g",
+        "cantidad_tipica": 160
+    },
+    {
+        "nombre": "Berenjenas",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Pimientos verdes",
         "categoria": "frutas_verduras",
         "unidad_tipica": "kg",
         "cantidad_tipica": 0.5
     },
     {
-        "nombre": "Rábanos",
+        "nombre": "Coliflor",
         "categoria": "frutas_verduras",
         "unidad_tipica": "ud",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Coles de Bruselas",
+        "nombre": "Melón",
         "categoria": "frutas_verduras",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Mandarinas",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 1.5
+    },
+    {
+        "nombre": "Pepino",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 2
+    },
+    {
+        "nombre": "Ajos",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 2
+    },
+    {
+        "nombre": "Peras conferencia",
+        "categoria": "frutas_verduras",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Filete de ternera",
+        "categoria": "carnes_pescados",
         "unidad_tipica": "kg",
         "cantidad_tipica": 0.5
     },
     {
-        "nombre": "Ciruelas",
-        "categoria": "frutas_verduras",
+        "nombre": "Almejas",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 0.5
+    },
+    {
+        "nombre": "Trucha entera",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 2
+    },
+    {
+        "nombre": "Salchichas de frankfurt",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "pack",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Rape en rodajas",
+        "categoria": "carnes_pescados",
+        "unidad_tipica": "kg",
+        "cantidad_tipica": 0.5
+    },
+    {
+        "nombre": "Contramuslos de pollo",
+        "categoria": "carnes_pescados",
         "unidad_tipica": "kg",
         "cantidad_tipica": 1
     },
@@ -846,141 +984,99 @@
         "cantidad_tipica": 0.5
     },
     {
-        "nombre": "Sepia fresca",
+        "nombre": "Pulpo cocido",
         "categoria": "carnes_pescados",
         "unidad_tipica": "kg",
         "cantidad_tipica": 0.5
     },
     {
-        "nombre": "Leche de cabra",
-        "categoria": "lacteos_huevos",
-        "unidad_tipica": "L",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Queso de cabra rulo",
+        "nombre": "Leche evaporada",
         "categoria": "lacteos_huevos",
         "unidad_tipica": "ud",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Pan de pita",
-        "categoria": "panaderia",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 6
-    },
-    {
-        "nombre": "Bizcocho casero",
+        "nombre": "Pan de cereales",
         "categoria": "panaderia",
         "unidad_tipica": "ud",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Magdalenas integrales",
+        "nombre": "Rosquillas caseras",
         "categoria": "panaderia",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 12
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 4
     },
     {
-        "nombre": "Zumo de naranja natural",
+        "nombre": "Té frío de limón",
         "categoria": "bebidas",
         "unidad_tipica": "L",
+        "cantidad_tipica": 1.5
+    },
+    {
+        "nombre": "Sidra natural asturiana",
+        "categoria": "bebidas",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 2
+    },
+    {
+        "nombre": "Vino rosado",
+        "categoria": "bebidas",
+        "unidad_tipica": "ud",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Sidra natural",
-        "categoria": "bebidas",
-        "unidad_tipica": "L",
+        "nombre": "Tarta de queso congelada",
+        "categoria": "congelados",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 1
+    },
+    {
+        "nombre": "Espinacas congeladas en porciones",
+        "categoria": "congelados",
+        "unidad_tipica": "kg",
         "cantidad_tipica": 0.75
     },
     {
-        "nombre": "Té verde en bolsitas",
-        "categoria": "bebidas",
+        "nombre": "Pastillas lavavajillas",
+        "categoria": "limpieza",
         "unidad_tipica": "pack",
-        "cantidad_tipica": 20
-    },
-    {
-        "nombre": "Bebida de avena",
-        "categoria": "bebidas",
-        "unidad_tipica": "L",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Merluza en filetes congelada",
-        "categoria": "congelados",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 400
+        "nombre": "Limpiador multiusos en spray",
+        "categoria": "limpieza",
+        "unidad_tipica": "ml",
+        "cantidad_tipica": 750
     },
     {
-        "nombre": "Sorbete de limón",
-        "categoria": "congelados",
+        "nombre": "Lejía perfumada",
+        "categoria": "limpieza",
         "unidad_tipica": "L",
-        "cantidad_tipica": 0.5
+        "cantidad_tipica": 2
     },
     {
-        "nombre": "Desengrasante cocina spray",
-        "categoria": "limpieza",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 750
-    },
-    {
-        "nombre": "Limpiador de baños",
-        "categoria": "limpieza",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 750
-    },
-    {
-        "nombre": "Crema de afeitar",
-        "categoria": "higiene_personal",
-        "unidad_tipica": "ml",
-        "cantidad_tipica": 200
-    },
-    {
-        "nombre": "Hilo dental",
+        "nombre": "Desodorante en barra sin perfume",
         "categoria": "higiene_personal",
         "unidad_tipica": "ud",
         "cantidad_tipica": 1
     },
     {
-        "nombre": "Toallitas desmaquillantes",
-        "categoria": "higiene_personal",
-        "unidad_tipica": "pack",
-        "cantidad_tipica": 25
-    },
-    {
-        "nombre": "Colutorio bucal",
+        "nombre": "Champú para cabello seco",
         "categoria": "higiene_personal",
         "unidad_tipica": "ml",
-        "cantidad_tipica": 500
+        "cantidad_tipica": 300
     },
     {
-        "nombre": "Garbanzos cocidos en bote",
+        "nombre": "Lentejas en conserva",
         "categoria": "conservas",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 400
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 2
     },
     {
-        "nombre": "Arroz integral",
-        "categoria": "otros",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 1
-    },
-    {
-        "nombre": "Lentejas pardinas",
-        "categoria": "otros",
-        "unidad_tipica": "kg",
-        "cantidad_tipica": 0.5
-    },
-    {
-        "nombre": "Miel de romero",
-        "categoria": "otros",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 250
-    },
-    {
-        "nombre": "Piñones crudos",
-        "categoria": "otros",
-        "unidad_tipica": "g",
-        "cantidad_tipica": 100
+        "nombre": "Tomate triturado en brick",
+        "categoria": "conservas",
+        "unidad_tipica": "ud",
+        "cantidad_tipica": 3
     }
 ]

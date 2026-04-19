@@ -15,7 +15,7 @@ describe('LandingPage', () => {
             </BrowserRouter>
         );
 
-        expect(screen.getByText(/La compra/)).toBeInTheDocument();
+        expect(screen.getByText(/La lista de la compra con IA/)).toBeInTheDocument();
         expect(screen.getByText('IA que te sugiere')).toBeInTheDocument();
         expect(screen.getByText('Listas compartidas')).toBeInTheDocument();
         expect(screen.getByText('Historial y estadísticas')).toBeInTheDocument();

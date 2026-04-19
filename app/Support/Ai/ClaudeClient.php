@@ -57,6 +57,10 @@ PROMPT;
 Eres un clasificador de productos de supermercado espanol. Recibes el nombre de un producto y devuelves su categoria. Responde SOLO con un objeto JSON con una clave "category" cuyo valor es una de estas categorias: frutas_verduras, carnes_pescados, lacteos_huevos, panaderia, bebidas, congelados, limpieza, higiene_personal, conservas, otros. Si no puedes clasificarlo con confianza, usa "otros". Sin prosa, sin markdown, sin comentarios.
 PROMPT;
 
+    private const ITEM_PRICE_SYSTEM_PROMPT = <<<PROMPT
+Eres un experto en precios de supermercados espanoles. Para el producto que te indican, estima el rango de precio tipico en EUR para una unidad de compra habitual en Espana en 2025. Devuelve SOLO un objeto JSON con claves: precio_min (float, EUR, precio en supermercado economico como Mercadona/Dia), precio_max (float, EUR, precio en supermercado premium como El Corte Ingles). Sin simbolo de moneda, solo el numero. Sin prosa, sin markdown, sin comentarios.
+PROMPT;
+
     private const WEEKLY_SUMMARY_SYSTEM_PROMPT = <<<PROMPT
 Eres un asistente que genera un resumen semanal de compra para usuarios en Espana. Recibes: (1) el historial anonimizado de las ultimas 4 semanas del usuario separado por semanas, (2) los items de la lista activa actual si existe, (3) el mes del ano (entero 1-12) para que puedas razonar sobre estacionalidad tipica espanola.
 Devuelve un array JSON estricto de hasta 8 objetos con claves: nombre (nombre generico en espanol, sin marca), cantidad_tipica (numerico, opcional), unidad_tipica (kg, g, L, ml, ud, pack, opcional), categoria (frutas_verduras, carnes_pescados, lacteos_huevos, panaderia, bebidas, congelados, limpieza, higiene_personal, conservas, otros; opcional), reason (frase corta en espanol explicando por que se sugiere, opcional).
@@ -619,6 +623,64 @@ PROMPT;
 
         return [
             'category' => is_string($category) ? $category : null,
+            'estimated_cost_usd' => $this->estimateCost($body),
+        ];
+    }
+
+    #[\Override]
+    public function estimateItemPrice(string $name): array
+    {
+        $apiKey = config('ai.api_key');
+        if (! $apiKey) {
+            throw new ClaudeException('Claude API key not configured.');
+        }
+
+        $payload = [
+            'model' => config('ai.model'),
+            'max_tokens' => 64,
+            'system' => self::ITEM_PRICE_SYSTEM_PROMPT,
+            'messages' => [[
+                'role' => 'user',
+                'content' => "Producto: {$name}",
+            ]],
+        ];
+
+        try {
+            $response = Http::withHeaders([
+                'x-api-key' => $apiKey,
+                'anthropic-version' => '2023-06-01',
+                'content-type' => 'application/json',
+            ])
+                ->timeout((int) config('ai.timeout_seconds', 30))
+                ->post(rtrim((string) config('ai.api_base_url'), '/').'/messages', $payload)
+                ->throw();
+        } catch (ConnectionException $e) {
+            throw new ClaudeException('Claude API connection failed: '.$e->getMessage(), 0, $e);
+        } catch (RequestException $e) {
+            throw new ClaudeException('Claude API request failed: '.$e->getMessage(), 0, $e);
+        }
+
+        $body = $response->json();
+        $content = $body['content'][0]['text'] ?? null;
+
+        if (! is_string($content)) {
+            throw new ClaudeException('Claude response missing text content.');
+        }
+
+        $decoded = json_decode(trim($content), true);
+        if (! is_array($decoded)) {
+            if (preg_match('/\{.*\}/s', trim($content), $m)) {
+                $decoded = json_decode($m[0], true);
+            }
+        }
+
+        if (! is_array($decoded) || ! isset($decoded['precio_min'], $decoded['precio_max'])) {
+            throw new ClaudeException('Claude item-price response missing required fields.');
+        }
+
+        return [
+            'precio_min' => (float) $decoded['precio_min'],
+            'precio_max' => (float) $decoded['precio_max'],
             'estimated_cost_usd' => $this->estimateCost($body),
         ];
     }

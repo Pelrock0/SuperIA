@@ -3,12 +3,16 @@
 namespace Tests\Unit\Services;
 
 use App\Models\ListItem;
+use App\Models\PriceCache;
 use App\Models\ProductoCatalogo;
 use App\Models\ProductoHistorial;
 use App\Models\ShoppingList;
 use App\Models\User;
 use App\Services\PriceEstimationService;
+use App\Support\Ai\Exceptions\ClaudeException;
+use App\Support\Ai\FakeClaudeClient;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
 
 class PriceEstimationServiceTest extends TestCase
@@ -17,11 +21,15 @@ class PriceEstimationServiceTest extends TestCase
 
     private PriceEstimationService $service;
 
+    private FakeClaudeClient $fakeClaude;
+
     #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
-        $this->service = $this->app->make(PriceEstimationService::class);
+        $this->fakeClaude = new FakeClaudeClient();
+        $this->fakeClaude->shouldThrow = new ClaudeException('disabled in test');
+        $this->service = new PriceEstimationService($this->fakeClaude);
     }
 
     public function test_layer1_resolves_from_personal_history(): void
@@ -197,5 +205,108 @@ class PriceEstimationServiceTest extends TestCase
 
         $this->assertNotNull($estimate);
         $this->assertSame('catalog', $estimate->source);
+    }
+
+    public function test_layer3a_fuzzy_match_resolves_from_catalog(): void
+    {
+        $user = User::factory()->createOne();
+        ProductoCatalogo::factory()->createOne(['nombre' => 'Pan de molde', 'precio_min' => 1.20, 'precio_max' => 2.50]);
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $item = $list->items()->create(['name' => 'pan de molde integral', 'is_purchased' => false, 'position' => 0]);
+
+        $estimate = $this->service->estimateForItem($user, $item);
+
+        $this->assertNotNull($estimate);
+        $this->assertSame('catalog_fuzzy', $estimate->source);
+        $this->assertSame(1.20, $estimate->min);
+        $this->assertSame(2.50, $estimate->max);
+    }
+
+    public function test_layer3b_resolves_from_price_cache(): void
+    {
+        $user = User::factory()->createOne();
+        PriceCache::create([
+            'input_name' => 'salsa especial casera',
+            'precio_min' => 2.00,
+            'precio_max' => 4.00,
+            'expires_at' => now()->addDays(10),
+        ]);
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $item = $list->items()->create(['name' => 'Salsa especial casera', 'is_purchased' => false, 'position' => 0]);
+
+        $estimate = $this->service->estimateForItem($user, $item);
+
+        $this->assertNotNull($estimate);
+        $this->assertSame('cache', $estimate->source);
+        $this->assertSame(2.00, $estimate->min);
+    }
+
+    public function test_layer3b_ignores_expired_cache(): void
+    {
+        $user = User::factory()->createOne();
+        PriceCache::create([
+            'input_name' => 'producto expirado',
+            'precio_min' => 1.00,
+            'precio_max' => 2.00,
+            'expires_at' => now()->subDay(),
+        ]);
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $item = $list->items()->create(['name' => 'producto expirado', 'is_purchased' => false, 'position' => 0]);
+
+        $estimate = $this->service->estimateForItem($user, $item);
+
+        $this->assertNull($estimate);
+    }
+
+    public function test_layer3c_claude_estimates_and_writes_cache(): void
+    {
+        $this->fakeClaude->shouldThrow = null;
+        $this->fakeClaude->cannedItemPriceMin = 0.80;
+        $this->fakeClaude->cannedItemPriceMax = 1.60;
+
+        $user = User::factory()->createOne();
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $item = $list->items()->create(['name' => 'Zumo de naranja artesanal', 'is_purchased' => false, 'position' => 0]);
+
+        $estimate = $this->service->estimateForItem($user, $item);
+
+        $this->assertNotNull($estimate);
+        $this->assertSame('ai', $estimate->source);
+        $this->assertSame(0.80, $estimate->min);
+        $this->assertSame(1.60, $estimate->max);
+        $this->assertCount(1, $this->fakeClaude->itemPriceCalls);
+        $this->assertDatabaseHas('price_cache', ['input_name' => 'zumo de naranja artesanal']);
+    }
+
+    public function test_layer3c_returns_null_when_claude_fails(): void
+    {
+        $user = User::factory()->createOne();
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $item = $list->items()->create(['name' => 'Producto inexistente xyz123', 'is_purchased' => false, 'position' => 0]);
+
+        $estimate = $this->service->estimateForItem($user, $item);
+
+        $this->assertNull($estimate);
+    }
+
+    public function test_layer3c_throttle_blocks_after_daily_limit(): void
+    {
+        $this->fakeClaude->shouldThrow = null;
+        $this->fakeClaude->cannedItemPriceMin = 1.00;
+        $this->fakeClaude->cannedItemPriceMax = 2.00;
+
+        $user = User::factory()->createOne();
+        $key = "price_throttle:{$user->id}:".now()->toDateString();
+        Cache::store('array')->put($key, 50, 3600);
+        // Point the app cache to array store so withinThrottle reads it
+        config(['cache.default' => 'array']);
+
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $item = $list->items()->create(['name' => 'Producto xyz99zz sin match', 'is_purchased' => false, 'position' => 0]);
+
+        $estimate = $this->service->estimateForItem($user, $item);
+
+        $this->assertNull($estimate);
+        $this->assertEmpty($this->fakeClaude->itemPriceCalls);
     }
 }

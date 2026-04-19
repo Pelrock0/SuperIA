@@ -138,7 +138,7 @@ export default function DashboardPage() {
                 )}
 
                 {/* AI Concierge Banner */}
-                {hasLists && (
+                {(
                     <section
                         className="mb-10 rounded-[24px] p-8 text-white relative overflow-hidden"
                         style={{ background: 'linear-gradient(to bottom right, #002736, #003e54)', boxShadow: '0 24px 48px -12px rgba(0,39,54,0.2)' }}

@@ -85,7 +85,7 @@ export default function DataCommitment() {
                     </h2>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                        {['Encriptado de extremo a extremo', 'Sin rastreadores de terceros'].map((text) => (
+                        {['Sin rastreadores.', 'Sin venta de datos.', 'Conexión cifrada.'].map((text) => (
                             <div key={text} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
                                 <div
                                     style={{

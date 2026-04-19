@@ -48,8 +48,8 @@ export default function HeroSection() {
                             margin: 0,
                         }}
                     >
-                        La compra, <br />
-                        <span style={{ color: '#50d9fe' }}>m&aacute;s inteligente</span>
+                        La lista de la compra con IA. <br />
+                        <span style={{ color: '#50d9fe' }}>Sin anuncios.</span>
                     </h1>
                     <p
                         style={{
@@ -60,7 +60,7 @@ export default function HeroSection() {
                             margin: 0,
                         }}
                     >
-                        Listas de compra con IA que aprende de ti. Redescubre el placer de organizar tu hogar con el asistente digital definitivo.
+                        Aprende lo que compras, te sugiere lo que falta, y nunca vende tus datos. Hecha en España.
                     </p>
                     <div className="hero-cta" style={{ display: 'flex', gap: '1rem' }}>
                         <a
@@ -79,7 +79,7 @@ export default function HeroSection() {
                             onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(0.95)')}
                             onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                         >
-                            &Uacute;nete a la lista de espera
+                            Ap&uacute;ntate a la beta
                         </a>
                     </div>
                 </div>

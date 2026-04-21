@@ -64,6 +64,8 @@ class AiUsageTracker
         AiOperation $operation,
         AiUsageStatus $status,
         float $costUsd = 0,
+        ?int $inputTokens = null,
+        ?int $outputTokens = null,
     ): AiUsageLog {
         return AiUsageLog::create([
             'user_id' => $user?->id,
@@ -71,6 +73,8 @@ class AiUsageTracker
             'status' => $status->value,
             'date' => $this->madridToday(),
             'estimated_cost_usd' => $costUsd,
+            'input_tokens' => $inputTokens,
+            'output_tokens' => $outputTokens,
             'created_at' => now(),
         ]);
     }

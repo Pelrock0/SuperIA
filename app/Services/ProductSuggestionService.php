@@ -158,6 +158,8 @@ class ProductSuggestionService
                 AiOperation::Suggestion,
                 AiUsageStatus::Success,
                 (float) $result['estimated_cost_usd'],
+                $result['input_tokens'] ?? null,
+                $result['output_tokens'] ?? null,
             );
 
             return [

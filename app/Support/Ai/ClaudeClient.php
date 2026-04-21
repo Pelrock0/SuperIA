@@ -110,10 +110,10 @@ PROMPT;
 
         $body = $response->json();
 
-        return [
+        return array_merge([
             'suggestions' => $this->parseSuggestions($body),
             'estimated_cost_usd' => $this->estimateCost($body),
-        ];
+        ], $this->extractTokens($body));
     }
 
     #[\Override]
@@ -153,10 +153,10 @@ PROMPT;
 
         $body = $response->json();
 
-        return [
+        return array_merge([
             'products' => $this->parseCatalogEntries($body),
             'estimated_cost_usd' => $this->estimateCost($body),
-        ];
+        ], $this->extractTokens($body));
     }
 
     #[\Override]
@@ -194,10 +194,10 @@ PROMPT;
 
         $body = $response->json();
 
-        return [
+        return array_merge([
             'products' => $this->parseComplementEntries($body),
             'estimated_cost_usd' => $this->estimateCost($body),
-        ];
+        ], $this->extractTokens($body));
     }
 
     #[\Override]
@@ -240,10 +240,10 @@ PROMPT;
 
         $body = $response->json();
 
-        return [
+        return array_merge([
             'prices' => $this->parsePriceEntries($body),
             'estimated_cost_usd' => $this->estimateCost($body),
-        ];
+        ], $this->extractTokens($body));
     }
 
     /**
@@ -311,10 +311,10 @@ PROMPT;
 
         $body = $response->json();
 
-        return [
+        return array_merge([
             'products' => $this->parseListGenerationEntries($body),
             'estimated_cost_usd' => $this->estimateCost($body),
-        ];
+        ], $this->extractTokens($body));
     }
 
     /**
@@ -391,10 +391,10 @@ PROMPT;
 
         $body = $response->json();
 
-        return [
+        return array_merge([
             'products' => $this->parseWeeklySummaryEntries($body),
             'estimated_cost_usd' => $this->estimateCost($body),
-        ];
+        ], $this->extractTokens($body));
     }
 
     /**
@@ -621,10 +621,10 @@ PROMPT;
 
         $category = is_array($decoded) ? ($decoded['category'] ?? null) : null;
 
-        return [
+        return array_merge([
             'category' => is_string($category) ? $category : null,
             'estimated_cost_usd' => $this->estimateCost($body),
-        ];
+        ], $this->extractTokens($body));
     }
 
     #[\Override]
@@ -678,11 +678,11 @@ PROMPT;
             throw new ClaudeException('Claude item-price response missing required fields.');
         }
 
-        return [
+        return array_merge([
             'precio_min' => (float) $decoded['precio_min'],
             'precio_max' => (float) $decoded['precio_max'],
             'estimated_cost_usd' => $this->estimateCost($body),
-        ];
+        ], $this->extractTokens($body));
     }
 
     private function extractJsonArray(string $raw): mixed
@@ -704,6 +704,19 @@ PROMPT;
         Log::warning('Claude returned non-JSON body', ['raw' => mb_substr($trimmed, 0, 500)]);
 
         return null;
+    }
+
+    private function extractTokens(array $body): array
+    {
+        $usage = $body['usage'] ?? null;
+        if (! is_array($usage)) {
+            return ['input_tokens' => null, 'output_tokens' => null];
+        }
+
+        return [
+            'input_tokens' => isset($usage['input_tokens']) ? (int) $usage['input_tokens'] : null,
+            'output_tokens' => isset($usage['output_tokens']) ? (int) $usage['output_tokens'] : null,
+        ];
     }
 
     private function estimateCost(array $body): float

@@ -66,6 +66,8 @@ class InferItemCategoryJob implements ShouldQueue
             'status' => AiUsageStatus::Success,
             'date' => now()->toDateString(),
             'estimated_cost_usd' => $result['estimated_cost_usd'],
+            'input_tokens' => $result['input_tokens'] ?? null,
+            'output_tokens' => $result['output_tokens'] ?? null,
             'created_at' => now(),
         ]);
     }

@@ -24,6 +24,8 @@ class AiUsageLog extends Model
         'status',
         'date',
         'estimated_cost_usd',
+        'input_tokens',
+        'output_tokens',
         'created_at',
     ];
 
@@ -35,6 +37,8 @@ class AiUsageLog extends Model
             'status' => AiUsageStatus::class,
             'date' => 'date',
             'estimated_cost_usd' => 'decimal:4',
+            'input_tokens' => 'integer',
+            'output_tokens' => 'integer',
             'created_at' => 'datetime',
         ];
     }

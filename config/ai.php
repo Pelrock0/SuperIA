@@ -3,7 +3,7 @@
 return [
     'provider' => env('AI_PROVIDER', 'claude'),
     'api_key' => env('CLAUDE_API_KEY'),
-    'model' => env('CLAUDE_MODEL', 'claude-sonnet-4-6'),
+    'model' => env('CLAUDE_MODEL', 'claude-haiku-4-5-20251001'),
     'api_base_url' => env('CLAUDE_API_BASE_URL', 'https://api.anthropic.com/v1'),
     'timeout_seconds' => (int) env('AI_TIMEOUT', 30),
     'seed_timeout_seconds' => (int) env('AI_SEED_TIMEOUT', 120),
@@ -54,7 +54,7 @@ return [
 
     // Consumed by Epic 6 (FEAT-EPIC6-GENERATION). List generation from natural language description.
     'generation' => [
-        'model' => env('AI_GENERATION_MODEL', 'claude-sonnet-4-6'),
+        'model' => env('AI_GENERATION_MODEL', 'claude-haiku-4-5-20251001'),
         'max_tokens' => (int) env('AI_GENERATION_MAX_TOKENS', 3000),
         'max_prompt_chars' => (int) env('AI_GENERATION_MAX_PROMPT_CHARS', 500),
         'max_items' => (int) env('AI_GENERATION_MAX_ITEMS', 25),

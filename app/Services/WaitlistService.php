@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+use App\Mail\AdminWaitlistNotificationMail;
 use App\Mail\InvitationMail;
 use App\Mail\WaitlistConfirmationMail;
+use App\Models\User;
 use App\Models\WaitlistEntry;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -39,6 +42,8 @@ class WaitlistService
         Mail::to($entry->email)->queue(
             new WaitlistConfirmationMail($entry->name, $queuePosition)
         );
+
+        $this->notifyAdmins($entry->name, $entry->email, $queuePosition);
 
         return [
             'message' => 'Te has registrado en la lista de espera',
@@ -78,6 +83,23 @@ class WaitlistService
         }
 
         return $entry;
+    }
+
+    private function notifyAdmins(string $name, string $email, int $position): void
+    {
+        $admins = User::role(['admin', 'superadmin'])->get();
+
+        if ($admins->isEmpty()) {
+            Log::warning('AdminWaitlistNotify: no admin users found to notify');
+
+            return;
+        }
+
+        foreach ($admins as $admin) {
+            Mail::to($admin->email)->queue(
+                new AdminWaitlistNotificationMail($name, $email, $position)
+            );
+        }
     }
 
     private function pendingPosition(WaitlistEntry $entry): int

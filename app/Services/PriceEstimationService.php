@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\ItemUnit;
 use App\Models\ListItem;
 use App\Models\PriceCache;
 use App\Models\ProductoCatalogo;
@@ -159,7 +160,11 @@ class PriceEstimationService
 
         foreach ($list->items as $item) {
             $estimate = $this->estimateForItem($user, $item);
-            $quantity = max(1, (float) ($item->quantity ?? 1));
+            $rawQty = (float) ($item->quantity ?? 1);
+            $unit = $item->unit;
+            $quantity = ($unit === ItemUnit::G || $unit === ItemUnit::Ml)
+                ? $rawQty / 1000
+                : ($rawQty > 0 ? $rawQty : 1.0);
 
             if ($estimate !== null) {
                 $itemMin = round($estimate->min * $quantity, 2);

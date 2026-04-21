@@ -2,12 +2,16 @@
 
 namespace Tests\Unit\Services;
 
+use App\Mail\AdminWaitlistNotificationMail;
 use App\Mail\InvitationMail;
 use App\Mail\WaitlistConfirmationMail;
+use App\Models\User;
 use App\Models\WaitlistEntry;
 use App\Services\WaitlistService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class WaitlistServiceTest extends TestCase
@@ -147,5 +151,75 @@ class WaitlistServiceTest extends TestCase
         $found = $this->service->findByInvitationToken($entry->invitation_token);
 
         $this->assertNull($found);
+    }
+
+    public function test_register_notifies_admin_on_new_entry(): void
+    {
+        Mail::fake();
+        $admin = $this->createAdminUser('superadmin');
+
+        $result = $this->service->register('Pedro', 'pedro@example.com', null);
+
+        Mail::assertQueued(AdminWaitlistNotificationMail::class, function ($mail) use ($admin, $result) {
+            return $mail->hasTo($admin->email)
+                && $mail->applicantName === 'Pedro'
+                && $mail->applicantEmail === 'pedro@example.com'
+                && $mail->position === $result['position'];
+        });
+    }
+
+    public function test_register_notifies_all_admins_individually(): void
+    {
+        Mail::fake();
+        $admin1 = $this->createAdminUser('admin');
+        $admin2 = $this->createAdminUser('superadmin');
+
+        $this->service->register('Laura', 'laura@example.com', null);
+
+        Mail::assertQueued(AdminWaitlistNotificationMail::class, 2);
+        Mail::assertQueued(AdminWaitlistNotificationMail::class, fn ($mail) => $mail->hasTo($admin1->email));
+        Mail::assertQueued(AdminWaitlistNotificationMail::class, fn ($mail) => $mail->hasTo($admin2->email));
+    }
+
+    public function test_register_does_not_notify_admins_on_duplicate_email(): void
+    {
+        Mail::fake();
+        $this->createAdminUser('superadmin');
+        WaitlistEntry::factory()->createOne(['email' => 'dup@example.com']);
+
+        $this->service->register('Otro', 'dup@example.com', null);
+
+        Mail::assertNotQueued(AdminWaitlistNotificationMail::class);
+    }
+
+    public function test_register_logs_warning_when_no_admins_exist(): void
+    {
+        Mail::fake();
+        Log::shouldReceive('warning')
+            ->once()
+            ->with('AdminWaitlistNotify: no admin users found to notify');
+
+        $this->service->register('Carlos', 'carlos@example.com', null);
+
+        Mail::assertNotQueued(AdminWaitlistNotificationMail::class);
+    }
+
+    public function test_register_completes_successfully_when_no_admins_exist(): void
+    {
+        Mail::fake();
+
+        $result = $this->service->register('Maria', 'maria@example.com', null);
+
+        $this->assertDatabaseHas('waitlist_entries', ['email' => 'maria@example.com']);
+        $this->assertEquals('Te has registrado en la lista de espera', $result['message']);
+    }
+
+    private function createAdminUser(string $role): User
+    {
+        Role::firstOrCreate(['name' => $role, 'guard_name' => 'web']);
+        $user = User::factory()->createOne();
+        $user->assignRole($role);
+
+        return $user;
     }
 }

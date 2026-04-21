@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\AiOperation;
 use App\Enums\AiUsageStatus;
+use App\Models\ListItem;
 use App\Models\ProductoCatalogo;
 use App\Models\User;
 use App\Support\Ai\AiUsageTracker;
@@ -36,9 +37,10 @@ class ProductSuggestionService
     public function suggest(User $user, string $query, bool $includeAi = false): array
     {
         $layer1 = $this->history->search($user, $query, self::LOCAL_LIMIT);
+        $layerList = $this->searchListItems($user, $query, self::LOCAL_LIMIT);
         $layer2 = $this->searchCatalog($query, self::LOCAL_LIMIT);
 
-        $merged = $this->dedup([...$layer1, ...$layer2], self::LOCAL_LIMIT);
+        $merged = $this->dedup([...$layer1, ...$layerList, ...$layer2], self::LOCAL_LIMIT);
 
         $aiFallbackUsed = false;
         $aiLimitReached = false;
@@ -60,6 +62,36 @@ class ProductSuggestionService
             'ai_fallback_used' => $aiFallbackUsed,
             'ai_limit_reached' => $aiLimitReached,
         ];
+    }
+
+    /**
+     * @return Suggestion[]
+     */
+    private function searchListItems(User $user, string $query, int $limit): array
+    {
+        $trimmed = trim($query);
+
+        if ($trimmed === '') {
+            return [];
+        }
+
+        $escaped = str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $trimmed);
+
+        return ListItem::query()
+            ->select('list_items.name')
+            ->join('shopping_lists', 'shopping_lists.id', '=', 'list_items.shopping_list_id')
+            ->where('shopping_lists.user_id', $user->id)
+            ->where('list_items.name', 'LIKE', $escaped.'%')
+            ->distinct()
+            ->orderBy('list_items.name')
+            ->limit($limit)
+            ->get()
+            ->toBase()
+            ->map(fn (object $row) => new Suggestion(
+                source: 'list',
+                name: $row->name,
+            ))
+            ->all();
     }
 
     /**

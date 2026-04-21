@@ -7,6 +7,7 @@ use App\Enums\AiUsageStatus;
 use App\Models\AiUsageLog;
 use App\Models\ProductoCatalogo;
 use App\Models\ProductoHistorial;
+use App\Models\ShoppingList;
 use App\Models\User;
 use App\Services\ProductHistoryWeightingService;
 use App\Services\ProductSuggestionService;
@@ -288,5 +289,122 @@ class ProductSuggestionServiceTest extends TestCase
         $this->assertStringNotContainsString('secret@superia.test', $payload);
         $this->assertStringNotContainsString('user_id', $payload);
         $this->assertStringNotContainsString((string) $user->id, $payload);
+    }
+
+    // AC-1: list items appear when no purchase history exists
+    public function test_layer_list_returns_item_added_to_list_without_purchase(): void
+    {
+        $user = User::factory()->createOne();
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $list->items()->create(['name' => 'Chocolate negro 70%', 'is_purchased' => false, 'position' => 0]);
+
+        $result = $this->service->suggest($user, 'Choco', includeAi: false);
+
+        $names = collect($result['suggestions'])->pluck('name')->all();
+        $this->assertContains('Chocolate negro 70%', $names);
+        $sources = collect($result['suggestions'])->pluck('source')->all();
+        $this->assertContains('list', $sources);
+    }
+
+    // AC-2: history takes precedence over list layer
+    public function test_layer_list_loses_to_history_in_dedup(): void
+    {
+        $user = User::factory()->createOne();
+        $this->seedHistory($user, 'Leche entera');
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $list->items()->create(['name' => 'Leche entera', 'is_purchased' => false, 'position' => 0]);
+
+        $result = $this->service->suggest($user, 'Leche', includeAi: false);
+
+        $match = collect($result['suggestions'])->firstWhere('name', 'Leche entera');
+        $this->assertNotNull($match);
+        $this->assertSame('history', $match['source']);
+    }
+
+    // AC-3: list layer wins over catalog
+    public function test_layer_list_beats_catalog_in_dedup(): void
+    {
+        $user = User::factory()->createOne();
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $list->items()->create(['name' => 'Tortitas de arroz', 'is_purchased' => false, 'position' => 0]);
+        ProductoCatalogo::factory()->createOne(['nombre' => 'Tortitas de arroz']);
+
+        $result = $this->service->suggest($user, 'Tort', includeAi: false);
+
+        $match = collect($result['suggestions'])->firstWhere('name', 'Tortitas de arroz');
+        $this->assertNotNull($match);
+        $this->assertSame('list', $match['source']);
+    }
+
+    // AC-4: items from other users' lists are never returned
+    public function test_layer_list_never_returns_other_users_items(): void
+    {
+        $userA = User::factory()->createOne();
+        $userB = User::factory()->createOne();
+        $listA = ShoppingList::factory()->create(['user_id' => $userA->id]);
+        $listA->items()->create(['name' => 'Producto secreto XYZ', 'is_purchased' => false, 'position' => 0]);
+
+        $result = $this->service->suggest($userB, 'Prod', includeAi: false);
+
+        $names = collect($result['suggestions'])->pluck('name')->all();
+        $this->assertNotContains('Producto secreto XYZ', $names);
+    }
+
+    // AC-5: prefix-only — mid-word does not match
+    public function test_layer_list_prefix_only_no_mid_word_match(): void
+    {
+        $user = User::factory()->createOne();
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $list->items()->create(['name' => 'Pan integral', 'is_purchased' => false, 'position' => 0]);
+
+        $result = $this->service->suggest($user, 'integral', includeAi: false);
+
+        $names = collect($result['suggestions'])->pluck('name')->all();
+        $this->assertNotContains('Pan integral', $names);
+    }
+
+    // AC-6: empty query returns no list-layer results
+    public function test_layer_list_empty_query_returns_nothing(): void
+    {
+        $user = User::factory()->createOne();
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $list->items()->create(['name' => 'Cualquier cosa', 'is_purchased' => false, 'position' => 0]);
+
+        $result = $this->service->suggest($user, '   ', includeAi: false);
+
+        $this->assertSame([], $result['suggestions']);
+    }
+
+    // AC-7: same item in list and catalog appears once
+    public function test_layer_list_deduplicates_with_catalog(): void
+    {
+        $user = User::factory()->createOne();
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $list->items()->create(['name' => 'Arroz largo', 'is_purchased' => false, 'position' => 0]);
+        ProductoCatalogo::factory()->createOne(['nombre' => 'Arroz largo']);
+
+        $result = $this->service->suggest($user, 'Arroz', includeAi: false);
+
+        $arrozMatches = collect($result['suggestions'])->filter(
+            fn ($s) => mb_strtolower($s['name']) === 'arroz largo'
+        );
+        $this->assertCount(1, $arrozMatches);
+    }
+
+    // Item from multiple lists appears once (DISTINCT)
+    public function test_layer_list_distinct_across_multiple_lists(): void
+    {
+        $user = User::factory()->createOne();
+        $list1 = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $list2 = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $list1->items()->create(['name' => 'Mantequilla', 'is_purchased' => false, 'position' => 0]);
+        $list2->items()->create(['name' => 'Mantequilla', 'is_purchased' => false, 'position' => 0]);
+
+        $result = $this->service->suggest($user, 'Mant', includeAi: false);
+
+        $manteMatches = collect($result['suggestions'])->filter(
+            fn ($s) => mb_strtolower($s['name']) === 'mantequilla'
+        );
+        $this->assertCount(1, $manteMatches);
     }
 }

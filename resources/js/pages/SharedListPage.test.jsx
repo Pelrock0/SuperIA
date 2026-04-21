@@ -56,6 +56,29 @@ const emptyResponse = {
     counters: { items_total: 0, items_completed: 0 },
 };
 
+const mixedResponse = {
+    list: { id: 5, name: 'Compra', emoji: '🛒', owner_name: 'Maria' },
+    mode: 'edit',
+    items: {
+        bebidas: [
+            { id: 1, name: 'Agua', quantity: '1.00', unit: null, category: 'bebidas', estimated_price: null, is_purchased: false },
+            { id: 2, name: 'Leche', quantity: '1.00', unit: null, category: 'bebidas', estimated_price: null, is_purchased: true },
+        ],
+    },
+    counters: { items_total: 2, items_completed: 1 },
+};
+
+const allPurchasedResponse = {
+    list: { id: 5, name: 'Compra', emoji: '🛒', owner_name: 'Maria' },
+    mode: 'edit',
+    items: {
+        bebidas: [
+            { id: 1, name: 'Agua', quantity: '1.00', unit: null, category: 'bebidas', estimated_price: null, is_purchased: true },
+        ],
+    },
+    counters: { items_total: 1, items_completed: 1 },
+};
+
 describe('SharedListPage', () => {
     beforeEach(() => {
         vi.clearAllMocks();
@@ -307,5 +330,135 @@ describe('SharedListPage', () => {
         await waitFor(() => expect(sendHeartbeat).toHaveBeenCalled());
 
         expect(sendHeartbeat.mock.calls[0][1]).toBe('550e8400-e29b-41d4-a716-446655440000');
+    });
+
+    // AC-1: pending items rendered above purchased items
+    it('AC-1: non-purchased items appear above purchased items in DOM', async () => {
+        window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+        fetchSharedList.mockResolvedValue(mixedResponse);
+        sendHeartbeat.mockResolvedValue();
+
+        renderPage();
+
+        await waitFor(() => screen.getByText('Agua'));
+
+        const pendingRows = screen.getAllByTestId('shared-item-row');
+        const purchasedRows = screen.getAllByTestId('purchased-item-row');
+
+        expect(pendingRows.length).toBe(1);
+        expect(purchasedRows.length).toBe(1);
+        expect(pendingRows[0].textContent).toMatch(/Agua/);
+        expect(purchasedRows[0].textContent).toMatch(/Leche/);
+
+        const pendingPos = document.body.innerHTML.indexOf('Agua');
+        const purchasedPos = document.body.innerHTML.indexOf('Leche');
+        expect(pendingPos).toBeLessThan(purchasedPos);
+    });
+
+    // AC-3: "Ya en el carro" header visible when purchased items exist
+    it('AC-3: shows Ya en el carro section header when purchased items exist', async () => {
+        window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+        fetchSharedList.mockResolvedValue(mixedResponse);
+        sendHeartbeat.mockResolvedValue();
+
+        renderPage();
+
+        await waitFor(() => screen.getByTestId('purchased-section'));
+        expect(screen.getByText(/ya en el carro/i)).toBeInTheDocument();
+    });
+
+    // AC-4: no purchased section when no items are purchased
+    it('AC-4: purchased section not rendered when all items are pending', async () => {
+        window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+        fetchSharedList.mockResolvedValue(editResponse);
+        sendHeartbeat.mockResolvedValue();
+
+        renderPage();
+
+        await waitFor(() => screen.getByText('Agua'));
+        expect(screen.queryByTestId('purchased-section')).toBeNull();
+    });
+
+    // AC-5: no pending category section when all items are purchased
+    it('AC-5: pending category sections not rendered when all items are purchased', async () => {
+        window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+        fetchSharedList.mockResolvedValue(allPurchasedResponse);
+        sendHeartbeat.mockResolvedValue();
+
+        renderPage();
+
+        await waitFor(() => screen.getByTestId('purchased-section'));
+        expect(screen.queryByTestId('pending-category-section')).toBeNull();
+        expect(screen.getByTestId('purchased-section')).toBeInTheDocument();
+    });
+
+    // AC-2: purchased item moves to purchased section after toggle
+    it('AC-2: item moves to purchased section after being toggled', async () => {
+        const user = userEvent.setup();
+        window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+
+        const afterToggle = {
+            ...editResponse,
+            items: {
+                bebidas: [
+                    { id: 1, name: 'Agua', quantity: '6.00', unit: 'L', category: 'bebidas', estimated_price: null, is_purchased: true },
+                ],
+            },
+            counters: { items_total: 1, items_completed: 1 },
+        };
+
+        fetchSharedList
+            .mockResolvedValueOnce(editResponse)
+            .mockResolvedValueOnce(afterToggle);
+        toggleSharedItem.mockResolvedValue({});
+        sendHeartbeat.mockResolvedValue();
+
+        renderPage();
+
+        await waitFor(() => screen.getByText('Agua'));
+        expect(screen.queryByTestId('purchased-section')).toBeNull();
+
+        await user.click(screen.getByRole('checkbox'));
+
+        await waitFor(() => screen.getByTestId('purchased-section'));
+        expect(screen.queryByTestId('pending-category-section')).toBeNull();
+        expect(screen.getByTestId('purchased-item-row').textContent).toMatch(/Agua/);
+    });
+
+    // AC-6: un-toggling a purchased item moves it back to pending
+    it('AC-6: un-toggling purchased item moves it back to pending section', async () => {
+        const user = userEvent.setup();
+        window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+
+        const afterUnToggle = {
+            ...mixedResponse,
+            items: {
+                bebidas: [
+                    { id: 1, name: 'Agua', quantity: '1.00', unit: null, category: 'bebidas', estimated_price: null, is_purchased: false },
+                    { id: 2, name: 'Leche', quantity: '1.00', unit: null, category: 'bebidas', estimated_price: null, is_purchased: false },
+                ],
+            },
+            counters: { items_total: 2, items_completed: 0 },
+        };
+
+        fetchSharedList
+            .mockResolvedValueOnce(mixedResponse)
+            .mockResolvedValueOnce(afterUnToggle);
+        toggleSharedItem.mockResolvedValue({});
+        sendHeartbeat.mockResolvedValue();
+
+        renderPage();
+
+        await waitFor(() => screen.getByTestId('purchased-section'));
+
+        // uncheck Leche (the purchased item)
+        const purchasedCheckbox = screen.getByLabelText(/leche.*comprado/i);
+        await user.click(purchasedCheckbox);
+
+        await waitFor(() => {
+            expect(screen.queryByTestId('purchased-section')).toBeNull();
+        });
+        const pendingRows = screen.getAllByTestId('shared-item-row');
+        expect(pendingRows.length).toBe(2);
     });
 });

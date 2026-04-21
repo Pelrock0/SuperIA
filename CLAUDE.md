@@ -203,9 +203,3 @@ python cli/cli.py prepare FEAT-AUTH-LOGIN --mode=claude
 - **Follow the stack** - Use stack-specific patterns from core.md
 - **Test everything** - 100% coverage is mandatory
 - **No shortcuts** - Every rule is NON-NEGOTIABLE
-
----
-
-## Security Reviews (S5-SEC)
-
-Before running an S5-SEC review, execute `composer security` to run the automated gates (`composer audit` + `psalm --taint-analysis`). The full skill at `.cursor/skills/security-review.md` is the source of truth for the manual review checklist (OWASP Top 10 2021, OWASP API Top 10 2023, OWASP LLM Top 10 v2 2025). Both the wrapper and the skill are mandatory.

@@ -273,6 +273,8 @@ export default function SharedListPage() {
     }
 
     const categoryKeys = Object.keys(items).filter((k) => items[k].length > 0);
+    const pendingCategories = categoryKeys.filter((k) => items[k].some((i) => !i.is_purchased));
+    const purchasedItems = categoryKeys.reduce((acc, k) => acc.concat(items[k].filter((i) => i.is_purchased)), []);
     const hasItems = counters.items_total > 0;
 
     return (
@@ -492,8 +494,13 @@ export default function SharedListPage() {
                         </p>
                     </div>
                 ) : (
-                    categoryKeys.map((category) => (
-                        <section key={category} style={{ marginBottom: '40px' }}>
+                    <>
+                        {/* ─── Pending items by category ─── */}
+                        {pendingCategories.map((category) => {
+                            const pending = items[category].filter((i) => !i.is_purchased);
+                            if (pending.length === 0) return null;
+                            return (
+                        <section key={category} data-testid="pending-category-section" style={{ marginBottom: '40px' }}>
                             {/* Category header */}
                             <div
                                 style={{
@@ -533,7 +540,7 @@ export default function SharedListPage() {
                                 />
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                                {items[category].map((item) => (
+                                {pending.map((item) => (
                                     <div
                                         key={item.id}
                                         data-testid="shared-item-row"
@@ -608,7 +615,126 @@ export default function SharedListPage() {
                                 ))}
                             </div>
                         </section>
-                    ))
+                    ); })}
+
+                        {/* ─── Purchased items ─── */}
+                        {purchasedItems.length > 0 && (
+                            <section data-testid="purchased-section" style={{ marginTop: '28px', marginBottom: '40px' }}>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '12px',
+                                        marginBottom: '24px',
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            height: '1px',
+                                            flex: 1,
+                                            background: 'linear-gradient(to right, transparent, #c1c7cd, transparent)',
+                                            opacity: 0.3,
+                                        }}
+                                    />
+                                    <h3
+                                        style={{
+                                            fontSize: '11px',
+                                            fontWeight: 800,
+                                            textTransform: 'uppercase',
+                                            letterSpacing: '0.2em',
+                                            color: '#71787d',
+                                            margin: 0,
+                                        }}
+                                    >
+                                        Ya en el carro ({purchasedItems.length})
+                                    </h3>
+                                    <div
+                                        style={{
+                                            height: '1px',
+                                            flex: 1,
+                                            background: 'linear-gradient(to right, transparent, #c1c7cd, transparent)',
+                                            opacity: 0.3,
+                                        }}
+                                    />
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                    {purchasedItems.map((item) => (
+                                        <div
+                                            key={item.id}
+                                            data-testid="purchased-item-row"
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                padding: '20px',
+                                                background: 'rgba(242, 244, 246, 0.5)',
+                                                borderRadius: '20px',
+                                                transition: 'all 0.2s',
+                                                cursor: isEdit ? 'pointer' : 'default',
+                                            }}
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                checked={item.is_purchased}
+                                                disabled={!isEdit}
+                                                onChange={() => handleToggle(item.id)}
+                                                aria-label={`${item.name} (comprado)`}
+                                                style={{
+                                                    width: '24px',
+                                                    height: '24px',
+                                                    borderRadius: '8px',
+                                                    border: `2px solid #002736`,
+                                                    accentColor: '#002736',
+                                                    cursor: isEdit ? 'pointer' : 'not-allowed',
+                                                    opacity: !isEdit ? 0.4 : 1,
+                                                }}
+                                            />
+
+                                            {isEdit ? (
+                                                <button
+                                                    onClick={() => setEditingItem(item)}
+                                                    style={{
+                                                        flex: 1,
+                                                        textAlign: 'left',
+                                                        minWidth: 0,
+                                                        marginLeft: '16px',
+                                                        background: 'none',
+                                                        border: 'none',
+                                                        cursor: 'pointer',
+                                                        padding: 0,
+                                                        fontFamily: "'Inter', sans-serif",
+                                                    }}
+                                                >
+                                                    <ItemLabel item={item} />
+                                                </button>
+                                            ) : (
+                                                <div style={{ flex: 1, textAlign: 'left', minWidth: 0, marginLeft: '16px' }}>
+                                                    <ItemLabel item={item} />
+                                                </div>
+                                            )}
+
+                                            {isEdit && (
+                                                <button
+                                                    onClick={() => handleDelete(item)}
+                                                    aria-label={`Eliminar ${item.name}`}
+                                                    style={{
+                                                        color: '#ba1a1a',
+                                                        background: 'none',
+                                                        border: 'none',
+                                                        cursor: 'pointer',
+                                                        padding: '4px',
+                                                        opacity: 0.4,
+                                                        fontSize: '20px',
+                                                    }}
+                                                >
+                                                    <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>close</span>
+                                                </button>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+                    </>
                 )}
 
                 {/* End of list */}

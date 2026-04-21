@@ -162,6 +162,45 @@ class PriceEstimationServiceTest extends TestCase
         $this->assertSame(3.00, $result->totalMax); // 0.50 * 6
     }
 
+    public function test_quantity_in_grams_normalized_to_kg(): void
+    {
+        $user = User::factory()->createOne();
+        ProductoCatalogo::factory()->createOne(['nombre' => 'Arroz', 'precio_min' => 1.20, 'precio_max' => 1.80]);
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $list->items()->create(['name' => 'Arroz', 'quantity' => 500, 'unit' => 'g', 'is_purchased' => false, 'position' => 0]);
+
+        $result = $this->service->estimateForList($user, $list->load('items'));
+
+        $this->assertSame(0.60, $result->totalMin);  // 1.20 * 0.5
+        $this->assertSame(0.90, $result->totalMax);  // 1.80 * 0.5
+    }
+
+    public function test_quantity_in_ml_normalized_to_liters(): void
+    {
+        $user = User::factory()->createOne();
+        ProductoCatalogo::factory()->createOne(['nombre' => 'Nata', 'precio_min' => 1.00, 'precio_max' => 2.00]);
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $list->items()->create(['name' => 'Nata', 'quantity' => 250, 'unit' => 'ml', 'is_purchased' => false, 'position' => 0]);
+
+        $result = $this->service->estimateForList($user, $list->load('items'));
+
+        $this->assertSame(0.25, $result->totalMin);  // 1.00 * 0.25
+        $this->assertSame(0.50, $result->totalMax);  // 2.00 * 0.25
+    }
+
+    public function test_quantity_zero_defaults_to_one(): void
+    {
+        $user = User::factory()->createOne();
+        ProductoCatalogo::factory()->createOne(['nombre' => 'Sal', 'precio_min' => 0.50, 'precio_max' => 1.00]);
+        $list = ShoppingList::factory()->create(['user_id' => $user->id]);
+        $list->items()->create(['name' => 'Sal', 'quantity' => 0, 'is_purchased' => false, 'position' => 0]);
+
+        $result = $this->service->estimateForList($user, $list->load('items'));
+
+        $this->assertSame(0.50, $result->totalMin);
+        $this->assertSame(1.00, $result->totalMax);
+    }
+
     public function test_record_item_prices_updates_history_and_item(): void
     {
         $user = User::factory()->createOne();

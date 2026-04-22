@@ -99,10 +99,11 @@ export default function ListDetailPage() {
 
     useEffect(() => {
         fetchList();
+        estimatePrices(id).then(setPriceEstimate).catch(() => {});
         return () => {
             if (undoTimerRef.current) clearTimeout(undoTimerRef.current);
         };
-    }, [fetchList]);
+    }, [fetchList, id]);
 
     const handleAdd = async (data) => {
         setAddLoading(true);
@@ -389,7 +390,7 @@ export default function ListDetailPage() {
                 </span>
                 {item.estimated_price != null && (
                     <span style={{ fontSize: 12, color: T.outline }}>
-                        ~{item.estimated_price}\u20AC
+                        ~{item.estimated_price}€
                     </span>
                 )}
             </button>

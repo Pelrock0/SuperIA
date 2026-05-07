@@ -1,0 +1,2751 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="ListItemService.php" path="\Services">
+    <totals>
+      <lines total="169" comments="1" code="168" executable="78" executed="78" percent="100.00"/>
+      <methods count="10" tested="10" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Services\ListItemService" start="13" executable="78" executed="78" crap="16">
+      <namespace name="App\Services"/>
+      <method name="__construct" signature="__construct(?App\Services\ActivityLogService $activityLog, ?App\Services\CategoryInferenceService $categoryInference)" start="15" end="21" crap="1" executable="2" executed="2" coverage="100"/>
+      <method name="getItemsForList" signature="getItemsForList(App\Models\ShoppingList $list): array" start="23" end="42" crap="2" executable="14" executed="14" coverage="100"/>
+      <method name="create" signature="create(App\Models\ShoppingList $list, array $data, ?App\Support\ShareTokenContext $context): array" start="44" end="74" crap="3" executable="19" executed="19" coverage="100"/>
+      <method name="update" signature="update(App\Models\ListItem $item, array $data, ?App\Support\ShareTokenContext $context): App\Models\ListItem" start="76" end="84" crap="1" executable="4" executed="4" coverage="100"/>
+      <method name="togglePurchased" signature="togglePurchased(App\Models\ListItem $item, int $userId, int $listaId, ?App\Support\ShareTokenContext $context): array" start="86" end="108" crap="3" executable="11" executed="11" coverage="100"/>
+      <method name="delete" signature="delete(App\Models\ListItem $item, ?App\Support\ShareTokenContext $context): array" start="110" end="122" crap="1" executable="8" executed="8" coverage="100"/>
+      <method name="clearCompleted" signature="clearCompleted(App\Models\ShoppingList $list, ?App\Support\ShareTokenContext $context): array" start="124" end="134" crap="1" executable="6" executed="6" coverage="100"/>
+      <method name="logActivity" signature="logActivity(App\Models\ShoppingList $list, ?App\Support\ShareTokenContext $context, App\Enums\ActivityAction $action, string $name): void" start="136" end="146" crap="2" executable="3" executed="3" coverage="100"/>
+      <method name="syncCounters" signature="syncCounters(App\Models\ShoppingList $list): array" start="148" end="159" crap="1" executable="7" executed="7" coverage="100"/>
+      <method name="getCounters" signature="getCounters(App\Models\ShoppingList $list): array" start="161" end="167" crap="1" executable="4" executed="4" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="19">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_changes_item"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_logs_item_edited"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\IncrementQuantityTest::test_increments_item_quantity"/>
+        <covered by="Tests\Feature\IncrementQuantityTest::test_increments_null_quantity"/>
+        <covered by="Tests\Feature\IncrementQuantityTest::test_requires_ownership"/>
+        <covered by="Tests\Feature\IncrementQuantityTest::test_validates_quantity_required"/>
+        <covered by="Tests\Feature\IncrementQuantityTest::test_validates_quantity_positive"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_requires_authentication"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_cannot_save_own_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_unauthenticated"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_read_only_cannot_add_items"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_non_collaborator_cannot_access_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_collaborator_cannot_delete_items"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_collaborator_cannot_increment_quantity"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_denies_other_users_list"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_fails_with_empty_name"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_fails_with_name_over_80_chars"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_fails_with_invalid_unit"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_fails_with_invalid_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_denies_other_users_list"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_update_changes_item_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_update_denies_item_from_other_list"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_denies_other_users_list"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_denies_other_users_list"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_denies_other_users_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_empty_when_no_active_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_suggestions_when_data_matches"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_denies_other_users_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_requires_valid_input"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_ignore_creates_dismiss_row"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_ignore_validates_input"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_silence_creates_silenced_row"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_silence_scopes_to_user"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_validates_input"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_404_when_item_from_other_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_requires_valid_uuid"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_cross_tenant_token_cannot_mutate_another_list"/>
+      </line>
+      <line nr="20">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_changes_item"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_logs_item_edited"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\IncrementQuantityTest::test_increments_item_quantity"/>
+        <covered by="Tests\Feature\IncrementQuantityTest::test_increments_null_quantity"/>
+        <covered by="Tests\Feature\IncrementQuantityTest::test_requires_ownership"/>
+        <covered by="Tests\Feature\IncrementQuantityTest::test_validates_quantity_required"/>
+        <covered by="Tests\Feature\IncrementQuantityTest::test_validates_quantity_positive"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_requires_authentication"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_cannot_save_own_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_unauthenticated"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_read_only_cannot_add_items"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_non_collaborator_cannot_access_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_collaborator_cannot_delete_items"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_collaborator_cannot_increment_quantity"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_denies_other_users_list"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_fails_with_empty_name"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_fails_with_name_over_80_chars"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_fails_with_invalid_unit"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_fails_with_invalid_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_denies_other_users_list"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_update_changes_item_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_update_denies_item_from_other_list"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_denies_other_users_list"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_denies_other_users_list"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_denies_other_users_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_empty_when_no_active_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_suggestions_when_data_matches"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_denies_other_users_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_requires_valid_input"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_ignore_creates_dismiss_row"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_ignore_validates_input"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_silence_creates_silenced_row"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_silence_scopes_to_user"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_validates_input"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_404_when_item_from_other_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_requires_valid_uuid"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_cross_tenant_token_cannot_mutate_another_list"/>
+      </line>
+      <line nr="25">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="26">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="27">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="28">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="29">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="30">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="32">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="33">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="34">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="35">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="39">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="40">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="46">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="47">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="48">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="49">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="50">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="53">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="54">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="55">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="56">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="57">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="58">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="61">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="63">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="65">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="66">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="69">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="70">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="73">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="78">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_changes_item"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_logs_item_edited"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_update_changes_item_fields"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="79">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_changes_item"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_logs_item_edited"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_update_changes_item_fields"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="81">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_changes_item"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_logs_item_edited"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_update_changes_item_fields"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="83">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_changes_item"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_logs_item_edited"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_update_changes_item_fields"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="92">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+      </line>
+      <line nr="93">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+      </line>
+      <line nr="94">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+      </line>
+      <line nr="96">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+      </line>
+      <line nr="97">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+      </line>
+      <line nr="100">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+      </line>
+      <line nr="101">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+      </line>
+      <line nr="103">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+      </line>
+      <line nr="104">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+      </line>
+      <line nr="106">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+      </line>
+      <line nr="107">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+      </line>
+      <line nr="112">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="113">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="114">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="115">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="116">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="118">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="120">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="121">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="126">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+      </line>
+      <line nr="127">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+      </line>
+      <line nr="128">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+      </line>
+      <line nr="130">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+      </line>
+      <line nr="132">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+      </line>
+      <line nr="133">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+      </line>
+      <line nr="142">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_changes_item"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_logs_item_edited"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_update_changes_item_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="143">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_changes_item"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_logs_item_edited"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_update_changes_item_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="145">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_changes_item"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_update_logs_item_edited"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_update_changes_item_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="150">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="151">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="153">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="154">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="155">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="158">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="164">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="165">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="38">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="41">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="59">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+      </line>
+      <line nr="156">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_adds_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_marks_purchased_and_creates_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_unmarks_without_historial"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_removes_item_and_syncs_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_removes_only_purchased"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_owner_activity_when_no_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_create_logs_anonymous_activity_with_context"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_toggle_logs_checked_and_unchecked"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_delete_logs_item_deleted"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_clear_completed_logs_list_cleared"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_auto_categorizes_from_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_leaves_null_when_not_in_catalog"/>
+        <covered by="Tests\Feature\AutoCategorizationTest::test_respects_explicit_category"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_edit_can_add_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_all_fields"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_creates_item_with_name_only"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_store_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_marks_item_as_purchased"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_unmarks_purchased_item"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_creates_historial_on_purchase"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_toggle_does_not_create_historial_on_uncheck"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_destroy_deletes_item_and_syncs_counters"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_clear_completed_removes_only_purchased_items"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_accept_creates_item_in_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+      </line>
+      <line nr="163">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+      <line nr="166">
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_get_items_returns_grouped_and_counters"/>
+        <covered by="Tests\Unit\Services\ListItemServiceTest::test_items_without_category_grouped_as_otros"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_collaborator_can_read_items"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_items_grouped_by_category"/>
+        <covered by="Tests\Feature\ListItemControllerTest::test_index_returns_empty_for_empty_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Services</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Enums\ActivityAction</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Enums\ActorType</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\ListItem</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\ProductoHistorial</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\ShoppingList</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="10">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Support\ShareTokenContext</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="11">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Support\Facades\DB</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="12"/>
+      <line no="13">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListItemService</token>
+      </line>
+      <line no="14">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="15">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">__construct</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="16">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">ActivityLogService</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$activityLog</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">CategoryInferenceService</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$categoryInference</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="19">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">activityLog</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COALESCE_EQUAL">??=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ActivityLogService</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="20">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">categoryInference</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COALESCE_EQUAL">??=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CategoryInferenceService</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="22"/>
+      <line no="23">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">getItemsForList</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ShoppingList</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$items</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">items</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="26">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">orderBy</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'is_purchased'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="27">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">orderBy</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'category'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">orderBy</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'position'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">orderBy</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'created_at'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">get</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="31"/>
+      <line no="32">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$grouped</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_FOREACH">foreach</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$items</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_AS">as</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$category</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">category</token>
+        <token name="T_NULLSAFE_OBJECT_OPERATOR">?-&gt;</token>
+        <token name="T_STRING">value</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COALESCE">??</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'otros'</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$grouped</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_VARIABLE">$category</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="36">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="37"/>
+      <line no="38">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="39">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$grouped</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="40">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'counters'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">getCounters</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="41">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="42">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="43"/>
+      <line no="44">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">create</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ShoppingList</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$data</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">ShareTokenContext</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="45">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="46">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">transaction</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$data</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="47">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$category</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$data</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'category'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COALESCE">??</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="48">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$category</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="49">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$inferred</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">categoryInference</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">infer</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$data</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'name'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="50">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$category</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$inferred</token>
+        <token name="T_NULLSAFE_OBJECT_OPERATOR">?-&gt;</token>
+        <token name="T_STRING">value</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="51">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="52"/>
+      <line no="53">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">items</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">create</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="54">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'name'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$data</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'name'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="55">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'quantity'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$data</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'quantity'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COALESCE">??</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="56">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'unit'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$data</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'unit'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COALESCE">??</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="57">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'category'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$category</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="58">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'estimated_price'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$data</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'estimated_price'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COALESCE">??</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="59">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="60"/>
+      <line no="61">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$counters</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">syncCounters</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="62"/>
+      <line no="63">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">logActivity</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ActivityAction</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">ItemAdded</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">name</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="64"/>
+      <line no="65">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'item'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'counters'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$counters</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="66">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="67"/>
+      <line no="68">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_COMMENT">// If no category was resolved, dispatch async AI inference</token>
+      </line>
+      <line no="69">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'item'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">category</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="70">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">categoryInference</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">dispatchAiInference</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'item'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="71">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="72"/>
+      <line no="73">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="74">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="75"/>
+      <line no="76">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">update</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ListItem</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$data</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">ShareTokenContext</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListItem</token>
+      </line>
+      <line no="77">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="78">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">update</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$data</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="79">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">refresh</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="80"/>
+      <line no="81">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">logActivity</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">shoppingList</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ActivityAction</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">ItemEdited</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">name</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="82"/>
+      <line no="83">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="84">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="85"/>
+      <line no="86">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">togglePurchased</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="87">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">ListItem</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="88">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$userId</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="89">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listaId</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="90">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">ShareTokenContext</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="91">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="92">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">transaction</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$userId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listaId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="93">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$wasPurchased</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">is_purchased</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="94">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">update</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'is_purchased'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_VARIABLE">$wasPurchased</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="95"/>
+      <line no="96">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_VARIABLE">$wasPurchased</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="97">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_STRING">ProductoHistorial</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">recordPurchase</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$userId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listaId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="98">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="99"/>
+      <line no="100">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">shoppingList</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="101">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$counters</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">syncCounters</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="102"/>
+      <line no="103">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$action</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$wasPurchased</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ActivityAction</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">ItemUnchecked</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ActivityAction</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">ItemChecked</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="104">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">logActivity</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$action</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">name</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="105"/>
+      <line no="106">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'item'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">refresh</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'counters'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$counters</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="107">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="108">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="109"/>
+      <line no="110">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">delete</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ListItem</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">ShareTokenContext</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="111">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="112">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">transaction</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="113">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">shoppingList</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="114">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$itemName</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">name</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="115">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">delete</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="116">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$counters</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">syncCounters</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="117"/>
+      <line no="118">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">logActivity</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ActivityAction</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">ItemDeleted</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$itemName</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="119"/>
+      <line no="120">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'counters'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$counters</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="121">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="122">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="123"/>
+      <line no="124">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">clearCompleted</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ShoppingList</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">ShareTokenContext</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="125">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="126">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">transaction</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="127">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">items</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'is_purchased'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">true</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">delete</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="128">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$counters</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">syncCounters</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="129"/>
+      <line no="130">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">logActivity</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ActivityAction</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">ListCleared</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">name</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="131"/>
+      <line no="132">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'counters'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$counters</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="133">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="134">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="135"/>
+      <line no="136">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">logActivity</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="137">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">ShoppingList</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="138">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">ShareTokenContext</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="139">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">ActivityAction</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$action</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="140">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$name</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="141">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">void</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="142">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$actor</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ActorType</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Anonymous</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ActorType</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Owner</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="143">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$tokenId</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_NULLSAFE_OBJECT_OPERATOR">?-&gt;</token>
+        <token name="T_STRING">tokenId</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="144"/>
+      <line no="145">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">activityLog</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">record</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$actor</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$action</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$name</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$tokenId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="146">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="147"/>
+      <line no="148">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">syncCounters</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ShoppingList</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="149">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="150">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$total</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">items</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">count</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="151">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$completed</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">items</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'is_purchased'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">true</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">count</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="152"/>
+      <line no="153">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">update</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="154">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_total'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$total</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="155">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_completed'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$completed</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="156">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="157"/>
+      <line no="158">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_total'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$total</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_completed'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$completed</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="159">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="160"/>
+      <line no="161">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">getCounters</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ShoppingList</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="162">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="163">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="164">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_total'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">items_total</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="165">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_completed'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">items_completed</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="166">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="167">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="168">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="169"/>
+    </source>
+  </file>
+</phpunit>

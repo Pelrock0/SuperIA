@@ -1,0 +1,359 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="AccountDeletionController.php" path="\Http\Controllers\Auth">
+    <totals>
+      <lines total="36" comments="0" code="36" executable="14" executed="14" percent="100.00"/>
+      <methods count="2" tested="2" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Http\Controllers\Auth\AccountDeletionController" start="10" executable="14" executed="14" crap="3">
+      <namespace name="App\Http\Controllers\Auth"/>
+      <method name="__construct" signature="__construct(App\Services\AccountDeletionService $accountDeletionService)" start="12" end="14" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="destroy" signature="destroy(App\Http\Requests\Auth\DeleteAccountRequest $request): Illuminate\Http\JsonResponse" start="16" end="34" crap="2" executable="13" executed="13" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="14">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_soft_deletes_user"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_creates_audit_log"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_increments_jwt_version"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_requires_password"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_audit_log_contains_no_pii"/>
+      </line>
+      <line nr="19">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_soft_deletes_user"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_creates_audit_log"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_increments_jwt_version"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_audit_log_contains_no_pii"/>
+      </line>
+      <line nr="20">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_soft_deletes_user"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_creates_audit_log"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_increments_jwt_version"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_audit_log_contains_no_pii"/>
+      </line>
+      <line nr="21">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_soft_deletes_user"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_creates_audit_log"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_increments_jwt_version"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_audit_log_contains_no_pii"/>
+      </line>
+      <line nr="24">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_soft_deletes_user"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_creates_audit_log"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_increments_jwt_version"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_audit_log_contains_no_pii"/>
+      </line>
+      <line nr="26">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_soft_deletes_user"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_creates_audit_log"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_increments_jwt_version"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_audit_log_contains_no_pii"/>
+      </line>
+      <line nr="29">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_fails_with_wrong_password"/>
+      </line>
+      <line nr="30">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_fails_with_wrong_password"/>
+      </line>
+      <line nr="31">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_fails_with_wrong_password"/>
+      </line>
+      <line nr="32">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_fails_with_wrong_password"/>
+      </line>
+      <line nr="22">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_soft_deletes_user"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_creates_audit_log"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_increments_jwt_version"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_audit_log_contains_no_pii"/>
+      </line>
+      <line nr="25">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_soft_deletes_user"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_creates_audit_log"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_increments_jwt_version"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_audit_log_contains_no_pii"/>
+      </line>
+      <line nr="27">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_soft_deletes_user"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_creates_audit_log"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_increments_jwt_version"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_audit_log_contains_no_pii"/>
+      </line>
+      <line nr="28">
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_soft_deletes_user"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_creates_audit_log"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_delete_account_increments_jwt_version"/>
+        <covered by="Tests\Feature\Auth\AccountDeletionTest::test_audit_log_contains_no_pii"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Http\Controllers\Auth</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Http\Controllers\Controller</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Http\Requests\Auth\DeleteAccountRequest</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Services\AccountDeletionService</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Http\JsonResponse</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9"/>
+      <line no="10">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AccountDeletionController</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EXTENDS">extends</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Controller</token>
+      </line>
+      <line no="11">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="12">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">__construct</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="13">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AccountDeletionService</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$accountDeletionService</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="14">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="15"/>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">destroy</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">DeleteAccountRequest</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">JsonResponse</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_TRY">try</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="19">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">accountDeletionService</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">initiateDelete</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="20">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_STRING">auth</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'api'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">user</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">validated</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'password'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="23"/>
+      <line no="24">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">response</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">json</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'data'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="26">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'message'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'Tu cuenta ha sido eliminada. Recibiras un email de confirmacion.'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="27">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CATCH">catch</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_NAME_FULLY_QUALIFIED">\InvalidArgumentException</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$e</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">response</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">json</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="31">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'error'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'code'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'DELETION_FAILED'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'message'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$e</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">getMessage</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="32">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">422</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="35">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="36"/>
+    </source>
+  </file>
+</phpunit>

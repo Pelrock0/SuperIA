@@ -1,0 +1,663 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="WaitlistEntry.php" path="\Models">
+    <totals>
+      <lines total="58" comments="6" code="52" executable="10" executed="10" percent="100.00"/>
+      <methods count="4" tested="4" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Models\WaitlistEntry" start="14" executable="10" executed="10" crap="7">
+      <namespace name="App\Models"/>
+      <method name="casts" signature="casts(): array" start="31" end="38" crap="1" executable="4" executed="4" coverage="100"/>
+      <method name="isPending" signature="isPending(): bool" start="40" end="43" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="isInvited" signature="isInvited(): bool" start="45" end="48" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="hasValidInvitation" signature="hasValidInvitation(): bool" start="50" end="56" crap="4" executable="4" executed="4" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="35">
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_is_pending_returns_true_when_status_pending"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_is_invited_returns_true_when_status_invited"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_true_when_not_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_pending"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_casts_dates_correctly"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_fillable_attributes"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_user_counts"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_list_counts"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_ai_metrics"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_waitlist_count"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_all_expected_keys"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_entry_for_valid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_invalid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_expired_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_creates_user_and_updates_waitlist"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_sends_verification_email"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_invalid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_creates_entry_and_sends_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_with_null_companion"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_duplicate_email_returns_success_without_creating"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_assigns_sequential_position"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_invite_sends_email_and_updates_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_invite_throws_if_not_pending"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_unknown"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_expired"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_notifies_admin_on_new_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_notifies_all_admins_individually"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_does_not_notify_admins_on_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_logs_warning_when_no_admins_exist"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_completes_successfully_when_no_admins_exist"/>
+        <covered by="Tests\Feature\AdminDashboardTest::test_dashboard_renders_with_metrics"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_creates_waitlist_entry"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_without_optional_companion"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_duplicate_email_returns_success"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_rate_limited_after_3_requests"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_returns_position"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_user_data_for_valid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_invalid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_expired_invitation"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_creates_user_with_valid_data"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_invalid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_expired_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_if_email_already_registered"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_without_privacy_acceptance"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_weak_password"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_password_no_uppercase"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_password_no_number"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_mismatched_passwords"/>
+      </line>
+      <line nr="42">
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_is_pending_returns_true_when_status_pending"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_is_invited_returns_true_when_status_invited"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_invite_sends_email_and_updates_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_invite_throws_if_not_pending"/>
+      </line>
+      <line nr="47">
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_is_pending_returns_true_when_status_pending"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_is_invited_returns_true_when_status_invited"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_true_when_not_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_pending"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_entry_for_valid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_expired_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_creates_user_and_updates_waitlist"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_sends_verification_email"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_expired"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_user_data_for_valid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_expired_invitation"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_creates_user_with_valid_data"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_expired_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_if_email_already_registered"/>
+      </line>
+      <line nr="52">
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_true_when_not_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_pending"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_entry_for_valid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_expired_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_creates_user_and_updates_waitlist"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_sends_verification_email"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_expired"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_user_data_for_valid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_expired_invitation"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_creates_user_with_valid_data"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_expired_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_if_email_already_registered"/>
+      </line>
+      <line nr="53">
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_true_when_not_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_pending"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_entry_for_valid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_expired_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_creates_user_and_updates_waitlist"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_sends_verification_email"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_expired"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_user_data_for_valid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_expired_invitation"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_creates_user_with_valid_data"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_expired_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_if_email_already_registered"/>
+      </line>
+      <line nr="54">
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_true_when_not_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_pending"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_entry_for_valid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_expired_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_creates_user_and_updates_waitlist"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_sends_verification_email"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_expired"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_user_data_for_valid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_expired_invitation"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_creates_user_with_valid_data"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_expired_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_if_email_already_registered"/>
+      </line>
+      <line nr="55">
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_true_when_not_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_pending"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_entry_for_valid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_expired_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_creates_user_and_updates_waitlist"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_sends_verification_email"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_expired"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_user_data_for_valid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_expired_invitation"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_creates_user_with_valid_data"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_expired_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_if_email_already_registered"/>
+      </line>
+      <line nr="34">
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_is_pending_returns_true_when_status_pending"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_is_invited_returns_true_when_status_invited"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_true_when_not_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_pending"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_casts_dates_correctly"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_fillable_attributes"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_user_counts"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_list_counts"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_ai_metrics"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_waitlist_count"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_all_expected_keys"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_entry_for_valid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_invalid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_expired_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_creates_user_and_updates_waitlist"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_sends_verification_email"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_invalid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_creates_entry_and_sends_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_with_null_companion"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_duplicate_email_returns_success_without_creating"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_assigns_sequential_position"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_invite_sends_email_and_updates_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_invite_throws_if_not_pending"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_unknown"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_expired"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_notifies_admin_on_new_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_notifies_all_admins_individually"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_does_not_notify_admins_on_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_logs_warning_when_no_admins_exist"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_completes_successfully_when_no_admins_exist"/>
+        <covered by="Tests\Feature\AdminDashboardTest::test_dashboard_renders_with_metrics"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_creates_waitlist_entry"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_without_optional_companion"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_duplicate_email_returns_success"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_rate_limited_after_3_requests"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_returns_position"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_user_data_for_valid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_invalid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_expired_invitation"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_creates_user_with_valid_data"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_invalid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_expired_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_if_email_already_registered"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_without_privacy_acceptance"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_weak_password"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_password_no_uppercase"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_password_no_number"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_mismatched_passwords"/>
+      </line>
+      <line nr="36">
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_is_pending_returns_true_when_status_pending"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_is_invited_returns_true_when_status_invited"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_true_when_not_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_pending"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_casts_dates_correctly"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_fillable_attributes"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_user_counts"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_list_counts"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_ai_metrics"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_waitlist_count"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_all_expected_keys"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_entry_for_valid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_invalid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_expired_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_creates_user_and_updates_waitlist"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_sends_verification_email"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_invalid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_creates_entry_and_sends_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_with_null_companion"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_duplicate_email_returns_success_without_creating"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_assigns_sequential_position"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_invite_sends_email_and_updates_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_invite_throws_if_not_pending"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_unknown"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_expired"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_notifies_admin_on_new_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_notifies_all_admins_individually"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_does_not_notify_admins_on_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_logs_warning_when_no_admins_exist"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_completes_successfully_when_no_admins_exist"/>
+        <covered by="Tests\Feature\AdminDashboardTest::test_dashboard_renders_with_metrics"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_creates_waitlist_entry"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_without_optional_companion"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_duplicate_email_returns_success"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_rate_limited_after_3_requests"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_returns_position"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_user_data_for_valid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_invalid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_expired_invitation"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_creates_user_with_valid_data"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_invalid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_expired_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_if_email_already_registered"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_without_privacy_acceptance"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_weak_password"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_password_no_uppercase"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_password_no_number"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_mismatched_passwords"/>
+      </line>
+      <line nr="37">
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_is_pending_returns_true_when_status_pending"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_is_invited_returns_true_when_status_invited"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_true_when_not_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_expired"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_has_valid_invitation_returns_false_when_pending"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_casts_dates_correctly"/>
+        <covered by="Tests\Unit\Models\WaitlistEntryTest::test_fillable_attributes"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_user_counts"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_list_counts"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_ai_metrics"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_waitlist_count"/>
+        <covered by="Tests\Unit\Services\AdminMetricsServiceTest::test_returns_all_expected_keys"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_entry_for_valid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_invalid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_validate_invitation_token_returns_null_for_expired_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_creates_user_and_updates_waitlist"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_sends_verification_email"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_invalid_token"/>
+        <covered by="Tests\Unit\Services\RegistrationServiceTest::test_register_throws_for_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_creates_entry_and_sends_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_with_null_companion"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_duplicate_email_returns_success_without_creating"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_assigns_sequential_position"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_invite_sends_email_and_updates_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_invite_throws_if_not_pending"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_unknown"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_find_by_invitation_token_returns_null_for_expired"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_notifies_admin_on_new_entry"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_notifies_all_admins_individually"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_does_not_notify_admins_on_duplicate_email"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_logs_warning_when_no_admins_exist"/>
+        <covered by="Tests\Unit\Services\WaitlistServiceTest::test_register_completes_successfully_when_no_admins_exist"/>
+        <covered by="Tests\Feature\AdminDashboardTest::test_dashboard_renders_with_metrics"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_creates_waitlist_entry"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_without_optional_companion"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_duplicate_email_returns_success"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_sends_confirmation_email"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_rate_limited_after_3_requests"/>
+        <covered by="Tests\Feature\Api\WaitlistControllerTest::test_store_returns_position"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_user_data_for_valid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_invalid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_validate_token_returns_404_for_expired_invitation"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_creates_user_with_valid_data"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_invalid_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_expired_token"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_if_email_already_registered"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_without_privacy_acceptance"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_weak_password"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_password_no_uppercase"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_password_no_number"/>
+        <covered by="Tests\Feature\Auth\RegisterTest::test_register_fails_with_mismatched_passwords"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Backpack\CRUD\app\Models\Traits\CrudTrait</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Database\Eloquent\Factories\HasFactory</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Database\Eloquent\Model</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8"/>
+      <line no="9">
+        <token name="T_DOC_COMMENT">/**</token>
+      </line>
+      <line no="10">
+        <token name="T_DOC_COMMENT"> * @property string $status</token>
+      </line>
+      <line no="11">
+        <token name="T_DOC_COMMENT"> * @property string|null $invitation_token</token>
+      </line>
+      <line no="12">
+        <token name="T_DOC_COMMENT"> * @property \Illuminate\Support\Carbon|null $invitation_expires_at</token>
+      </line>
+      <line no="13">
+        <token name="T_DOC_COMMENT"> */</token>
+      </line>
+      <line no="14">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">WaitlistEntry</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EXTENDS">extends</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Model</token>
+      </line>
+      <line no="15">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CrudTrait</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_DOC_COMMENT">/** @use HasFactory&lt;\Database\Factories\WaitlistEntryFactory&gt; */</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">HasFactory</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="19"/>
+      <line no="20">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PROTECTED">protected</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$fillable</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'name'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'email'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'shopping_companion'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'position'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'status'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="26">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'invitation_token'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="27">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'invitation_sent_at'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'invitation_expires_at'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="30"/>
+      <line no="31">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_ATTRIBUTE">#[</token>
+        <token name="T_NAME_FULLY_QUALIFIED">\Override</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+      </line>
+      <line no="32">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PROTECTED">protected</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">casts</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'invitation_sent_at'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'datetime'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="36">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'invitation_expires_at'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'datetime'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="37">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="38">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="39"/>
+      <line no="40">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">isPending</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+      </line>
+      <line no="41">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="42">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">status</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'pending'</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="43">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="44"/>
+      <line no="45">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">isInvited</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+      </line>
+      <line no="46">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="47">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">status</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'invited'</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="48">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="49"/>
+      <line no="50">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">hasValidInvitation</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+      </line>
+      <line no="51">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="52">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">isInvited</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="53">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_BOOLEAN_AND">&amp;&amp;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">invitation_token</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_NOT_IDENTICAL">!==</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+      </line>
+      <line no="54">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_BOOLEAN_AND">&amp;&amp;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">invitation_expires_at</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_NOT_IDENTICAL">!==</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+      </line>
+      <line no="55">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_BOOLEAN_AND">&amp;&amp;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">invitation_expires_at</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">isFuture</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="56">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="57">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="58"/>
+    </source>
+  </file>
+</phpunit>

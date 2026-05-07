@@ -312,4 +312,115 @@ class ComplementarySuggestionServiceTest extends TestCase
         $sent = $this->fakeClaude->complementCalls[0]['product'] ?? '';
         $this->assertStringNotContainsString('ignore previous', $sent);
     }
+
+    public function test_budget_cap_returns_empty_suggestions_and_false_ai_fallback(): void
+    {
+        config(['ai.budget_cap_monthly_usd' => 1]);
+        $user = User::factory()->createOne();
+        AiUsageLog::factory()->createOne([
+            'user_id' => $user->id,
+            'status' => AiUsageStatus::Success,
+            'estimated_cost_usd' => 5,
+        ]);
+        $current = $this->currentList($user);
+
+        $result = $this->service->suggest($user, 'Pasta', $current->id);
+
+        $this->assertSame([], $result['suggestions']);
+        $this->assertFalse($result['ai_fallback_used']);
+    }
+
+    public function test_user_quota_records_user_capped_and_returns_empty_suggestions(): void
+    {
+        $user = User::factory()->createOne();
+        AiUsageLog::factory()->count(20)->create([
+            'user_id' => $user->id,
+            'operation' => AiOperation::Suggestion,
+            'status' => AiUsageStatus::Success,
+        ]);
+        $current = $this->currentList($user);
+
+        $result = $this->service->suggest($user, 'Pasta', $current->id);
+
+        $this->assertSame([], $result['suggestions']);
+        $this->assertFalse($result['ai_fallback_used']);
+        $this->assertDatabaseHas('ai_usage_log', [
+            'user_id' => $user->id,
+            'status' => AiUsageStatus::UserCapped->value,
+            'operation' => AiOperation::Complement->value,
+        ]);
+    }
+
+    public function test_claude_error_returns_false_for_ai_limit_reached(): void
+    {
+        $user = User::factory()->createOne();
+        $current = $this->currentList($user);
+        $this->fakeClaude->shouldThrow = new ClaudeException('boom');
+
+        $result = $this->service->suggest($user, 'Pasta', $current->id);
+
+        $this->assertFalse($result['ai_limit_reached']);
+    }
+
+    public function test_circuit_breaker_opens_after_complement_claude_failures(): void
+    {
+        $user = User::factory()->createOne();
+        $current = $this->currentList($user);
+        $this->fakeClaude->shouldThrow = new ClaudeException('x');
+
+        for ($i = 0; $i < 3; $i++) {
+            $this->service->suggest($user, 'Pasta', $current->id);
+        }
+
+        $this->fakeClaude->shouldThrow = null;
+        $this->fakeClaude->cannedComplements = [['nombre' => 'Tomate', 'unidad_tipica' => null, 'categoria' => null]];
+
+        $result = $this->service->suggest($user, 'Pasta', $current->id);
+
+        $this->assertTrue($result['ai_limit_reached']);
+        $this->assertFalse($result['ai_fallback_used']);
+    }
+
+    public function test_circuit_open_records_circuit_open_log_and_returns_empty_suggestions(): void
+    {
+        $user = User::factory()->createOne();
+        $current = $this->currentList($user);
+        $this->fakeClaude->shouldThrow = new ClaudeException('x');
+
+        for ($i = 0; $i < 3; $i++) {
+            $this->service->suggest($user, 'Pasta', $current->id);
+        }
+
+        $this->fakeClaude->shouldThrow = null;
+        $result = $this->service->suggest($user, 'Pasta', $current->id);
+
+        $this->assertSame([], $result['suggestions']);
+        $this->assertDatabaseHas('ai_usage_log', [
+            'user_id' => $user->id,
+            'status' => AiUsageStatus::CircuitOpen->value,
+            'operation' => AiOperation::Complement->value,
+        ]);
+    }
+
+    public function test_co_occurrence_continues_past_current_list_item_to_next_candidate(): void
+    {
+        $user = User::factory()->createOne();
+
+        // 5 lists: all contain Pasta + Aceite de oliva (100%)
+        // 4 of those also contain Sal (80%) — both above 60% threshold
+        $this->makeCompletedList($user, ['Pasta', 'Aceite de oliva', 'Sal']);
+        $this->makeCompletedList($user, ['Pasta', 'Aceite de oliva', 'Sal']);
+        $this->makeCompletedList($user, ['Pasta', 'Aceite de oliva', 'Sal']);
+        $this->makeCompletedList($user, ['Pasta', 'Aceite de oliva', 'Sal']);
+        $this->makeCompletedList($user, ['Pasta', 'Aceite de oliva']);
+
+        // Current list already has Aceite de oliva — it should be skipped but iteration must continue
+        $current = $this->currentList($user, ['Pasta', 'Aceite de oliva']);
+
+        $result = $this->service->suggest($user, 'Pasta', $current->id);
+
+        $names = collect($result['suggestions'])->pluck('nombre')->all();
+        $this->assertContains('Sal', $names);
+        $this->assertNotContains('Aceite de oliva', $names);
+    }
 }

@@ -73,4 +73,54 @@ class AdminMetricsServiceTest extends TestCase
             $this->assertArrayHasKey($key, $metrics);
         }
     }
+
+    public function test_active_users_7d_excludes_activity_older_than_7_days(): void
+    {
+        $user = User::factory()->createOne();
+        // Insert historial row 8 days ago — must NOT count
+        \Illuminate\Support\Facades\DB::table('producto_historial')->insert([
+            'user_id' => $user->id,
+            'producto_nombre' => 'Old',
+            'fecha_compra' => now()->subDays(8)->toDateString(),
+            'lista_id' => null,
+        ]);
+
+        $before = $this->service->getMetrics()['users_active_7d'];
+
+        // Insert one from today — must count
+        \Illuminate\Support\Facades\DB::table('producto_historial')->insert([
+            'user_id' => $user->id,
+            'producto_nombre' => 'New',
+            'fecha_compra' => now()->toDateString(),
+            'lista_id' => null,
+        ]);
+
+        $after = $this->service->getMetrics()['users_active_7d'];
+
+        $this->assertGreaterThan($before, $after);
+    }
+
+    public function test_ai_cost_month_is_float_rounded_to_2_decimals(): void
+    {
+        $baseline = $this->service->getMetrics()['ai_cost_month'];
+
+        $user = User::factory()->createOne();
+        AiUsageLog::factory()->create([
+            'user_id' => $user->id,
+            'status' => AiUsageStatus::Success,
+            'estimated_cost_usd' => 1.50,
+        ]);
+
+        $metrics = $this->service->getMetrics();
+
+        $this->assertIsFloat($metrics['ai_cost_month']);
+        $this->assertSame(round($baseline + 1.50, 2), $metrics['ai_cost_month']);
+    }
+
+    public function test_active_users_7d_is_integer(): void
+    {
+        $metrics = $this->service->getMetrics();
+
+        $this->assertIsInt($metrics['users_active_7d']);
+    }
 }

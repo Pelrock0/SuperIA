@@ -90,6 +90,23 @@ class WeeklySummaryEndpointsTest extends TestCase
             ->assertJsonPath('error.code', 'NO_SUMMARY_THIS_WEEK');
     }
 
+    public function test_latest_returns_404_when_summary_actioned(): void
+    {
+        $user = User::factory()->createOne();
+        WeeklySummary::factory()->create([
+            'user_id' => $user->id,
+            'week_start_date' => $this->currentWeekStart(),
+            'status' => WeeklySummaryStatus::Actioned,
+            'payload_json' => [],
+        ]);
+
+        $response = $this->withHeaders($this->authHeaders($user))
+            ->getJson('/api/weekly-summary/latest');
+
+        $response->assertStatus(404)
+            ->assertJsonPath('error.code', 'NO_SUMMARY_THIS_WEEK');
+    }
+
     public function test_latest_requires_auth(): void
     {
         $this->getJson('/api/weekly-summary/latest')->assertStatus(401);
@@ -113,9 +130,9 @@ class WeeklySummaryEndpointsTest extends TestCase
         $this->postJson('/api/weekly-summary/dismiss')->assertStatus(401);
     }
 
-    // ---- POST /api/weekly-summary/{id}/convert-to-list ----
+    // ---- POST /api/weekly-summary/{id}/save ----
 
-    public function test_convert_to_list_creates_new_list(): void
+    public function test_save_creates_new_list_and_marks_actioned_when_all_selected(): void
     {
         $user = User::factory()->createOne();
         $summary = WeeklySummary::factory()->create([
@@ -124,14 +141,61 @@ class WeeklySummaryEndpointsTest extends TestCase
         ]);
 
         $response = $this->withHeaders($this->authHeaders($user))
-            ->postJson("/api/weekly-summary/{$summary->id}/convert-to-list");
+            ->postJson("/api/weekly-summary/{$summary->id}/save", [
+                'selected_indices' => [0, 1],
+                'target_list_id' => null,
+            ]);
 
-        $response->assertStatus(201)
-            ->assertJsonPath('data.user_id', $user->id);
+        $response->assertStatus(200)
+            ->assertJsonPath('data.list.user_id', $user->id)
+            ->assertJsonPath('data.summary.is_actioned', true)
+            ->assertJsonPath('data.summary.status', 'actioned');
+        $this->assertSame(1, $user->refresh()->shoppingLists()->count());
+        $this->assertSame(WeeklySummaryStatus::Actioned, $summary->refresh()->status);
+    }
+
+    public function test_save_partial_keeps_summary_pending(): void
+    {
+        $user = User::factory()->createOne();
+        $summary = WeeklySummary::factory()->create([
+            'user_id' => $user->id,
+            'week_start_date' => $this->currentWeekStart(),
+        ]);
+
+        $response = $this->withHeaders($this->authHeaders($user))
+            ->postJson("/api/weekly-summary/{$summary->id}/save", [
+                'selected_indices' => [0],
+                'target_list_id' => null,
+            ]);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('data.summary.is_actioned', false)
+            ->assertJsonPath('data.summary.status', 'pending');
+        $this->assertCount(1, $response->json('data.summary.remaining_items'));
+    }
+
+    public function test_save_appends_to_existing_list(): void
+    {
+        $user = User::factory()->createOne();
+        $list = ShoppingList::factory()->create([
+            'user_id' => $user->id,
+            'status' => ListStatus::Active,
+        ]);
+        $summary = WeeklySummary::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->withHeaders($this->authHeaders($user))
+            ->postJson("/api/weekly-summary/{$summary->id}/save", [
+                'selected_indices' => [0, 1],
+                'target_list_id' => $list->id,
+            ]);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('data.list.id', $list->id);
+        $this->assertSame(2, $list->refresh()->items()->count());
         $this->assertSame(1, $user->refresh()->shoppingLists()->count());
     }
 
-    public function test_convert_to_list_returns_403_when_freemium_limit_hit(): void
+    public function test_save_returns_403_freemium_limit_for_new_list(): void
     {
         $user = User::factory()->createOne();
         ShoppingList::factory()->count(3)->create([
@@ -141,28 +205,116 @@ class WeeklySummaryEndpointsTest extends TestCase
         $summary = WeeklySummary::factory()->create(['user_id' => $user->id]);
 
         $response = $this->withHeaders($this->authHeaders($user))
-            ->postJson("/api/weekly-summary/{$summary->id}/convert-to-list");
+            ->postJson("/api/weekly-summary/{$summary->id}/save", [
+                'selected_indices' => [0, 1],
+                'target_list_id' => null,
+            ]);
 
         $response->assertStatus(403)
             ->assertJsonPath('error.code', 'FREEMIUM_LIMIT');
     }
 
-    public function test_convert_to_list_returns_404_for_other_users_summary(): void
+    public function test_save_returns_404_for_other_users_summary(): void
     {
         $owner = User::factory()->createOne();
         $intruder = User::factory()->createOne();
         $summary = WeeklySummary::factory()->create(['user_id' => $owner->id]);
 
         $response = $this->withHeaders($this->authHeaders($intruder))
-            ->postJson("/api/weekly-summary/{$summary->id}/convert-to-list");
+            ->postJson("/api/weekly-summary/{$summary->id}/save", [
+                'selected_indices' => [0],
+                'target_list_id' => null,
+            ]);
 
         $response->assertStatus(404);
     }
 
-    public function test_convert_to_list_requires_auth(): void
+    public function test_save_returns_404_for_other_users_target_list(): void
+    {
+        $owner = User::factory()->createOne();
+        $intruder = User::factory()->createOne();
+        $summary = WeeklySummary::factory()->create(['user_id' => $intruder->id]);
+        $foreignList = ShoppingList::factory()->create([
+            'user_id' => $owner->id,
+            'status' => ListStatus::Active,
+        ]);
+
+        $response = $this->withHeaders($this->authHeaders($intruder))
+            ->postJson("/api/weekly-summary/{$summary->id}/save", [
+                'selected_indices' => [0],
+                'target_list_id' => $foreignList->id,
+            ]);
+
+        $response->assertStatus(404);
+    }
+
+    public function test_save_returns_404_for_archived_target_list(): void
+    {
+        $user = User::factory()->createOne();
+        $summary = WeeklySummary::factory()->create(['user_id' => $user->id]);
+        $archived = ShoppingList::factory()->create([
+            'user_id' => $user->id,
+            'status' => ListStatus::Archived,
+        ]);
+
+        $response = $this->withHeaders($this->authHeaders($user))
+            ->postJson("/api/weekly-summary/{$summary->id}/save", [
+                'selected_indices' => [0],
+                'target_list_id' => $archived->id,
+            ]);
+
+        $response->assertStatus(404);
+    }
+
+    public function test_save_returns_422_on_empty_selection(): void
+    {
+        $user = User::factory()->createOne();
+        $summary = WeeklySummary::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->withHeaders($this->authHeaders($user))
+            ->postJson("/api/weekly-summary/{$summary->id}/save", [
+                'selected_indices' => [],
+                'target_list_id' => null,
+            ]);
+
+        $response->assertStatus(422);
+    }
+
+    public function test_save_returns_422_on_out_of_range_indices(): void
+    {
+        $user = User::factory()->createOne();
+        $summary = WeeklySummary::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->withHeaders($this->authHeaders($user))
+            ->postJson("/api/weekly-summary/{$summary->id}/save", [
+                'selected_indices' => [0, 5],
+                'target_list_id' => null,
+            ]);
+
+        $response->assertStatus(422);
+    }
+
+    public function test_save_returns_422_on_non_integer_indices(): void
+    {
+        $user = User::factory()->createOne();
+        $summary = WeeklySummary::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->withHeaders($this->authHeaders($user))
+            ->postJson("/api/weekly-summary/{$summary->id}/save", [
+                'selected_indices' => ['foo'],
+                'target_list_id' => null,
+            ]);
+
+        $response->assertStatus(422);
+    }
+
+    public function test_save_requires_auth(): void
     {
         $summary = WeeklySummary::factory()->create();
-        $this->postJson("/api/weekly-summary/{$summary->id}/convert-to-list")->assertStatus(401);
+        $this->postJson("/api/weekly-summary/{$summary->id}/save", [
+            'selected_indices' => [0],
+            'target_list_id' => null,
+        ])->assertStatus(401);
     }
 
     // ---- POST /api/settings/weekly-summary-email ----

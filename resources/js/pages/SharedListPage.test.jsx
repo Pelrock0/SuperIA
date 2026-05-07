@@ -1,4 +1,4 @@
-import { render, screen, waitFor, act } from '@testing-library/react';
+import { render, screen, waitFor, act, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
@@ -392,9 +392,8 @@ describe('SharedListPage', () => {
         expect(screen.getByTestId('purchased-section')).toBeInTheDocument();
     });
 
-    // AC-2: purchased item moves to purchased section after toggle
+    // AC-2: purchased item moves to purchased section after toggle (requires 1.5s animation to complete)
     it('AC-2: item moves to purchased section after being toggled', async () => {
-        const user = userEvent.setup();
         window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
 
         const afterToggle = {
@@ -414,20 +413,23 @@ describe('SharedListPage', () => {
         sendHeartbeat.mockResolvedValue();
 
         renderPage();
-
         await waitFor(() => screen.getByText('Agua'));
         expect(screen.queryByTestId('purchased-section')).toBeNull();
 
-        await user.click(screen.getByRole('checkbox'));
+        vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+        fireEvent.click(screen.getByRole('checkbox'));
+        // 1.5s green phase — then async chain creates the 300ms exit timer
+        await act(async () => { vi.advanceTimersByTime(1500); });
+        // 300ms exit animation — then loadList() fires
+        await act(async () => { vi.advanceTimersByTime(300); });
 
-        await waitFor(() => screen.getByTestId('purchased-section'));
+        expect(screen.getByTestId('purchased-section')).toBeInTheDocument();
         expect(screen.queryByTestId('pending-category-section')).toBeNull();
         expect(screen.getByTestId('purchased-item-row').textContent).toMatch(/Agua/);
     });
 
-    // AC-6: un-toggling a purchased item moves it back to pending
+    // AC-6: un-toggling a purchased item moves it back to pending (requires 1.5s animation to complete)
     it('AC-6: un-toggling purchased item moves it back to pending section', async () => {
-        const user = userEvent.setup();
         window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
 
         const afterUnToggle = {
@@ -448,17 +450,143 @@ describe('SharedListPage', () => {
         sendHeartbeat.mockResolvedValue();
 
         renderPage();
-
         await waitFor(() => screen.getByTestId('purchased-section'));
 
-        // uncheck Leche (the purchased item)
+        vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
         const purchasedCheckbox = screen.getByLabelText(/leche.*comprado/i);
-        await user.click(purchasedCheckbox);
+        fireEvent.click(purchasedCheckbox);
+        // 1.5s green phase — then async chain creates the 300ms exit timer
+        await act(async () => { vi.advanceTimersByTime(1500); });
+        // 300ms exit animation — then loadList() fires
+        await act(async () => { vi.advanceTimersByTime(300); });
 
-        await waitFor(() => {
-            expect(screen.queryByTestId('purchased-section')).toBeNull();
-        });
+        expect(screen.queryByTestId('purchased-section')).toBeNull();
         const pendingRows = screen.getAllByTestId('shared-item-row');
         expect(pendingRows.length).toBe(2);
+    });
+
+    describe('purchase animation', () => {
+        afterEach(() => vi.useRealTimers());
+
+        it('shows green background immediately when checking a pending item', async () => {
+            window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+            fetchSharedList.mockResolvedValue(editResponse);
+            sendHeartbeat.mockResolvedValue();
+            toggleSharedItem.mockResolvedValue({});
+
+            renderPage();
+            await waitFor(() => screen.getByText('Agua'));
+
+            fireEvent.click(screen.getByRole('checkbox'));
+
+            await waitFor(() => {
+                const row = screen.getByTestId('shared-item-row');
+                expect(row).toHaveStyle({ background: '#dcfce7' });
+            });
+        });
+
+        it('calls toggleSharedItem immediately without waiting for the delay', async () => {
+            window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+            fetchSharedList.mockResolvedValue(editResponse);
+            sendHeartbeat.mockResolvedValue();
+            toggleSharedItem.mockResolvedValue({});
+
+            renderPage();
+            await waitFor(() => screen.getByText('Agua'));
+
+            fireEvent.click(screen.getByRole('checkbox'));
+
+            expect(toggleSharedItem).toHaveBeenCalledWith(TOKEN, 1);
+        });
+
+        it('disables the checkbox during animation to prevent double-toggle', async () => {
+            window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+            fetchSharedList.mockResolvedValue(editResponse);
+            sendHeartbeat.mockResolvedValue();
+            toggleSharedItem.mockResolvedValue({});
+
+            renderPage();
+            await waitFor(() => screen.getByText('Agua'));
+
+            fireEvent.click(screen.getByRole('checkbox'));
+
+            await waitFor(() => {
+                expect(screen.getByRole('checkbox')).toBeDisabled();
+            });
+        });
+
+        it('removes green background after animation completes (1.5s delay + 300ms exit)', async () => {
+            window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+            fetchSharedList
+                .mockResolvedValueOnce(editResponse)
+                .mockResolvedValueOnce(editResponse);
+            sendHeartbeat.mockResolvedValue();
+            toggleSharedItem.mockResolvedValue({});
+
+            renderPage();
+            await waitFor(() => screen.getByText('Agua'));
+
+            vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+            const row = screen.getByTestId('shared-item-row');
+            fireEvent.click(screen.getByRole('checkbox'));
+            expect(row).toHaveStyle({ background: '#dcfce7' });
+
+            // 1.5s green phase, then async chain creates 300ms exit timer
+            await act(async () => { vi.advanceTimersByTime(1500); });
+            // 300ms exit animation fires — exitingItems cleared, green gone
+            await act(async () => { vi.advanceTimersByTime(300); });
+
+            expect(row).not.toHaveStyle({ background: '#dcfce7' });
+        });
+
+        it('cleans up timer on unmount without calling setState', async () => {
+            window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+            fetchSharedList.mockResolvedValue(editResponse);
+            sendHeartbeat.mockResolvedValue();
+            toggleSharedItem.mockResolvedValue({});
+
+            const { unmount } = renderPage();
+            await waitFor(() => screen.getByText('Agua'));
+
+            vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+            fireEvent.click(screen.getByRole('checkbox'));
+            unmount();
+
+            await act(async () => { vi.advanceTimersByTime(2000); });
+        });
+
+        it('unchecking a purchased item calls API immediately and disables checkbox during animation', async () => {
+            window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+            fetchSharedList.mockResolvedValue(mixedResponse);
+            sendHeartbeat.mockResolvedValue();
+            toggleSharedItem.mockResolvedValue({});
+
+            renderPage();
+            await waitFor(() => screen.getByText('Leche'));
+
+            const purchasedCheckbox = screen.getByLabelText(/leche \(comprado\)/i);
+            fireEvent.click(purchasedCheckbox);
+
+            expect(toggleSharedItem).toHaveBeenCalledWith(TOKEN, 2);
+            await waitFor(() => {
+                expect(screen.getByLabelText(/leche \(comprado\)/i)).toBeDisabled();
+            });
+        });
+
+        it('clears animation state and shows error when API fails during toggle', async () => {
+            window.sessionStorage.setItem(`superia:consent:${TOKEN}`, '1');
+            fetchSharedList.mockResolvedValue(editResponse);
+            sendHeartbeat.mockResolvedValue();
+            toggleSharedItem.mockRejectedValue(new Error('network error'));
+
+            renderPage();
+            await waitFor(() => screen.getByText('Agua'));
+
+            fireEvent.click(screen.getByRole('checkbox'));
+
+            await waitFor(() => {
+                expect(screen.getByRole('checkbox')).not.toBeDisabled();
+            });
+        });
     });
 });

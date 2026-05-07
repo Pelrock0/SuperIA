@@ -233,4 +233,189 @@ class ListItemServiceTest extends TestCase
             'item_name' => 'Weekly',
         ]);
     }
+
+    public function test_create_or_increment_creates_item_when_no_match(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+
+        $item = $this->service->createOrIncrement($list, [
+            'name' => 'Pera',
+            'quantity' => 2.0,
+            'unit' => 'kg',
+            'category' => 'frutas_verduras',
+        ]);
+
+        $this->assertSame('Pera', $item->name);
+        $this->assertSame(1, $list->refresh()->items()->count());
+        $this->assertSame(0, $item->position);
+    }
+
+    public function test_create_or_increment_appends_at_end_position(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        ListItem::factory()->createOne(['shopping_list_id' => $list->id, 'position' => 0]);
+        ListItem::factory()->createOne(['shopping_list_id' => $list->id, 'position' => 5]);
+
+        $item = $this->service->createOrIncrement($list, [
+            'name' => 'Nuevo',
+            'quantity' => 1.0,
+            'unit' => 'ud',
+            'category' => 'otros',
+        ]);
+
+        $this->assertSame(6, $item->position);
+    }
+
+    public function test_create_or_increment_increments_quantity_when_match_pending_same_unit(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $existing = $list->items()->create([
+            'name' => 'Leche',
+            'quantity' => 1.0,
+            'unit' => 'L',
+            'is_purchased' => false,
+            'position' => 0,
+        ]);
+
+        $result = $this->service->createOrIncrement($list, [
+            'name' => 'Leche',
+            'quantity' => 2.0,
+            'unit' => 'L',
+            'category' => 'lacteos_huevos',
+        ]);
+
+        $this->assertSame($existing->id, $result->id);
+        $this->assertSame('3.00', (string) $result->quantity);
+        $this->assertSame(1, $list->refresh()->items()->count());
+    }
+
+    public function test_create_or_increment_normalizes_name_for_match(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $list->items()->create([
+            'name' => '  LECHE  ',
+            'quantity' => 1.0,
+            'unit' => 'L',
+            'is_purchased' => false,
+            'position' => 0,
+        ]);
+
+        $this->service->createOrIncrement($list, [
+            'name' => 'leche',
+            'quantity' => 1.0,
+            'unit' => 'L',
+        ]);
+
+        $this->assertSame(1, $list->refresh()->items()->count());
+    }
+
+    public function test_create_or_increment_treats_different_unit_as_separate(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $list->items()->create([
+            'name' => 'Leche',
+            'quantity' => 1.0,
+            'unit' => 'L',
+            'is_purchased' => false,
+            'position' => 0,
+        ]);
+
+        $this->service->createOrIncrement($list, [
+            'name' => 'Leche',
+            'quantity' => 1.0,
+            'unit' => 'ml',
+        ]);
+
+        $this->assertSame(2, $list->refresh()->items()->count());
+    }
+
+    public function test_create_or_increment_does_not_match_purchased_item(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $list->items()->create([
+            'name' => 'Leche',
+            'quantity' => 1.0,
+            'unit' => 'L',
+            'is_purchased' => true,
+            'position' => 0,
+        ]);
+
+        $this->service->createOrIncrement($list, [
+            'name' => 'Leche',
+            'quantity' => 1.0,
+            'unit' => 'L',
+        ]);
+
+        $this->assertSame(2, $list->refresh()->items()->count());
+    }
+
+    public function test_create_or_increment_matches_when_unit_is_null_on_both(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $existing = $list->items()->create([
+            'name' => 'Algo',
+            'quantity' => 1.0,
+            'unit' => null,
+            'is_purchased' => false,
+            'position' => 0,
+        ]);
+
+        $result = $this->service->createOrIncrement($list, [
+            'name' => 'Algo',
+            'quantity' => 2.0,
+            'unit' => null,
+        ]);
+
+        $this->assertSame($existing->id, $result->id);
+        $this->assertSame('3.00', (string) $result->quantity);
+    }
+
+    public function test_create_or_increment_infers_category_when_missing(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+
+        $item = $this->service->createOrIncrement($list, [
+            'name' => 'Manzanas',
+            'quantity' => 1.0,
+            'unit' => 'kg',
+        ]);
+
+        $this->assertNotNull($item);
+        // Category may be null or inferred depending on CategoryInferenceService;
+        // we only assert the item was created.
+        $this->assertSame('Manzanas', $item->name);
+    }
+
+    public function test_create_or_increment_coerces_invalid_category_to_null(): void
+    {
+        // Defends against LLM payloads producing categories outside the closed enum.
+        // Without coercion, Eloquent's enum cast throws ValueError on save.
+        $list = ShoppingList::factory()->createOne();
+
+        $item = $this->service->createOrIncrement($list, [
+            'name' => 'AceiteRaro',
+            'quantity' => 1.0,
+            'unit' => 'L',
+            'category' => 'aceites_no_existe_en_enum',
+        ]);
+
+        $this->assertNotNull($item);
+        $this->assertSame('AceiteRaro', $item->name);
+        $this->assertNull($item->category);
+    }
+
+    public function test_create_or_increment_coerces_invalid_unit_to_null(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+
+        $item = $this->service->createOrIncrement($list, [
+            'name' => 'CosaExotica',
+            'quantity' => 1.0,
+            'unit' => 'galones',
+            'category' => 'otros',
+        ]);
+
+        $this->assertNotNull($item);
+        $this->assertNull($item->unit);
+    }
 }

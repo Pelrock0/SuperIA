@@ -226,4 +226,58 @@ class ListGenerationServiceTest extends TestCase
         $this->assertNull($item->category);
         $this->assertSame('Test', $item->name);
     }
+
+    public function test_confirm_add_to_existing_throws_404_not_403_or_405(): void
+    {
+        $owner = User::factory()->createOne();
+        $intruder = User::factory()->createOne();
+        $list = ShoppingList::factory()->create(['user_id' => $owner->id]);
+
+        try {
+            $this->service->confirmAddToExisting($intruder, $list, $this->cannedProducts);
+            $this->fail('Expected HttpException');
+        } catch (\Symfony\Component\HttpKernel\Exception\HttpException $e) {
+            $this->assertSame(404, $e->getStatusCode());
+        }
+    }
+
+    public function test_generate_budget_capped_records_budget_capped_in_log(): void
+    {
+        config(['ai.budget_cap_monthly_usd' => 0.001]);
+        $user = User::factory()->createOne();
+        AiUsageLog::factory()->create([
+            'user_id' => $user->id,
+            'status' => AiUsageStatus::Success,
+            'estimated_cost_usd' => 1.0,
+        ]);
+
+        try {
+            $this->service->generate($user, 'Cena', 2);
+        } catch (\RuntimeException) {
+        }
+
+        $this->assertDatabaseHas('ai_usage_log', [
+            'user_id' => $user->id,
+            'status' => AiUsageStatus::BudgetCapped->value,
+            'operation' => 'generation',
+        ]);
+    }
+
+    public function test_generate_user_quota_records_user_capped_in_log(): void
+    {
+        config(['ai.rate_limits.free.suggestions_per_day' => 1]);
+        $user = User::factory()->createOne();
+        AiUsageLog::factory()->create(['user_id' => $user->id, 'status' => AiUsageStatus::Success]);
+
+        try {
+            $this->service->generate($user, 'Cena', 2);
+        } catch (\RuntimeException) {
+        }
+
+        $this->assertDatabaseHas('ai_usage_log', [
+            'user_id' => $user->id,
+            'status' => AiUsageStatus::UserCapped->value,
+            'operation' => 'generation',
+        ]);
+    }
 }

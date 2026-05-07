@@ -1,0 +1,21 @@
+{
+    "source": {
+        "directories": ["app/Services"]
+    },
+    "logs": {
+        "text": "coverage/infection.log",
+        "html": "coverage/infection.html",
+        "summary": "coverage/infection-summary.log"
+    },
+    "mutators": {
+        "@default": true
+    },
+    "testFramework": "phpunit",
+    "testFrameworkOptions": "--testsuite=Unit,Feature",
+    "phpUnit": {
+        "configDir": ".",
+        "customPath": "vendor/bin/phpunit"
+    },
+    "minMsi": 70,
+    "minCoveredMsi": 85
+}

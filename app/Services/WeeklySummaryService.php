@@ -4,9 +4,7 @@ namespace App\Services;
 
 use App\Enums\AiOperation;
 use App\Enums\AiUsageStatus;
-use App\Enums\ItemUnit;
 use App\Enums\ListStatus;
-use App\Enums\ProductCategory;
 use App\Enums\WeeklySummaryStatus;
 use App\Mail\WeeklySummaryMail;
 use App\Models\ProductoHistorial;
@@ -24,6 +22,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\ValidationException;
 
 class WeeklySummaryService
 {
@@ -34,6 +33,7 @@ class WeeklySummaryService
         private CircuitBreaker $circuitBreaker,
         private ClaudeClientInterface $claude,
         private ShoppingListService $shoppingLists,
+        private ListItemService $listItems,
     ) {}
 
     /**
@@ -210,54 +210,129 @@ class WeeklySummaryService
     }
 
     /**
-     * Convert a weekly summary to a new shopping list.
-     * Propagates OverflowException from ShoppingListService when freemium limit is hit.
+     * Save a subset of recommendations from a weekly summary into a shopping list.
+     *
+     * - $selectedIndices: indices into the summary's payload_json (0-based, must be unique and in range).
+     * - $targetListId: ID of an existing active shopping list to append items to. Null → create a new list.
+     * - $newListName: name for the new list when $targetListId is null. Falls back to the legacy
+     *   "Resumen semanal del DD/MM/YYYY" pattern when not provided.
+     *
+     * Behaviour:
+     * - For an existing list: items with the same normalized name + same unit + not purchased
+     *   have their quantity incremented; otherwise a new item is appended.
+     * - The selected items are removed from `payload_json`. When the payload becomes empty,
+     *   the summary status is set to {@see WeeklySummaryStatus::Actioned} so it disappears
+     *   from the latest endpoint.
+     *
+     * @param  array<int, int>  $selectedIndices
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException 404 when the summary or target list does not belong to the user
+     * @throws \Illuminate\Validation\ValidationException 422 when selected_indices is empty or out of range
+     * @throws \OverflowException 403 FREEMIUM_LIMIT when creating a new list would exceed the freemium cap
      */
-    public function convertToList(User $user, WeeklySummary $summary): ShoppingList
-    {
+    public function saveSelection(
+        User $user,
+        WeeklySummary $summary,
+        array $selectedIndices,
+        ?int $targetListId,
+        ?string $newListName = null,
+    ): array {
         if ($summary->user_id !== $user->id) {
             abort(404);
         }
 
-        $payload = $summary->payload_json ?? [];
-
-        $name = 'Resumen semanal del '.Carbon::parse($summary->week_start_date)->format('d/m/Y');
-
-        $list = $this->shoppingLists->create($user, [
-            'name' => $name,
-            'emoji' => '📅',
-            'category' => null,
-        ]);
-
-        $position = 0;
-        foreach ($payload as $product) {
-            if (! is_array($product) || ! isset($product['nombre'])) {
-                continue;
-            }
-
-            $unit = isset($product['unidad_tipica'])
-                ? ItemUnit::tryFrom((string) $product['unidad_tipica'])
-                : null;
-            $category = isset($product['categoria'])
-                ? ProductCategory::tryFrom((string) $product['categoria'])
-                : null;
-
-            $list->items()->create([
-                'name' => (string) $product['nombre'],
-                'quantity' => isset($product['cantidad_tipica']) ? (float) $product['cantidad_tipica'] : null,
-                'unit' => $unit?->value,
-                'category' => $category?->value,
-                'is_purchased' => false,
-                'position' => $position++,
+        if (count($selectedIndices) === 0) {
+            throw ValidationException::withMessages([
+                'selected_indices' => ['Selecciona al menos un item.'],
             ]);
         }
 
-        $list->update([
-            'items_total' => $list->items()->count(),
-            'items_completed' => $list->items()->where('is_purchased', true)->count(),
-        ]);
+        $uniqueIndices = array_values(array_unique(array_map('intval', $selectedIndices)));
 
-        return $list->refresh();
+        return DB::transaction(function () use ($user, $summary, $uniqueIndices, $targetListId, $newListName) {
+            // Lock the summary row to serialize concurrent saves on the same summary.
+            $lockedSummary = WeeklySummary::query()
+                ->whereKey($summary->id)
+                ->lockForUpdate()
+                ->first();
+
+            if ($lockedSummary === null) {
+                abort(404);
+            }
+
+            $payload = $lockedSummary->payload_json ?? [];
+            $payloadCount = count($payload);
+
+            foreach ($uniqueIndices as $idx) {
+                if ($idx < 0 || $idx >= $payloadCount) {
+                    throw ValidationException::withMessages([
+                        'selected_indices' => ['Selección inválida. Recarga la página y vuelve a intentarlo.'],
+                    ]);
+                }
+            }
+
+            // Resolve target list (existing locked or newly created).
+            if ($targetListId !== null) {
+                $list = ShoppingList::query()
+                    ->where('id', $targetListId)
+                    ->where('user_id', $user->id)
+                    ->where('status', ListStatus::Active)
+                    ->lockForUpdate()
+                    ->first();
+
+                if ($list === null) {
+                    abort(404);
+                }
+            } else {
+                $defaultName = 'Resumen semanal del '.Carbon::parse($lockedSummary->week_start_date)->format('d/m/Y');
+                $list = $this->shoppingLists->create($user, [
+                    'name' => $newListName !== null && trim($newListName) !== '' ? $newListName : $defaultName,
+                    'emoji' => '📅',
+                    'category' => null,
+                ]);
+            }
+
+            // Save each selected item via upsert-by-name semantics.
+            $selectedSet = array_flip($uniqueIndices);
+            foreach ($uniqueIndices as $idx) {
+                $product = $payload[$idx];
+                if (! is_array($product) || ! isset($product['nombre'])) {
+                    continue;
+                }
+
+                $this->listItems->createOrIncrement($list, [
+                    'name' => (string) $product['nombre'],
+                    'quantity' => isset($product['cantidad_tipica']) ? (float) $product['cantidad_tipica'] : null,
+                    'unit' => isset($product['unidad_tipica']) ? (string) $product['unidad_tipica'] : null,
+                    'category' => isset($product['categoria']) ? (string) $product['categoria'] : null,
+                ]);
+            }
+
+            // Rewrite payload preserving original order minus the saved entries.
+            $remaining = [];
+            foreach ($payload as $i => $product) {
+                if (! isset($selectedSet[$i])) {
+                    $remaining[] = $product;
+                }
+            }
+
+            $updates = ['payload_json' => $remaining];
+            if (count($remaining) === 0) {
+                $updates['status'] = WeeklySummaryStatus::Actioned;
+            }
+            $lockedSummary->update($updates);
+
+            // Sync counters for the target list (idempotent helper used elsewhere in the app).
+            $list->update([
+                'items_total' => $list->items()->count(),
+                'items_completed' => $list->items()->where('is_purchased', true)->count(),
+            ]);
+
+            return [
+                'list' => $list->refresh(),
+                'summary' => $lockedSummary->refresh(),
+            ];
+        });
     }
 
     public function currentWeekStart(): string

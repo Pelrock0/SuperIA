@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sofia4Builders — un sistema multi-agente que convierte una idea en software probado, auditado y trazable.">
+<meta name="theme-color" content="#0a0e1a">
+<title>Sofia4Builders — Una fábrica de software conducida por agentes IA</title>
+<style>
+  :root{
+    --bg:#0a0e1a;
+    --bg2:#0f1525;
+    --panel:#151b2c;
+    --panel2:#1a2138;
+    --line:#1f2937;
+    --line2:#2a3349;
+    --text:#e5e7eb;
+    --muted:#9ca3af;
+    --muted2:#6b7280;
+    --accent:#a78bfa;
+    --accent2:#22d3ee;
+    --good:#10b981;
+    --warn:#f59e0b;
+    --bad:#ef4444;
+    --code:#0d1320;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+
+  /* background ornament */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background:
+      radial-gradient(60vw 60vw at 80% -10%, rgba(124,58,237,.15), transparent 60%),
+      radial-gradient(50vw 50vw at -10% 30%, rgba(34,211,238,.10), transparent 60%);
+    pointer-events:none;z-index:0;
+  }
+  main, header, footer{position:relative;z-index:1}
+
+  /* progress bar */
+  .progress{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.05);z-index:50}
+  .progress > span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .1s}
+
+  /* nav */
+  header{
+    position:sticky;top:0;z-index:40;
+    backdrop-filter:blur(12px);
+    background:rgba(10,14,26,.7);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:1200px;margin:0 auto;
+    padding:.9rem 1.5rem;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  }
+  .brand{
+    display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:.95rem;letter-spacing:.02em;
+    color:#fff;text-decoration:none;
+  }
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 12px rgba(124,58,237,.6)}
+  .nav-links{display:flex;gap:1.4rem;font-size:.88rem}
+  .nav-links a{color:var(--muted);text-decoration:none;transition:color .15s}
+  .nav-links a:hover{color:#fff}
+  .menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--text);padding:.4rem .6rem;border-radius:6px;cursor:pointer;font-size:1.1rem}
+
+  /* layout */
+  main{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+  section{padding:6rem 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+  .sec-tag{display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.75rem;color:var(--accent);background:rgba(124,58,237,.12);padding:5px 11px;border-radius:6px;border:1px solid rgba(124,58,237,.3);letter-spacing:.12em;margin-bottom:1.2rem;font-weight:600}
+
+  /* typography */
+  h1{font-size:clamp(2.2rem,6vw,4.5rem);font-weight:800;letter-spacing:-.025em;line-height:1.04;margin-bottom:1rem;background:linear-gradient(135deg,#fff 0%,#a78bfa 60%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  h2{font-size:clamp(1.7rem,3.6vw,2.7rem);font-weight:700;letter-spacing:-.015em;line-height:1.15;margin-bottom:1rem;color:#fff}
+  h3{font-size:1.2rem;font-weight:600;color:#fff;margin-bottom:.4rem}
+  h4{font-size:1.05rem;font-weight:600;color:#fff;margin-bottom:.4rem}
+  p{font-size:1.05rem;color:var(--text);max-width:75ch}
+  p.lead{font-size:clamp(1.1rem,1.7vw,1.35rem);color:#cbd5e1;max-width:65ch;margin-bottom:1.5rem;line-height:1.55}
+  .muted{color:var(--muted)}
+  strong{color:#fff;font-weight:600}
+  em{color:#a78bfa;font-style:normal}
+  a{color:var(--accent2)}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--code);color:#a78bfa;padding:2px 7px;border-radius:5px;font-size:.88em;border:1px solid var(--line2);white-space:nowrap}
+
+  /* hero */
+  .hero{padding:7rem 0 5rem;border-bottom:1px solid var(--line)}
+  .hero-eyebrow{font-family:ui-monospace,monospace;font-size:.85rem;color:var(--accent);letter-spacing:.2em;margin-bottom:1.2rem;font-weight:600}
+  .hero p.lead{font-size:clamp(1.15rem,1.8vw,1.5rem);max-width:55ch}
+  .hero-stats{display:flex;flex-wrap:wrap;gap:2.5rem;margin-top:2.5rem;color:var(--muted);font-family:ui-monospace,monospace;font-size:.95rem}
+  .hero-stats span strong{color:#22d3ee;font-size:1.4rem;display:block;margin-bottom:.1rem}
+  .hero-cta{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.8rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.3rem;border-radius:8px;font-size:.95rem;font-weight:600;text-decoration:none;transition:transform .15s, box-shadow .15s;border:1px solid transparent}
+  .btn-primary{background:linear-gradient(135deg,var(--accent),#7c3aed);color:#fff;box-shadow:0 4px 20px rgba(124,58,237,.3)}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(124,58,237,.45)}
+  .btn-ghost{border-color:var(--line2);color:var(--text);background:rgba(255,255,255,.02)}
+  .btn-ghost:hover{border-color:var(--accent);color:#fff}
+
+  /* grid */
+  .grid{display:grid;gap:1.5rem}
+  .grid.two{grid-template-columns:repeat(2,1fr)}
+  .grid.three{grid-template-columns:repeat(3,1fr)}
+  .grid.four{grid-template-columns:repeat(4,1fr)}
+
+  /* cards */
+  .card{
+    background:linear-gradient(180deg,var(--panel) 0%,var(--bg2) 100%);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.5rem 1.6rem;
+    transition:transform .2s, border-color .2s;
+  }
+  .card:hover{transform:translateY(-3px);border-color:var(--line2)}
+  .card .tag{display:inline-block;font-family:ui-monospace,monospace;font-size:.7rem;background:rgba(124,58,237,.15);color:var(--accent);padding:3px 9px;border-radius:5px;border:1px solid rgba(124,58,237,.3);margin-bottom:.7rem;letter-spacing:.06em;font-weight:600}
+  .card .num{font-family:ui-monospace,monospace;font-size:.8rem;color:var(--muted2);margin-bottom:.2rem}
+  .card p{font-size:.95rem;color:var(--muted);line-height:1.55;margin-top:.3rem}
+
+  /* lists */
+  ul.bullets{list-style:none;padding:0;margin:0}
+  ul.bullets li{position:relative;padding:.45rem 0 .45rem 1.6rem;font-size:1rem;line-height:1.55;color:var(--text)}
+  ul.bullets li::before{content:"";position:absolute;left:0;top:.95rem;width:7px;height:7px;background:var(--accent);border-radius:50%}
+  ul.checks li::before{content:"✓";color:var(--good);background:none;width:auto;height:auto;top:.5rem;font-weight:700;font-size:1rem}
+  ul.crosses li::before{content:"✕";color:var(--bad);background:none;width:auto;height:auto;top:.5rem;font-weight:700;font-size:1rem}
+
+  /* table */
+  .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+  table{width:100%;min-width:560px;border-collapse:collapse;font-size:.92rem}
+  th,td{text-align:left;padding:.75rem 1rem;border-bottom:1px solid var(--line)}
+  tr:last-child td{border-bottom:none}
+  th{color:var(--accent);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;background:rgba(0,0,0,.2)}
+  td{color:var(--text)}
+  td:first-child{font-family:ui-monospace,monospace;color:var(--accent2);font-size:.85rem;white-space:nowrap}
+
+  /* code blocks */
+  pre{background:var(--code);border:1px solid var(--line2);border-radius:12px;padding:1.3rem 1.5rem;color:#cbd5e1;font-family:ui-monospace,monospace;font-size:.88rem;line-height:1.65;overflow-x:auto;margin:0}
+  pre .k{color:#a78bfa}
+  pre .s{color:#22d3ee}
+  pre .c{color:#64748b;font-style:italic}
+  pre .g{color:#10b981}
+  pre .y{color:#fbbf24}
+  .ascii{font-family:ui-monospace,monospace;color:#cbd5e1;font-size:.82rem;line-height:1.55;white-space:pre;background:var(--code);padding:1.3rem;border-radius:12px;border:1px solid var(--line2);overflow-x:auto;margin-top:1rem}
+
+  /* workflow */
+  .flow{display:flex;align-items:stretch;gap:.5rem;flex-wrap:wrap;margin:2rem 0;justify-content:flex-start}
+  .flow .step{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:1rem 1.1rem;text-align:center;min-width:135px;flex:1;min-height:90px;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .flow .step .id{font-family:ui-monospace,monospace;font-size:.7rem;color:var(--accent);letter-spacing:.12em;font-weight:700}
+  .flow .step .name{font-size:1rem;color:#fff;font-weight:600;margin-top:.3rem}
+  .flow .step .role{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+  .flow .arrow{align-self:center;color:var(--line2);font-size:1.5rem;user-select:none;display:flex;align-items:center}
+  .flow .step.gate{border-color:rgba(245,158,11,.4);background:linear-gradient(180deg,rgba(245,158,11,.08) 0%,var(--panel) 100%)}
+  .flow .step.done{border-color:rgba(16,185,129,.4);background:linear-gradient(180deg,rgba(16,185,129,.10) 0%,var(--panel) 100%)}
+
+  /* badges */
+  .badge{display:inline-block;font-family:ui-monospace,monospace;font-size:.72rem;padding:3px 9px;border-radius:5px;letter-spacing:.05em;font-weight:600;margin-right:.3rem}
+  .badge.purple{background:rgba(124,58,237,.15);color:var(--accent);border:1px solid rgba(124,58,237,.3)}
+  .badge.cyan{background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.3)}
+  .badge.amber{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.3)}
+  .badge.green{background:rgba(16,185,129,.12);color:#34d399;border:1px solid rgba(16,185,129,.3)}
+  .badge.red{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.3)}
+
+  /* callout */
+  .callout{
+    border-left:3px solid var(--accent);
+    background:linear-gradient(90deg,rgba(124,58,237,.08),transparent);
+    padding:1.1rem 1.3rem;
+    border-radius:0 10px 10px 0;
+    margin:1.5rem 0;
+    font-size:1rem;
+    color:#cbd5e1;
+  }
+  .callout strong{color:#fff}
+
+  /* metrics */
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:1.5rem}
+  .metric{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.4rem 1rem;text-align:center}
+  .metric .num{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.05}
+  .metric .num.txt{font-size:clamp(1.1rem,2vw,1.6rem);letter-spacing:-.01em}
+  .metric .lbl{font-size:.85rem;color:var(--muted);margin-top:.4rem;letter-spacing:.04em}
+
+  /* fade-in on scroll — visible by default; JS añade .js-fade para activar el efecto */
+  .reveal{transition:opacity .6s ease, transform .6s ease}
+  body.js-fade .reveal{opacity:0;transform:translateY(20px)}
+  body.js-fade .reveal.in{opacity:1;transform:none}
+
+  /* footer */
+  footer{padding:3rem 1.5rem;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);max-width:1200px;margin:0 auto}
+  footer .meta{font-family:ui-monospace,monospace;letter-spacing:.05em;margin-top:.5rem;color:var(--muted2)}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 920px){
+    .grid.two,.grid.three,.grid.four{grid-template-columns:1fr}
+    .metrics{grid-template-columns:repeat(2,1fr)}
+    .flow{gap:.4rem}
+    .flow .step{min-width:calc(50% - .5rem);flex:0 1 calc(50% - .5rem)}
+    .flow .arrow{display:none}
+  }
+  @media (max-width: 720px){
+    section{padding:4rem 0}
+    .hero{padding:4rem 0 3rem}
+    main{padding:0 1.1rem}
+    .nav{padding:.8rem 1.1rem}
+    .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg2);border-top:1px solid var(--line);padding:1rem 1.5rem;gap:1rem}
+    .nav-links.open{display:flex}
+    .menu-btn{display:block}
+    .hero-stats{gap:1.5rem}
+    .hero-stats span strong{font-size:1.2rem}
+    .callout{padding:.9rem 1rem}
+    pre,.ascii{font-size:.78rem;padding:1rem 1.1rem}
+    h1{font-size:2.2rem}
+    h2{font-size:1.6rem}
+    p,p.lead{font-size:1rem}
+    .card{padding:1.2rem 1.3rem}
+  }
+  @media (max-width: 420px){
+    .metrics{grid-template-columns:1fr}
+    .flow .step{min-width:100%;flex:0 1 100%}
+    .ascii{font-size:.72rem}
+  }
+
+  /* respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none!important;animation:none!important}
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress"><span id="prog"></span></div>
+
+<header>
+  <div class="nav">
+    <a href="#top" class="brand"><span class="dot"></span>Sofia4Builders</a>
+    <button class="menu-btn" id="menuBtn" aria-label="menú">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#problema">Problema</a>
+      <a href="#concepto">Concepto</a>
+      <a href="#agentes">Agentes</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#memoria">Memoria</a>
+      <a href="#ddd">DDD</a>
+      <a href="#kpis">KPIs</a>
+      <a href="#diferenciador">Por qué</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" style="border-bottom:none">
+  <div class="reveal">
+    <div class="hero-eyebrow">SOFIA4BUILDERS</div>
+    <h1>Una fábrica de software<br>conducida por agentes IA.</h1>
+    <p class="lead">Un sistema multi-agente que convierte una idea en código probado, auditado y trazable — con guardarraíles que <em>no se pueden saltar</em>.</p>
+    <div class="hero-cta">
+      <a href="#concepto" class="btn btn-primary">Empezar →</a>
+      <a href="#diferenciador" class="btn btn-ghost">¿Por qué importa?</a>
+    </div>
+    <div class="hero-stats">
+      <span><strong>10</strong>agentes</span>
+      <span><strong>11</strong>skills</span>
+      <span><strong>6</strong>stacks soportados</span>
+      <span><strong>100%</strong>cobertura · gate</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEMA ============ -->
+<section id="problema">
+  <div class="reveal">
+    <span class="sec-tag">01 · CONTEXTO</span>
+    <h2>El problema: la IA generativa sin guardarraíles</h2>
+    <p class="lead">Le pides a un LLM que "implemente una feature" y te devuelve código. ¿Pero está bien diseñado, probado, seguro y alineado con el negocio? Sin un proceso, no.</p>
+  </div>
+  <div class="grid two reveal" style="margin-top:2rem">
+    <div class="card">
+      <span class="tag">SIN SISTEMA</span>
+      <h3>Lo que pasa por defecto</h3>
+      <ul class="bullets crosses" style="margin-top:.6rem">
+        <li>Salta el análisis de scope — empieza a codear</li>
+        <li>Tests "si quedan ganas"</li>
+        <li>Mezcla dominio, framework y BD</li>
+        <li>Vocabulario inconsistente entre features</li>
+        <li>Vulnerabilidades no detectadas</li>
+        <li>30-40 % de re-trabajo por requisitos mal capturados</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">CON SOFIA4BUILDERS</span>
+      <h3>Workflow forzado</h3>
+      <ul class="bullets checks" style="margin-top:.6rem">
+        <li>Cada feature pasa por 6 pasos auditables</li>
+        <li>Cada paso = un agente especializado</li>
+        <li>Cobertura 100 % es <em>gate</em>, no recomendación</li>
+        <li>Glosario DDD por bounded context</li>
+        <li>Auditoría OWASP automática antes de mergear</li>
+        <li>State machine bloquea atajos</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCEPTO ============ -->
+<section id="concepto">
+  <div class="reveal">
+    <span class="sec-tag">02 · CONCEPTOS</span>
+    <h2>¿Qué es un "agente IA" aquí?</h2>
+    <p class="lead">Un agente = <strong>un LLM cualquiera</strong> (Claude, GPT, Gemini, Llama, Mistral…) + <strong>rol</strong> + <strong>instrucciones</strong> + <strong>herramientas</strong> (leer archivos, ejecutar comandos, escribir código). El sistema no impone modelo: cada agente declara cuál usa en su frontmatter.</p>
+  </div>
+  <div class="grid three reveal" style="margin-top:1.5rem">
+    <div class="card">
+      <span class="tag">ROL</span>
+      <h4>Quién es</h4>
+      <p>"Eres un Product Owner. Tu trabajo es escribir un PRD que sea un contrato entre negocio e ingeniería."</p>
+    </div>
+    <div class="card">
+      <span class="tag">SKILL</span>
+      <h4>Cómo lo hace</h4>
+      <p>Checklist + plantillas + criterios de aceptación. Define el formato exacto del output y refuta excusas comunes.</p>
+    </div>
+    <div class="card">
+      <span class="tag">HERRAMIENTAS</span>
+      <h4>Qué puede tocar</h4>
+      <p>Leer/escribir archivos, ejecutar tests, lanzar sub-agentes, navegar (en frontend), correr CLI del proyecto.</p>
+    </div>
+  </div>
+  <div class="callout reveal">
+    <strong>Clave:</strong> un agente solo hace UNA cosa. No "implementa y revisa". El que revisa es otro agente, sin contexto sesgado del que escribió. Cada gate es independiente.
+  </div>
+</section>
+
+<!-- ============ ANATOMIA ============ -->
+<section id="anatomia">
+  <div class="reveal">
+    <span class="sec-tag">03 · ARQUITECTURA</span>
+    <h2>Anatomía del sistema</h2>
+    <p class="lead">Cuatro capas: definición de agentes (.cursor/), orquestación (CLI Python), interfaz (dashboard Next.js) y artefactos (docs/).</p>
+  </div>
+  <div class="ascii reveal">Agents_dev/
+├── .cursor/                ← definición del sistema multi-agente
+│   ├── agents/             ← 10 roles especializados (yaml + markdown)
+│   ├── skills/             ← 11 instrucciones de "cómo se hace"
+│   ├── core/core.md        ← reglas no-negociables
+│   ├── workflows/          ← diagrama S1→S6 con gates
+│   └── config/stack.yaml   ← stack activo (laravel, node, django, …)
+├── cli/cli.py              ← state machine en Python
+│   └── state/              ← JSON por feature (status, métricas, checksum)
+├── dashboard/              ← Next.js 15 + xterm.js (terminal en browser)
+├── docs/
+│   ├── features/           ← artefactos generados (scope, PRD, design…)
+│   └── contexts/           ← glosarios DDD por bounded context
+└── wiki/                   ← releases, arquitectura, ejemplos</div>
+  <div class="grid four reveal" style="margin-top:2rem">
+    <div class="card"><span class="tag">AGENTES</span><h4>El "quién"</h4><p>Un LLM (cualquiera) con un rol y un modelo asignado.</p></div>
+    <div class="card"><span class="tag">SKILLS</span><h4>El "cómo"</h4><p>Recetas + plantillas + criterios.</p></div>
+    <div class="card"><span class="tag">CLI</span><h4>El "guardia"</h4><p>Bloquea avances sin artefactos válidos.</p></div>
+    <div class="card"><span class="tag">CORE.MD</span><h4>La "ley"</h4><p>Reglas para todos los agentes.</p></div>
+  </div>
+</section>
+
+<!-- ============ AGENTES ============ -->
+<section id="agentes">
+  <div class="reveal">
+    <span class="sec-tag">04 · LOS 10 AGENTES</span>
+    <h2>El equipo</h2>
+    <p class="lead">Diez agentes especializados, cada uno con responsabilidades acotadas. Los agentes no comparten contexto entre sí — eso es por diseño.</p>
+  </div>
+  <div class="table-wrap reveal" style="margin-top:1.5rem">
+    <table>
+      <thead><tr><th>Paso</th><th>Agente</th><th>Responsabilidad</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>S1</td><td>scope-analyzer</td><td>Clasifica complejidad (LOW/MED/HIGH), riesgos</td><td>01-scope.md</td></tr>
+        <tr><td>S2</td><td>product-owner</td><td>Escribe el PRD — contrato negocio↔ingeniería</td><td>02-prd.md</td></tr>
+        <tr><td>S2</td><td>ux-designer</td><td>Wireframes si la feature toca UI</td><td>ux-wireframes.html</td></tr>
+        <tr><td>S3</td><td>architect</td><td>Diseño técnico: componentes, agregados, transacciones</td><td>03-technical-design.md</td></tr>
+        <tr><td>S4</td><td>backend-developer</td><td>Implementación backend + tests 100 %</td><td>código + tests</td></tr>
+        <tr><td>S4</td><td>frontend-developer</td><td>Implementación frontend + tests 100 %</td><td>código + tests</td></tr>
+        <tr><td>S5</td><td>code-reviewer</td><td>Revisa patrones, arquitectura, calidad</td><td>05-code-review.md</td></tr>
+        <tr><td>S5</td><td>security-reviewer</td><td>OWASP Top 10 + LLM Top 10 + CVE scan + SAST</td><td>05-security-review.md</td></tr>
+        <tr><td>S5</td><td>test-gate</td><td>Ejecuta tests reales, valida cobertura 100 %</td><td>pass / fail</td></tr>
+        <tr><td>S5</td><td>ui-ux-reviewer</td><td>Compara UI vs wireframes, accesibilidad WCAG</td><td>05-ux-review.md</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout reveal">Cada agente está definido como un archivo markdown con frontmatter YAML (<code>name</code>, <code>description</code>, <code>model</code>) más instrucciones específicas en lenguaje natural.</div>
+</section>
+
+<!-- ============ WORKFLOW ============ -->
+<section id="workflow">
+  <div class="reveal">
+    <span class="sec-tag">05 · FLUJO</span>
+    <h2>El workflow S1 → S6</h2>
+    <p class="lead">Una feature recorre seis etapas. Cada etapa termina en un <em>gate</em>: si el artefacto no está o falla la validación, no avanza.</p>
+  </div>
+  <div class="flow reveal">
+    <div class="step"><div class="id">S1</div><div class="name">Scope</div><div class="role">scope-analyzer</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="id">S2</div><div class="name">PRD</div><div class="role">product-owner</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="id">S3</div><div class="name">Diseño</div><div class="role">architect</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="id">S4</div><div class="name">Implementación</div><div class="role">backend / frontend</div></div>
+    <div class="arrow">→</div>
+    <div class="step gate"><div class="id">S5</div><div class="name">4 Reviews</div><div class="role">code · sec · test · ux</div></div>
+    <div class="arrow">→</div>
+    <div class="step done"><div class="id">S6</div><div class="name">DONE</div><div class="role">producción</div></div>
+  </div>
+  <div class="grid two reveal" style="margin-top:1.5rem">
+    <div class="card">
+      <span class="tag">RUTA RÁPIDA · LOW</span>
+      <h4>Cambios pequeños</h4>
+      <p>S1 → S1b (mini-scope) → S4 → S5 → S6. Sin PRD ni diseño.</p>
+    </div>
+    <div class="card">
+      <span class="tag">RUTA COMPLETA · MEDIUM/HIGH</span>
+      <h4>Features con impacto</h4>
+      <p>S1 → S2 (PRD + UX) → S3 (diseño) → S4 → S5 (4 reviews) → S6.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLI ============ -->
+<section id="cli">
+  <div class="reveal">
+    <span class="sec-tag">06 · ORQUESTACIÓN</span>
+    <h2>El CLI: la state machine que no deja saltarse pasos</h2>
+    <p class="lead"><code>cli/cli.py</code> — el state machine escrito en Python. Mantiene un JSON por feature en <code>cli/state/</code> y bloquea cualquier avance sin artefactos válidos.</p>
+  </div>
+  <div class="grid two reveal" style="margin-top:1rem;align-items:start">
+    <div>
+      <h4 style="margin-bottom:.7rem">Comandos clave</h4>
+<pre><span class="c"># crea feature → estado inicial S1</span>
+<span class="k">python</span> cli/cli.py create <span class="s">FEAT-001</span>
+
+<span class="c"># genera el prompt de contexto</span>
+<span class="c"># (reglas + agente + skill + outputs previos)</span>
+<span class="k">python</span> cli/cli.py prepare <span class="s">FEAT-001</span> --mode=claude
+
+<span class="c"># valida artefactos y avanza al siguiente paso</span>
+<span class="k">python</span> cli/cli.py approve <span class="s">FEAT-001</span>
+
+<span class="c"># si falla un review, vuelve a S4 (max 3 iter)</span>
+<span class="k">python</span> cli/cli.py review-failed <span class="s">FEAT-001</span> <span class="s">"reason"</span></pre>
+    </div>
+    <div>
+      <h4 style="margin-bottom:.7rem">Qué valida <code>approve</code></h4>
+      <ul class="bullets checks">
+        <li>El artefacto del paso existe (01-scope.md, 02-prd.md…)</li>
+        <li>Glosario DDD presente antes de S3</li>
+        <li>Tests existen <em>y se ejecutan de verdad</em> (php artisan test, npm test, pytest…)</li>
+        <li>Detección de cambios UI vía git diff → activa S5-UX</li>
+        <li>Checksum SHA-256 del state (integridad)</li>
+        <li>Contador de iteraciones de review — bloqueo a las 3</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REGLAS ============ -->
+<section id="reglas">
+  <div class="reveal">
+    <span class="sec-tag">07 · GUARDARRAÍLES</span>
+    <h2>Reglas no negociables</h2>
+    <p class="lead"><code>.cursor/core/core.md</code> — reglas que aplican a TODOS los agentes. Sin excepciones.</p>
+  </div>
+  <div class="grid two reveal" style="margin-top:1.5rem">
+    <div class="card">
+      <span class="tag">ARQUITECTURA</span>
+      <h4>Hexagonal + DDD</h4>
+      <ul class="bullets" style="margin-top:.5rem">
+        <li>Dominio sin imports de framework ni ORM</li>
+        <li>Use cases ↔ DTOs (nunca request/response)</li>
+        <li>Repository = port en dominio, adapter en infra</li>
+        <li>Agregado: una raíz, invariantes adentro</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">TESTING</span>
+      <h4>100 % cobertura, sin trampas</h4>
+      <ul class="bullets" style="margin-top:.5rem">
+        <li>Cobertura 100 % — bloqueante</li>
+        <li>BD real, no SQLite. Transacciones que rollback</li>
+        <li>Cubre happy + failure + edge + security</li>
+        <li>Test-gate ejecuta los tests, no se fía</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">ARTEFACTOS</span>
+      <h4>Si no está escrito, no existe</h4>
+      <ul class="bullets" style="margin-top:.5rem">
+        <li>Sin scope aprobado → no hay PRD</li>
+        <li>Sin PRD aprobado → no hay diseño</li>
+        <li>Sin diseño aprobado → no hay código</li>
+        <li>TBD pendiente = STOP</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">VOCABULARIO</span>
+      <h4>Ubiquitous Language</h4>
+      <ul class="bullets" style="margin-top:.5rem">
+        <li>Glosario por bounded context</li>
+        <li>El PRD debe referenciar el glosario</li>
+        <li>Mismo término → misma definición</li>
+        <li>Evita el clásico "anular vs cancelar"</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEMORIA POR CAPAS ============ -->
+<section id="memoria">
+  <div class="reveal">
+    <span class="sec-tag">07.2 · MEMORIA EN CAPAS</span>
+    <h2>Documentación y funcionalidad como memoria por capas</h2>
+    <p class="lead">Los LLMs olvidan entre conversaciones. El sistema lo resuelve con una <strong>memoria estratificada</strong>: cada capa tiene un alcance, un ciclo de vida y un consumidor distintos. Cuando el agente arranca, la memoria se ensambla de abajo arriba.</p>
+  </div>
+
+  <div class="ascii reveal" style="font-size:.78rem">┌──────────────────────────────────────────────────────────────────┐
+│  L5 · MEMORIA DE CONVERSACIÓN     ← efímera · solo este turno    │
+├──────────────────────────────────────────────────────────────────┤
+│  L4 · ESTADO DE FEATURE           ← cli/state/FEAT-XXX.json      │
+├──────────────────────────────────────────────────────────────────┤
+│  L3 · ARTEFACTOS DE FEATURE       ← docs/features/FEAT-XXX/      │
+├──────────────────────────────────────────────────────────────────┤
+│  L2 · GLOSARIOS Y CONTEXTOS DDD   ← docs/contexts/{ctx}/         │
+├──────────────────────────────────────────────────────────────────┤
+│  L1 · SKILLS + AGENTES            ← .cursor/skills + .cursor/agents
+├──────────────────────────────────────────────────────────────────┤
+│  L0 · CORE.MD · REGLAS DE ORO     ← .cursor/core/core.md         │
+└──────────────────────────────────────────────────────────────────┘
+                          ↓
+                ENSAMBLADO POR `prepare`
+                          ↓
+                   PROMPT DEL AGENTE</div>
+
+  <div class="grid two reveal" style="margin-top:1.8rem">
+    <div class="card">
+      <span class="badge purple">L0</span>
+      <h4 style="margin-top:.4rem">Core · las reglas de oro</h4>
+      <p><strong>Qué es:</strong> <code>.cursor/core/core.md</code>. Reglas no negociables válidas para TODOS los agentes (hexagonal, DDD, testing 100 %, TBD = STOP).</p>
+      <p><strong>Ciclo:</strong> raramente cambia · cambio = decisión arquitectónica.</p>
+      <p><strong>Quién la lee:</strong> los 10 agentes, en cada paso.</p>
+    </div>
+    <div class="card">
+      <span class="badge cyan">L1</span>
+      <h4 style="margin-top:.4rem">Skills + agentes · el "cómo"</h4>
+      <p><strong>Qué es:</strong> <code>.cursor/skills/</code> (recetas por paso) + <code>.cursor/agents/</code> (rol y modelo). Define <em>cómo</em> escribir un PRD, hacer un code review, etc.</p>
+      <p><strong>Ciclo:</strong> evoluciona con la metodología.</p>
+      <p><strong>Quién la lee:</strong> el agente del paso actual, sólo el suyo.</p>
+    </div>
+    <div class="card">
+      <span class="badge amber">L2</span>
+      <h4 style="margin-top:.4rem">Glosarios DDD · vocabulario del negocio</h4>
+      <p><strong>Qué es:</strong> <code>docs/contexts/{ctx}/00-glossary.md</code>. Ubiquitous Language por bounded context. <em>Memoria semántica del dominio.</em></p>
+      <p><strong>Ciclo:</strong> crece feature a feature; se actualiza cuando aparecen términos nuevos.</p>
+      <p><strong>Quién la lee:</strong> product-owner, architect, backend, code-reviewer.</p>
+    </div>
+    <div class="card">
+      <span class="badge green">L3</span>
+      <h4 style="margin-top:.4rem">Artefactos de feature · trazabilidad</h4>
+      <p><strong>Qué es:</strong> <code>docs/features/FEAT-XXX/01-scope.md</code> · <code>02-prd.md</code> · <code>03-design.md</code> · <code>05-reviews/*</code>. La historia decisional de cada feature.</p>
+      <p><strong>Ciclo:</strong> append-only · versionado en git.</p>
+      <p><strong>Quién la lee:</strong> el agente del paso siguiente — lee los outputs de los pasos anteriores.</p>
+    </div>
+    <div class="card">
+      <span class="badge red">L4</span>
+      <h4 style="margin-top:.4rem">Estado de feature · puntero de ejecución</h4>
+      <p><strong>Qué es:</strong> <code>cli/state/FEAT-XXX.json</code>. Status (S1…S6), iteraciones de review, tiempo, checksum, métricas.</p>
+      <p><strong>Ciclo:</strong> se muta en cada <code>approve</code> / <code>review-failed</code>.</p>
+      <p><strong>Quién la lee:</strong> el CLI (gate de aprobación) y el dashboard.</p>
+    </div>
+    <div class="card">
+      <span class="tag">L5</span>
+      <h4 style="margin-top:.4rem">Conversación · memoria efímera</h4>
+      <p><strong>Qué es:</strong> el contexto que el LLM mantiene durante una sola sesión. Se descarta al cerrar.</p>
+      <p><strong>Ciclo:</strong> minutos · muere con la ventana.</p>
+      <p><strong>Quién la lee:</strong> sólo el agente actual mientras dura el turno.</p>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top:1.8rem">
+    <h4 style="margin-bottom:.7rem">Cómo se ensambla la memoria al arrancar un paso</h4>
+<pre><span class="c"># `python cli/cli.py prepare FEAT-001 --mode=claude`</span>
+<span class="c"># compone el prompt del agente leyendo de abajo arriba:</span>
+
+<span class="k">[L0]</span> .cursor/core/core.md                       <span class="c"># reglas de oro</span>
+<span class="k">[L1]</span> .cursor/agents/&lt;rol-del-paso&gt;.md            <span class="c"># quién es</span>
+<span class="k">[L1]</span> .cursor/skills/&lt;skill-del-paso&gt;.md          <span class="c"># cómo lo hace</span>
+<span class="k">[L2]</span> docs/contexts/&lt;ctx&gt;/00-glossary.md          <span class="c"># vocabulario</span>
+<span class="k">[L3]</span> docs/features/FEAT-001/01-scope.md          <span class="c"># outputs previos</span>
+<span class="k">[L3]</span> docs/features/FEAT-001/02-prd.md            <span class="c"># …</span>
+<span class="k">[L4]</span> cli/state/FEAT-001.json                     <span class="c"># dónde estoy</span>
+   ↓
+<span class="g">prompt completo · contexto saturado de forma intencional</span></pre>
+  </div>
+
+  <div class="callout reveal" style="margin-top:1.5rem">
+    <strong>Por qué funciona:</strong> ningún agente "se acuerda" — todos <em>leen</em>. La memoria vive en archivos versionados, no en la cabeza del LLM. Por eso el sistema es reproducible: dos devs distintos en dos máquinas distintas obtienen el mismo contexto y el mismo output. Y por eso es portable: cualquier framework agéntico que sepa leer markdown puede ejecutar el mismo workflow.
+  </div>
+
+  <div class="grid three reveal" style="margin-top:1.8rem">
+    <div class="card"><div class="num">EFÍMERA</div><h4>L5 · Conversación</h4><p>Vive en RAM. Se pierde al cerrar el chat.</p></div>
+    <div class="card"><div class="num">VOLÁTIL</div><h4>L4 · Estado</h4><p>Cambia a cada paso. JSON mutado por el CLI.</p></div>
+    <div class="card"><div class="num">PERSISTENTE</div><h4>L0–L3 · Markdown + git</h4><p>Versionada, auditable, trazable. La verdadera memoria del sistema.</p></div>
+  </div>
+</section>
+
+<!-- ============ DDD ============ -->
+<section id="ddd">
+  <div class="reveal">
+    <span class="sec-tag">07.5 · ARQUITECTURA</span>
+    <h2>DDD como columna vertebral</h2>
+    <p class="lead"><strong>Domain-Driven Design</strong> no es opcional aquí — está incrustado en el workflow. El sistema bloquea cualquier feature que no respete los principios estratégicos y tácticos.</p>
+  </div>
+
+  <div class="grid two reveal" style="margin-top:1.5rem">
+    <div class="card">
+      <span class="tag">DDD ESTRATÉGICO</span>
+      <h4>Mapear el negocio</h4>
+      <ul class="bullets" style="margin-top:.5rem">
+        <li><strong>Bounded Context:</strong> cada dominio aislado en <code>docs/contexts/{context}/</code></li>
+        <li><strong>Ubiquitous Language:</strong> glosario <code>00-glossary.md</code> obligatorio antes de S3</li>
+        <li><strong>Context Maps:</strong> relaciones entre contextos documentadas</li>
+        <li>El PRD del paso S2 <em>debe</em> referenciar el glosario del contexto</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">DDD TÁCTICO</span>
+      <h4>Modelar el dominio</h4>
+      <ul class="bullets" style="margin-top:.5rem">
+        <li><strong>Aggregate:</strong> una raíz, invariantes adentro, persistencia atómica</li>
+        <li><strong>Repository:</strong> port en dominio, adapter en infrastructure (hexagonal)</li>
+        <li><strong>Value Objects:</strong> inmutables, sin identidad propia</li>
+        <li><strong>Domain Events:</strong> emitidos por agregados, consumidos por otros contextos</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top:1.5rem">
+    <h4 style="margin-bottom:.7rem">Cómo el sistema lo hace cumplir</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Gate</th><th>Validación DDD</th><th>Si falla</th></tr></thead>
+        <tbody>
+          <tr><td>S2 → S3</td><td>El PRD referencia el glosario del bounded context</td><td>Bloqueo · resolver primero</td></tr>
+          <tr><td>S3</td><td>Existe <code>docs/contexts/{ctx}/00-glossary.md</code></td><td>CLI no permite avanzar</td></tr>
+          <tr><td>S4 (impl)</td><td>Dominio sin imports de framework / ORM</td><td>Code-reviewer rechaza</td></tr>
+          <tr><td>S4 (impl)</td><td>Repositorios = ports en dominio, adapter en infra</td><td>Code-reviewer rechaza</td></tr>
+          <tr><td>S4 (impl)</td><td>Use cases hablan DTOs, no request/response</td><td>Code-reviewer rechaza</td></tr>
+          <tr><td>S5-CODE</td><td>Agregados con invariantes, persistencia atómica</td><td>Vuelve a S4</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout reveal" style="margin-top:1.5rem">
+    <strong>Por qué importa:</strong> sin Ubiquitous Language, "cancelar" en producto significa "anular" en BD y "borrar" en frontend. El glosario por contexto fuerza un solo término — y el agente que escribe el PRD lo referencia, el architect lo respeta, el dev lo usa en código. Trazabilidad lingüística completa.
+  </div>
+</section>
+
+<!-- ============ MULTI STACK ============ -->
+<section id="stacks">
+  <div class="reveal">
+    <span class="sec-tag">08 · STACK-AGNÓSTICO</span>
+    <h2>Mismo workflow, 6 stacks distintos</h2>
+    <p class="lead">El sistema detecta el stack del proyecto e inyecta reglas específicas. Las skills cambian el "cómo", pero el flujo es idéntico.</p>
+  </div>
+  <div class="table-wrap reveal" style="margin-top:1.5rem">
+    <table>
+      <thead><tr><th>Stack</th><th>Validación</th><th>ORM / DB</th><th>Tests</th><th>Migraciones</th></tr></thead>
+      <tbody>
+        <tr><td>Laravel</td><td>FormRequest</td><td>Eloquent</td><td>php artisan test</td><td>artisan migrate</td></tr>
+        <tr><td>Node / TS</td><td>Zod / Joi</td><td>Prisma / TypeORM</td><td>vitest / jest</td><td>prisma migrate</td></tr>
+        <tr><td>Django</td><td>DRF Serializers</td><td>Django ORM</td><td>pytest</td><td>manage.py migrate</td></tr>
+        <tr><td>FastAPI</td><td>Pydantic</td><td>SQLAlchemy</td><td>pytest</td><td>alembic</td></tr>
+        <tr><td>Go</td><td>validator/v10</td><td>GORM / sqlx</td><td>go test</td><td>goose</td></tr>
+        <tr><td>Rust</td><td>validator crate</td><td>sqlx (compile-time)</td><td>cargo test</td><td>sqlx migrate</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout reveal"><strong>Auto-detect:</strong> si encuentra <code>artisan</code> → Laravel; <code>package.json</code> → Node; <code>manage.py</code> → Django; <code>Cargo.toml</code> → Rust; <code>go.mod</code> → Go. Si no, lee <code>.cursor/config/stack.yaml</code>.</div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section id="reviews">
+  <div class="reveal">
+    <span class="sec-tag">09 · S5 · REVIEWS</span>
+    <h2>Cuatro jueces independientes</h2>
+    <p class="lead">En S5 se lanzan 4 reviews — cada una con un agente distinto, sin contexto compartido. Si uno falla, vuelve a S4.</p>
+  </div>
+  <div class="grid four reveal" style="margin-top:1.5rem">
+    <div class="card">
+      <span class="badge purple">S5-CODE</span>
+      <h4 style="margin-top:.4rem">Code Review</h4>
+      <p>Patrones, hexagonal, naming, complejidad, code smells.</p>
+    </div>
+    <div class="card">
+      <span class="badge red">S5-SEC</span>
+      <h4 style="margin-top:.4rem">Security Review</h4>
+      <p>OWASP Top 10 2021 + LLM Top 10 v2 · npm audit · gitleaks · SAST · CVE scan · SSRF · auth bypass.</p>
+    </div>
+    <div class="card">
+      <span class="badge green">S5-TEST</span>
+      <h4 style="margin-top:.4rem">Test Gate</h4>
+      <p>Ejecuta los tests <em>de verdad</em>. Valida cobertura 100 %. Si baja del umbral, bloquea.</p>
+    </div>
+    <div class="card">
+      <span class="badge cyan">S5-UX</span>
+      <h4 style="margin-top:.4rem">UX Review</h4>
+      <p>Compara la UI implementada con los wireframes aprobados. Accesibilidad WCAG 2.1 AA.</p>
+    </div>
+  </div>
+  <div class="callout reveal"><strong>Política de bloqueo:</strong> 3 iteraciones fallidas → feature BLOQUEADA. Requiere <code>--force</code> o escalación humana.</div>
+</section>
+
+<!-- ============ DASHBOARD ============ -->
+<section id="dashboard">
+  <div class="reveal">
+    <span class="sec-tag">10 · INTERFAZ</span>
+    <h2>Dashboard: la consola del director de orquesta</h2>
+    <p class="lead">Aplicación web (Next.js 15 + React 19) para observar y operar features. Incluye una <strong>terminal real embebida</strong> en el navegador.</p>
+  </div>
+  <div class="grid two reveal" style="margin-top:1.2rem">
+    <div class="card">
+      <span class="tag">FRONTEND</span>
+      <h4>Next.js 15 + React 19 + Tailwind 4</h4>
+      <ul class="bullets" style="margin-top:.5rem">
+        <li>Listado y estado de features</li>
+        <li>Vista del workflow con gates</li>
+        <li>Renderizado markdown de PRDs y reviews</li>
+        <li>Approve / hold / cancel desde UI</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">BACKEND + PTY</span>
+      <h4>Node + xterm.js + node-pty</h4>
+      <ul class="bullets" style="margin-top:.5rem">
+        <li>Pseudo-terminal vía WebSocket</li>
+        <li>Correr <code>claude</code> dentro del navegador</li>
+        <li>Ejecutar comandos del CLI sin salir del dashboard</li>
+        <li>Logs en vivo de cada paso</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout reveal">Rama actual: <code>dashboard_terminal-pty</code>. La terminal embebida es la pieza diferenciadora — convierte el dashboard en un IDE en el browser.</div>
+</section>
+
+<!-- ============ EJEMPLO ============ -->
+<section id="ejemplo">
+  <div class="reveal">
+    <span class="sec-tag">11 · EN VIVO</span>
+    <h2>Una feature, de cero a producción</h2>
+  </div>
+  <div class="reveal" style="margin-top:1rem">
+<pre><span class="c"># 1. Creas la feature</span>
+$ python cli/cli.py create <span class="s">FEAT-AUTH-LOGIN</span>
+<span class="g">✓</span> Feature creada · estado: <span class="k">S1</span>
+
+<span class="c"># 2. Pides el contexto del paso actual</span>
+$ python cli/cli.py prepare <span class="s">FEAT-AUTH-LOGIN</span> --mode=claude
+<span class="g">✓</span> Contexto generado: core.md + scope-analyzer.md + scope-analysis.md
+
+<span class="c"># 3. En Claude Code, el agente ejecuta el paso</span>
+<span class="c">#    → escribe docs/features/FEAT-AUTH-LOGIN/01-scope.md</span>
+
+<span class="c"># 4. Apruebas y pasas al siguiente</span>
+$ python cli/cli.py approve <span class="s">FEAT-AUTH-LOGIN</span>
+<span class="g">✓</span> Artefacto válido · avanzando a <span class="k">S2</span>
+
+<span class="c"># 5. Repites hasta S6</span>
+<span class="c">#    S2: PRD escrito por product-owner</span>
+<span class="c">#    S3: diseño técnico por architect</span>
+<span class="c">#    S4: código + tests por backend-developer</span>
+<span class="c">#    S5: 4 reviews independientes</span>
+<span class="c">#    S6: DONE → trazabilidad completa de decisiones</span></pre>
+  </div>
+  <div class="metrics reveal">
+    <div class="metric"><div class="num">104'</div><div class="lbl">tiempo medio feature</div></div>
+    <div class="metric"><div class="num">0</div><div class="lbl">iteraciones de review</div></div>
+    <div class="metric"><div class="num">100%</div><div class="lbl">cobertura tests</div></div>
+    <div class="metric"><div class="num">6</div><div class="lbl">artefactos auditables</div></div>
+  </div>
+</section>
+
+<!-- ============ KPIs / IMPACTO ============ -->
+<section id="kpis">
+  <div class="reveal">
+    <span class="sec-tag">11.5 · IMPACTO MEDIBLE</span>
+    <h2>Antes vs ahora</h2>
+    <p class="lead">El sistema convierte un proceso que llevaba <strong>semanas</strong> en uno que se mide en <strong>horas</strong>. Estos números salen de features reales gestionadas por Sofia4Builders.</p>
+  </div>
+
+  <div class="grid two reveal" style="margin-top:1.5rem">
+    <div class="card" style="background:linear-gradient(180deg,rgba(239,68,68,.06),var(--bg2));border-color:rgba(239,68,68,.25)">
+      <span class="badge red" style="margin-bottom:.6rem">ANTES · SIN SISTEMA</span>
+      <ul class="bullets crosses" style="margin-top:.5rem">
+        <li><strong>Proyecto medio:</strong> ~2 meses</li>
+        <li><strong>Equipo necesario:</strong> 3 devs</li>
+        <li><strong>Iteraciones de review:</strong> 3–5</li>
+        <li><strong>Cobertura de tests:</strong> 40–60 %</li>
+        <li><strong>Documentación por feature:</strong> casi nula</li>
+        <li><strong>Trazabilidad de decisiones:</strong> en cabezas, slacks o nada</li>
+      </ul>
+    </div>
+    <div class="card" style="background:linear-gradient(180deg,rgba(16,185,129,.06),var(--bg2));border-color:rgba(16,185,129,.3)">
+      <span class="badge green" style="margin-bottom:.6rem">AHORA · CON SOFIA4BUILDERS</span>
+      <ul class="bullets checks" style="margin-top:.5rem">
+        <li><strong>Proyecto medio:</strong> ~2 semanas</li>
+        <li><strong>Equipo necesario:</strong> 1 dev</li>
+        <li><strong>Iteraciones de review:</strong> 0–1 (FEAT-2026-001 · 104 min real)</li>
+        <li><strong>Cobertura de tests:</strong> 100 % · gate bloqueante</li>
+        <li><strong>Documentación por feature:</strong> 6 artefactos versionados</li>
+        <li><strong>Trazabilidad de decisiones:</strong> markdown auditado, in-repo</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="metrics reveal" style="margin-top:2rem">
+    <div class="metric"><div class="num txt">2 meses → 2 sem</div><div class="lbl">tiempo del proyecto</div></div>
+    <div class="metric"><div class="num">3 → 1</div><div class="lbl">devs por proyecto</div></div>
+    <div class="metric"><div class="num">12×</div><div class="lbl">productividad combinada</div></div>
+    <div class="metric"><div class="num">100%</div><div class="lbl">cobertura · sin negociación</div></div>
+  </div>
+
+  <div class="callout reveal" style="margin-top:1.5rem">
+    <strong>Por qué se dispara la velocidad:</strong> el cuello de botella nunca fue escribir código — era el ida-vuelta entre negocio y dev, los tests olvidados, las revisiones que se acumulan, y el re-trabajo por requisitos mal capturados. El sistema mata esos cuatro al mismo tiempo.
+  </div>
+</section>
+
+<!-- ============ DIFERENCIADOR ============ -->
+<section id="diferenciador">
+  <div class="reveal">
+    <span class="sec-tag">12 · POR QUÉ IMPORTA</span>
+    <h2>¿Qué lo hace distinto?</h2>
+    <p class="lead">No es "un LLM haciendo código". Es un <strong>proceso de ingeniería</strong> ejecutado por agentes — con la calidad y la trazabilidad que pedirías a un equipo humano senior.</p>
+  </div>
+  <div class="grid two reveal" style="margin-top:1.5rem">
+    <div class="card"><div class="num">01</div><h4>State machine forzada</h4><p>El CLI bloquea atajos. Si el PRD no está, no hay diseño. Si los tests no pasan, no hay merge.</p></div>
+    <div class="card"><div class="num">02</div><h4>Coverage 100 % como gate</h4><p>Test-gate ejecuta los tests reales contra una BD real. No se fía de lo que dice el agente que codifica.</p></div>
+    <div class="card"><div class="num">03</div><h4>Artifact-driven</h4><p>Toda decisión queda escrita en markdown versionable. PRD = contrato. Diseño = contrato. Sin ambigüedad.</p></div>
+    <div class="card"><div class="num">04</div><h4>DDD integrado</h4><p>Glosarios por bounded context. Mismo término en producto, código y BD. Sin "anular vs cancelar".</p></div>
+    <div class="card"><div class="num">05</div><h4>Multi-stack real</h4><p>Mismo flujo en Laravel, Node, Django, FastAPI, Go o Rust. Las reglas específicas se inyectan al prompt.</p></div>
+    <div class="card"><div class="num">06</div><h4>Seguridad auditada</h4><p>OWASP 2021 + LLM Top 10 v2 + scans automáticos antes de cada merge. Encuentra CVEs en deps.</p></div>
+    <div class="card" style="grid-column:1/-1;background:linear-gradient(135deg,rgba(124,58,237,.10),rgba(34,211,238,.06));border-color:rgba(124,58,237,.4)"><div class="num">07</div><h4>Portable · framework-agnóstico</h4><p>Las definiciones viven en archivos markdown + YAML, no en SDK propietario. Funciona hoy con <strong>Cursor</strong> y <strong>Claude Code</strong> de forma nativa, y se adapta fácilmente a <strong>cualquier framework agéntico</strong> (LangGraph, AutoGen, CrewAI, agentes custom). Cambias el "transport"; las reglas, skills y gates no se tocan.</p></div>
+  </div>
+</section>
+
+<!-- ============ CIERRE ============ -->
+<section id="cierre" style="text-align:left">
+  <div class="reveal">
+    <div class="hero-eyebrow">EN UNA FRASE</div>
+    <h2 style="font-size:clamp(1.8rem,4.5vw,3.4rem);background:linear-gradient(135deg,#fff,#a78bfa 60%,#22d3ee);-webkit-background-clip:text;background-clip:text;color:transparent">Sofia4Builders convierte un LLM en un equipo de ingeniería con disciplina.</h2>
+    <p class="lead" style="margin-top:1.5rem">El LLM ya sabe escribir código. Lo que falta es el <em>proceso</em>: scope, diseño, tests, revisión, seguridad, trazabilidad. Eso es lo que el sistema impone — no como recomendación, sino como gate técnico.</p>
+    <div style="display:flex;gap:.6rem;margin-top:2rem;flex-wrap:wrap">
+      <span class="badge purple" style="padding:7px 13px;font-size:.8rem">10 agentes</span>
+      <span class="badge cyan" style="padding:7px 13px;font-size:.8rem">11 skills</span>
+      <span class="badge amber" style="padding:7px 13px;font-size:.8rem">workflow S1 → S6</span>
+      <span class="badge green" style="padding:7px 13px;font-size:.8rem">multi-stack · framework-agnóstico</span>
+      <span class="badge red" style="padding:7px 13px;font-size:.8rem">100 % cobertura · NON-NEGOTIABLE</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Sofia4Builders · presentación técnica
+  <div class="meta">single-file html · standalone · responsive</div>
+</footer>
+
+<script>
+  // progress bar
+  const prog = document.getElementById('prog');
+  function updateProgress(){
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    prog.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  // mobile nav
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // reveal on scroll — solo si no se prefiere reduced motion
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.body.classList.add('js-fade');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
+    }, { threshold: .12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    // safety: tras carga + 1.2s revelar todo lo no intersectado todavía
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in'));
+      }, 1200);
+    });
+  }
+</script>
+
+</body>
+</html>

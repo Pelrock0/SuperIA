@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Enums\ActivityAction;
 use App\Enums\ActorType;
+use App\Enums\ItemUnit;
+use App\Enums\ProductCategory;
 use App\Models\ListItem;
 use App\Models\ProductoHistorial;
 use App\Models\ShoppingList;
@@ -71,6 +73,63 @@ class ListItemService
         }
 
         return $result;
+    }
+
+    /**
+     * Create a new item, or — if a pending item with the same normalized name and unit
+     * already exists in the list — increment its quantity instead.
+     *
+     * Match rule: trimmed/lowercased `name` AND identical `unit` (string or null) AND `is_purchased = false`.
+     * Different units, purchased items, or different normalized names are treated as separate entries.
+     *
+     * Caller is responsible for wrapping this in a transaction when atomicity matters.
+     *
+     * @param  array{name:string, quantity?:float|null, unit?:string|null, category?:string|null}  $data
+     */
+    public function createOrIncrement(ShoppingList $list, array $data): ListItem
+    {
+        $name = (string) $data['name'];
+        $normalized = mb_strtolower(trim($name));
+        $rawUnit = $data['unit'] ?? null;
+        $unit = $rawUnit !== null ? ItemUnit::tryFrom((string) $rawUnit)?->value : null;
+        $quantityToAdd = isset($data['quantity']) ? (float) $data['quantity'] : 0.0;
+
+        $existing = $list->items()
+            ->whereRaw('LOWER(TRIM(name)) = ?', [$normalized])
+            ->where(function ($q) use ($unit) {
+                if ($unit === null) {
+                    $q->whereNull('unit');
+                } else {
+                    $q->where('unit', $unit);
+                }
+            })
+            ->where('is_purchased', false)
+            ->lockForUpdate()
+            ->first();
+
+        if ($existing !== null) {
+            $current = (float) ($existing->quantity ?? 0.0);
+            $existing->update(['quantity' => $current + $quantityToAdd]);
+            return $existing->refresh();
+        }
+
+        $rawCategory = $data['category'] ?? null;
+        $category = $rawCategory !== null ? ProductCategory::tryFrom((string) $rawCategory)?->value : null;
+        if ($category === null) {
+            $inferred = $this->categoryInference->infer($name);
+            $category = $inferred?->value;
+        }
+
+        $maxPosition = (int) ($list->items()->max('position') ?? -1);
+
+        return $list->items()->create([
+            'name' => $name,
+            'quantity' => $quantityToAdd > 0 ? $quantityToAdd : null,
+            'unit' => $unit,
+            'category' => $category,
+            'is_purchased' => false,
+            'position' => $maxPosition + 1,
+        ]);
     }
 
     public function update(ListItem $item, array $data, ?ShareTokenContext $context = null): ListItem

@@ -1,0 +1,955 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="AuthService.php" path="\Services">
+    <totals>
+      <lines total="90" comments="2" code="88" executable="41" executed="38" percent="92.68"/>
+      <methods count="4" tested="2" percent="50.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="0" percent="0.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Services\AuthService" start="10" executable="41" executed="38" crap="11.05">
+      <namespace name="App\Services"/>
+      <method name="login" signature="login(string $email, string $password, string $ipAddress, bool $remember): array" start="15" end="66" crap="7" executable="35" executed="34" coverage="97.142857142857"/>
+      <method name="logout" signature="logout(): void" start="68" end="78" crap="2.50" executable="4" executed="2" coverage="50"/>
+      <method name="refresh" signature="refresh(): string" start="80" end="83" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="isLockedOut" signature="isLockedOut(string $email): bool" start="85" end="88" crap="1" executable="1" executed="1" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="17">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_when_locked"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_wrong_password"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_unverified_email"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_nonexistent_user"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_deactivated_user_cannot_login"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_nonexistent_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_records_failed_attempt"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_unverified_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_locks_account_after_5_failed_attempts"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="19">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_when_locked"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_locks_account_after_5_failed_attempts"/>
+      </line>
+      <line nr="25">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_wrong_password"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_unverified_email"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_nonexistent_user"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_deactivated_user_cannot_login"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_nonexistent_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_records_failed_attempt"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_unverified_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="27">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_wrong_password"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_unverified_email"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_nonexistent_user"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_deactivated_user_cannot_login"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_nonexistent_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_records_failed_attempt"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_unverified_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="28">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_wrong_password"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_nonexistent_user"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_nonexistent_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_records_failed_attempt"/>
+      </line>
+      <line nr="31">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_wrong_password"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_nonexistent_user"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_nonexistent_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_records_failed_attempt"/>
+      </line>
+      <line nr="37">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_unverified_email"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_deactivated_user_cannot_login"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_unverified_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="39">
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_deactivated_user_cannot_login"/>
+      </line>
+      <line nr="45">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_unverified_email"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_unverified_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="47">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_unverified_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_unverified_email"/>
+      </line>
+      <line nr="53">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="55">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="59">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="62">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="63">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="64">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="70">
+        <covered by="Tests\Feature\Auth\LoginTest::test_logout_invalidates_token"/>
+      </line>
+      <line nr="74">
+        <covered by="Tests\Feature\Auth\LoginTest::test_logout_invalidates_token"/>
+      </line>
+      <line nr="82">
+        <covered by="Tests\Feature\Auth\LoginTest::test_refresh_returns_new_token"/>
+      </line>
+      <line nr="87">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_is_locked_out_returns_false_under_threshold"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_is_locked_out_returns_true_at_threshold"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_is_locked_out_ignores_old_attempts"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_when_locked"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_wrong_password"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_unverified_email"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_nonexistent_user"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_deactivated_user_cannot_login"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_nonexistent_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_records_failed_attempt"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_unverified_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_locks_account_after_5_failed_attempts"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="18">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_when_locked"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_locks_account_after_5_failed_attempts"/>
+      </line>
+      <line nr="20">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_when_locked"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_locks_account_after_5_failed_attempts"/>
+      </line>
+      <line nr="21">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_when_locked"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_locks_account_after_5_failed_attempts"/>
+      </line>
+      <line nr="22">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_when_locked"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_locks_account_after_5_failed_attempts"/>
+      </line>
+      <line nr="30">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_wrong_password"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_nonexistent_user"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_nonexistent_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_records_failed_attempt"/>
+      </line>
+      <line nr="32">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_wrong_password"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_nonexistent_user"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_nonexistent_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_records_failed_attempt"/>
+      </line>
+      <line nr="33">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_wrong_password"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_nonexistent_user"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_nonexistent_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_records_failed_attempt"/>
+      </line>
+      <line nr="34">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_wrong_password"/>
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_nonexistent_user"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_wrong_password"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_nonexistent_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_records_failed_attempt"/>
+      </line>
+      <line nr="38">
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_deactivated_user_cannot_login"/>
+      </line>
+      <line nr="40">
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_deactivated_user_cannot_login"/>
+      </line>
+      <line nr="41">
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_deactivated_user_cannot_login"/>
+      </line>
+      <line nr="42">
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_deactivated_user_cannot_login"/>
+      </line>
+      <line nr="46">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_unverified_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_unverified_email"/>
+      </line>
+      <line nr="48">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_unverified_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_unverified_email"/>
+      </line>
+      <line nr="49">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_unverified_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_unverified_email"/>
+      </line>
+      <line nr="50">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_returns_error_for_unverified_email"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_fails_with_unverified_email"/>
+      </line>
+      <line nr="61">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+      <line nr="65">
+        <covered by="Tests\Unit\Services\AuthServiceTest::test_login_succeeds_with_valid_credentials"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_active_user_can_login"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_returns_token_with_valid_credentials"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_response_includes_email_verified_at_for_verified_users"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_clears_failed_attempts_on_success"/>
+        <covered by="Tests\Feature\Auth\LoginTest::test_login_succeeds_after_lockout_expires"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Services</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\LoginAttempt</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\User</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Support\Facades\Hash</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Tymon\JWTAuth\Facades\JWTAuth</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9"/>
+      <line no="10">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AuthService</token>
+      </line>
+      <line no="11">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="12">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONST">const</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">MAX_ATTEMPTS</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">5</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="13">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONST">const</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">LOCKOUT_MINUTES</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">15</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="14"/>
+      <line no="15">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">login</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$email</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$password</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$ipAddress</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$remember</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">isLockedOut</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$email</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="19">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'success'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="20">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'error'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'ACCOUNT_LOCKED'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'message'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'Cuenta bloqueada temporalmente. Intentalo de nuevo en 15 minutos.'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="24"/>
+      <line no="25">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">User</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'email'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$email</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">first</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="26"/>
+      <line no="27">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_BOOLEAN_OR">||</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_STRING">Hash</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">check</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$password</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">password</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">LoginAttempt</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">record</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$email</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$ipAddress</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="29"/>
+      <line no="30">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="31">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'success'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="32">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'error'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'INVALID_CREDENTIALS'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'message'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'Credenciales incorrectas.'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="36"/>
+      <line no="37">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">is_active</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="38">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="39">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'success'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="40">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'error'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'ACCOUNT_DEACTIVATED'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="41">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'message'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'Tu cuenta ha sido desactivada.'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="42">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="43">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="44"/>
+      <line no="45">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">email_verified_at</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="46">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="47">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'success'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="48">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'error'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'EMAIL_NOT_VERIFIED'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="49">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'message'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'Debes verificar tu email antes de iniciar sesi&#xF3;n.'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="50">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="51">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="52"/>
+      <line no="53">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">LoginAttempt</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">clearForEmail</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$email</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="54"/>
+      <line no="55">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$remember</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="56">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">JWTAuth</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">factory</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">setTTL</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">config</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'jwt.refresh_ttl'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="57">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="58"/>
+      <line no="59">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$token</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">JWTAuth</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">fromUser</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="60"/>
+      <line no="61">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="62">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'success'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">true</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="63">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'token'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$token</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="64">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="65">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="66">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="67"/>
+      <line no="68">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">logout</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">void</token>
+      </line>
+      <line no="69">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="70">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">JWTAuth</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">invalidate</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">JWTAuth</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">getToken</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="71"/>
+      <line no="72">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_COMMENT">// Also invalidate any web/backpack session to prevent stale session</token>
+      </line>
+      <line no="73">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_COMMENT">// from redirecting admin/login away (guard shares session driver).</token>
+      </line>
+      <line no="74">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">request</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">hasSession</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="75">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">request</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">session</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">invalidate</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="76">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">request</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">session</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">regenerateToken</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="77">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="78">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="79"/>
+      <line no="80">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">refresh</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+      </line>
+      <line no="81">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="82">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">JWTAuth</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">refresh</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">JWTAuth</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">getToken</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="83">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="84"/>
+      <line no="85">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">isLockedOut</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$email</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+      </line>
+      <line no="86">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="87">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">LoginAttempt</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">recentFailedCount</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$email</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">self</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">LOCKOUT_MINUTES</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_GREATER_OR_EQUAL">&gt;=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">self</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">MAX_ATTEMPTS</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="88">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="89">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="90"/>
+    </source>
+  </file>
+</phpunit>

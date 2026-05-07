@@ -92,6 +92,10 @@ export default function SharedListPage() {
     const [inputFocused, setInputFocused] = useState(false);
     const [saveState, setSaveState] = useState({ authenticated: false, isOwner: false, linked: false, saving: false });
     const heartbeatRef = useRef(null);
+    const [justCheckedItems, setJustCheckedItems] = useState(new Set());
+    const [exitingItems, setExitingItems] = useState(new Set());
+    const isMountedRef = useRef(true);
+    const pendingTimersRef = useRef({});
 
     const isEdit = mode === 'edit';
     const consentKey = `superia:consent:${tokenParam}`;
@@ -114,6 +118,13 @@ export default function SharedListPage() {
             }
         }
     }, [tokenParam]);
+
+    useEffect(() => {
+        return () => {
+            isMountedRef.current = false;
+            Object.values(pendingTimersRef.current).forEach(clearTimeout);
+        };
+    }, []);
 
     useEffect(() => {
         setConsented(readSessionFlag(consentKey) === '1');
@@ -199,10 +210,32 @@ export default function SharedListPage() {
 
     const handleToggle = async (itemId) => {
         if (!isEdit) return;
+        if (justCheckedItems.has(itemId)) return;
+        setJustCheckedItems((prev) => new Set([...prev, itemId]));
+
+        const timerPromise = new Promise((resolve) => {
+            pendingTimersRef.current[itemId] = setTimeout(resolve, 1500);
+        });
+
         try {
-            await toggleSharedItem(tokenParam, itemId);
+            await Promise.all([
+                toggleSharedItem(tokenParam, itemId),
+                timerPromise,
+            ]);
+            delete pendingTimersRef.current[itemId];
+            if (!isMountedRef.current) return;
+            setJustCheckedItems((prev) => { const s = new Set(prev); s.delete(itemId); return s; });
+            setExitingItems((prev) => new Set([...prev, itemId]));
+
+            await new Promise((r) => setTimeout(r, 300));
+            if (!isMountedRef.current) return;
+            setExitingItems((prev) => { const s = new Set(prev); s.delete(itemId); return s; });
             await loadList();
         } catch {
+            clearTimeout(pendingTimersRef.current[itemId]);
+            delete pendingTimersRef.current[itemId];
+            if (!isMountedRef.current) return;
+            setJustCheckedItems((prev) => { const s = new Set(prev); s.delete(itemId); return s; });
             setError('Error al actualizar el item.');
         }
     };
@@ -540,24 +573,35 @@ export default function SharedListPage() {
                                 />
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                                {pending.map((item) => (
+                                {pending.map((item) => {
+                                    const isItemAnimating = justCheckedItems.has(item.id);
+                                    const isItemExiting = exitingItems.has(item.id);
+                                    return (
                                     <div
                                         key={item.id}
                                         data-testid="shared-item-row"
                                         style={{
                                             display: 'flex',
                                             alignItems: 'center',
-                                            padding: '20px',
-                                            background: item.is_purchased ? 'rgba(242, 244, 246, 0.5)' : '#ffffff',
+                                            paddingTop: isItemExiting ? 0 : 20,
+                                            paddingBottom: isItemExiting ? 0 : 20,
+                                            paddingLeft: 20,
+                                            paddingRight: 20,
+                                            background: (isItemAnimating || isItemExiting) ? '#dcfce7' : '#ffffff',
                                             borderRadius: '20px',
-                                            transition: 'all 0.2s',
+                                            opacity: isItemExiting ? 0 : 1,
+                                            transform: isItemExiting ? 'translateY(10px)' : 'none',
+                                            maxHeight: isItemExiting ? 0 : 200,
+                                            overflow: 'hidden',
+                                            marginBottom: isItemExiting ? 0 : undefined,
+                                            transition: 'background 0.3s, opacity 0.3s, transform 0.3s, max-height 0.3s, padding 0.3s, margin 0.3s',
                                             cursor: isEdit ? 'pointer' : 'default',
                                         }}
                                     >
                                         <input
                                             type="checkbox"
                                             checked={item.is_purchased}
-                                            disabled={!isEdit}
+                                            disabled={!isEdit || isItemAnimating || isItemExiting}
                                             onChange={() => handleToggle(item.id)}
                                             aria-label={`${item.name} (${item.is_purchased ? 'comprado' : 'pendiente'})`}
                                             style={{
@@ -566,7 +610,7 @@ export default function SharedListPage() {
                                                 borderRadius: '8px',
                                                 border: `2px solid ${item.is_purchased ? '#002736' : '#c1c7cd'}`,
                                                 accentColor: '#002736',
-                                                cursor: isEdit ? 'pointer' : 'not-allowed',
+                                                cursor: (isEdit && !isItemAnimating && !isItemExiting) ? 'pointer' : 'not-allowed',
                                                 opacity: !isEdit ? 0.4 : 1,
                                             }}
                                         />
@@ -586,11 +630,11 @@ export default function SharedListPage() {
                                                     fontFamily: "'Inter', sans-serif",
                                                 }}
                                             >
-                                                <ItemLabel item={item} />
+                                                <ItemLabel item={item} isAnimating={isItemAnimating || isItemExiting} />
                                             </button>
                                         ) : (
                                             <div style={{ flex: 1, textAlign: 'left', minWidth: 0, marginLeft: '16px' }}>
-                                                <ItemLabel item={item} />
+                                                <ItemLabel item={item} isAnimating={isItemAnimating || isItemExiting} />
                                             </div>
                                         )}
 
@@ -612,7 +656,8 @@ export default function SharedListPage() {
                                             </button>
                                         )}
                                     </div>
-                                ))}
+                                    );
+                                })}
                             </div>
                         </section>
                     ); })}
@@ -658,7 +703,10 @@ export default function SharedListPage() {
                                     />
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                                    {purchasedItems.map((item) => (
+                                    {purchasedItems.map((item) => {
+                                    const isItemAnimating = justCheckedItems.has(item.id);
+                                    const isItemExiting = exitingItems.has(item.id);
+                                    return (
                                         <div
                                             key={item.id}
                                             data-testid="purchased-item-row"
@@ -675,7 +723,7 @@ export default function SharedListPage() {
                                             <input
                                                 type="checkbox"
                                                 checked={item.is_purchased}
-                                                disabled={!isEdit}
+                                                disabled={!isEdit || isItemAnimating || isItemExiting}
                                                 onChange={() => handleToggle(item.id)}
                                                 aria-label={`${item.name} (comprado)`}
                                                 style={{
@@ -684,7 +732,7 @@ export default function SharedListPage() {
                                                     borderRadius: '8px',
                                                     border: `2px solid #002736`,
                                                     accentColor: '#002736',
-                                                    cursor: isEdit ? 'pointer' : 'not-allowed',
+                                                    cursor: (isEdit && !isItemAnimating && !isItemExiting) ? 'pointer' : 'not-allowed',
                                                     opacity: !isEdit ? 0.4 : 1,
                                                 }}
                                             />
@@ -704,11 +752,11 @@ export default function SharedListPage() {
                                                         fontFamily: "'Inter', sans-serif",
                                                     }}
                                                 >
-                                                    <ItemLabel item={item} />
+                                                    <ItemLabel item={item} isAnimating={isItemAnimating} />
                                                 </button>
                                             ) : (
                                                 <div style={{ flex: 1, textAlign: 'left', minWidth: 0, marginLeft: '16px' }}>
-                                                    <ItemLabel item={item} />
+                                                    <ItemLabel item={item} isAnimating={isItemAnimating} />
                                                 </div>
                                             )}
 
@@ -730,7 +778,8 @@ export default function SharedListPage() {
                                                 </button>
                                             )}
                                         </div>
-                                    ))}
+                                    );
+                                })}
                                 </div>
                             </section>
                         )}
@@ -838,7 +887,12 @@ export default function SharedListPage() {
     );
 }
 
-function ItemLabel({ item }) {
+function ItemLabel({ item, isAnimating = false }) {
+    const isChecking = isAnimating && !item.is_purchased;
+    const isUnchecking = isAnimating && item.is_purchased;
+    const showLineThrough = isChecking || (item.is_purchased && !isUnchecking);
+    const textOpacity = (item.is_purchased && !isAnimating) ? 0.5 : 1;
+    const textColor = (item.is_purchased && !isAnimating) ? '#71787d' : '#002736';
     return (
         <>
             <span
@@ -846,16 +900,16 @@ function ItemLabel({ item }) {
                     display: 'block',
                     fontSize: '18px',
                     fontWeight: 700,
-                    color: item.is_purchased ? '#71787d' : '#002736',
-                    textDecoration: item.is_purchased ? 'line-through' : 'none',
-                    opacity: item.is_purchased ? 0.5 : 1,
+                    color: textColor,
+                    textDecoration: showLineThrough ? 'line-through' : 'none',
+                    opacity: textOpacity,
                     transition: 'all 0.2s',
                 }}
             >
                 {item.name}
             </span>
             {(item.quantity || item.estimated_price) && (
-                <span style={{ fontSize: '14px', color: '#41484c', fontWeight: 500, opacity: item.is_purchased ? 0.5 : 1 }}>
+                <span style={{ fontSize: '14px', color: '#41484c', fontWeight: 500, opacity: textOpacity }}>
                     {item.quantity && `${item.quantity}${item.unit || ''}`}
                     {item.quantity && item.estimated_price && ' · '}
                     {item.estimated_price && `~${item.estimated_price}€`}

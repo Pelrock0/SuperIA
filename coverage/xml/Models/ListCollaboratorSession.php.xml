@@ -1,0 +1,371 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="ListCollaboratorSession.php" path="\Models">
+    <totals>
+      <lines total="37" comments="1" code="36" executable="5" executed="5" percent="100.00"/>
+      <methods count="2" tested="2" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Models\ListCollaboratorSession" start="9" executable="5" executed="5" crap="2">
+      <namespace name="App\Models"/>
+      <method name="casts" signature="casts(): array" start="23" end="30" crap="1" executable="4" executed="4" coverage="100"/>
+      <method name="shareToken" signature="shareToken(): Illuminate\Database\Eloquent\Relations\BelongsTo" start="32" end="35" crap="1" executable="1" executed="1" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="27">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_heartbeat_creates_session_on_first_call"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_heartbeat_updates_existing_session"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_includes_recent_sessions"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_excludes_stale_sessions"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_excludes_revoked_token_sessions"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_is_cached"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_heartbeat_invalidates_cache"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_delete_stale_removes_old_sessions"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_marks_token_and_keeps_other_active"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_deletes_sessions"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_last_active_token_unflags_is_shared"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_is_idempotent"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_active_tokens_excludes_revoked"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_resolve_returns_null_for_revoked"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_deletes_stale_sessions_beyond_5_minutes"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_deletes_anonymous_logs_older_than_30_days"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_keeps_owner_logs_older_than_30_days"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_purges_logs_of_revoked_tokens_older_than_24h"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_keeps_logs_of_tokens_revoked_less_than_24h_ago"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_reports_counts_in_output"/>
+        <covered by="Tests\Feature\CollaborationOwnerViewsTest::test_collaborators_count_returns_active_sessions"/>
+        <covered by="Tests\Feature\CollaborationOwnerViewsTest::test_collaborators_count_excludes_stale_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_revoking_token_removes_collaborators"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+        <covered by="Tests\Feature\ShareTokenControllerTest::test_index_returns_active_tokens_only"/>
+        <covered by="Tests\Feature\ShareTokenControllerTest::test_destroy_revokes_token"/>
+        <covered by="Tests\Feature\ShareTokenControllerTest::test_destroy_unflags_is_shared_when_no_active_tokens_remain"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+      </line>
+      <line nr="34">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="26">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_heartbeat_creates_session_on_first_call"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_heartbeat_updates_existing_session"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_includes_recent_sessions"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_excludes_stale_sessions"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_excludes_revoked_token_sessions"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_is_cached"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_heartbeat_invalidates_cache"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_delete_stale_removes_old_sessions"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_marks_token_and_keeps_other_active"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_deletes_sessions"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_last_active_token_unflags_is_shared"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_is_idempotent"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_active_tokens_excludes_revoked"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_resolve_returns_null_for_revoked"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_deletes_stale_sessions_beyond_5_minutes"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_deletes_anonymous_logs_older_than_30_days"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_keeps_owner_logs_older_than_30_days"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_purges_logs_of_revoked_tokens_older_than_24h"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_keeps_logs_of_tokens_revoked_less_than_24h_ago"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_reports_counts_in_output"/>
+        <covered by="Tests\Feature\CollaborationOwnerViewsTest::test_collaborators_count_returns_active_sessions"/>
+        <covered by="Tests\Feature\CollaborationOwnerViewsTest::test_collaborators_count_excludes_stale_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_revoking_token_removes_collaborators"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+        <covered by="Tests\Feature\ShareTokenControllerTest::test_index_returns_active_tokens_only"/>
+        <covered by="Tests\Feature\ShareTokenControllerTest::test_destroy_revokes_token"/>
+        <covered by="Tests\Feature\ShareTokenControllerTest::test_destroy_unflags_is_shared_when_no_active_tokens_remain"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+      </line>
+      <line nr="28">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_heartbeat_creates_session_on_first_call"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_heartbeat_updates_existing_session"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_includes_recent_sessions"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_excludes_stale_sessions"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_excludes_revoked_token_sessions"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_is_cached"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_heartbeat_invalidates_cache"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_delete_stale_removes_old_sessions"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_marks_token_and_keeps_other_active"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_deletes_sessions"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_last_active_token_unflags_is_shared"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_is_idempotent"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_active_tokens_excludes_revoked"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_resolve_returns_null_for_revoked"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_deletes_stale_sessions_beyond_5_minutes"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_deletes_anonymous_logs_older_than_30_days"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_keeps_owner_logs_older_than_30_days"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_purges_logs_of_revoked_tokens_older_than_24h"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_keeps_logs_of_tokens_revoked_less_than_24h_ago"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_reports_counts_in_output"/>
+        <covered by="Tests\Feature\CollaborationOwnerViewsTest::test_collaborators_count_returns_active_sessions"/>
+        <covered by="Tests\Feature\CollaborationOwnerViewsTest::test_collaborators_count_excludes_stale_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_revoking_token_removes_collaborators"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+        <covered by="Tests\Feature\ShareTokenControllerTest::test_index_returns_active_tokens_only"/>
+        <covered by="Tests\Feature\ShareTokenControllerTest::test_destroy_revokes_token"/>
+        <covered by="Tests\Feature\ShareTokenControllerTest::test_destroy_unflags_is_shared_when_no_active_tokens_remain"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+      </line>
+      <line nr="29">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_heartbeat_creates_session_on_first_call"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_heartbeat_updates_existing_session"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_includes_recent_sessions"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_excludes_stale_sessions"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_excludes_revoked_token_sessions"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_count_active_is_cached"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_heartbeat_invalidates_cache"/>
+        <covered by="Tests\Unit\Services\CollaboratorPresenceServiceTest::test_delete_stale_removes_old_sessions"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_marks_token_and_keeps_other_active"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_deletes_sessions"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_last_active_token_unflags_is_shared"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_revoke_is_idempotent"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_active_tokens_excludes_revoked"/>
+        <covered by="Tests\Unit\Services\ShareTokenServiceTest::test_resolve_returns_null_for_revoked"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_deletes_stale_sessions_beyond_5_minutes"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_deletes_anonymous_logs_older_than_30_days"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_keeps_owner_logs_older_than_30_days"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_purges_logs_of_revoked_tokens_older_than_24h"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_keeps_logs_of_tokens_revoked_less_than_24h_ago"/>
+        <covered by="Tests\Feature\CleanupExpiredCollaboratorDataTest::test_reports_counts_in_output"/>
+        <covered by="Tests\Feature\CollaborationOwnerViewsTest::test_collaborators_count_returns_active_sessions"/>
+        <covered by="Tests\Feature\CollaborationOwnerViewsTest::test_collaborators_count_excludes_stale_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_revoking_token_removes_collaborators"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+        <covered by="Tests\Feature\ShareTokenControllerTest::test_index_returns_active_tokens_only"/>
+        <covered by="Tests\Feature\ShareTokenControllerTest::test_destroy_revokes_token"/>
+        <covered by="Tests\Feature\ShareTokenControllerTest::test_destroy_unflags_is_shared_when_no_active_tokens_remain"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Database\Eloquent\Factories\HasFactory</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Database\Eloquent\Model</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Database\Eloquent\Relations\BelongsTo</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8"/>
+      <line no="9">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListCollaboratorSession</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EXTENDS">extends</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Model</token>
+      </line>
+      <line no="10">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="11">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_DOC_COMMENT">/** @use HasFactory&lt;\Database\Factories\ListCollaboratorSessionFactory&gt; */</token>
+      </line>
+      <line no="12">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">HasFactory</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="13"/>
+      <line no="14">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$timestamps</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="15"/>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PROTECTED">protected</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$fillable</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'list_share_token_id'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'session_uuid'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="19">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'last_heartbeat_at'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="20">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'created_at'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="22"/>
+      <line no="23">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_ATTRIBUTE">#[</token>
+        <token name="T_NAME_FULLY_QUALIFIED">\Override</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PROTECTED">protected</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">casts</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="26">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="27">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'last_heartbeat_at'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'datetime'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'created_at'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'datetime'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="31"/>
+      <line no="32">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">shareToken</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">BelongsTo</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">belongsTo</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ListShareToken</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_CLASS">class</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'list_share_token_id'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="36">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="37"/>
+    </source>
+  </file>
+</phpunit>

@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="BudgetCapExceededAlert.php" path="\Mail">
+    <totals>
+      <lines total="38" comments="0" code="38" executable="11" executed="11" percent="100.00"/>
+      <methods count="3" tested="3" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Mail\BudgetCapExceededAlert" start="12" executable="11" executed="11" crap="3">
+      <namespace name="App\Mail"/>
+      <method name="__construct" signature="__construct(float $currentSpendUsd)" start="16" end="18" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="envelope" signature="envelope(): Illuminate\Mail\Mailables\Envelope" start="20" end="25" crap="1" executable="3" executed="3" coverage="100"/>
+      <method name="content" signature="content(): Illuminate\Mail\Mailables\Content" start="27" end="36" crap="1" executable="7" executed="7" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="18">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_budget_cap_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_global_budget_exceeded"/>
+        <covered by="Tests\Unit\Support\Ai\BudgetCapTest::test_notify_if_exceeded_queues_alert"/>
+        <covered by="Tests\Unit\Support\Ai\BudgetCapTest::test_notify_is_dedup_per_day"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_budget_cap_exceeded"/>
+        <covered by="Tests\Feature\SeedProductCatalogCommandTest::test_aborts_when_budget_cap_exceeded"/>
+      </line>
+      <line nr="22">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_budget_cap_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_global_budget_exceeded"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_budget_cap_exceeded"/>
+        <covered by="Tests\Feature\SeedProductCatalogCommandTest::test_aborts_when_budget_cap_exceeded"/>
+      </line>
+      <line nr="23">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_budget_cap_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_global_budget_exceeded"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_budget_cap_exceeded"/>
+        <covered by="Tests\Feature\SeedProductCatalogCommandTest::test_aborts_when_budget_cap_exceeded"/>
+      </line>
+      <line nr="29">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_budget_cap_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_global_budget_exceeded"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_budget_cap_exceeded"/>
+        <covered by="Tests\Feature\SeedProductCatalogCommandTest::test_aborts_when_budget_cap_exceeded"/>
+      </line>
+      <line nr="30">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_budget_cap_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_global_budget_exceeded"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_budget_cap_exceeded"/>
+        <covered by="Tests\Feature\SeedProductCatalogCommandTest::test_aborts_when_budget_cap_exceeded"/>
+      </line>
+      <line nr="32">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_budget_cap_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_global_budget_exceeded"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_budget_cap_exceeded"/>
+        <covered by="Tests\Feature\SeedProductCatalogCommandTest::test_aborts_when_budget_cap_exceeded"/>
+      </line>
+      <line nr="33">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_budget_cap_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_global_budget_exceeded"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_budget_cap_exceeded"/>
+        <covered by="Tests\Feature\SeedProductCatalogCommandTest::test_aborts_when_budget_cap_exceeded"/>
+      </line>
+      <line nr="24">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_budget_cap_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_global_budget_exceeded"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_budget_cap_exceeded"/>
+        <covered by="Tests\Feature\SeedProductCatalogCommandTest::test_aborts_when_budget_cap_exceeded"/>
+      </line>
+      <line nr="31">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_budget_cap_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_global_budget_exceeded"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_budget_cap_exceeded"/>
+        <covered by="Tests\Feature\SeedProductCatalogCommandTest::test_aborts_when_budget_cap_exceeded"/>
+      </line>
+      <line nr="34">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_budget_cap_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_global_budget_exceeded"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_budget_cap_exceeded"/>
+        <covered by="Tests\Feature\SeedProductCatalogCommandTest::test_aborts_when_budget_cap_exceeded"/>
+      </line>
+      <line nr="35">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_budget_cap_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_global_budget_exceeded"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_budget_cap_exceeded"/>
+        <covered by="Tests\Feature\SeedProductCatalogCommandTest::test_aborts_when_budget_cap_exceeded"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Mail</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Bus\Queueable</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Contracts\Queue\ShouldQueue</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Mail\Mailable</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Mail\Mailables\Content</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Mail\Mailables\Envelope</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="10">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Queue\SerializesModels</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="11"/>
+      <line no="12">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">BudgetCapExceededAlert</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EXTENDS">extends</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Mailable</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IMPLEMENTS">implements</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ShouldQueue</token>
+      </line>
+      <line no="13">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="14">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Queueable</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">SerializesModels</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="15"/>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">__construct</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_READONLY">readonly</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">float</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$currentSpendUsd</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="19"/>
+      <line no="20">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">envelope</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Envelope</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Envelope</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">subject</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'Superlistia AI &#x2014; Budget cap exceeded'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="26"/>
+      <line no="27">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">content</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Content</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Content</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">view</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'emails.ai-budget-cap-exceeded'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="31">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">with</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="32">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'currentSpendUsd'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">currentSpendUsd</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'limitUsd'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_CAST">(float)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">config</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'ai.budget_cap_monthly_usd'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="36">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="37">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="38"/>
+    </source>
+  </file>
+</phpunit>

@@ -298,4 +298,41 @@ class ReplenishmentSuggestionServiceTest extends TestCase
 
         $this->assertSame([], $this->service->forUser($user));
     }
+
+    public function test_returns_empty_array_when_no_qualifying_rows(): void
+    {
+        $user = User::factory()->createOne();
+        $this->activeListWithItems($user);
+
+        $result = $this->service->forUser($user);
+
+        $this->assertIsArray($result);
+        $this->assertSame([], $result);
+    }
+
+    public function test_excluded_product_does_not_stop_iteration_of_remaining(): void
+    {
+        $user = User::factory()->createOne();
+        $this->activeListWithItems($user);
+
+        // Leche is in the active list — will be excluded
+        $list = ShoppingList::factory()->createOne(['user_id' => $user->id, 'status' => 'active', 'items_total' => 3]);
+        ListItem::factory()->createOne(['shopping_list_id' => $list->id, 'name' => 'Leche', 'is_purchased' => false]);
+
+        // Leche: 3 purchases (excluded via active list)
+        $this->recordPurchase($user, 'Leche', '-20 days');
+        $this->recordPurchase($user, 'Leche', '-14 days');
+        $this->recordPurchase($user, 'Leche', '-7 days');
+
+        // Pan: 3 purchases (should still appear after Leche is skipped)
+        $this->recordPurchase($user, 'Pan', '-21 days');
+        $this->recordPurchase($user, 'Pan', '-14 days');
+        $this->recordPurchase($user, 'Pan', '-7 days');
+
+        $result = $this->service->forUser($user);
+
+        $names = array_column($result, 'producto_nombre');
+        $this->assertContains('Pan', $names);
+        $this->assertNotContains('Leche', $names);
+    }
 }

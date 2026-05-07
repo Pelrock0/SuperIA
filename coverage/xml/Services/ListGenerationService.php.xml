@@ -1,0 +1,2267 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="ListGenerationService.php" path="\Services">
+    <totals>
+      <lines total="190" comments="21" code="169" executable="88" executed="83" percent="94.32"/>
+      <methods count="8" tested="6" percent="75.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="0" percent="0.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Services\ListGenerationService" start="18" executable="88" executed="83" crap="23.1">
+      <namespace name="App\Services"/>
+      <method name="__construct" signature="__construct(App\Support\Ai\PromptSanitizer $sanitizer, App\Support\Ai\BudgetCap $budgetCap, App\Support\Ai\AiUsageTracker $usageTracker, App\Support\Ai\CircuitBreaker $circuitBreaker, App\Support\Ai\ClaudeClientInterface $claude, App\Services\ShoppingListService $shoppingLists)" start="20" end="27" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="generate" signature="generate(App\Models\User $user, string $description, int $people): array" start="39" end="69" crap="1" executable="23" executed="23" coverage="100"/>
+      <method name="confirmAsNewList" signature="confirmAsNewList(App\Models\User $user, array $items, string $name): App\Models\ShoppingList" start="75" end="87" crap="1" executable="8" executed="8" coverage="100"/>
+      <method name="confirmAddToExisting" signature="confirmAddToExisting(App\Models\User $user, App\Models\ShoppingList $list, array $items): App\Models\ShoppingList" start="92" end="102" crap="2" executable="5" executed="5" coverage="100"/>
+      <method name="checkQuotas" signature="checkQuotas(App\Models\User $user): void" start="104" end="130" crap="7.27" executable="17" executed="14" coverage="82.352941176471"/>
+      <method name="callWithRetry" signature="callWithRetry(array $context): array" start="135" end="152" crap="3" executable="10" executed="10" coverage="100"/>
+      <method name="insertItems" signature="insertItems(App\Models\ShoppingList $list, array $items): void" start="154" end="178" crap="7.07" executable="18" executed="16" coverage="88.888888888889"/>
+      <method name="syncCounters" signature="syncCounters(App\Models\ShoppingList $list): void" start="180" end="188" crap="1" executable="6" executed="6" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="27">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_shared_quota_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_respects_freemium"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_rejects_other_users_list"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_validates_description_required"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_validates_description_max_length"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_returns_403_freemium"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_validates_items_required"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_returns_404_for_other_users_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_validates_list_id_exists"/>
+      </line>
+      <line nr="41">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_shared_quota_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="43">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="44">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="46">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="47">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="48">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="51">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="53">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="54">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="55">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="56">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="57">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="58">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="59">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="63">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="65">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="66">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="77">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_respects_freemium"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_returns_403_freemium"/>
+      </line>
+      <line nr="78">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_respects_freemium"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_returns_403_freemium"/>
+      </line>
+      <line nr="79">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_respects_freemium"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_returns_403_freemium"/>
+      </line>
+      <line nr="83">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+      </line>
+      <line nr="84">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+      </line>
+      <line nr="86">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+      </line>
+      <line nr="94">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_rejects_other_users_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="95">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_rejects_other_users_list"/>
+      </line>
+      <line nr="98">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="99">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="101">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="106">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_shared_quota_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="107">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+      </line>
+      <line nr="108">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+      </line>
+      <line nr="109">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_budget_exceeded"/>
+      </line>
+      <line nr="112">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_shared_quota_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="113">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_shared_quota_exceeded"/>
+      </line>
+      <line nr="114">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_shared_quota_exceeded"/>
+      </line>
+      <line nr="117">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="118">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="120">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="121">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="122">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+      </line>
+      <line nr="123">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+      </line>
+      <line nr="126">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="138">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="139">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="140">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="141">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="144">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="145">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+      </line>
+      <line nr="146">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+      </line>
+      <line nr="147">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="148">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="149">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="156">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="157">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="158">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="162">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="163">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="165">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="166">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+      </line>
+      <line nr="167">
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="169">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="170">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="171">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="172">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="173">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="175">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="182">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="183">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="184">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="185">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="186">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="49">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+      </line>
+      <line nr="60">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="62">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="64">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="67">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="68">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+      </line>
+      <line nr="80">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_respects_freemium"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_returns_403_freemium"/>
+      </line>
+      <line nr="81">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_respects_freemium"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_returns_403_freemium"/>
+      </line>
+      <line nr="174">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="176">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+      <line nr="187">
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_as_new_list_creates_list_with_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_add_to_existing_appends_items"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_confirm_validates_enum_values_on_items"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_new_creates_list"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_confirm_existing_appends_items"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Services</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Enums\AiOperation</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Enums\AiUsageStatus</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Enums\ItemUnit</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Enums\ProductCategory</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\ShoppingList</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="10">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\User</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="11">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Support\Ai\AiUsageTracker</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="12">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Support\Ai\BudgetCap</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="13">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Support\Ai\CircuitBreaker</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="14">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Support\Ai\ClaudeClientInterface</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="15">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Support\Ai\Exceptions\ClaudeException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="16">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Support\Ai\PromptSanitizer</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="17"/>
+      <line no="18">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListGenerationService</token>
+      </line>
+      <line no="19">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="20">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">__construct</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">PromptSanitizer</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$sanitizer</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">BudgetCap</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$budgetCap</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiUsageTracker</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$usageTracker</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CircuitBreaker</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$circuitBreaker</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ClaudeClientInterface</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$claude</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="26">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ShoppingListService</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$shoppingLists</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="27">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="28"/>
+      <line no="29">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_DOC_COMMENT">/**</token>
+      </line>
+      <line no="30">
+        <token name="T_DOC_COMMENT">     * Generate a shopping list from a natural language description.</token>
+      </line>
+      <line no="31">
+        <token name="T_DOC_COMMENT">     * Checks shared quota + per-operation cap + budget + circuit breaker.</token>
+      </line>
+      <line no="32">
+        <token name="T_DOC_COMMENT">     * Retries once silently on invalid JSON.</token>
+      </line>
+      <line no="33">
+        <token name="T_DOC_COMMENT">     *</token>
+      </line>
+      <line no="34">
+        <token name="T_DOC_COMMENT">     * @return array{products: array&lt;int, array&lt;string, mixed&gt;&gt;, meta: array{people: int, description_used: string}}</token>
+      </line>
+      <line no="35">
+        <token name="T_DOC_COMMENT">     *</token>
+      </line>
+      <line no="36">
+        <token name="T_DOC_COMMENT">     * @throws \App\Support\Ai\Exceptions\ClaudeException on double failure</token>
+      </line>
+      <line no="37">
+        <token name="T_DOC_COMMENT">     * @throws \RuntimeException on quota/budget/circuit limits (caller translates to HTTP 429)</token>
+      </line>
+      <line no="38">
+        <token name="T_DOC_COMMENT">     */</token>
+      </line>
+      <line no="39">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">generate</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$description</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$people</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">2</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="40">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="41">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">checkQuotas</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="42"/>
+      <line no="43">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$maxChars</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INT_CAST">(int)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">config</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'ai.generation.max_prompt_chars'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">500</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="44">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$sanitized</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">sanitizer</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">clean</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$description</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$maxChars</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="45"/>
+      <line no="46">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="47">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'description'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$sanitized</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="48">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'people'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$people</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="49">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="50"/>
+      <line no="51">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">callWithRetry</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="52"/>
+      <line no="53">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">usageTracker</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">record</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="54">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="55">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">AiOperation</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Generation</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="56">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">AiUsageStatus</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Success</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="57">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_DOUBLE_CAST">(float)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'estimated_cost_usd'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="58">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'input_tokens'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COALESCE">??</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="59">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'output_tokens'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COALESCE">??</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="60">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="61"/>
+      <line no="62">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="63">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'products'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'products'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="64">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'meta'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="65">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'people'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$people</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="66">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'description_used'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$sanitized</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="67">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="68">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="69">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="70"/>
+      <line no="71">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_DOC_COMMENT">/**</token>
+      </line>
+      <line no="72">
+        <token name="T_DOC_COMMENT">     * Create a new ShoppingList from confirmed preview items.</token>
+      </line>
+      <line no="73">
+        <token name="T_DOC_COMMENT">     * Propagates OverflowException when freemium limit is hit.</token>
+      </line>
+      <line no="74">
+        <token name="T_DOC_COMMENT">     */</token>
+      </line>
+      <line no="75">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">confirmAsNewList</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$items</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$name</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ShoppingList</token>
+      </line>
+      <line no="76">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="77">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">shoppingLists</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">create</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="78">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'name'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$name</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="79">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'emoji'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'&#x1F916;'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="80">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'category'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="81">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="82"/>
+      <line no="83">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">insertItems</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$items</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="84">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">syncCounters</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="85"/>
+      <line no="86">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">refresh</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="87">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="88"/>
+      <line no="89">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_DOC_COMMENT">/**</token>
+      </line>
+      <line no="90">
+        <token name="T_DOC_COMMENT">     * Append confirmed preview items to an existing list.</token>
+      </line>
+      <line no="91">
+        <token name="T_DOC_COMMENT">     */</token>
+      </line>
+      <line no="92">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">confirmAddToExisting</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ShoppingList</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$items</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ShoppingList</token>
+      </line>
+      <line no="93">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="94">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">user_id</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_NOT_IDENTICAL">!==</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="95">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">abort</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_LNUMBER">404</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="96">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="97"/>
+      <line no="98">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">insertItems</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$items</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="99">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">syncCounters</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="100"/>
+      <line no="101">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">refresh</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="102">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="103"/>
+      <line no="104">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">checkQuotas</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">void</token>
+      </line>
+      <line no="105">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="106">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">budgetCap</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">canSpend</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="107">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">usageTracker</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">record</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiOperation</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Generation</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiUsageStatus</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">BudgetCapped</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="108">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">budgetCap</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">notifyIfExceeded</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="109">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_FULLY_QUALIFIED">\RuntimeException</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'BUDGET_CAPPED'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="110">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="111"/>
+      <line no="112">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">usageTracker</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">canUse</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiOperation</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Generation</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="113">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">usageTracker</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">record</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiOperation</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Generation</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiUsageStatus</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">UserCapped</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="114">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_FULLY_QUALIFIED">\RuntimeException</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'AI_LIMIT'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="115">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="116"/>
+      <line no="117">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$defaultPerDay</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INT_CAST">(int)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">config</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'ai.generation.generation_per_day'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">5</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="118">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$perDayLimit</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">ai_daily_limit_override</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_NOT_IDENTICAL">!==</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+      </line>
+      <line no="119">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INT_CAST">(int)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">ai_daily_limit_override</token>
+      </line>
+      <line no="120">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">plan</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'premium'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$defaultPerDay</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_MULT">*</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">10</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$defaultPerDay</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="121">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">usageTracker</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">canUseOperation</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiOperation</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Generation</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$perDayLimit</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="122">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">usageTracker</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">record</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiOperation</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Generation</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiUsageStatus</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">UserCapped</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="123">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_FULLY_QUALIFIED">\RuntimeException</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'GENERATION_LIMIT'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="124">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="125"/>
+      <line no="126">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">circuitBreaker</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">allow</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="127">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">usageTracker</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">record</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiOperation</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Generation</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiUsageStatus</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">CircuitOpen</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="128">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_FULLY_QUALIFIED">\RuntimeException</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'CIRCUIT_OPEN'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="129">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="130">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="131"/>
+      <line no="132">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_DOC_COMMENT">/**</token>
+      </line>
+      <line no="133">
+        <token name="T_DOC_COMMENT">     * @return array{products: array&lt;int, array&lt;string, mixed&gt;&gt;, estimated_cost_usd: float}</token>
+      </line>
+      <line no="134">
+        <token name="T_DOC_COMMENT">     */</token>
+      </line>
+      <line no="135">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">callWithRetry</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_ARRAY">array</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="136">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="137">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_TRY">try</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="138">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">claude</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">generateListFromContext</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="139">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">circuitBreaker</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">recordSuccess</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="140">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="141">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CATCH">catch</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ClaudeException</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$e</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="142">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_COMMENT">// Silent retry once</token>
+      </line>
+      <line no="143">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_TRY">try</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="144">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">claude</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">generateListFromContext</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="145">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">circuitBreaker</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">recordSuccess</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="146">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="147">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CATCH">catch</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ClaudeException</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$e2</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="148">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">circuitBreaker</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">recordFailure</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="149">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$e2</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="150">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="151">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="152">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="153"/>
+      <line no="154">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">insertItems</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ShoppingList</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$items</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">void</token>
+      </line>
+      <line no="155">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="156">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$position</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">items</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">count</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="157">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_FOREACH">foreach</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$items</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_AS">as</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="158">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">is_array</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_BOOLEAN_OR">||</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ISSET">isset</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'nombre'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="159">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONTINUE">continue</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="160">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="161"/>
+      <line no="162">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$unit</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ISSET">isset</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'unidad_tipica'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="163">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ItemUnit</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">tryFrom</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING_CAST">(string)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'unidad_tipica'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="164">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="165">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$category</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ISSET">isset</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'categoria'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="166">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ProductCategory</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">tryFrom</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING_CAST">(string)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'categoria'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="167">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="168"/>
+      <line no="169">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">items</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">create</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="170">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'name'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING_CAST">(string)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'nombre'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="171">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'quantity'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ISSET">isset</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'cantidad_tipica'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_CAST">(float)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$item</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'cantidad_tipica'</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="172">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'unit'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$unit</token>
+        <token name="T_NULLSAFE_OBJECT_OPERATOR">?-&gt;</token>
+        <token name="T_STRING">value</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="173">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'category'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$category</token>
+        <token name="T_NULLSAFE_OBJECT_OPERATOR">?-&gt;</token>
+        <token name="T_STRING">value</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="174">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'is_purchased'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="175">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'position'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$position</token>
+        <token name="T_INC">++</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="176">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="177">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="178">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="179"/>
+      <line no="180">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">syncCounters</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ShoppingList</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">void</token>
+      </line>
+      <line no="181">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="182">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$total</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">items</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">count</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="183">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$completed</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">items</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'is_purchased'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">true</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">count</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="184">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">update</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="185">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_total'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$total</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="186">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_completed'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$completed</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="187">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="188">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="189">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="190"/>
+    </source>
+  </file>
+</phpunit>

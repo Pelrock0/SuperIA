@@ -1,0 +1,674 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="ProductHistoryStatsService.php" path="\Services">
+    <totals>
+      <lines total="49" comments="3" code="46" executable="20" executed="20" percent="100.00"/>
+      <methods count="4" tested="4" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Services\ProductHistoryStatsService" start="8" executable="20" executed="20" crap="4">
+      <namespace name="App\Services"/>
+      <method name="completedListsCount" signature="completedListsCount(App\Models\User $user): int" start="10" end="17" crap="1" executable="5" executed="5" coverage="100"/>
+      <method name="completedListIds" signature="completedListIds(App\Models\User $user): array" start="22" end="30" crap="1" executable="6" executed="6" coverage="100"/>
+      <method name="hasActiveListWithMinItems" signature="hasActiveListWithMinItems(App\Models\User $user, int $minItems): bool" start="32" end="39" crap="1" executable="5" executed="5" coverage="100"/>
+      <method name="distinctProductCount" signature="distinctProductCount(App\Models\User $user): int" start="41" end="47" crap="1" executable="4" executed="4" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="12">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_local_co_occurrence_returns_matches_above_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_filters_below_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_excludes_products_already_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_user_quota_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_caps_at_2_suggestions"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sorts_by_co_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_co_occurrence_query_caps_intermediate_fetch_at_50_rows"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_is_zero_when_none"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_matches_items_total_equals_completed"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_excludes_empty_lists"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_excludes_other_users"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_returns_local_suggestions"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+      </line>
+      <line nr="13">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_local_co_occurrence_returns_matches_above_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_filters_below_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_excludes_products_already_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_user_quota_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_caps_at_2_suggestions"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sorts_by_co_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_co_occurrence_query_caps_intermediate_fetch_at_50_rows"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_is_zero_when_none"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_matches_items_total_equals_completed"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_excludes_empty_lists"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_excludes_other_users"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_returns_local_suggestions"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+      </line>
+      <line nr="14">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_local_co_occurrence_returns_matches_above_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_filters_below_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_excludes_products_already_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_user_quota_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_caps_at_2_suggestions"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sorts_by_co_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_co_occurrence_query_caps_intermediate_fetch_at_50_rows"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_is_zero_when_none"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_matches_items_total_equals_completed"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_excludes_empty_lists"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_excludes_other_users"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_returns_local_suggestions"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+      </line>
+      <line nr="15">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_local_co_occurrence_returns_matches_above_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_filters_below_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_excludes_products_already_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_user_quota_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_caps_at_2_suggestions"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sorts_by_co_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_co_occurrence_query_caps_intermediate_fetch_at_50_rows"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_is_zero_when_none"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_matches_items_total_equals_completed"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_excludes_empty_lists"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_excludes_other_users"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_returns_local_suggestions"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+      </line>
+      <line nr="16">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_local_co_occurrence_returns_matches_above_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_filters_below_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_excludes_products_already_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_budget_cap_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_user_quota_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_caps_at_2_suggestions"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sorts_by_co_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_co_occurrence_query_caps_intermediate_fetch_at_50_rows"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_is_zero_when_none"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_matches_items_total_equals_completed"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_excludes_empty_lists"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_lists_count_excludes_other_users"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_returns_local_suggestions"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+      </line>
+      <line nr="24">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_local_co_occurrence_returns_matches_above_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_filters_below_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_excludes_products_already_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_caps_at_2_suggestions"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sorts_by_co_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_co_occurrence_query_caps_intermediate_fetch_at_50_rows"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_list_ids_returns_array"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_returns_local_suggestions"/>
+      </line>
+      <line nr="25">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_local_co_occurrence_returns_matches_above_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_filters_below_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_excludes_products_already_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_caps_at_2_suggestions"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sorts_by_co_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_co_occurrence_query_caps_intermediate_fetch_at_50_rows"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_list_ids_returns_array"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_returns_local_suggestions"/>
+      </line>
+      <line nr="26">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_local_co_occurrence_returns_matches_above_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_filters_below_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_excludes_products_already_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_caps_at_2_suggestions"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sorts_by_co_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_co_occurrence_query_caps_intermediate_fetch_at_50_rows"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_list_ids_returns_array"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_returns_local_suggestions"/>
+      </line>
+      <line nr="27">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_local_co_occurrence_returns_matches_above_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_filters_below_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_excludes_products_already_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_caps_at_2_suggestions"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sorts_by_co_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_co_occurrence_query_caps_intermediate_fetch_at_50_rows"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_list_ids_returns_array"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_returns_local_suggestions"/>
+      </line>
+      <line nr="28">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_local_co_occurrence_returns_matches_above_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_filters_below_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_excludes_products_already_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_caps_at_2_suggestions"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sorts_by_co_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_co_occurrence_query_caps_intermediate_fetch_at_50_rows"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_list_ids_returns_array"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_returns_local_suggestions"/>
+      </line>
+      <line nr="29">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_local_co_occurrence_returns_matches_above_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_filters_below_threshold"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_excludes_products_already_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_caps_at_2_suggestions"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sorts_by_co_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_co_occurrence_query_caps_intermediate_fetch_at_50_rows"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_completed_list_ids_returns_array"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_returns_local_suggestions"/>
+      </line>
+      <line nr="34">
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_true_when_meets_threshold"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_false_when_below"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_excludes_archived"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_empty_when_no_active_list_with_items"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_empty_when_active_list_has_less_than_3_items"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_suggests_when_due_for_replenishment"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_does_not_suggest_below_min_occurrences"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_does_not_suggest_when_factor_gates"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_silenced_products"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_dismissed_products_within_ttl"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_includes_expired_dismissed_products"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_products_in_active_lists"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_caps_at_3_suggestions"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_sorts_by_urgency_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_cache_returns_same_result_within_ttl"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_invalidate_cache_clears_cached_value"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_ignore_invalidates_cache"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_empty_when_no_active_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_suggestions_when_data_matches"/>
+      </line>
+      <line nr="35">
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_true_when_meets_threshold"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_false_when_below"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_excludes_archived"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_empty_when_no_active_list_with_items"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_empty_when_active_list_has_less_than_3_items"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_suggests_when_due_for_replenishment"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_does_not_suggest_below_min_occurrences"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_does_not_suggest_when_factor_gates"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_silenced_products"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_dismissed_products_within_ttl"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_includes_expired_dismissed_products"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_products_in_active_lists"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_caps_at_3_suggestions"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_sorts_by_urgency_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_cache_returns_same_result_within_ttl"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_invalidate_cache_clears_cached_value"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_ignore_invalidates_cache"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_empty_when_no_active_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_suggestions_when_data_matches"/>
+      </line>
+      <line nr="36">
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_true_when_meets_threshold"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_false_when_below"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_excludes_archived"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_empty_when_no_active_list_with_items"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_empty_when_active_list_has_less_than_3_items"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_suggests_when_due_for_replenishment"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_does_not_suggest_below_min_occurrences"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_does_not_suggest_when_factor_gates"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_silenced_products"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_dismissed_products_within_ttl"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_includes_expired_dismissed_products"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_products_in_active_lists"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_caps_at_3_suggestions"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_sorts_by_urgency_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_cache_returns_same_result_within_ttl"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_invalidate_cache_clears_cached_value"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_ignore_invalidates_cache"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_empty_when_no_active_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_suggestions_when_data_matches"/>
+      </line>
+      <line nr="37">
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_true_when_meets_threshold"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_false_when_below"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_excludes_archived"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_empty_when_no_active_list_with_items"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_empty_when_active_list_has_less_than_3_items"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_suggests_when_due_for_replenishment"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_does_not_suggest_below_min_occurrences"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_does_not_suggest_when_factor_gates"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_silenced_products"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_dismissed_products_within_ttl"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_includes_expired_dismissed_products"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_products_in_active_lists"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_caps_at_3_suggestions"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_sorts_by_urgency_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_cache_returns_same_result_within_ttl"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_invalidate_cache_clears_cached_value"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_ignore_invalidates_cache"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_empty_when_no_active_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_suggestions_when_data_matches"/>
+      </line>
+      <line nr="38">
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_true_when_meets_threshold"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_false_when_below"/>
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_has_active_list_with_min_items_excludes_archived"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_empty_when_no_active_list_with_items"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_empty_when_active_list_has_less_than_3_items"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_suggests_when_due_for_replenishment"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_does_not_suggest_below_min_occurrences"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_does_not_suggest_when_factor_gates"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_silenced_products"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_dismissed_products_within_ttl"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_includes_expired_dismissed_products"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_excludes_products_in_active_lists"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_caps_at_3_suggestions"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_sorts_by_urgency_ratio_desc"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_cache_returns_same_result_within_ttl"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_invalidate_cache_clears_cached_value"/>
+        <covered by="Tests\Unit\Services\ReplenishmentSuggestionServiceTest::test_ignore_invalidates_cache"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_empty_when_no_active_list"/>
+        <covered by="Tests\Feature\ReplenishmentControllerTest::test_index_returns_suggestions_when_data_matches"/>
+      </line>
+      <line nr="43">
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_distinct_product_count"/>
+      </line>
+      <line nr="44">
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_distinct_product_count"/>
+      </line>
+      <line nr="45">
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_distinct_product_count"/>
+      </line>
+      <line nr="46">
+        <covered by="Tests\Unit\Services\ProductHistoryStatsServiceTest::test_distinct_product_count"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Services</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\User</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Support\Facades\DB</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7"/>
+      <line no="8">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ProductHistoryStatsService</token>
+      </line>
+      <line no="9">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="10">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">completedListsCount</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+      </line>
+      <line no="11">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="12">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">table</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'shopping_lists'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="13">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="14">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_total'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'&gt;'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="15">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">whereColumn</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_total'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_completed'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="16">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">count</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="18"/>
+      <line no="19">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_DOC_COMMENT">/**</token>
+      </line>
+      <line no="20">
+        <token name="T_DOC_COMMENT">     * @return array&lt;int, int&gt;</token>
+      </line>
+      <line no="21">
+        <token name="T_DOC_COMMENT">     */</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">completedListIds</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">table</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'shopping_lists'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="26">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_total'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'&gt;'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="27">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">whereColumn</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_total'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_completed'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">pluck</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'id'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">all</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="31"/>
+      <line no="32">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">hasActiveListWithMinItems</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$minItems</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">table</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'shopping_lists'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="36">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'status'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'active'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="37">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'items_total'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'&gt;='</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$minItems</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="38">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">exists</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="39">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="40"/>
+      <line no="41">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">distinctProductCount</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+      </line>
+      <line no="42">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="43">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">table</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'producto_historial'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="44">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="45">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">distinct</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="46">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">count</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'producto_nombre'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="47">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="48">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="49"/>
+    </source>
+  </file>
+</phpunit>

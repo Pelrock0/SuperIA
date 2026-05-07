@@ -111,4 +111,17 @@ class AuthServiceTest extends TestCase
         $this->assertFalse($result['success']);
         $this->assertEquals('INVALID_CREDENTIALS', $result['error']);
     }
+
+    public function test_logout_invalidates_jwt_token(): void
+    {
+        $user = User::factory()->createOne(['password' => 'Password1']);
+        $login = $this->service->login($user->email, 'Password1', '127.0.0.1');
+        $token = $login['token'];
+
+        \Tymon\JWTAuth\Facades\JWTAuth::setToken($token);
+        $this->service->logout();
+
+        $this->expectException(\Tymon\JWTAuth\Exceptions\TokenInvalidException::class);
+        \Tymon\JWTAuth\Facades\JWTAuth::setToken($token)->authenticate();
+    }
 }

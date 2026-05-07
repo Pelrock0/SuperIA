@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
@@ -188,5 +188,124 @@ describe('ListDetailPage', () => {
 
         await waitFor(() => screen.getByText('Compra'));
         expect(screen.queryByTestId('activity-log')).toBeNull();
+    });
+
+    describe('purchase animation', () => {
+        afterEach(() => vi.useRealTimers());
+
+        const mockItemsSetup = () => {
+            api.get.mockImplementation((url) => {
+                if (url.includes('/items')) return Promise.resolve({ data: { data: mockItemsResponse } });
+                return Promise.resolve({ data: { data: mockList } });
+            });
+        };
+
+        it('shows green background immediately when checking a pending item', async () => {
+            mockItemsSetup();
+            api.patch.mockResolvedValue({ data: { data: { counters: { items_total: 2, items_completed: 2 } } } });
+
+            renderPage();
+            await waitFor(() => screen.getByText('Agua'));
+
+            fireEvent.click(screen.getByLabelText(/marcar agua como comprado/i));
+
+            await waitFor(() => {
+                const row = screen.getByText('Agua').closest('[data-testid="item-row"]');
+                expect(row).toHaveStyle({ background: '#dcfce7' });
+            });
+        });
+
+        it('calls API immediately without waiting for the 1.5s delay', async () => {
+            mockItemsSetup();
+            api.patch.mockResolvedValue({ data: { data: { counters: { items_total: 2, items_completed: 2 } } } });
+
+            renderPage();
+            await waitFor(() => screen.getByText('Agua'));
+
+            fireEvent.click(screen.getByLabelText(/marcar agua como comprado/i));
+
+            expect(api.patch).toHaveBeenCalledWith('/lists/1/items/1/toggle');
+        });
+
+        it('disables the checkbox button during the animation window', async () => {
+            mockItemsSetup();
+            api.patch.mockResolvedValue({ data: { data: { counters: { items_total: 2, items_completed: 2 } } } });
+
+            renderPage();
+            await waitFor(() => screen.getByText('Agua'));
+
+            fireEvent.click(screen.getByLabelText(/marcar agua como comprado/i));
+
+            await waitFor(() => {
+                expect(screen.getByLabelText(/marcar agua como comprado/i)).toBeDisabled();
+            });
+        });
+
+        it('removes green background after animation completes (1.5s delay + 300ms exit)', async () => {
+            mockItemsSetup();
+            api.patch.mockResolvedValue({ data: { data: { counters: { items_total: 2, items_completed: 1 } } } });
+
+            renderPage();
+            await waitFor(() => screen.getByText('Agua'));
+
+            // switch to fake timers AFTER initial render so waitFor above works
+            vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+
+            const row = screen.getByText('Agua').closest('[data-testid="item-row"]');
+            fireEvent.click(screen.getByLabelText(/marcar agua como comprado/i));
+
+            expect(row).toHaveStyle({ background: '#dcfce7' });
+
+            // 1.5s green phase, then async chain creates 300ms exit timer
+            await act(async () => { vi.advanceTimersByTime(1500); });
+            // 300ms exit animation fires — exitingItems cleared, green gone
+            await act(async () => { vi.advanceTimersByTime(300); });
+
+            expect(row).not.toHaveStyle({ background: '#dcfce7' });
+        });
+
+        it('cleans up timer on unmount without calling setState', async () => {
+            mockItemsSetup();
+            api.patch.mockResolvedValue({ data: { data: { counters: { items_total: 2, items_completed: 2 } } } });
+
+            const { unmount } = renderPage();
+            await waitFor(() => screen.getByText('Agua'));
+
+            vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+
+            fireEvent.click(screen.getByLabelText(/marcar agua como comprado/i));
+            unmount();
+
+            await act(async () => { vi.advanceTimersByTime(2000); });
+        });
+
+        it('unchecking a purchased item calls API immediately and disables checkbox during animation', async () => {
+            mockItemsSetup();
+            api.patch.mockResolvedValue({ data: { data: { counters: { items_total: 2, items_completed: 0 } } } });
+
+            renderPage();
+            await waitFor(() => screen.getByText('Pan'));
+
+            fireEvent.click(screen.getByLabelText(/marcar pan como pendiente/i));
+
+            expect(api.patch).toHaveBeenCalledWith('/lists/1/items/2/toggle');
+            await waitFor(() => {
+                expect(screen.getByLabelText(/marcar pan como pendiente/i)).toBeDisabled();
+            });
+        });
+
+        it('clears animation state and shows error when API fails during toggle', async () => {
+            mockItemsSetup();
+            api.patch.mockRejectedValue(new Error('network error'));
+
+            renderPage();
+            await waitFor(() => screen.getByText('Agua'));
+
+            fireEvent.click(screen.getByLabelText(/marcar agua como comprado/i));
+
+            await waitFor(() => {
+                expect(screen.getByLabelText(/marcar agua como comprado/i)).not.toBeDisabled();
+            });
+        });
     });
 });

@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="CleanupDismissedSuggestions.php" path="\Console\Commands">
+    <totals>
+      <lines total="25" comments="0" code="25" executable="5" executed="5" percent="100.00"/>
+      <methods count="1" tested="1" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Console\Commands\CleanupDismissedSuggestions" start="8" executable="5" executed="5" crap="1">
+      <namespace name="App\Console\Commands"/>
+      <method name="handle" signature="handle(): int" start="14" end="23" crap="1" executable="5" executed="5" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="16">
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_runs_successfully_on_empty_table"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_deletes_only_expired_rows"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_scopes_correctly_across_users"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_reports_count_in_output"/>
+      </line>
+      <line nr="17">
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_runs_successfully_on_empty_table"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_deletes_only_expired_rows"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_scopes_correctly_across_users"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_reports_count_in_output"/>
+      </line>
+      <line nr="18">
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_runs_successfully_on_empty_table"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_deletes_only_expired_rows"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_scopes_correctly_across_users"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_reports_count_in_output"/>
+      </line>
+      <line nr="20">
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_runs_successfully_on_empty_table"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_deletes_only_expired_rows"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_scopes_correctly_across_users"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_reports_count_in_output"/>
+      </line>
+      <line nr="22">
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_runs_successfully_on_empty_table"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_deletes_only_expired_rows"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_scopes_correctly_across_users"/>
+        <covered by="Tests\Feature\CleanupDismissedSuggestionsCommandTest::test_reports_count_in_output"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Console\Commands</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\AiDismissedSuggestion</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Console\Command</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7"/>
+      <line no="8">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CleanupDismissedSuggestions</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EXTENDS">extends</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Command</token>
+      </line>
+      <line no="9">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="10">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PROTECTED">protected</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$signature</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'ai:cleanup-dismissed-suggestions'</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="11"/>
+      <line no="12">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PROTECTED">protected</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$description</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'Delete ai_dismissed_suggestions rows past their TTL. Prevents slow growth of the dismiss table over time.'</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="13"/>
+      <line no="14">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">handle</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+      </line>
+      <line no="15">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="16">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$deleted</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiDismissedSuggestion</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">query</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'dismissed_until'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'&lt;'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">now</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">delete</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="19"/>
+      <line no="20">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">info</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_DOUBLE_QUOTES">"</token>
+        <token name="T_ENCAPSED_AND_WHITESPACE">Deleted </token>
+        <token name="T_CURLY_OPEN">{</token>
+        <token name="T_VARIABLE">$deleted</token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_ENCAPSED_AND_WHITESPACE"> expired dismissed suggestion row(s).</token>
+        <token name="T_DOUBLE_QUOTES">"</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="21"/>
+      <line no="22">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">self</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">SUCCESS</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="24">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="25"/>
+    </source>
+  </file>
+</phpunit>

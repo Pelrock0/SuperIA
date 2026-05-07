@@ -1,0 +1,514 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="PromptSanitizer.php" path="\Support\Ai">
+    <totals>
+      <lines total="32" comments="0" code="32" executable="6" executed="6" percent="100.00"/>
+      <methods count="1" tested="1" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Support\Ai\PromptSanitizer" start="5" executable="6" executed="6" crap="2">
+      <namespace name="App\Support\Ai"/>
+      <method name="clean" signature="clean(string $input, ?int $maxChars): string" start="18" end="30" crap="2" executable="6" executed="6" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="20">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_claude_error_records_and_does_not_throw"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_circuit_breaker_opens_after_failures"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_happy_path_persists_row_and_tracks_usage"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_idempotent_via_unique_constraint"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_handles_claude_exception"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_sends_only_when_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_skips_when_not_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_rereads_opt_in_flag_to_close_race_window"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_preserves_normal_text"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_ignore_previous_instructions"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_you_are_a_new_assistant"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_disregard_previous"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_inst_tags"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_assistant_role_injection"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_special_tokens"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_code_fences"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_truncates_to_config_limit"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_handles_unicode"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_handles_empty_string"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_trims_whitespace"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_case_insensitive_injection_detection"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_happy_path_generates_and_dispatches"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_failure_isolation_one_user_fails_others_succeed"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_logs_metrics_on_done"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_idempotent_second_run_same_week_does_not_duplicate"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+      <line nr="21">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_claude_error_records_and_does_not_throw"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_circuit_breaker_opens_after_failures"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_happy_path_persists_row_and_tracks_usage"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_idempotent_via_unique_constraint"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_handles_claude_exception"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_sends_only_when_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_skips_when_not_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_rereads_opt_in_flag_to_close_race_window"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_preserves_normal_text"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_ignore_previous_instructions"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_you_are_a_new_assistant"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_disregard_previous"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_inst_tags"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_assistant_role_injection"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_special_tokens"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_code_fences"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_truncates_to_config_limit"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_handles_unicode"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_handles_empty_string"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_trims_whitespace"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_case_insensitive_injection_detection"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_happy_path_generates_and_dispatches"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_failure_isolation_one_user_fails_others_succeed"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_logs_metrics_on_done"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_idempotent_second_run_same_week_does_not_duplicate"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+      <line nr="22">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_claude_error_records_and_does_not_throw"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_circuit_breaker_opens_after_failures"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_happy_path_persists_row_and_tracks_usage"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_idempotent_via_unique_constraint"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_handles_claude_exception"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_sends_only_when_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_skips_when_not_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_rereads_opt_in_flag_to_close_race_window"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_preserves_normal_text"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_ignore_previous_instructions"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_you_are_a_new_assistant"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_disregard_previous"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_inst_tags"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_assistant_role_injection"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_special_tokens"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_code_fences"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_truncates_to_config_limit"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_handles_unicode"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_handles_empty_string"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_trims_whitespace"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_case_insensitive_injection_detection"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_happy_path_generates_and_dispatches"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_failure_isolation_one_user_fails_others_succeed"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_logs_metrics_on_done"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_idempotent_second_run_same_week_does_not_duplicate"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+      <line nr="25">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_claude_error_records_and_does_not_throw"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_circuit_breaker_opens_after_failures"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_happy_path_persists_row_and_tracks_usage"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_idempotent_via_unique_constraint"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_handles_claude_exception"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_sends_only_when_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_skips_when_not_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_rereads_opt_in_flag_to_close_race_window"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_preserves_normal_text"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_ignore_previous_instructions"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_you_are_a_new_assistant"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_disregard_previous"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_inst_tags"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_assistant_role_injection"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_special_tokens"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_code_fences"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_truncates_to_config_limit"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_handles_unicode"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_handles_empty_string"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_trims_whitespace"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_case_insensitive_injection_detection"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_happy_path_generates_and_dispatches"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_failure_isolation_one_user_fails_others_succeed"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_logs_metrics_on_done"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_idempotent_second_run_same_week_does_not_duplicate"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+      <line nr="27">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_claude_error_records_and_does_not_throw"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_circuit_breaker_opens_after_failures"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_happy_path_persists_row_and_tracks_usage"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_idempotent_via_unique_constraint"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_handles_claude_exception"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_sends_only_when_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_skips_when_not_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_rereads_opt_in_flag_to_close_race_window"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_preserves_normal_text"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_ignore_previous_instructions"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_you_are_a_new_assistant"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_disregard_previous"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_inst_tags"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_assistant_role_injection"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_special_tokens"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_code_fences"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_truncates_to_config_limit"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_handles_unicode"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_handles_empty_string"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_trims_whitespace"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_case_insensitive_injection_detection"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_happy_path_generates_and_dispatches"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_failure_isolation_one_user_fails_others_succeed"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_logs_metrics_on_done"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_idempotent_second_run_same_week_does_not_duplicate"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+      <line nr="29">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_claude_error_records_and_does_not_throw"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_circuit_breaker_opens_after_failures"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_happy_path_persists_row_and_tracks_usage"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_idempotent_via_unique_constraint"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_handles_claude_exception"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_sends_only_when_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_skips_when_not_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_rereads_opt_in_flag_to_close_race_window"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_preserves_normal_text"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_ignore_previous_instructions"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_you_are_a_new_assistant"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_disregard_previous"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_inst_tags"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_assistant_role_injection"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_special_tokens"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_strips_code_fences"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_truncates_to_config_limit"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_handles_unicode"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_handles_empty_string"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_trims_whitespace"/>
+        <covered by="Tests\Unit\Support\Ai\PromptSanitizerTest::test_clean_case_insensitive_injection_detection"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_happy_path_generates_and_dispatches"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_failure_isolation_one_user_fails_others_succeed"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_logs_metrics_on_done"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_idempotent_second_run_same_week_does_not_duplicate"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Support\Ai</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">PromptSanitizer</token>
+      </line>
+      <line no="6">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="7">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONST">const</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">INJECTION_PATTERNS</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="8">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'/ignore\s+(all\s+)?previous\s+instructions/i'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="9">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'/disregard\s+(all\s+)?(previous|prior)\s+(instructions|prompts)/i'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="10">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'/you\s+are\s+a\s+(new|different|helpful)\s+(assistant|model|bot)/i'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="11">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'/system\s*prompt/i'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="12">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'/&lt;\|.*?\|&gt;/'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="13">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'/```(system|prompt|instructions)/i'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="14">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'/\[INST\]|\[\/INST\]/i'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="15">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'/\bassistant\s*:/i'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="17"/>
+      <line no="18">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">clean</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$input</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$maxChars</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+      </line>
+      <line no="19">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="20">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$cleaned</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$input</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_FOREACH">foreach</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">self</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">INJECTION_PATTERNS</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_AS">as</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$pattern</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$cleaned</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">preg_replace</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$pattern</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">''</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$cleaned</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COALESCE">??</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">''</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="24"/>
+      <line no="25">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$cleaned</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">trim</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cleaned</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="26"/>
+      <line no="27">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$max</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$maxChars</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COALESCE">??</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INT_CAST">(int)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">config</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'ai.prompt.max_user_input_chars'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">200</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="28"/>
+      <line no="29">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">mb_substr</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cleaned</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$max</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="31">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="32"/>
+    </source>
+  </file>
+</phpunit>

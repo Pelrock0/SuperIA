@@ -1,0 +1,819 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="ValidateShareToken.php" path="\Http\Middleware">
+    <totals>
+      <lines total="54" comments="0" code="54" executable="22" executed="22" percent="100.00"/>
+      <methods count="3" tested="3" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Http\Middleware\ValidateShareToken" start="10" executable="22" executed="22" crap="8">
+      <namespace name="App\Http\Middleware"/>
+      <method name="__construct" signature="__construct(App\Services\ShareTokenService $shareTokens)" start="12" end="14" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="handle" signature="handle(Illuminate\Http\Request $request, Closure $next, ?string $requires): Symfony\Component\HttpFoundation\Response" start="16" end="42" crap="6" executable="15" executed="15" coverage="100"/>
+      <method name="revoked" signature="revoked(): Symfony\Component\HttpFoundation\Response" start="44" end="52" crap="1" executable="6" executed="6" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="14">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_when_token_missing_from_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_malformed_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_invalid_signature"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_attaches_context_on_valid_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_403_when_read_only_hits_write_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_allows_edit_on_write_route"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_requires_authentication"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_cannot_save_own_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_unauthenticated"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_invalid_signature"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_nonexistent_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_malformed_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_validates_input"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_404_when_item_from_other_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_requires_valid_uuid"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_cross_tenant_token_cannot_mutate_another_list"/>
+      </line>
+      <line nr="18">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_when_token_missing_from_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_malformed_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_invalid_signature"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_attaches_context_on_valid_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_403_when_read_only_hits_write_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_allows_edit_on_write_route"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_requires_authentication"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_cannot_save_own_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_unauthenticated"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_invalid_signature"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_nonexistent_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_malformed_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_validates_input"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_404_when_item_from_other_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_requires_valid_uuid"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_cross_tenant_token_cannot_mutate_another_list"/>
+      </line>
+      <line nr="20">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_when_token_missing_from_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_malformed_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_invalid_signature"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_attaches_context_on_valid_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_403_when_read_only_hits_write_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_allows_edit_on_write_route"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_requires_authentication"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_cannot_save_own_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_unauthenticated"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_invalid_signature"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_nonexistent_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_malformed_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_validates_input"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_404_when_item_from_other_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_requires_valid_uuid"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_cross_tenant_token_cannot_mutate_another_list"/>
+      </line>
+      <line nr="21">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_when_token_missing_from_route"/>
+      </line>
+      <line nr="24">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_malformed_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_invalid_signature"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_attaches_context_on_valid_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_403_when_read_only_hits_write_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_allows_edit_on_write_route"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_requires_authentication"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_cannot_save_own_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_unauthenticated"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_invalid_signature"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_nonexistent_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_malformed_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_validates_input"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_404_when_item_from_other_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_requires_valid_uuid"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_cross_tenant_token_cannot_mutate_another_list"/>
+      </line>
+      <line nr="26">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_malformed_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_invalid_signature"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_attaches_context_on_valid_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_403_when_read_only_hits_write_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_allows_edit_on_write_route"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_requires_authentication"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_cannot_save_own_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_unauthenticated"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_invalid_signature"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_nonexistent_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_malformed_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_validates_input"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_404_when_item_from_other_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_requires_valid_uuid"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_cross_tenant_token_cannot_mutate_another_list"/>
+      </line>
+      <line nr="27">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_malformed_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_invalid_signature"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_invalid_signature"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_nonexistent_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_malformed_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+      </line>
+      <line nr="30">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_attaches_context_on_valid_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_403_when_read_only_hits_write_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_allows_edit_on_write_route"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_requires_authentication"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_cannot_save_own_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_unauthenticated"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_validates_input"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_404_when_item_from_other_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_requires_valid_uuid"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_cross_tenant_token_cannot_mutate_another_list"/>
+      </line>
+      <line nr="31">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_403_when_read_only_hits_write_route"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_blocked_on_read_only_token"/>
+      </line>
+      <line nr="33">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_403_when_read_only_hits_write_route"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_blocked_on_read_only_token"/>
+      </line>
+      <line nr="36">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_403_when_read_only_hits_write_route"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_blocked_on_read_only_token"/>
+      </line>
+      <line nr="39">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_attaches_context_on_valid_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_allows_edit_on_write_route"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_requires_authentication"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_cannot_save_own_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_unauthenticated"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_validates_input"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_404_when_item_from_other_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_requires_valid_uuid"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_cross_tenant_token_cannot_mutate_another_list"/>
+      </line>
+      <line nr="41">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_attaches_context_on_valid_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_allows_edit_on_write_route"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_requires_authentication"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_cannot_save_own_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_unauthenticated"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_returns_list_data"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_validates_input"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_404_when_item_from_other_list"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_creates_producto_historial_with_owner_id"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_logs_anonymous_activity"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_succeeds_on_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_creates_session_for_edit_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_works_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_requires_valid_uuid"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_cross_tenant_token_cannot_mutate_another_list"/>
+      </line>
+      <line nr="46">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_when_token_missing_from_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_malformed_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_invalid_signature"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_invalid_signature"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_nonexistent_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_malformed_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+      </line>
+      <line nr="48">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_when_token_missing_from_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_malformed_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_invalid_signature"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_invalid_signature"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_nonexistent_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_malformed_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+      </line>
+      <line nr="51">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_when_token_missing_from_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_malformed_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_invalid_signature"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_invalid_signature"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_nonexistent_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_malformed_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+      </line>
+      <line nr="32">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_403_when_read_only_hits_write_route"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_blocked_on_read_only_token"/>
+      </line>
+      <line nr="34">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_403_when_read_only_hits_write_route"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_blocked_on_read_only_token"/>
+      </line>
+      <line nr="35">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_403_when_read_only_hits_write_route"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_store_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_update_item_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_toggle_blocked_on_read_only_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_destroy_item_blocked_on_read_only_token"/>
+      </line>
+      <line nr="47">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_when_token_missing_from_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_malformed_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_invalid_signature"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_invalid_signature"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_nonexistent_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_malformed_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+      </line>
+      <line nr="49">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_when_token_missing_from_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_malformed_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_invalid_signature"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_invalid_signature"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_nonexistent_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_malformed_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+      </line>
+      <line nr="50">
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_when_token_missing_from_route"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_malformed_token"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_invalid_signature"/>
+        <covered by="Tests\Unit\Middleware\ValidateShareTokenTest::test_returns_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_revoked_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_invalid_signature"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_nonexistent_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_show_410_on_malformed_token"/>
+        <covered by="Tests\Feature\SharedListControllerTest::test_heartbeat_410_on_revoked_token"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Http\Middleware</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Services\ShareTokenService</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Closure</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Http\Request</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Symfony\Component\HttpFoundation\Response</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9"/>
+      <line no="10">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ValidateShareToken</token>
+      </line>
+      <line no="11">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="12">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">__construct</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="13">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ShareTokenService</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$shareTokens</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="14">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="15"/>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">handle</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">Request</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Closure</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$next</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$requires</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Response</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$raw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">route</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'tokenParam'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="19"/>
+      <line no="20">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">is_string</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$raw</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_BOOLEAN_OR">||</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$raw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">''</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">revoked</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="23"/>
+      <line no="24">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">shareTokens</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">resolveFromUrlParam</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$raw</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="25"/>
+      <line no="26">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="27">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">revoked</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="29"/>
+      <line no="30">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$requires</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'write'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_BOOLEAN_AND">&amp;&amp;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">allowsWrite</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="31">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">response</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">json</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="32">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'error'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'code'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'READ_ONLY'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'message'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'Este enlace es de solo lectura.'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="36">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">403</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="37">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="38"/>
+      <line no="39">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">attributes</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">set</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'shareTokenContext'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="40"/>
+      <line no="41">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$next</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="42">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="43"/>
+      <line no="44">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">revoked</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Response</token>
+      </line>
+      <line no="45">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="46">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">response</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">json</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="47">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'error'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="48">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'code'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'LINK_UNAVAILABLE'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="49">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'message'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'Este enlace ya no esta activo.'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="50">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="51">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">410</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="52">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="53">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="54"/>
+    </source>
+  </file>
+</phpunit>

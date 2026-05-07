@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\WeeklySummaryStatus;
+use App\Http\Requests\SaveWeeklySummarySelectionRequest;
 use App\Models\WeeklySummary;
 use App\Services\WeeklySummaryService;
 use Illuminate\Http\JsonResponse;
@@ -24,7 +26,10 @@ class WeeklySummaryController extends Controller
             ->whereDate('week_start_date', $weekStart)
             ->first();
 
-        if ($summary === null || $summary->status->value === 'failed') {
+        if ($summary === null
+            || $summary->status === WeeklySummaryStatus::Failed
+            || $summary->status === WeeklySummaryStatus::Actioned
+        ) {
             return response()->json([
                 'error' => ['code' => 'NO_SUMMARY_THIS_WEEK', 'message' => 'No hay resumen para esta semana.'],
             ], 404);
@@ -56,22 +61,37 @@ class WeeklySummaryController extends Controller
         return response()->json(['data' => ['message' => 'Resumen descartado.']]);
     }
 
-    public function convertToList(WeeklySummary $summary): JsonResponse
+    public function save(SaveWeeklySummarySelectionRequest $request, WeeklySummary $summary): JsonResponse
     {
         $user = auth('api')->user();
-
-        if ($summary->user_id !== $user->id) {
-            abort(404);
-        }
+        $validated = $request->validated();
 
         try {
-            $list = $this->service->convertToList($user, $summary);
+            $result = $this->service->saveSelection(
+                $user,
+                $summary,
+                $validated['selected_indices'],
+                $validated['target_list_id'] ?? null,
+                $validated['new_list_name'] ?? null,
+            );
         } catch (OverflowException $e) {
             return response()->json([
                 'error' => ['code' => 'FREEMIUM_LIMIT', 'message' => $e->getMessage()],
             ], 403);
         }
 
-        return response()->json(['data' => $list], 201);
+        $resultSummary = $result['summary'];
+
+        return response()->json([
+            'data' => [
+                'list' => $result['list'],
+                'summary' => [
+                    'id' => $resultSummary->id,
+                    'status' => $resultSummary->status->value,
+                    'remaining_items' => $resultSummary->payload_json ?? [],
+                    'is_actioned' => $resultSummary->status === WeeklySummaryStatus::Actioned,
+                ],
+            ],
+        ], 200);
     }
 }

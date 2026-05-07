@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import api from '../lib/api';
 import AddItemInput from '../components/items/AddItemInput';
 import AddItemModal from '../components/items/AddItemModal';
-import ItemRow from '../components/items/ItemRow';
 import EditItemPanel from '../components/items/EditItemPanel';
 import UndoSnackbar from '../components/items/UndoSnackbar';
 import ShareListModal from '../components/collab/ShareListModal';
@@ -80,6 +79,10 @@ export default function ListDetailPage() {
     const [showConfirmPrice, setShowConfirmPrice] = useState(false);
     const [priceConfirmedThisSession, setPriceConfirmedThisSession] = useState(false);
     const undoTimerRef = useRef(null);
+    const [justCheckedItems, setJustCheckedItems] = useState(new Set());
+    const [exitingItems, setExitingItems] = useState(new Set());
+    const isMountedRef = useRef(true);
+    const pendingTimersRef = useRef({});
 
     const fetchList = useCallback(async () => {
         try {
@@ -97,12 +100,18 @@ export default function ListDetailPage() {
         }
     }, [id]);
 
+    // Unmount-only guard — must not fire on id changes or isMountedRef breaks cross-list navigation
+    useEffect(() => {
+        return () => {
+            isMountedRef.current = false;
+            if (undoTimerRef.current) clearTimeout(undoTimerRef.current);
+            Object.values(pendingTimersRef.current).forEach(clearTimeout);
+        };
+    }, []);
+
     useEffect(() => {
         fetchList();
         estimatePrices(id).then(setPriceEstimate).catch(() => {});
-        return () => {
-            if (undoTimerRef.current) clearTimeout(undoTimerRef.current);
-        };
     }, [fetchList, id]);
 
     const handleAdd = async (data) => {
@@ -137,9 +146,27 @@ export default function ListDetailPage() {
     };
 
     const handleToggle = async (itemId) => {
+        if (justCheckedItems.has(itemId)) return;
+        setJustCheckedItems((prev) => new Set([...prev, itemId]));
+
+        const timerPromise = new Promise((resolve) => {
+            pendingTimersRef.current[itemId] = setTimeout(resolve, 1500);
+        });
+
         try {
-            const response = await api.patch(`/lists/${id}/items/${itemId}/toggle`);
+            const [response] = await Promise.all([
+                api.patch(`/lists/${id}/items/${itemId}/toggle`),
+                timerPromise,
+            ]);
             const newCounters = response.data.data.counters;
+            delete pendingTimersRef.current[itemId];
+            if (!isMountedRef.current) return;
+            setJustCheckedItems((prev) => { const s = new Set(prev); s.delete(itemId); return s; });
+            setExitingItems((prev) => new Set([...prev, itemId]));
+
+            await new Promise((r) => setTimeout(r, 300));
+            if (!isMountedRef.current) return;
+            setExitingItems((prev) => { const s = new Set(prev); s.delete(itemId); return s; });
             setCounters(newCounters);
             await fetchList();
 
@@ -152,6 +179,10 @@ export default function ListDetailPage() {
                 setShowConfirmPrice(true);
             }
         } catch {
+            clearTimeout(pendingTimersRef.current[itemId]);
+            delete pendingTimersRef.current[itemId];
+            if (!isMountedRef.current) return;
+            setJustCheckedItems((prev) => { const s = new Set(prev); s.delete(itemId); return s; });
             setError('Error al actualizar el item.');
         }
     };
@@ -317,123 +348,136 @@ export default function ListDetailPage() {
         : 0;
 
     /* ─── Render helpers ─── */
-    const renderItemCard = (item, isPurchased) => (
-        <div
-            key={item.id}
-            data-testid="item-row"
-            style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
-                padding: '14px 16px',
-                background: T.surfaceContainerLowest,
-                borderRadius: 16,
-                boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
-                marginBottom: 8,
-                opacity: isPurchased ? 0.6 : 1,
-                transition: 'opacity 0.2s',
-            }}
-        >
-            {/* Checkbox */}
-            <button
-                onClick={() => handleToggle(item.id)}
-                aria-label={`Marcar ${item.name} como ${item.is_purchased ? 'pendiente' : 'comprado'}`}
+    const renderItemCard = (item, isPurchased) => {
+        const isAnimating = justCheckedItems.has(item.id);
+        const isExiting = exitingItems.has(item.id);
+        const isCheckingAnim = (isAnimating || isExiting) && !isPurchased;
+        const showStrikethrough = isCheckingAnim || (isPurchased && !isAnimating && !isExiting);
+        return (
+            <div
+                key={item.id}
+                data-testid="item-row"
                 style={{
-                    width: 24,
-                    height: 24,
-                    minWidth: 24,
-                    borderRadius: 6,
-                    border: isPurchased ? 'none' : `2px solid ${T.outlineVariant}`,
-                    background: isPurchased ? T.onTertiaryContainer : 'transparent',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    padding: 0,
-                    transition: 'background 0.15s, border 0.15s',
+                    gap: 12,
+                    paddingTop: isExiting ? 0 : 14,
+                    paddingBottom: isExiting ? 0 : 14,
+                    paddingLeft: 16,
+                    paddingRight: 16,
+                    background: isCheckingAnim ? '#dcfce7' : (isPurchased ? T.surfaceContainerLow : T.surfaceContainerLowest),
+                    borderRadius: 16,
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+                    marginBottom: isExiting ? 0 : 8,
+                    opacity: isExiting ? 0 : (isAnimating ? 1 : (isPurchased ? 0.6 : 1)),
+                    transform: isExiting ? 'translateY(10px)' : 'none',
+                    maxHeight: isExiting ? 0 : 200,
+                    overflow: 'hidden',
+                    transition: 'background 0.3s, opacity 0.3s, transform 0.3s, max-height 0.3s, margin 0.3s, padding 0.3s',
                 }}
             >
-                {isPurchased && (
-                    <span className="material-symbols-outlined" style={{ fontSize: 16, color: '#fff', fontWeight: 600 }}>
-                        check
-                    </span>
-                )}
-            </button>
-
-            {/* Name & price — tappable to edit */}
-            <button
-                onClick={() => setEditingItem(item)}
-                style={{
-                    flex: 1,
-                    minWidth: 0,
-                    background: 'none',
-                    border: 'none',
-                    padding: 0,
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    fontFamily: "'Inter', sans-serif",
-                }}
-            >
-                <span
+                {/* Checkbox */}
+                <button
+                    onClick={() => handleToggle(item.id)}
+                    aria-label={`Marcar ${item.name} como ${item.is_purchased ? 'pendiente' : 'comprado'}`}
+                    disabled={isAnimating || isExiting}
                     style={{
-                        display: 'block',
-                        fontSize: 15,
-                        fontWeight: 500,
-                        color: isPurchased ? T.onSurfaceVariant : T.onSurface,
-                        textDecoration: isPurchased ? 'line-through' : 'none',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
+                        width: 24,
+                        height: 24,
+                        minWidth: 24,
+                        borderRadius: 6,
+                        border: isPurchased ? 'none' : `2px solid ${T.outlineVariant}`,
+                        background: isPurchased ? T.onTertiaryContainer : 'transparent',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: isAnimating ? 'default' : 'pointer',
+                        padding: 0,
+                        transition: 'background 0.15s, border 0.15s',
                     }}
                 >
-                    {item.name}
-                </span>
-                {item.estimated_price != null && (
-                    <span style={{ fontSize: 12, color: T.outline }}>
-                        ~{item.estimated_price}€
-                    </span>
-                )}
-            </button>
+                    {isPurchased && (
+                        <span className="material-symbols-outlined" style={{ fontSize: 16, color: '#fff', fontWeight: 600 }}>
+                            check
+                        </span>
+                    )}
+                </button>
 
-            {/* Quantity badge */}
-            {item.quantity != null && (
-                <span
+                {/* Name & price — tappable to edit */}
+                <button
+                    onClick={() => setEditingItem(item)}
                     style={{
-                        background: T.surfaceContainerLow,
-                        borderRadius: 8,
-                        padding: '4px 10px',
-                        fontSize: 12,
-                        fontWeight: 700,
-                        color: T.onSurfaceVariant,
-                        whiteSpace: 'nowrap',
+                        flex: 1,
+                        minWidth: 0,
+                        background: 'none',
+                        border: 'none',
+                        padding: 0,
+                        textAlign: 'left',
+                        cursor: 'pointer',
+                        fontFamily: "'Inter', sans-serif",
                     }}
                 >
-                    {item.quantity}{item.unit ? ` ${UNIT_LABELS[item.unit] || item.unit}` : ''}
-                </span>
-            )}
+                    <span
+                        style={{
+                            display: 'block',
+                            fontSize: 15,
+                            fontWeight: 500,
+                            color: isPurchased ? T.onSurfaceVariant : T.onSurface,
+                            textDecoration: showStrikethrough ? 'line-through' : 'none',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                        }}
+                    >
+                        {item.name}
+                    </span>
+                    {item.estimated_price != null && (
+                        <span style={{ fontSize: 12, color: T.outline }}>
+                            ~{item.estimated_price}€
+                        </span>
+                    )}
+                </button>
 
-            {/* Delete */}
-            <button
-                onClick={() => handleDelete(item)}
-                aria-label={`Eliminar ${item.name}`}
-                style={{
-                    background: 'none',
-                    border: 'none',
-                    padding: 4,
-                    cursor: 'pointer',
-                    color: T.outlineVariant,
-                    display: 'flex',
-                    alignItems: 'center',
-                    opacity: 0.5,
-                    transition: 'opacity 0.15s, color 0.15s',
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.color = '#ef4444'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.5; e.currentTarget.style.color = T.outlineVariant; }}
-            >
-                <span className="material-symbols-outlined" style={{ fontSize: 20 }}>close</span>
-            </button>
-        </div>
-    );
+                {/* Quantity badge */}
+                {item.quantity != null && (
+                    <span
+                        style={{
+                            background: T.surfaceContainerLow,
+                            borderRadius: 8,
+                            padding: '4px 10px',
+                            fontSize: 12,
+                            fontWeight: 700,
+                            color: T.onSurfaceVariant,
+                            whiteSpace: 'nowrap',
+                        }}
+                    >
+                        {item.quantity}{item.unit ? ` ${UNIT_LABELS[item.unit] || item.unit}` : ''}
+                    </span>
+                )}
+
+                {/* Delete */}
+                <button
+                    onClick={() => handleDelete(item)}
+                    aria-label={`Eliminar ${item.name}`}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        padding: 4,
+                        cursor: 'pointer',
+                        color: T.outlineVariant,
+                        display: 'flex',
+                        alignItems: 'center',
+                        opacity: 0.5,
+                        transition: 'opacity 0.15s, color 0.15s',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.color = '#ef4444'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.5; e.currentTarget.style.color = T.outlineVariant; }}
+                >
+                    <span className="material-symbols-outlined" style={{ fontSize: 20 }}>close</span>
+                </button>
+            </div>
+        );
+    };
 
     return (
         <div

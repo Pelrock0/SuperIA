@@ -128,7 +128,7 @@ Route::middleware(['auth:api', \App\Http\Middleware\JwtVersionCheck::class])->gr
     // Weekly summary (Epic 5C - HU-505)
     Route::get('/weekly-summary/latest', [WeeklySummaryController::class, 'latest']);
     Route::post('/weekly-summary/dismiss', [WeeklySummaryController::class, 'dismiss']);
-    Route::post('/weekly-summary/{summary}/convert-to-list', [WeeklySummaryController::class, 'convertToList']);
+    Route::post('/weekly-summary/{summary}/save', [WeeklySummaryController::class, 'save']);
     Route::post('/settings/weekly-summary-email', [WeeklySummaryEmailController::class, 'update']);
 
     // List generation (Epic 6 - HU-601 + HU-602)

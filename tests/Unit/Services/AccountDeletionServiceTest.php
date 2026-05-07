@@ -4,6 +4,7 @@ namespace Tests\Unit\Services;
 
 use App\Mail\AccountDeletionMail;
 use App\Models\AccountDeletionLog;
+use App\Models\ShoppingList;
 use App\Models\User;
 use App\Services\AccountDeletionService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -123,5 +124,27 @@ class AccountDeletionServiceTest extends TestCase
         $count = $this->service->hardDeleteExpiredAccounts();
 
         $this->assertEquals(0, $count);
+    }
+
+    public function test_initiate_delete_removes_shopping_lists(): void
+    {
+        Mail::fake();
+        $user = User::factory()->createOne(['password' => 'Password1']);
+        ShoppingList::factory()->count(2)->create(['user_id' => $user->id]);
+
+        $this->service->initiateDelete($user, 'Password1');
+
+        $this->assertDatabaseMissing('shopping_lists', ['user_id' => $user->id]);
+    }
+
+    public function test_initiate_delete_schedules_hard_delete_in_exactly_30_days(): void
+    {
+        Mail::fake();
+        $user = User::factory()->createOne(['password' => 'Password1']);
+
+        $this->service->initiateDelete($user, 'Password1');
+
+        $user->refresh();
+        $this->assertSame(now()->addDays(30)->toDateString(), $user->scheduled_hard_delete_at->toDateString());
     }
 }

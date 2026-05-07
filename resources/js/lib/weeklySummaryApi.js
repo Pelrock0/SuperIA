@@ -9,9 +9,15 @@ export async function dismissSummary() {
     await api.post('/weekly-summary/dismiss');
 }
 
-export async function convertSummaryToList(summaryId) {
-    const response = await api.post(`/weekly-summary/${summaryId}/convert-to-list`);
+export async function saveSummarySelection(summaryId, payload) {
+    const response = await api.post(`/weekly-summary/${summaryId}/save`, payload);
     return response.data.data;
+}
+
+export async function fetchActiveLists() {
+    const response = await api.get('/lists');
+    const data = response.data.data;
+    return Array.isArray(data?.active) ? data.active : [];
 }
 
 export async function updateWeeklySummaryEmail(enabled) {

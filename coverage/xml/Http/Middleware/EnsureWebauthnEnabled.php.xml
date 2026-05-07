@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="EnsureWebauthnEnabled.php" path="\Http\Middleware">
+    <totals>
+      <lines total="20" comments="0" code="20" executable="3" executed="3" percent="100.00"/>
+      <methods count="1" tested="1" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Http\Middleware\EnsureWebauthnEnabled" start="9" executable="3" executed="3" crap="2">
+      <namespace name="App\Http\Middleware"/>
+      <method name="handle" signature="handle(Illuminate\Http\Request $request, Closure $next): Symfony\Component\HttpFoundation\Response" start="11" end="18" crap="2" executable="3" executed="3" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="13">
+        <covered by="Tests\Feature\WebauthnTest::test_feature_flag_disabled_returns_404_for_all_endpoints"/>
+        <covered by="Tests\Feature\WebauthnTest::test_user_cannot_rename_another_users_credential"/>
+        <covered by="Tests\Feature\WebauthnTest::test_user_cannot_delete_another_users_credential"/>
+        <covered by="Tests\Feature\WebauthnTest::test_list_credentials_returns_user_credentials_only"/>
+        <covered by="Tests\Feature\WebauthnTest::test_list_credentials_empty_returns_empty_array"/>
+        <covered by="Tests\Feature\WebauthnTest::test_user_can_rename_own_credential"/>
+        <covered by="Tests\Feature\WebauthnTest::test_rename_rejects_empty_name"/>
+        <covered by="Tests\Feature\WebauthnTest::test_rename_rejects_name_over_50_chars"/>
+        <covered by="Tests\Feature\WebauthnTest::test_user_can_delete_own_credential"/>
+        <covered by="Tests\Feature\WebauthnTest::test_begin_registration_returns_options"/>
+        <covered by="Tests\Feature\WebauthnTest::test_begin_registration_excludes_existing_credentials"/>
+        <covered by="Tests\Feature\WebauthnTest::test_begin_authentication_with_email_returns_allow_credentials"/>
+        <covered by="Tests\Feature\WebauthnTest::test_begin_authentication_without_email_returns_empty_allow_credentials"/>
+        <covered by="Tests\Feature\WebauthnTest::test_begin_authentication_unknown_email_returns_empty_allow_credentials"/>
+        <covered by="Tests\Feature\WebauthnTest::test_begin_authentication_rejects_invalid_email_format"/>
+        <covered by="Tests\Feature\WebauthnTest::test_complete_registration_requires_handle_and_credential"/>
+        <covered by="Tests\Feature\WebauthnTest::test_complete_registration_rejects_invalid_name"/>
+        <covered by="Tests\Feature\WebauthnTest::test_complete_authentication_rejects_invalid_handle"/>
+        <covered by="Tests\Feature\WebauthnTest::test_complete_registration_with_expired_handle_fails"/>
+        <covered by="Tests\Feature\WebauthnTest::test_complete_authentication_with_expired_handle_fails"/>
+      </line>
+      <line nr="14">
+        <covered by="Tests\Feature\WebauthnTest::test_feature_flag_disabled_returns_404_for_all_endpoints"/>
+      </line>
+      <line nr="17">
+        <covered by="Tests\Feature\WebauthnTest::test_user_cannot_rename_another_users_credential"/>
+        <covered by="Tests\Feature\WebauthnTest::test_user_cannot_delete_another_users_credential"/>
+        <covered by="Tests\Feature\WebauthnTest::test_list_credentials_returns_user_credentials_only"/>
+        <covered by="Tests\Feature\WebauthnTest::test_list_credentials_empty_returns_empty_array"/>
+        <covered by="Tests\Feature\WebauthnTest::test_user_can_rename_own_credential"/>
+        <covered by="Tests\Feature\WebauthnTest::test_rename_rejects_empty_name"/>
+        <covered by="Tests\Feature\WebauthnTest::test_rename_rejects_name_over_50_chars"/>
+        <covered by="Tests\Feature\WebauthnTest::test_user_can_delete_own_credential"/>
+        <covered by="Tests\Feature\WebauthnTest::test_begin_registration_returns_options"/>
+        <covered by="Tests\Feature\WebauthnTest::test_begin_registration_excludes_existing_credentials"/>
+        <covered by="Tests\Feature\WebauthnTest::test_begin_authentication_with_email_returns_allow_credentials"/>
+        <covered by="Tests\Feature\WebauthnTest::test_begin_authentication_without_email_returns_empty_allow_credentials"/>
+        <covered by="Tests\Feature\WebauthnTest::test_begin_authentication_unknown_email_returns_empty_allow_credentials"/>
+        <covered by="Tests\Feature\WebauthnTest::test_begin_authentication_rejects_invalid_email_format"/>
+        <covered by="Tests\Feature\WebauthnTest::test_complete_registration_requires_handle_and_credential"/>
+        <covered by="Tests\Feature\WebauthnTest::test_complete_registration_rejects_invalid_name"/>
+        <covered by="Tests\Feature\WebauthnTest::test_complete_authentication_rejects_invalid_handle"/>
+        <covered by="Tests\Feature\WebauthnTest::test_complete_registration_with_expired_handle_fails"/>
+        <covered by="Tests\Feature\WebauthnTest::test_complete_authentication_with_expired_handle_fails"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Http\Middleware</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Closure</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Http\Request</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Symfony\Component\HttpFoundation\Response</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8"/>
+      <line no="9">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">EnsureWebauthnEnabled</token>
+      </line>
+      <line no="10">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="11">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">handle</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">Request</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Closure</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$next</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Response</token>
+      </line>
+      <line no="12">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="13">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">config</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'webauthn.enabled'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="14">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">abort</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_LNUMBER">404</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="15">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="16"/>
+      <line no="17">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$next</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="19">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="20"/>
+    </source>
+  </file>
+</phpunit>

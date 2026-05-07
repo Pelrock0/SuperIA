@@ -407,4 +407,57 @@ class ProductSuggestionServiceTest extends TestCase
         );
         $this->assertCount(1, $manteMatches);
     }
+
+    public function test_empty_query_returns_empty_even_with_catalog_entries(): void
+    {
+        $user = User::factory()->createOne();
+        ProductoCatalogo::factory()->createOne(['nombre' => 'Leche entera']);
+        ProductoCatalogo::factory()->createOne(['nombre' => 'Pan integral']);
+
+        $result = $this->service->suggest($user, '', includeAi: false);
+
+        $this->assertSame([], $result['suggestions']);
+    }
+
+    public function test_circuit_open_result_contains_suggestions_key_as_empty_array(): void
+    {
+        $user = User::factory()->createOne();
+        $this->fakeClaude->shouldThrow = new ClaudeException('x');
+
+        for ($i = 0; $i < 3; $i++) {
+            $this->service->suggest($user, 'xy', includeAi: true);
+        }
+
+        $this->fakeClaude->shouldThrow = null;
+        $result = $this->service->suggest($user, 'xy', includeAi: true);
+
+        $this->assertArrayHasKey('suggestions', $result);
+        $this->assertSame([], $result['suggestions']);
+    }
+
+    public function test_claude_error_returns_false_for_limit_reached(): void
+    {
+        $user = User::factory()->createOne();
+        $this->fakeClaude->shouldThrow = new ClaudeException('boom');
+
+        $result = $this->service->suggest($user, 'xy', includeAi: true);
+
+        $this->assertFalse($result['ai_limit_reached']);
+        $this->assertArrayHasKey('suggestions', $result);
+    }
+
+    public function test_dedup_continues_past_duplicate_to_add_subsequent_item(): void
+    {
+        $user = User::factory()->createOne();
+        $this->seedHistory($user, 'Leche entera');
+        ProductoCatalogo::factory()->createOne(['nombre' => 'Leche de soja']);
+        ProductoCatalogo::factory()->createOne(['nombre' => 'Leche entera']);
+        ProductoCatalogo::factory()->createOne(['nombre' => 'Leche sin lactosa']);
+
+        $result = $this->service->suggest($user, 'le', includeAi: false);
+
+        $names = collect($result['suggestions'])->pluck('name')->all();
+        $this->assertContains('Leche sin lactosa', $names);
+        $this->assertContains('Leche entera', $names);
+    }
 }

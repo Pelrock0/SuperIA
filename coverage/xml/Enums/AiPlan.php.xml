@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="AiPlan.php" path="\Enums">
+    <totals>
+      <lines total="18" comments="0" code="18" executable="4" executed="4" percent="100.00"/>
+      <methods count="1" tested="1" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="0" tested="1" percent="0"/>
+      <traits count="1" tested="0" percent="0.00"/>
+    </totals>
+    <trait name="App\Enums\AiPlan" start="5" executable="4" executed="4" crap="3">
+      <namespace name="App\Enums"/>
+      <method name="dailySuggestionQuota" signature="dailySuggestionQuota(): ?int" start="10" end="16" crap="3" executable="4" executed="4" coverage="100"/>
+    </trait>
+    <coverage>
+      <line nr="12">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_user_quota_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_shared_quota_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_user_quota_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_claude_error_records_and_does_not_throw"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_circuit_breaker_opens_after_failures"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_happy_path_persists_row_and_tracks_usage"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_idempotent_via_unique_constraint"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_user_quota_exceeded"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_handles_claude_exception"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_sends_only_when_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_skips_when_not_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_rereads_opt_in_flag_to_close_race_window"/>
+        <covered by="Tests\Unit\Support\Ai\AiUsageTrackerTest::test_can_use_when_under_quota"/>
+        <covered by="Tests\Unit\Support\Ai\AiUsageTrackerTest::test_cannot_use_when_at_quota"/>
+        <covered by="Tests\Unit\Support\Ai\AiUsageTrackerTest::test_quota_is_shared_across_all_operations"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_ai_daily_limit_override_respected"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_ai_daily_limit_override_null_uses_default"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_happy_path_generates_and_dispatches"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_failure_isolation_one_user_fails_others_succeed"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_logs_metrics_on_done"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_idempotent_second_run_same_week_does_not_duplicate"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_user_quota_exhausted"/>
+      </line>
+      <line nr="13">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_user_quota_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_shared_quota_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_user_quota_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_claude_error_records_and_does_not_throw"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_circuit_breaker_opens_after_failures"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_happy_path_persists_row_and_tracks_usage"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_idempotent_via_unique_constraint"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_user_quota_exceeded"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_handles_claude_exception"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_sends_only_when_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_skips_when_not_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_rereads_opt_in_flag_to_close_race_window"/>
+        <covered by="Tests\Unit\Support\Ai\AiUsageTrackerTest::test_can_use_when_under_quota"/>
+        <covered by="Tests\Unit\Support\Ai\AiUsageTrackerTest::test_cannot_use_when_at_quota"/>
+        <covered by="Tests\Unit\Support\Ai\AiUsageTrackerTest::test_quota_is_shared_across_all_operations"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_ai_daily_limit_override_respected"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_ai_daily_limit_override_null_uses_default"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_happy_path_generates_and_dispatches"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_failure_isolation_one_user_fails_others_succeed"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_logs_metrics_on_done"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_idempotent_second_run_same_week_does_not_duplicate"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_user_quota_exhausted"/>
+      </line>
+      <line nr="14">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_user_quota_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_shared_quota_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_user_quota_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_claude_error_records_and_does_not_throw"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_circuit_breaker_opens_after_failures"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_happy_path_persists_row_and_tracks_usage"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_idempotent_via_unique_constraint"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_user_quota_exceeded"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_handles_claude_exception"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_sends_only_when_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_skips_when_not_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_rereads_opt_in_flag_to_close_race_window"/>
+        <covered by="Tests\Unit\Support\Ai\AiUsageTrackerTest::test_can_use_when_under_quota"/>
+        <covered by="Tests\Unit\Support\Ai\AiUsageTrackerTest::test_cannot_use_when_at_quota"/>
+        <covered by="Tests\Unit\Support\Ai\AiUsageTrackerTest::test_quota_is_shared_across_all_operations"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_ai_daily_limit_override_respected"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_ai_daily_limit_override_null_uses_default"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_happy_path_generates_and_dispatches"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_failure_isolation_one_user_fails_others_succeed"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_logs_metrics_on_done"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_idempotent_second_run_same_week_does_not_duplicate"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_user_quota_exhausted"/>
+      </line>
+      <line nr="15">
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_when_less_than_5_completed_lists"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_fallback_excludes_items_in_current_list"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_user_quota_blocks_ai_fallback"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_claude_error_returns_empty_without_crash"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_pii_never_leaves_via_claude_call"/>
+        <covered by="Tests\Unit\Services\ComplementarySuggestionServiceTest::test_sanitizes_product_name_before_claude_call"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_happy_path"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_sanitizes_description"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_uses_500_char_limit"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_records_usage"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_shared_quota_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_blocks_when_per_operation_limit_exceeded"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_retries_silently_on_first_claude_failure"/>
+        <covered by="Tests\Unit\Services\ListGenerationServiceTest::test_generate_throws_after_double_failure"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_user_quota_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_claude_error_records_and_does_not_throw"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_circuit_breaker_opens_after_failures"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_happy_path_persists_row_and_tracks_usage"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_idempotent_via_unique_constraint"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_blocks_when_user_quota_exceeded"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_generate_for_user_handles_claude_exception"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_sends_only_when_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_skips_when_not_opted_in"/>
+        <covered by="Tests\Unit\Services\WeeklySummaryServiceTest::test_dispatch_email_rereads_opt_in_flag_to_close_race_window"/>
+        <covered by="Tests\Unit\Support\Ai\AiUsageTrackerTest::test_can_use_when_under_quota"/>
+        <covered by="Tests\Unit\Support\Ai\AiUsageTrackerTest::test_cannot_use_when_at_quota"/>
+        <covered by="Tests\Unit\Support\Ai\AiUsageTrackerTest::test_quota_is_shared_across_all_operations"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_ai_daily_limit_override_respected"/>
+        <covered by="Tests\Feature\AdminDeactivateUserTest::test_ai_daily_limit_override_null_uses_default"/>
+        <covered by="Tests\Feature\ComplementControllerTest::test_ai_fallback_when_new_user"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_happy_path_generates_and_dispatches"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_failure_isolation_one_user_fails_others_succeed"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_logs_metrics_on_done"/>
+        <covered by="Tests\Feature\DispatchWeeklySummaryCommandTest::test_idempotent_second_run_same_week_does_not_duplicate"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_happy_path"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_defaults_people_to_config"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_429_on_per_operation_limit"/>
+        <covered by="Tests\Feature\ListGenerationControllerTest::test_generate_returns_500_on_claude_failure"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_user_quota_exhausted"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Enums</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_ENUM">enum</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">AiPlan</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+      </line>
+      <line no="6">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="7">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CASE">case</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Free</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'free'</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CASE">case</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Premium</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'premium'</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9"/>
+      <line no="10">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">dailySuggestionQuota</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">int</token>
+      </line>
+      <line no="11">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="12">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_MATCH">match</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="13">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">self</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Free</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INT_CAST">(int)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">config</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'ai.rate_limits.free.suggestions_per_day'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="14">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">self</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Premium</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COMMENT">// unlimited</token>
+      </line>
+      <line no="15">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="17">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="18"/>
+    </source>
+  </file>
+</phpunit>

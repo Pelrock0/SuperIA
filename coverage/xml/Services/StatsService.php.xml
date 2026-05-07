@@ -1,0 +1,1063 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="StatsService.php" path="\Services">
+    <totals>
+      <lines total="90" comments="0" code="90" executable="56" executed="55" percent="98.21"/>
+      <methods count="4" tested="3" percent="75.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="0" percent="0.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Services\StatsService" start="10" executable="56" executed="55" crap="8">
+      <namespace name="App\Services"/>
+      <method name="getStats" signature="getStats(App\Models\User $user): array" start="12" end="27" crap="4" executable="11" executed="11" coverage="100"/>
+      <method name="monthlySpend" signature="monthlySpend(App\Models\User $user): array" start="29" end="49" crap="1" executable="17" executed="17" coverage="100"/>
+      <method name="topCategories" signature="topCategories(App\Models\User $user): array" start="51" end="75" crap="2.00" executable="19" executed="18" coverage="94.736842105263"/>
+      <method name="topProducts" signature="topProducts(App\Models\User $user): array" start="77" end="88" crap="1" executable="9" executed="9" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="14">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_not_enough_data"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_scoped_to_user"/>
+      </line>
+      <line nr="15">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_not_enough_data"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_scoped_to_user"/>
+      </line>
+      <line nr="16">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_not_enough_data"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_scoped_to_user"/>
+      </line>
+      <line nr="18">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_not_enough_data"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_scoped_to_user"/>
+      </line>
+      <line nr="21">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_not_enough_data"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_scoped_to_user"/>
+      </line>
+      <line nr="22">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_not_enough_data"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_scoped_to_user"/>
+      </line>
+      <line nr="23">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_not_enough_data"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_scoped_to_user"/>
+      </line>
+      <line nr="24">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_not_enough_data"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_scoped_to_user"/>
+      </line>
+      <line nr="25">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_not_enough_data"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_scoped_to_user"/>
+      </line>
+      <line nr="31">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="33">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="34">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="35">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="36">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="37">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="38">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="40">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="41">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="42">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="43">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="44">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="45">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="46">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="47">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="48">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="53">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="54">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="55">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="57">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="61">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="62">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="63">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="64">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="65">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="66">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="67">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="68">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="69">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="70">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="71">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="72">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="73">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="74">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="79">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="80">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="81">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="82">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="83">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="84">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="85">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="86">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="87">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+      <line nr="20">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_not_enough_data"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_scoped_to_user"/>
+      </line>
+      <line nr="26">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_not_enough_data"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_scoped_to_user"/>
+      </line>
+      <line nr="39">
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_returns_data_when_enough_lists"/>
+        <covered by="Tests\Feature\StatsControllerTest::test_stats_top_products_returns_up_to_10"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Services</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Enums\ListStatus</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\User</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Support\Carbon</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Support\Facades\DB</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9"/>
+      <line no="10">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">StatsService</token>
+      </line>
+      <line no="11">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="12">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">getStats</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="13">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="14">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$totalCompleted</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">shoppingLists</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="15">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'status'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListStatus</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Archived</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="16">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">count</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="17"/>
+      <line no="18">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$hasEnoughData</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$totalCompleted</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_GREATER_OR_EQUAL">&gt;=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">3</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="19"/>
+      <line no="20">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'total_lists_completed'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$totalCompleted</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'has_enough_data'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$hasEnoughData</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'monthly_spend'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$hasEnoughData</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">monthlySpend</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'top_categories'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$hasEnoughData</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">topCategories</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'top_products'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$hasEnoughData</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">topProducts</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="26">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="27">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="28"/>
+      <line no="29">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">monthlySpend</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="31">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$sixMonthsAgo</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Carbon</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">now</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">subMonths</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_LNUMBER">6</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">startOfMonth</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="32"/>
+      <line no="33">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">table</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'shopping_lists as sl'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">join</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">raw</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'(SELECT shopping_list_id, SUM(estimated_price) as total FROM list_items WHERE estimated_price IS NOT NULL GROUP BY shopping_list_id) as item_totals'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="36">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'item_totals.shopping_list_id'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="37">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'='</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="38">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'sl.id'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="39">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="40">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'sl.user_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="41">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'sl.status'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListStatus</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">Archived</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">value</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="42">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'sl.updated_at'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'&gt;='</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$sixMonthsAgo</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="43">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">selectRaw</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">"DATE_FORMAT(sl.updated_at, '%Y-%m') as month, ROUND(SUM(item_totals.total), 2) as total"</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="44">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">groupBy</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'month'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="45">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">orderBy</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'month'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="46">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">get</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="47">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">map</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_FN">fn</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$row</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'month'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$row</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">month</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'total'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_CAST">(float)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$row</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">total</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="48">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">all</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="49">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="50"/>
+      <line no="51">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">topCategories</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="52">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="53">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$total</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">table</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'producto_historial'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="54">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="55">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">count</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="56"/>
+      <line no="57">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$total</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="58">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="59">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="60"/>
+      <line no="61">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">table</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'producto_historial'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="62">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="63">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">whereNotNull</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'categoria'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="64">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">selectRaw</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'categoria as category, COUNT(*) as count'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="65">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">groupBy</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'categoria'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="66">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">orderByDesc</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'count'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="67">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">limit</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_LNUMBER">5</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="68">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">get</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="69">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">map</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_FN">fn</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$row</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="70">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'category'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$row</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">category</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="71">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'count'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INT_CAST">(int)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$row</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">count</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="72">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'percentage'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">round</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_INT_CAST">(int)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$row</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">count</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DIV">/</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$total</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_MULT">*</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">100</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">1</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="73">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="74">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">all</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="75">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="76"/>
+      <line no="77">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">topProducts</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="78">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="79">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">table</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'producto_historial'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="80">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="81">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">selectRaw</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'producto_nombre as name, COUNT(*) as count'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="82">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">groupBy</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'producto_nombre'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="83">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">orderByDesc</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'count'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="84">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">limit</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_LNUMBER">10</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="85">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">get</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="86">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">map</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_FN">fn</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$row</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'name'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$row</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">name</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'count'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INT_CAST">(int)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$row</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">count</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="87">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">all</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="88">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="89">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="90"/>
+    </source>
+  </file>
+</phpunit>

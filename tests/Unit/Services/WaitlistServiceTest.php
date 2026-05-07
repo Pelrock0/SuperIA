@@ -214,6 +214,51 @@ class WaitlistServiceTest extends TestCase
         $this->assertEquals('Te has registrado en la lista de espera', $result['message']);
     }
 
+    public function test_invitation_expires_in_exactly_7_days(): void
+    {
+        Mail::fake();
+        $entry = WaitlistEntry::factory()->createOne(['status' => 'pending']);
+
+        $this->service->invite($entry);
+
+        $entry->refresh();
+        $this->assertSame(
+            now()->addDays(7)->toDateString(),
+            $entry->invitation_expires_at->toDateString()
+        );
+    }
+
+    public function test_invitation_token_differs_on_repeated_invites(): void
+    {
+        Mail::fake();
+
+        $entry1 = WaitlistEntry::factory()->createOne(['status' => 'pending']);
+        $entry2 = WaitlistEntry::factory()->createOne(['status' => 'pending', 'email' => $entry1->email . '.other']);
+
+        $this->service->invite($entry1);
+        $this->service->invite($entry2);
+
+        $this->assertNotSame($entry1->refresh()->invitation_token, $entry2->refresh()->invitation_token);
+    }
+
+    public function test_invitation_token_is_not_deterministic_for_same_email(): void
+    {
+        Mail::fake();
+
+        $entry = WaitlistEntry::factory()->createOne(['status' => 'pending']);
+
+        $this->service->invite($entry);
+        $token1 = $entry->refresh()->invitation_token;
+
+        // Reset entry to pending so a second invite can be issued
+        $entry->update(['status' => 'pending']);
+
+        $this->service->invite($entry);
+        $token2 = $entry->refresh()->invitation_token;
+
+        $this->assertNotSame($token1, $token2);
+    }
+
     private function createAdminUser(string $role): User
     {
         Role::firstOrCreate(['name' => $role, 'guard_name' => 'web']);

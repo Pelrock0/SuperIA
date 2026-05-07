@@ -1,0 +1,1278 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="ListCollaboratorService.php" path="\Services">
+    <totals>
+      <lines total="121" comments="0" code="121" executable="66" executed="62" percent="93.94"/>
+      <methods count="7" tested="5" percent="71.43"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="0" percent="0.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Services\ListCollaboratorService" start="13" executable="66" executed="62" crap="14.04">
+      <namespace name="App\Services"/>
+      <method name="linkUser" signature="linkUser(App\Models\User $user, App\Support\ShareTokenContext $context): App\Models\ListCollaborator" start="15" end="29" crap="1" executable="12" executed="12" coverage="100"/>
+      <method name="isLinked" signature="isLinked(int $userId, int $listId): bool" start="31" end="36" crap="1" executable="3" executed="3" coverage="100"/>
+      <method name="findForAccess" signature="findForAccess(int $userId, int $listId): ?App\Models\ListCollaborator" start="38" end="43" crap="2" executable="3" executed="0" coverage="0"/>
+      <method name="collaboratedListsForUser" signature="collaboratedListsForUser(App\Models\User $user): Illuminate\Support\Collection" start="45" end="55" crap="1" executable="8" executed="8" coverage="100"/>
+      <method name="collaboratorsForList" signature="collaboratorsForList(App\Models\ShoppingList $list): Illuminate\Support\Collection" start="57" end="70" crap="1" executable="11" executed="11" coverage="100"/>
+      <method name="removeByToken" signature="removeByToken(int $shareTokenId): int" start="72" end="75" crap="2" executable="1" executed="0" coverage="0"/>
+      <method name="linkRetroactive" signature="linkRetroactive(App\Models\User $user, array $sessionUuids): int" start="77" end="119" crap="8" executable="28" executed="28" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="17">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+      </line>
+      <line nr="18">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+      </line>
+      <line nr="20">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+      </line>
+      <line nr="21">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+      </line>
+      <line nr="24">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+      </line>
+      <line nr="25">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+      </line>
+      <line nr="28">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+      </line>
+      <line nr="33">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+      </line>
+      <line nr="34">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+      </line>
+      <line nr="35">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_returns_linked_state"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_status_detects_owner"/>
+      </line>
+      <line nr="47">
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_returns_grouped_by_status"/>
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_returns_empty_for_new_user"/>
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_orders_by_updated_at_desc"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_lists_index_includes_collaborated"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_returns_active_and_archived_lists"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_returns_empty_when_no_lists"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_does_not_return_other_users_lists"/>
+      </line>
+      <line nr="48">
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_returns_grouped_by_status"/>
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_returns_empty_for_new_user"/>
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_orders_by_updated_at_desc"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_lists_index_includes_collaborated"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_returns_active_and_archived_lists"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_returns_empty_when_no_lists"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_does_not_return_other_users_lists"/>
+      </line>
+      <line nr="49">
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_returns_grouped_by_status"/>
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_returns_empty_for_new_user"/>
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_orders_by_updated_at_desc"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_lists_index_includes_collaborated"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_returns_active_and_archived_lists"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_returns_empty_when_no_lists"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_does_not_return_other_users_lists"/>
+      </line>
+      <line nr="50">
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_returns_grouped_by_status"/>
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_returns_empty_for_new_user"/>
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_orders_by_updated_at_desc"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_lists_index_includes_collaborated"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_returns_active_and_archived_lists"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_returns_empty_when_no_lists"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_does_not_return_other_users_lists"/>
+      </line>
+      <line nr="51">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_lists_index_includes_collaborated"/>
+      </line>
+      <line nr="52">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_lists_index_includes_collaborated"/>
+      </line>
+      <line nr="53">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_lists_index_includes_collaborated"/>
+      </line>
+      <line nr="54">
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_returns_grouped_by_status"/>
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_returns_empty_for_new_user"/>
+        <covered by="Tests\Unit\Services\ShoppingListServiceTest::test_get_lists_orders_by_updated_at_desc"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_lists_index_includes_collaborated"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_returns_active_and_archived_lists"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_returns_empty_when_no_lists"/>
+        <covered by="Tests\Feature\ShoppingListControllerTest::test_index_does_not_return_other_users_lists"/>
+      </line>
+      <line nr="59">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_can_list_collaborators"/>
+      </line>
+      <line nr="60">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_can_list_collaborators"/>
+      </line>
+      <line nr="61">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_can_list_collaborators"/>
+      </line>
+      <line nr="62">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_can_list_collaborators"/>
+      </line>
+      <line nr="63">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_can_list_collaborators"/>
+      </line>
+      <line nr="64">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_can_list_collaborators"/>
+      </line>
+      <line nr="65">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_can_list_collaborators"/>
+      </line>
+      <line nr="66">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_can_list_collaborators"/>
+      </line>
+      <line nr="67">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_can_list_collaborators"/>
+      </line>
+      <line nr="68">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_can_list_collaborators"/>
+      </line>
+      <line nr="69">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_owner_can_list_collaborators"/>
+      </line>
+      <line nr="79">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_with_empty_uuids_returns_zero"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="80">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_with_empty_uuids_returns_zero"/>
+      </line>
+      <line nr="83">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="84">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="85">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="87">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="89">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="90">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="91">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="92">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="93">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+      </line>
+      <line nr="96">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="97">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="98">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="101">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+      </line>
+      <line nr="103">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+      </line>
+      <line nr="104">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+      </line>
+      <line nr="107">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+      </line>
+      <line nr="108">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+      </line>
+      <line nr="112">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+      </line>
+      <line nr="113">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+      </line>
+      <line nr="116">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="118">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_revoked_tokens"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_skips_own_lists"/>
+      </line>
+      <line nr="19">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+      </line>
+      <line nr="22">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+      </line>
+      <line nr="23">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+      </line>
+      <line nr="26">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+      </line>
+      <line nr="27">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_authenticated_user_can_save_shared_list"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_save_is_idempotent"/>
+        <covered by="Tests\Feature\ListCollaboratorTest::test_read_only_token_saves_read_only_mode"/>
+      </line>
+      <line nr="102">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+      </line>
+      <line nr="105">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+      </line>
+      <line nr="106">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+      </line>
+      <line nr="109">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+      </line>
+      <line nr="110">
+        <covered by="Tests\Feature\ListCollaboratorTest::test_retroactive_linking_creates_collaborators_from_sessions"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Services</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\ListCollaborator</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\ListCollaboratorSession</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\ShoppingList</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Models\User</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Support\ShareTokenContext</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="10">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Support\Collection</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="11">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Support\Facades\DB</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="12"/>
+      <line no="13">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListCollaboratorService</token>
+      </line>
+      <line no="14">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="15">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">linkUser</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ShareTokenContext</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListCollaborator</token>
+      </line>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">transaction</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListCollaborator</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">updateOrCreate</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="19">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="20">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user_id'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'shopping_list_id'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'mode'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">mode</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">value</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'share_token_id'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$context</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">token</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="26">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="27">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="30"/>
+      <line no="31">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">isLinked</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$userId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+      </line>
+      <line no="32">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListCollaborator</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$userId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'shopping_list_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">exists</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="36">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="37"/>
+      <line no="38">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">findForAccess</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$userId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">ListCollaborator</token>
+      </line>
+      <line no="39">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="40">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListCollaborator</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$userId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="41">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'shopping_list_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="42">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">first</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="43">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="44"/>
+      <line no="45">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">collaboratedListsForUser</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Collection</token>
+      </line>
+      <line no="46">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="47">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">collaboratedLists</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="48">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">with</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user:id,name'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="49">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">get</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="50">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">map</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ShoppingList</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="51">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">setAttribute</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'collaborator_mode'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">pivot</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">mode</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="52">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">setAttribute</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'owner_name'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">name</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="53">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="54">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="55">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="56"/>
+      <line no="57">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">collaboratorsForList</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ShoppingList</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Collection</token>
+      </line>
+      <line no="58">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="59">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">collaborators</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="60">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">with</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user:id,name,email'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="61">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">get</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="62">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">map</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_FN">fn</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ListCollaborator</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$c</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="63">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'id'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$c</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="64">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user_id'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$c</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">user_id</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="65">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'name'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$c</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">name</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="66">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'email'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$c</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">email</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="67">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'mode'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$c</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">mode</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">value</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="68">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'linked_at'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$c</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">created_at</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">toIso8601String</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="69">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="70">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="71"/>
+      <line no="72">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">removeByToken</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$shareTokenId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+      </line>
+      <line no="73">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="74">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListCollaborator</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'share_token_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$shareTokenId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">delete</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="75">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="76"/>
+      <line no="77">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">linkRetroactive</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">User</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$sessionUuids</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+      </line>
+      <line no="78">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="79">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EMPTY">empty</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$sessionUuids</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="80">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="81">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="82"/>
+      <line no="83">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$sessions</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListCollaboratorSession</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">whereIn</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'session_uuid'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$sessionUuids</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="84">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">with</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'shareToken.shoppingList'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="85">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">get</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="86"/>
+      <line no="87">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$linked</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="88"/>
+      <line no="89">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">DB</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">transaction</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$sessions</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG">&amp;</token>
+        <token name="T_VARIABLE">$linked</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="90">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_FOREACH">foreach</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$sessions</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_AS">as</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="91">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$token</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">shareToken</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="92">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$token</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_BOOLEAN_OR">||</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$token</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">isRevoked</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="93">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_CONTINUE">continue</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="94">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="95"/>
+      <line no="96">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$token</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">shoppingList</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="97">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_BOOLEAN_OR">||</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">user_id</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="98">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_CONTINUE">continue</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="99">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="100"/>
+      <line no="101">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$created</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListCollaborator</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">firstOrCreate</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="102">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="103">
+        <token name="T_WHITESPACE">                        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'user_id'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="104">
+        <token name="T_WHITESPACE">                        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'shopping_list_id'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$list</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="105">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="106">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="107">
+        <token name="T_WHITESPACE">                        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'mode'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$token</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">mode</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">value</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="108">
+        <token name="T_WHITESPACE">                        </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'share_token_id'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$token</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="109">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="110">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="111"/>
+      <line no="112">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$created</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">wasRecentlyCreated</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="113">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_VARIABLE">$linked</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="114">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="115">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="116">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="117"/>
+      <line no="118">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$linked</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="119">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="120">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="121"/>
+    </source>
+  </file>
+</phpunit>

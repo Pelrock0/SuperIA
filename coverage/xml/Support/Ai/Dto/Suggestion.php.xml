@@ -1,0 +1,387 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="Suggestion.php" path="\Support\Ai\Dto">
+    <totals>
+      <lines total="26" comments="1" code="25" executable="8" executed="8" percent="100.00"/>
+      <methods count="2" tested="2" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Support\Ai\Dto\Suggestion" start="5" executable="8" executed="8" crap="2">
+      <namespace name="App\Support\Ai\Dto"/>
+      <method name="__construct" signature="__construct(string $source, string $name, ?float $quantity, ?string $unit, ?string $category)" start="7" end="13" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="toArray" signature="toArray(): array" start="15" end="24" crap="1" executable="7" executed="7" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="13">
+        <covered by="Tests\Unit\Services\ProductHistoryWeightingServiceTest::test_search_finds_prefix_match"/>
+        <covered by="Tests\Unit\Services\ProductHistoryWeightingServiceTest::test_search_ranks_recent_higher_than_frequent_but_old"/>
+        <covered by="Tests\Unit\Services\ProductHistoryWeightingServiceTest::test_search_scopes_to_user"/>
+        <covered by="Tests\Unit\Services\ProductHistoryWeightingServiceTest::test_search_respects_limit"/>
+        <covered by="Tests\Unit\Services\ProductHistoryWeightingServiceTest::test_search_returns_dto_with_source_history"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer1_hits_history_with_prefix"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer2_hits_catalog_when_history_empty"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_not_called_when_local_has_three_results"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_not_called_when_include_ai_false"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_budget_cap_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_user_quota_blocks_layer3"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_cross_layer_dedup_case_insensitive"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_local_limit_cap_total_at_five"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_history_takes_precedence_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_circuit_breaker_opens_after_failures"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_returns_item_added_to_list_without_purchase"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_loses_to_history_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_beats_catalog_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_deduplicates_with_catalog"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_distinct_across_multiple_lists"/>
+        <covered by="Tests\Unit\Support\Ai\ClaudeClientTest::test_parses_valid_response_into_suggestions"/>
+        <covered by="Tests\Unit\Support\Ai\ClaudeClientTest::test_caps_at_5_suggestions"/>
+        <covered by="Tests\Unit\Support\Ai\ClaudeClientTest::test_extracts_embedded_json_array"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer1"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer2"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_user_quota_exhausted"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_ai_limit_reached_when_budget_cap_exceeded"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_include_ai_false_by_default"/>
+      </line>
+      <line nr="18">
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer1_hits_history_with_prefix"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer2_hits_catalog_when_history_empty"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_not_called_when_local_has_three_results"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_cross_layer_dedup_case_insensitive"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_local_limit_cap_total_at_five"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_history_takes_precedence_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_returns_item_added_to_list_without_purchase"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_loses_to_history_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_beats_catalog_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_deduplicates_with_catalog"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_distinct_across_multiple_lists"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer1"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer2"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+      <line nr="19">
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer1_hits_history_with_prefix"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer2_hits_catalog_when_history_empty"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_not_called_when_local_has_three_results"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_cross_layer_dedup_case_insensitive"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_local_limit_cap_total_at_five"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_history_takes_precedence_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_returns_item_added_to_list_without_purchase"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_loses_to_history_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_beats_catalog_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_deduplicates_with_catalog"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_distinct_across_multiple_lists"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer1"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer2"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+      <line nr="20">
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer1_hits_history_with_prefix"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer2_hits_catalog_when_history_empty"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_not_called_when_local_has_three_results"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_cross_layer_dedup_case_insensitive"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_local_limit_cap_total_at_five"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_history_takes_precedence_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_returns_item_added_to_list_without_purchase"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_loses_to_history_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_beats_catalog_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_deduplicates_with_catalog"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_distinct_across_multiple_lists"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer1"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer2"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+      <line nr="21">
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer1_hits_history_with_prefix"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer2_hits_catalog_when_history_empty"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_not_called_when_local_has_three_results"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_cross_layer_dedup_case_insensitive"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_local_limit_cap_total_at_five"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_history_takes_precedence_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_returns_item_added_to_list_without_purchase"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_loses_to_history_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_beats_catalog_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_deduplicates_with_catalog"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_distinct_across_multiple_lists"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer1"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer2"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+      <line nr="22">
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer1_hits_history_with_prefix"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer2_hits_catalog_when_history_empty"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_not_called_when_local_has_three_results"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_cross_layer_dedup_case_insensitive"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_local_limit_cap_total_at_five"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_history_takes_precedence_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_returns_item_added_to_list_without_purchase"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_loses_to_history_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_beats_catalog_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_deduplicates_with_catalog"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_distinct_across_multiple_lists"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer1"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer2"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+      <line nr="17">
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer1_hits_history_with_prefix"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer2_hits_catalog_when_history_empty"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_not_called_when_local_has_three_results"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_cross_layer_dedup_case_insensitive"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_local_limit_cap_total_at_five"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_history_takes_precedence_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_returns_item_added_to_list_without_purchase"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_loses_to_history_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_beats_catalog_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_deduplicates_with_catalog"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_distinct_across_multiple_lists"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer1"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer2"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+      <line nr="23">
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer1_hits_history_with_prefix"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer2_hits_catalog_when_history_empty"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_not_called_when_local_has_three_results"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_called_when_local_scarce_and_include_ai"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_successful_claude_records_cost"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_cross_layer_dedup_case_insensitive"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_local_limit_cap_total_at_five"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_history_takes_precedence_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer3_pii_never_leaves_via_claude"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_returns_item_added_to_list_without_purchase"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_loses_to_history_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_beats_catalog_in_dedup"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_deduplicates_with_catalog"/>
+        <covered by="Tests\Unit\Services\ProductSuggestionServiceTest::test_layer_list_distinct_across_multiple_lists"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer1"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_happy_path_layer2"/>
+        <covered by="Tests\Feature\ProductSuggestionControllerTest::test_layer3_fallback_when_scarce"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Support\Ai\Dto</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Suggestion</token>
+      </line>
+      <line no="6">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="7">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">__construct</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="8">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_READONLY">readonly</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$source</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE">      </token>
+        <token name="T_COMMENT">// 'history' | 'catalog' | 'ai'</token>
+      </line>
+      <line no="9">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_READONLY">readonly</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$name</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="10">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_READONLY">readonly</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">float</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$quantity</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="11">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_READONLY">readonly</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$unit</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="12">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_READONLY">readonly</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$category</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="13">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="14"/>
+      <line no="15">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">toArray</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'source'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">source</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="19">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'name'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">name</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="20">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'quantity'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">quantity</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'unit'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">unit</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'category'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">category</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="25">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="26"/>
+    </source>
+  </file>
+</phpunit>

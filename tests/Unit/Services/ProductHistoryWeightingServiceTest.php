@@ -134,4 +134,19 @@ class ProductHistoryWeightingServiceTest extends TestCase
         $names = collect($page->items())->pluck('producto_nombre')->all();
         $this->assertSame(['Mio'], $names);
     }
+
+    public function test_ranked_list_paginated_defaults_to_20_per_page(): void
+    {
+        $user = User::factory()->createOne();
+        $names = array_map(fn ($i) => "Producto{$i}", range(1, 25));
+        foreach ($names as $name) {
+            $this->record($user, $name);
+        }
+
+        $page = $this->service->rankedListPaginated($user);
+
+        $this->assertSame(20, $page->perPage());
+        $this->assertSame(20, $page->count());
+        $this->assertSame(25, $page->total());
+    }
 }

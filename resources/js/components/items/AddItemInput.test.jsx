@@ -112,4 +112,118 @@ describe('AddItemInput', () => {
         await waitFor(() => expect(onAdd).toHaveBeenCalled());
         expect(screen.getByRole('combobox')).toHaveValue('Pan');
     });
+
+    describe('duplicate detection vs active items only', () => {
+        it('does not show duplicate warning when matching item is purchased', async () => {
+            const user = userEvent.setup();
+            const onAdd = vi.fn().mockResolvedValue(true);
+            const existingItems = [
+                { id: 1, name: 'Pan', is_purchased: true },
+            ];
+
+            render(<AddItemInput onAdd={onAdd} isLoading={false} existingItems={existingItems} />);
+
+            await user.type(screen.getByRole('combobox'), 'Pan');
+            await user.click(screen.getByRole('button', { name: /añadir/i }));
+
+            expect(screen.queryByTestId('duplicate-warning')).toBeNull();
+            expect(onAdd).toHaveBeenCalledWith({ name: 'Pan' });
+        });
+
+        it('does not show duplicate warning when matching purchased item is plural variant', async () => {
+            const user = userEvent.setup();
+            const onAdd = vi.fn().mockResolvedValue(true);
+            const existingItems = [
+                { id: 1, name: 'Panes', is_purchased: true },
+            ];
+
+            render(<AddItemInput onAdd={onAdd} isLoading={false} existingItems={existingItems} />);
+
+            await user.type(screen.getByRole('combobox'), 'pan');
+            await user.click(screen.getByRole('button', { name: /añadir/i }));
+
+            expect(screen.queryByTestId('duplicate-warning')).toBeNull();
+            expect(onAdd).toHaveBeenCalledWith({ name: 'pan' });
+        });
+
+        it('shows duplicate warning when matching pending item exists', async () => {
+            const user = userEvent.setup();
+            const onAdd = vi.fn();
+            const existingItems = [
+                { id: 1, name: 'Pan', is_purchased: false },
+            ];
+
+            render(<AddItemInput onAdd={onAdd} isLoading={false} existingItems={existingItems} />);
+
+            await user.type(screen.getByRole('combobox'), 'Pan');
+            await user.click(screen.getByRole('button', { name: /añadir/i }));
+
+            expect(screen.getByTestId('duplicate-warning')).toBeInTheDocument();
+            expect(onAdd).not.toHaveBeenCalled();
+        });
+
+        it('shows duplicate warning when input is plural variant of a pending item', async () => {
+            const user = userEvent.setup();
+            const onAdd = vi.fn();
+            const existingItems = [
+                { id: 1, name: 'Pan', is_purchased: false },
+            ];
+
+            render(<AddItemInput onAdd={onAdd} isLoading={false} existingItems={existingItems} />);
+
+            await user.type(screen.getByRole('combobox'), 'Panes');
+            await user.click(screen.getByRole('button', { name: /añadir/i }));
+
+            expect(screen.getByTestId('duplicate-warning')).toBeInTheDocument();
+        });
+
+        it('mixed list shows warning only against pending match, ignores purchased homonym', async () => {
+            const user = userEvent.setup();
+            const onAdd = vi.fn();
+            const existingItems = [
+                { id: 1, name: 'Panes', is_purchased: true },
+                { id: 2, name: 'Pan', is_purchased: false },
+            ];
+
+            render(<AddItemInput onAdd={onAdd} isLoading={false} existingItems={existingItems} />);
+
+            await user.type(screen.getByRole('combobox'), 'Pan');
+            await user.click(screen.getByRole('button', { name: /añadir/i }));
+
+            const warning = screen.getByTestId('duplicate-warning');
+            expect(warning).toBeInTheDocument();
+            expect(warning).toHaveTextContent('Pan');
+        });
+
+        it('falls back to fuzzy match for typos against pending items', async () => {
+            const user = userEvent.setup();
+            const onAdd = vi.fn();
+            const existingItems = [
+                { id: 1, name: 'Tomate cherry', is_purchased: false },
+            ];
+
+            render(<AddItemInput onAdd={onAdd} isLoading={false} existingItems={existingItems} />);
+
+            await user.type(screen.getByRole('combobox'), 'Tomate cheery');
+            await user.click(screen.getByRole('button', { name: /añadir/i }));
+
+            expect(screen.getByTestId('duplicate-warning')).toBeInTheDocument();
+        });
+
+        it('does not match unrelated short names (pollo vs polla)', async () => {
+            const user = userEvent.setup();
+            const onAdd = vi.fn().mockResolvedValue(true);
+            const existingItems = [
+                { id: 1, name: 'Pollo', is_purchased: false },
+            ];
+
+            render(<AddItemInput onAdd={onAdd} isLoading={false} existingItems={existingItems} />);
+
+            await user.type(screen.getByRole('combobox'), 'Polla');
+            await user.click(screen.getByRole('button', { name: /añadir/i }));
+
+            expect(screen.queryByTestId('duplicate-warning')).toBeNull();
+            expect(onAdd).toHaveBeenCalledWith({ name: 'Polla' });
+        });
+    });
 });

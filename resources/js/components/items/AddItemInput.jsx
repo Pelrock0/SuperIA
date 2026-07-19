@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ItemAutocomplete from './ItemAutocomplete';
 import DuplicateWarning from './DuplicateWarning';
 import similarText from '../../lib/similarText';
+import normalize from '../../lib/spanishInflector';
 
 const DUPLICATE_THRESHOLD = 0.80;
 
@@ -14,10 +15,11 @@ export default function AddItemInput({ onAdd, onIncrementExisting, isLoading, ex
     const findDuplicate = (newName) => {
         const trimmed = newName.trim();
         if (trimmed === '') return null;
+        const normalizedNew = normalize(trimmed);
         for (const item of existingItems) {
-            if (similarText(trimmed, item.name) > DUPLICATE_THRESHOLD) {
-                return item;
-            }
+            if (item.is_purchased) continue;
+            if (normalize(item.name) === normalizedNew) return item;
+            if (similarText(trimmed, item.name) > DUPLICATE_THRESHOLD) return item;
         }
         return null;
     };

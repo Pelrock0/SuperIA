@@ -33,3 +33,6 @@ Thumbs.db
 /sofia
 /sofia.cmd
 /sofia.ps1
+
+# Coverage reports
+/coverage

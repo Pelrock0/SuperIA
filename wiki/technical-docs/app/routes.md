@@ -112,7 +112,7 @@
 |--------|-----|---------|-------|
 | GET | `/api/weekly-summary/latest` | WeeklySummaryController@latest | Current week's summary |
 | POST | `/api/weekly-summary/dismiss` | WeeklySummaryController@dismiss | Dismiss in-app banner |
-| POST | `/api/weekly-summary/{summary}/convert-to-list` | WeeklySummaryController@convertToList | Create list from summary |
+| POST | `/api/weekly-summary/{summary}/save` | WeeklySummaryController@save | Save selected recommendations to list (new or existing) |
 | POST | `/api/settings/weekly-summary-email` | WeeklySummaryEmailController@update | Toggle email opt-in |
 
 ### History & Stats

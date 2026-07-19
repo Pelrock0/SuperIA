@@ -1,6 +1,6 @@
 # Superlistia Wiki — Index
 
-**Stack:** Laravel 12 + Next.js 15 | **Mode:** Epic-based | **Build:** 2026-04-25
+**Stack:** Laravel 12 + React/Vite (SPA) | **Mode:** Epic-based | **Build:** 2026-04-25 | **Last sync:** 2026-05-14
 
 ---
 
@@ -21,10 +21,14 @@
 | FEAT-EPIC8-DUPLICATES | Duplicate Detection | MEDIUM | S5-PASS | [scope/epic8-duplicates.md](scope/epic8-duplicates.md) |
 | FEAT-EPIC9-HISTORY | History & Statistics | MEDIUM | S5-PASS | [scope/epic9-history.md](scope/epic9-history.md) |
 | FEAT-EPIC10-ADMIN | Admin Dashboard | HIGH | S5-PASS | [scope/epic10-admin.md](scope/epic10-admin.md) |
+| FEAT-AUTOCOMPLETE-LIST-SOURCE | Autocomplete from List Items | MEDIUM | S5-PASS | [scope/autocomplete-list-source.md](scope/autocomplete-list-source.md) |
 | FEAT-BIOMETRIC-AUTH | WebAuthn / Passkeys | HIGH | S5-PASS | [scope/biometric-auth.md](scope/biometric-auth.md) |
 | FEAT-BIOMETRIC-UX | Biometric Onboarding UX | MEDIUM | S4-PASS | [scope/biometric-ux.md](scope/biometric-ux.md) |
+| FEAT-LISTS-MOVE-ITEMS | Move Items Between Lists | MEDIUM | S1-PASS | [scope/lists-move-items.md](scope/lists-move-items.md) |
 | FEAT-OPS-SECURITY-GATES | CI Security Gates | HIGH | S5-PASS | [scope/ops-security-gates.md](scope/ops-security-gates.md) |
+| FEAT-PURCHASE-ANIMATION | Purchase Item Animation | LOW | S5-PASS | [scope/purchase-animation.md](scope/purchase-animation.md) |
 | FEAT-PURCHASED-ITEM-SINK | Purchased Item Sort | LOW | S5-PASS | [scope/purchased-item-sink.md](scope/purchased-item-sink.md) |
+| FEAT-REC-SAVE-PARTIAL | Partial Save of Weekly Recommendations | MEDIUM | S5-PASS + S6-hotfix | [scope/rec-save-partial.md](scope/rec-save-partial.md) |
 | FEAT-SHARED-AUTH | Shared List Collaborators | HIGH | S5-PASS | [scope/shared-auth.md](scope/shared-auth.md) |
 | FEAT-WAITLIST-ADMIN-NOTIFY | Admin Notification on Signup | MEDIUM | S5-PASS | [scope/waitlist-admin-notify.md](scope/waitlist-admin-notify.md) |
 
@@ -47,9 +51,15 @@
 | FEAT-EPIC8-DUPLICATES | Duplicate Detection | [technical-design/epic8-duplicates.md](technical-design/epic8-duplicates.md) | client-side, similarText, Ratcliff, increment-quantity |
 | FEAT-EPIC9-HISTORY | History & Statistics | [technical-design/epic9-history.md](technical-design/epic9-history.md) | pagination, price SUM, duplicate clone, recharts |
 | FEAT-EPIC10-ADMIN | Admin Dashboard | [technical-design/epic10-admin.md](technical-design/epic10-admin.md) | Backpack CRUD, is_active, metrics, Telescope gate |
+| FEAT-AUTOCOMPLETE-LIST-SOURCE | Autocomplete from List Items | [technical-design/autocomplete-list-source.md](technical-design/autocomplete-list-source.md) | list_items layer, composite index, prefix LIKE, user scoping, dedup |
 | FEAT-BIOMETRIC-AUTH | WebAuthn / Passkeys | [technical-design/biometric-auth.md](technical-design/biometric-auth.md) | WebAuthn, FIDO2, sign_count, RP ID, challenge cache |
+| FEAT-BIOMETRIC-UX | Biometric Onboarding UX | [technical-design/biometric-ux.md](technical-design/biometric-ux.md) | hook, modal, localStorage, prompt, opt-in, 30d cooldown |
 | FEAT-OPS-SECURITY-GATES | CI Security Gates | [technical-design/ops-security-gates.md](technical-design/ops-security-gates.md) | Psalm, psalm.xml, gitleaks, composer audit |
+| FEAT-PURCHASE-ANIMATION | Purchase Item Animation | [technical-design/purchase-animation.md](technical-design/purchase-animation.md) | green flash, sink, justChecked, exitingItems, fake timers |
+| FEAT-PURCHASED-ITEM-SINK | Purchased Item Sort | [technical-design/purchased-item-sink.md](technical-design/purchased-item-sink.md) | SharedListPage, pendingCategories, purchasedItems, Ya en el carro |
+| FEAT-REC-SAVE-PARTIAL | Partial Save of Weekly Recommendations | [technical-design/rec-save-partial.md](technical-design/rec-save-partial.md) | saveSelection, lockForUpdate, createOrIncrement, Actioned, payload mutation, SaveTargetSheet |
 | FEAT-SHARED-AUTH | Shared List Collaborators | [technical-design/shared-auth.md](technical-design/shared-auth.md) | ListCollaborator, retroactive, UPSERT, authorizeListAccess |
+| FEAT-WAITLIST-ADMIN-NOTIFY | Admin Notification on Signup | [technical-design/waitlist-admin-notify.md](technical-design/waitlist-admin-notify.md) | AdminWaitlistNotificationMail, ShouldQueue, Spatie role, side effect |
 
 ---
 
@@ -59,20 +69,21 @@ See [releases/README.md](releases/README.md) for the full commit index.
 
 | # | Hash | Date | Summary |
 |---|------|------|---------|
-| r001 | d0d3b66 | 2026-04-22 | ListDetailPage price estimation on mount |
-| r002 | 83ef439 | 2026-04-22 | Token usage tracking in AI services |
-| r003 | 872b1ae | 2026-04-21 | Security docs refactor, source-driven dev |
-| r004 | 72fa46b | 2026-04-19 | Price estimation 3-layer pipeline |
+| r001 | 34fe4b3 | 2026-05-07 | Infection mutation testing + DDD review skills |
+| r002 | d0d3b66 | 2026-04-22 | ListDetailPage price estimation on mount |
+| r003 | 83ef439 | 2026-04-22 | Token usage tracking in AI services |
+| r004 | 872b1ae | 2026-04-21 | Security docs refactor, source-driven dev |
 | r005 | e9d627e | 2026-04-19 | WebAuthn API simplification |
-| r006 | 7d0dfe2 | 2026-04-19 | Privacy text, PriceBar empty state |
-| r007 | 7befae7 | 2026-04-18 | i18n support, Spanish translations |
-| r008 | 25382e2 | 2026-04-17 | Rebrand Superia → Superlistia, Resend email |
-| r009 | 9832ff7 | 2026-04-16 | WebAuthn passwordless auth |
-| r010 | 1c773ad | 2026-04-15 | Retroactive collaborator linking tests pass |
-| r011 | 9f67360 | 2026-04-15 | Category inference prompt seeder |
-| r012 | f1d48b1 | 2026-04-15 | Collaboration features + shared list save |
-| r013-r021 | various | 2026-04-14/15 | Dockerfile + admin + landing iterations |
-| r049 | caba3b1 | 2026-04-13 | Initial commit: SuperIA full project |
+| r006 | 72fa46b | 2026-04-19 | Price estimation 3-layer pipeline |
+| r007 | 7d0dfe2 | 2026-04-19 | Privacy text, PriceBar empty state |
+| r008 | 7befae7 | 2026-04-18 | i18n support, Spanish translations |
+| r009 | 25382e2 | 2026-04-17 | Rebrand Superia → Superlistia, Resend email |
+| r010 | 9832ff7 | 2026-04-16 | WebAuthn passwordless auth |
+| r011 | 1c773ad | 2026-04-15 | Retroactive collaborator linking tests pass |
+| r012 | 9f67360 | 2026-04-15 | Category inference prompt seeder |
+| r013 | f1d48b1 | 2026-04-15 | Collaboration features + shared list save |
+| r014-r022 | various | 2026-04-14/15 | Dockerfile + admin + landing iterations |
+| r050 | caba3b1 | 2026-04-13 | Initial commit: SuperIA full project |
 
 ---
 
@@ -86,6 +97,7 @@ See [releases/README.md](releases/README.md) for the full commit index.
 | Enums & constants | [architecture/enums.md](architecture/enums.md) | enums, constants, limits, config values, quotas, TTL |
 | Async jobs & commands | [architecture/async-jobs.md](architecture/async-jobs.md) | jobs, queue, scheduler, cron, commands |
 | Middleware | [architecture/middleware.md](architecture/middleware.md) | middleware, rate limit, throttle, JWT, share token, admin |
+| Bounded contexts (DDD) | [architecture/bounded-contexts.md](architecture/bounded-contexts.md) | DDD, glosario, ubicuo, list-items, resumen semanal, conversión parcial |
 
 ---
 
@@ -131,3 +143,7 @@ See [releases/README.md](releases/README.md) for the full commit index.
 | Question | Answer | Source |
 |----------|--------|--------|
 | ¿Se notifica a admins cuando alguien se apunta a la waitlist? | Sí — `AdminWaitlistNotificationMail` enviado async (queue) a todos los admin/superadmin al registrar un waitlist entry. | [scope/waitlist-admin-notify.md](scope/waitlist-admin-notify.md) |
+| ¿Cómo guarda el endpoint las recomendaciones del resumen semanal? | `POST /api/weekly-summary/{summary}/save` con `selected_indices[]` + `target_list_id` opcional. Una transacción con triple lock (summary + lista + items) muta `payload_json` y aplica upsert por nombre normalizado. Si payload queda vacío, status pasa a `Actioned`. Reemplaza el legacy `/convert-to-list`. | [technical-design/rec-save-partial.md](technical-design/rec-save-partial.md) |
+| ¿Qué fuentes alimentan el autocompletado? | 4 layers en orden: history (`producto_historial`) → list-items (items añadidos a listas del usuario, sin importar si están comprados) → catalog (`producto_catalogo`) → AI fallback. Dedup entre layers. | [technical-design/autocomplete-list-source.md](technical-design/autocomplete-list-source.md) |
+| ¿Por qué tarda 1.5s en moverse un item al marcarlo comprado? | Animación de feedback intencional: `bg-green-100` + line-through inmediatos (<50ms), 1.5s delay + 300ms exit (fade+height). La llamada API toggle dispara al instante; solo el sink visual se retrasa. | [technical-design/purchase-animation.md](technical-design/purchase-animation.md) |
+| ¿Dónde se documenta el lenguaje ubicuo (DDD) del proyecto? | `docs/contexts/default/00-glossary.md` (single bounded context "list-items"). Resumen en [architecture/bounded-contexts.md](architecture/bounded-contexts.md). | [architecture/bounded-contexts.md](architecture/bounded-contexts.md) |

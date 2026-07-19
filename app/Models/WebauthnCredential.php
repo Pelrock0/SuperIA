@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Webauthn\PublicKeyCredentialSource;
+use Webauthn\CredentialRecord;
 use Webauthn\TrustPath\EmptyTrustPath;
 
 class WebauthnCredential extends Model
@@ -39,9 +39,9 @@ class WebauthnCredential extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function toPublicKeyCredentialSource(): PublicKeyCredentialSource
+    public function toCredentialRecord(): CredentialRecord
     {
-        return PublicKeyCredentialSource::create(
+        return CredentialRecord::create(
             publicKeyCredentialId: self::base64UrlDecode($this->credential_id),
             type: 'public-key',
             transports: $this->transports ?? [],
@@ -55,7 +55,7 @@ class WebauthnCredential extends Model
     }
 
     public static function fromPublicKeyCredentialSource(
-        PublicKeyCredentialSource $source,
+        CredentialRecord $source,
         User $user,
         string $name,
     ): self {

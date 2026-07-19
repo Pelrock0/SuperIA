@@ -351,7 +351,7 @@ class WeeklySummaryServiceTest extends TestCase
             'user_id' => $user->id,
             'status' => ListStatus::Active,
         ]);
-        $existingList->items()->create([
+        $purchased = $existingList->items()->create([
             'name' => 'Leche',
             'quantity' => 1.0,
             'unit' => 'L',
@@ -362,7 +362,10 @@ class WeeklySummaryServiceTest extends TestCase
 
         $this->service->saveSelection($user, $summary, [0], $existingList->id);
 
-        $this->assertSame(2, $existingList->refresh()->items()->count());
+        $this->assertDatabaseMissing('list_items', ['id' => $purchased->id]);
+        $remaining = $existingList->refresh()->items()->get();
+        $this->assertCount(1, $remaining);
+        $this->assertFalse((bool) $remaining->first()->is_purchased);
     }
 
     public function test_save_selection_normalizes_name_case_and_whitespace_for_match(): void

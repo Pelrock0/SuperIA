@@ -44,12 +44,20 @@ class WebauthnController extends Controller
                 name: $request->validated('name'),
             );
         } catch (Throwable $e) {
-            return response()->json([
-                'error' => [
-                    'code' => 'WEBAUTHN_REGISTRATION_FAILED',
-                    'message' => 'No se pudo registrar el dispositivo. Intentalo de nuevo.',
-                ],
-            ], 422);
+            \Illuminate\Support\Facades\Log::warning('WebAuthn registration failed', [
+                'exception' => $e::class,
+                'error' => $e->getMessage(),
+            ]);
+
+            $error = [
+                'code' => 'WEBAUTHN_REGISTRATION_FAILED',
+                'message' => 'No se pudo registrar el dispositivo. Intentalo de nuevo.',
+            ];
+            if (config('app.debug')) {
+                $error['debug'] = $e::class.': '.$e->getMessage();
+            }
+
+            return response()->json(['error' => $error], 422);
         }
 
         return response()->json([

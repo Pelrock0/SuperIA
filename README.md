@@ -155,7 +155,7 @@ php artisan up
 
 ## 📄 Licencia
 
-Distribuido bajo licencia **[MIT](LICENSE)** — © 2026 Alfredo Martín.
+Distribuido bajo licencia **[MIT](LICENSE)** — © 2026 Alfredo Martín (pelrock@gmail.com).
 
 Puedes usar, modificar y distribuir el proyecto libremente, **conservando el aviso de
 copyright y atribución al autor** en todas las copias o partes sustanciales del software.

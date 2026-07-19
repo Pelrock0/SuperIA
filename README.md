@@ -155,7 +155,10 @@ php artisan up
 
 ## 📄 Licencia
 
-Propietario. Todos los derechos reservados © Superlistia.
+Distribuido bajo licencia **[MIT](LICENSE)** — © 2026 Alfredo Martín.
+
+Puedes usar, modificar y distribuir el proyecto libremente, **conservando el aviso de
+copyright y atribución al autor** en todas las copias o partes sustanciales del software.
 
 <div align="center">
 <sub>Hecho con Laravel · React · Claude</sub>

@@ -24,3 +24,12 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Sofia4Builders framework (andamiaje, no parte de la app)
+/.cursor
+/cli
+/.claude
+/dashboard
+/sofia
+/sofia.cmd
+/sofia.ps1

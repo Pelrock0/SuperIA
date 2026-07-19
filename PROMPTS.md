@@ -29,6 +29,36 @@ Sigue las instrucciones del paso resultante.
 
 ---
 
+## Autopilot — run S1→S6 autonomously (speedyS4b)
+
+Runs the whole workflow without stopping at every step; pauses only when there is
+a real decision/TBD or an unfixable failure.
+
+```
+Lee CLAUDE.md y .cursor/core/autopilot-enforcement.md.
+Ejecuta: python cli/cli.py prepare FEAT-XXX --auto --mode=claude
+Luego lanza el skill: /autopilot FEAT-XXX
+```
+
+- Stops only at open blocker/high/medium TBDs (shown as a plain-language gate) or
+  after exhausting self-correction. Answer in chat, then re-invoke `/autopilot FEAT-XXX`.
+- Manual mode is unchanged: omit `/autopilot` and approve each step yourself.
+
+---
+
+## Launch with the banner
+
+Run the launcher instead of `claude` from the project root:
+
+```
+./sofia        # macOS/Linux
+sofia          # Windows
+```
+
+Prints the SOFIA4BUILDERS splash, then starts Claude (args pass through, e.g. `./sofia --resume`).
+
+---
+
 ## Continue Existing Feature
 
 ```

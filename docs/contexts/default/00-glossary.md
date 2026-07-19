@@ -25,3 +25,6 @@
 | Conversión parcial | Operación de guardar un subconjunto de recomendaciones manteniendo el resto pendientes en el resumen | `selected_indices` ⊂ `payload_json` |
 | Resumen actuado | Resumen sin recomendaciones pendientes tras una o varias conversiones; queda oculto en la vista | `WeeklySummaryStatus::Actioned` (TBD nombre exacto) |
 | Recomendación pendiente | Item del resumen aún no guardado en ninguna lista | Permanece en `payload_json` |
+| Duplicado | Item cuyo nombre normalizado (lowercase, sin tildes, reducido a singular) y unidad coinciden con otro item de la misma lista | `findDuplicate(name)` |
+| Forma normalizada | Versión canónica del nombre de un producto: minúsculas, sin tildes, sin sufijo de plural en español | "Tomates" → "tomate", "Cebollas" → "cebolla" |
+| Variante plural | Nombre que difiere de su forma singular solo por el sufijo `-s` o `-es` en español | "panes" es variante plural de "pan" |

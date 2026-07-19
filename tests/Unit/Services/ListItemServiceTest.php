@@ -4,6 +4,7 @@ namespace Tests\Unit\Services;
 
 use App\Enums\ActivityAction;
 use App\Enums\ActorType;
+use App\Enums\ItemUnit;
 use App\Enums\ProductCategory;
 use App\Enums\ShareTokenMode;
 use App\Models\ListActivityLog;
@@ -332,7 +333,7 @@ class ListItemServiceTest extends TestCase
     public function test_create_or_increment_does_not_match_purchased_item(): void
     {
         $list = ShoppingList::factory()->createOne();
-        $list->items()->create([
+        $purchased = $list->items()->create([
             'name' => 'Leche',
             'quantity' => 1.0,
             'unit' => 'L',
@@ -340,13 +341,15 @@ class ListItemServiceTest extends TestCase
             'position' => 0,
         ]);
 
-        $this->service->createOrIncrement($list, [
+        $result = $this->service->createOrIncrement($list, [
             'name' => 'Leche',
             'quantity' => 1.0,
             'unit' => 'L',
         ]);
 
-        $this->assertSame(2, $list->refresh()->items()->count());
+        $this->assertDatabaseMissing('list_items', ['id' => $purchased->id]);
+        $this->assertFalse((bool) $result->is_purchased);
+        $this->assertSame(1, $list->refresh()->items()->count());
     }
 
     public function test_create_or_increment_matches_when_unit_is_null_on_both(): void
@@ -417,5 +420,207 @@ class ListItemServiceTest extends TestCase
 
         $this->assertNotNull($item);
         $this->assertNull($item->unit);
+    }
+
+    public function test_create_deletes_purchased_homonym_with_same_normalized_name(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $purchased = ListItem::factory()->purchased()->createOne([
+            'shopping_list_id' => $list->id,
+            'name' => 'Pan',
+            'unit' => null,
+        ]);
+
+        $result = $this->service->create($list, ['name' => 'Pan']);
+
+        $this->assertDatabaseMissing('list_items', ['id' => $purchased->id]);
+        $this->assertSame('Pan', $result['item']->name);
+        $this->assertFalse((bool) $result['item']->is_purchased);
+        $this->assertSame(1, $list->items()->count());
+    }
+
+    public function test_create_deletes_purchased_homonym_singular_plural_variants(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $purchased = ListItem::factory()->purchased()->createOne([
+            'shopping_list_id' => $list->id,
+            'name' => 'Panes',
+            'unit' => null,
+        ]);
+
+        $result = $this->service->create($list, ['name' => 'pan']);
+
+        $this->assertDatabaseMissing('list_items', ['id' => $purchased->id]);
+        $this->assertSame('pan', $result['item']->name);
+        $this->assertSame(1, $list->items()->count());
+    }
+
+    public function test_create_deletes_purchased_homonym_plural_input_singular_existing(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $purchased = ListItem::factory()->purchased()->createOne([
+            'shopping_list_id' => $list->id,
+            'name' => 'Tomate',
+            'unit' => null,
+        ]);
+
+        $result = $this->service->create($list, ['name' => 'Tomates']);
+
+        $this->assertDatabaseMissing('list_items', ['id' => $purchased->id]);
+        $this->assertSame('Tomates', $result['item']->name);
+        $this->assertSame(1, $list->items()->count());
+    }
+
+    public function test_create_deletes_all_purchased_homonyms_when_multiple_match(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $p1 = ListItem::factory()->purchased()->createOne([
+            'shopping_list_id' => $list->id,
+            'name' => 'Pan',
+            'unit' => null,
+        ]);
+        $p2 = ListItem::factory()->purchased()->createOne([
+            'shopping_list_id' => $list->id,
+            'name' => 'PANES',
+            'unit' => null,
+        ]);
+
+        $this->service->create($list, ['name' => 'Pan']);
+
+        $this->assertDatabaseMissing('list_items', ['id' => $p1->id]);
+        $this->assertDatabaseMissing('list_items', ['id' => $p2->id]);
+        $this->assertSame(1, $list->items()->count());
+    }
+
+    public function test_create_does_not_delete_purchased_with_different_unit(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $purchased = ListItem::factory()->purchased()->createOne([
+            'shopping_list_id' => $list->id,
+            'name' => 'Leche',
+            'unit' => ItemUnit::L,
+        ]);
+
+        $result = $this->service->create($list, ['name' => 'Leche', 'unit' => 'ml']);
+
+        $this->assertDatabaseHas('list_items', ['id' => $purchased->id]);
+        $this->assertSame(2, $list->items()->count());
+        $this->assertSame(ItemUnit::Ml, $result['item']->unit);
+    }
+
+    public function test_create_does_not_delete_purchased_with_different_name(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $purchased = ListItem::factory()->purchased()->createOne([
+            'shopping_list_id' => $list->id,
+            'name' => 'Pollo',
+            'unit' => null,
+        ]);
+
+        $result = $this->service->create($list, ['name' => 'Polla']);
+
+        $this->assertDatabaseHas('list_items', ['id' => $purchased->id]);
+        $this->assertSame(2, $list->items()->count());
+        $this->assertSame('Polla', $result['item']->name);
+    }
+
+    public function test_create_does_not_touch_pending_items_with_same_name(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $pending = ListItem::factory()->createOne([
+            'shopping_list_id' => $list->id,
+            'name' => 'Pan',
+            'is_purchased' => false,
+            'unit' => null,
+        ]);
+
+        $result = $this->service->create($list, ['name' => 'Pan']);
+
+        $this->assertDatabaseHas('list_items', ['id' => $pending->id]);
+        $this->assertNotSame($pending->id, $result['item']->id);
+        $this->assertSame(2, $list->items()->count());
+    }
+
+    public function test_create_does_not_delete_purchased_in_other_lists(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $otherList = ShoppingList::factory()->createOne();
+        $purchasedOther = ListItem::factory()->purchased()->createOne([
+            'shopping_list_id' => $otherList->id,
+            'name' => 'Pan',
+            'unit' => null,
+        ]);
+
+        $this->service->create($list, ['name' => 'Pan']);
+
+        $this->assertDatabaseHas('list_items', ['id' => $purchasedOther->id]);
+    }
+
+    public function test_create_or_increment_matches_normalized_plural_for_pending_increment(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $pending = ListItem::factory()->createOne([
+            'shopping_list_id' => $list->id,
+            'name' => 'Tomate',
+            'quantity' => 2.0,
+            'unit' => null,
+            'is_purchased' => false,
+        ]);
+
+        $result = $this->service->createOrIncrement($list, [
+            'name' => 'Tomates',
+            'quantity' => 3.0,
+        ]);
+
+        $this->assertSame($pending->id, $result->id);
+        $this->assertEqualsWithDelta(5.0, (float) $result->quantity, 0.001);
+        $this->assertSame(1, $list->items()->count());
+    }
+
+    public function test_create_or_increment_deletes_purchased_homonyms_when_no_pending_match(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $purchased = ListItem::factory()->purchased()->createOne([
+            'shopping_list_id' => $list->id,
+            'name' => 'Panes',
+            'unit' => null,
+        ]);
+
+        $result = $this->service->createOrIncrement($list, [
+            'name' => 'Pan',
+            'quantity' => 1.0,
+        ]);
+
+        $this->assertDatabaseMissing('list_items', ['id' => $purchased->id]);
+        $this->assertNotSame($purchased->id, $result->id);
+        $this->assertFalse((bool) $result->is_purchased);
+        $this->assertSame(1, $list->items()->count());
+    }
+
+    public function test_create_or_increment_does_not_delete_purchased_when_incrementing_existing_pending(): void
+    {
+        $list = ShoppingList::factory()->createOne();
+        $purchased = ListItem::factory()->purchased()->createOne([
+            'shopping_list_id' => $list->id,
+            'name' => 'Panes',
+            'unit' => null,
+        ]);
+        $pending = ListItem::factory()->createOne([
+            'shopping_list_id' => $list->id,
+            'name' => 'Pan',
+            'quantity' => 1.0,
+            'unit' => null,
+            'is_purchased' => false,
+        ]);
+
+        $result = $this->service->createOrIncrement($list, [
+            'name' => 'Panes',
+            'quantity' => 2.0,
+        ]);
+
+        $this->assertSame($pending->id, $result->id);
+        $this->assertEqualsWithDelta(3.0, (float) $result->quantity, 0.001);
+        $this->assertDatabaseHas('list_items', ['id' => $purchased->id]);
+        $this->assertSame(2, $list->items()->count());
     }
 }

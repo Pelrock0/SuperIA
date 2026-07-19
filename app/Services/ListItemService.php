@@ -9,6 +9,7 @@ use App\Enums\ProductCategory;
 use App\Models\ListItem;
 use App\Models\ProductoHistorial;
 use App\Models\ShoppingList;
+use App\Support\Inflector\SpanishInflector;
 use App\Support\ShareTokenContext;
 use Illuminate\Support\Facades\DB;
 
@@ -46,6 +47,11 @@ class ListItemService
     public function create(ShoppingList $list, array $data, ?ShareTokenContext $context = null): array
     {
         $result = DB::transaction(function () use ($list, $data, $context) {
+            $rawUnit = $data['unit'] ?? null;
+            $unit = $rawUnit !== null ? ItemUnit::tryFrom((string) $rawUnit)?->value : null;
+
+            $this->deletePurchasedHomonyms($list, (string) $data['name'], $unit);
+
             $category = $data['category'] ?? null;
             if ($category === null) {
                 $inferred = $this->categoryInference->infer($data['name']);
@@ -55,7 +61,7 @@ class ListItemService
             $item = $list->items()->create([
                 'name' => $data['name'],
                 'quantity' => $data['quantity'] ?? null,
-                'unit' => $data['unit'] ?? null,
+                'unit' => $unit,
                 'category' => $category,
                 'estimated_price' => $data['estimated_price'] ?? null,
             ]);
@@ -89,29 +95,28 @@ class ListItemService
     public function createOrIncrement(ShoppingList $list, array $data): ListItem
     {
         $name = (string) $data['name'];
-        $normalized = mb_strtolower(trim($name));
+        $normalized = SpanishInflector::normalize($name);
         $rawUnit = $data['unit'] ?? null;
         $unit = $rawUnit !== null ? ItemUnit::tryFrom((string) $rawUnit)?->value : null;
         $quantityToAdd = isset($data['quantity']) ? (float) $data['quantity'] : 0.0;
 
-        $existing = $list->items()
-            ->whereRaw('LOWER(TRIM(name)) = ?', [$normalized])
-            ->where(function ($q) use ($unit) {
-                if ($unit === null) {
-                    $q->whereNull('unit');
-                } else {
-                    $q->where('unit', $unit);
-                }
-            })
+        $pendings = $list->items()
             ->where('is_purchased', false)
             ->lockForUpdate()
-            ->first();
+            ->get();
+
+        $existing = $pendings->first(function (ListItem $item) use ($normalized, $unit): bool {
+            return SpanishInflector::normalize((string) $item->name) === $normalized
+                && $this->unitMatches($item->unit?->value, $unit);
+        });
 
         if ($existing !== null) {
             $current = (float) ($existing->quantity ?? 0.0);
             $existing->update(['quantity' => $current + $quantityToAdd]);
             return $existing->refresh();
         }
+
+        $this->deletePurchasedHomonyms($list, $name, $unit);
 
         $rawCategory = $data['category'] ?? null;
         $category = $rawCategory !== null ? ProductCategory::tryFrom((string) $rawCategory)?->value : null;
@@ -202,6 +207,31 @@ class ListItemService
         $tokenId = $context?->tokenId();
 
         $this->activityLog->record($list, $actor, $action, $name, $tokenId);
+    }
+
+    private function deletePurchasedHomonyms(ShoppingList $list, string $name, ?string $unit): void
+    {
+        $normalized = SpanishInflector::normalize($name);
+
+        $purchased = $list->items()
+            ->where('is_purchased', true)
+            ->lockForUpdate()
+            ->get();
+
+        $matchIds = $purchased
+            ->filter(fn (ListItem $item): bool => SpanishInflector::normalize((string) $item->name) === $normalized
+                && $this->unitMatches($item->unit?->value, $unit))
+            ->pluck('id')
+            ->all();
+
+        if ($matchIds !== []) {
+            $list->items()->whereIn('id', $matchIds)->delete();
+        }
+    }
+
+    private function unitMatches(?string $itemUnit, ?string $newUnit): bool
+    {
+        return $itemUnit === $newUnit;
     }
 
     private function syncCounters(ShoppingList $list): array

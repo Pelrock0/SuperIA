@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import api from '../../lib/api';
 import similarText from '../../lib/similarText';
+import normalize from '../../lib/spanishInflector';
 
 const DUPLICATE_THRESHOLD = 0.80;
 
@@ -63,7 +64,10 @@ export default function AddItemModal({ listId, existingItems = [], onAdd, onIncr
     const findDuplicate = () => {
         const trimmed = name.trim();
         if (!trimmed) return null;
+        const normalizedNew = normalize(trimmed);
         for (const item of existingItems) {
+            if (item.is_purchased) continue;
+            if (normalize(item.name) === normalizedNew) return item;
             if (similarText(trimmed, item.name) > DUPLICATE_THRESHOLD) return item;
         }
         return null;

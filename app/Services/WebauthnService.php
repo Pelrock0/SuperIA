@@ -30,7 +30,6 @@ use Webauthn\PublicKeyCredentialParameters;
 use Webauthn\PublicKeyCredentialRequestOptions;
 use Webauthn\PublicKeyCredentialRpEntity;
 use Webauthn\PublicKeyCredentialUserEntity;
-use Webauthn\PublicKeyCredentialSource;
 
 class WebauthnService
 {
@@ -182,14 +181,14 @@ class WebauthnService
         $userHandleFromResponse = $credential->response->userHandle;
         $expectedUserHandle = WebauthnCredential::userHandleFor($user->id);
 
-        $source = $stored->toPublicKeyCredentialSource();
+        $source = $stored->toCredentialRecord();
         $previousSignCount = $source->counter;
 
         $validator = $this->assertionValidator();
 
         try {
             $newSource = $validator->check(
-                publicKeyCredentialSource: $source,
+                credentialRecord: $source,
                 authenticatorAssertionResponse: $credential->response,
                 publicKeyCredentialRequestOptions: $options,
                 host: $this->rpId(),

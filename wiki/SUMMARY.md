@@ -24,6 +24,7 @@
 | FEAT-AUTOCOMPLETE-LIST-SOURCE | Autocomplete from List Items | MEDIUM | S5-PASS | [scope/autocomplete-list-source.md](scope/autocomplete-list-source.md) |
 | FEAT-BIOMETRIC-AUTH | WebAuthn / Passkeys | HIGH | S5-PASS | [scope/biometric-auth.md](scope/biometric-auth.md) |
 | FEAT-BIOMETRIC-UX | Biometric Onboarding UX | MEDIUM | S4-PASS | [scope/biometric-ux.md](scope/biometric-ux.md) |
+| FEAT-DUPCHECK-ACTIVE | Duplicate Check vs Active Only (+ ES singular/plural) | MEDIUM | S6 (deployed) | [scope/dupcheck-active.md](scope/dupcheck-active.md) |
 | FEAT-LISTS-MOVE-ITEMS | Move Items Between Lists | MEDIUM | S1-PASS | [scope/lists-move-items.md](scope/lists-move-items.md) |
 | FEAT-OPS-SECURITY-GATES | CI Security Gates | HIGH | S5-PASS | [scope/ops-security-gates.md](scope/ops-security-gates.md) |
 | FEAT-PURCHASE-ANIMATION | Purchase Item Animation | LOW | S5-PASS | [scope/purchase-animation.md](scope/purchase-animation.md) |
@@ -54,6 +55,7 @@
 | FEAT-AUTOCOMPLETE-LIST-SOURCE | Autocomplete from List Items | [technical-design/autocomplete-list-source.md](technical-design/autocomplete-list-source.md) | list_items layer, composite index, prefix LIKE, user scoping, dedup |
 | FEAT-BIOMETRIC-AUTH | WebAuthn / Passkeys | [technical-design/biometric-auth.md](technical-design/biometric-auth.md) | WebAuthn, FIDO2, sign_count, RP ID, challenge cache |
 | FEAT-BIOMETRIC-UX | Biometric Onboarding UX | [technical-design/biometric-ux.md](technical-design/biometric-ux.md) | hook, modal, localStorage, prompt, opt-in, 30d cooldown |
+| FEAT-DUPCHECK-ACTIVE | Duplicate Check vs Active Only | [technical-design/dupcheck-active.md](technical-design/dupcheck-active.md) | SpanishInflector, singular/plural, is_purchased, deletePurchasedHomonyms, lockForUpdate, app/Support/Inflector |
 | FEAT-OPS-SECURITY-GATES | CI Security Gates | [technical-design/ops-security-gates.md](technical-design/ops-security-gates.md) | Psalm, psalm.xml, gitleaks, composer audit |
 | FEAT-PURCHASE-ANIMATION | Purchase Item Animation | [technical-design/purchase-animation.md](technical-design/purchase-animation.md) | green flash, sink, justChecked, exitingItems, fake timers |
 | FEAT-PURCHASED-ITEM-SINK | Purchased Item Sort | [technical-design/purchased-item-sink.md](technical-design/purchased-item-sink.md) | SharedListPage, pendingCategories, purchasedItems, Ya en el carro |
@@ -67,23 +69,36 @@
 
 See [releases/README.md](releases/README.md) for the full commit index.
 
+> ⚠️ **History rewritten 2026-07-19.** The Sofia4Builders framework (`.cursor/`, `cli/`,
+> `.claude/`, `dashboard/`) was purged from history with `git filter-repo` and force-pushed,
+> so **all pre-existing commit hashes changed**. The hashes below are the current ones (HEAD `cae81fd`,
+> 64 commits). Old hashes (34fe4b3, d0d3b66, caba3b1…) no longer exist.
+
 | # | Hash | Date | Summary |
 |---|------|------|---------|
-| r001 | 34fe4b3 | 2026-05-07 | Infection mutation testing + DDD review skills |
-| r002 | d0d3b66 | 2026-04-22 | ListDetailPage price estimation on mount |
-| r003 | 83ef439 | 2026-04-22 | Token usage tracking in AI services |
-| r004 | 872b1ae | 2026-04-21 | Security docs refactor, source-driven dev |
-| r005 | e9d627e | 2026-04-19 | WebAuthn API simplification |
-| r006 | 72fa46b | 2026-04-19 | Price estimation 3-layer pipeline |
-| r007 | 7d0dfe2 | 2026-04-19 | Privacy text, PriceBar empty state |
-| r008 | 7befae7 | 2026-04-18 | i18n support, Spanish translations |
-| r009 | 25382e2 | 2026-04-17 | Rebrand Superia → Superlistia, Resend email |
-| r010 | 9832ff7 | 2026-04-16 | WebAuthn passwordless auth |
-| r011 | 1c773ad | 2026-04-15 | Retroactive collaborator linking tests pass |
-| r012 | 9f67360 | 2026-04-15 | Category inference prompt seeder |
-| r013 | f1d48b1 | 2026-04-15 | Collaboration features + shared list save |
-| r014-r022 | various | 2026-04-14/15 | Dockerfile + admin + landing iterations |
-| r050 | caba3b1 | 2026-04-13 | Initial commit: SuperIA full project |
+| r001 | cae81fd | 2026-07-19 | fix(webauthn): adapt to webauthn-lib 5.3 CredentialRecord API |
+| r002 | 26731a4 | 2026-07-19 | fix(webauthn): log/surface real registration error |
+| r003 | 764a1c6 | 2026-07-19 | chore: deploy.sh for incremental VPS deployment |
+| r004 | cdbb121 | 2026-07-19 | chore: stop tracking coverage/ reports |
+| r005 | 5791bde/aedcd1f | 2026-07-19 | MIT license (author attribution) |
+| r006 | 94fdc0c | 2026-07-19 | Professional README for public repo |
+| r007 | c67cd86 | 2026-07-19 | Production deployment guide |
+| r008 | da60b03 | 2026-07-19 | Sync composer.lock (PHP 8.5 deps, laravel/sentinel) |
+| r009 | c9245b9 | 2026-07-19 | Wiki pages + COMPLETE-SHOPPING scope (WIP) |
+| r010 | 3f93d70 | 2026-07-19 | feat(dupcheck): ignore purchased in duplicate check + ES inflector |
+| r011 | 59c123f | 2026-07-19 | chore: ignore Sofia4Builders framework files |
+| r012 | c42adeb/60d4225 | 2026-07-19 | Backpack CrudTrait on LoginAttempt + ProductoHistorial (PR #1) |
+| r013 | 10289c1 | 2026-05-07 | Infection mutation testing + DDD review skills |
+| r014 | 7b4d2f9 | 2026-04-22 | ListDetailPage price estimation on mount |
+| r015 | ccab526 | 2026-04-22 | Token usage tracking in AI services (Haiku) |
+| r016 | 5c42da9 | 2026-04-21 | Security docs refactor, source-driven dev |
+| r017 | f8b8527/b3b3549 | 2026-04-16/19 | WebAuthn passwordless auth + API simplification |
+| r018 | e5fd468 | 2026-04-19 | Price estimation 3-layer pipeline |
+| r019 | 943bc24 | 2026-04-18 | i18n support, Spanish translations |
+| r020 | a84eceb | 2026-04-17 | Rebrand Superia → Superlistia, Resend email |
+| r021 | 5b46717/f1d48b1 | 2026-04-15 | Collaboration + shared list save + retroactive linking |
+| r022-r063 | various | 2026-04-14/15 | Admin, Telescope, landing, Dockerfile/nixpacks deploy iterations |
+| r064 | 2c2a0d5 | 2026-04-13 | Initial commit: SuperIA full project |
 
 ---
 
@@ -147,3 +162,4 @@ See [releases/README.md](releases/README.md) for the full commit index.
 | ¿Qué fuentes alimentan el autocompletado? | 4 layers en orden: history (`producto_historial`) → list-items (items añadidos a listas del usuario, sin importar si están comprados) → catalog (`producto_catalogo`) → AI fallback. Dedup entre layers. | [technical-design/autocomplete-list-source.md](technical-design/autocomplete-list-source.md) |
 | ¿Por qué tarda 1.5s en moverse un item al marcarlo comprado? | Animación de feedback intencional: `bg-green-100` + line-through inmediatos (<50ms), 1.5s delay + 300ms exit (fade+height). La llamada API toggle dispara al instante; solo el sink visual se retrasa. | [technical-design/purchase-animation.md](technical-design/purchase-animation.md) |
 | ¿Dónde se documenta el lenguaje ubicuo (DDD) del proyecto? | `docs/contexts/default/00-glossary.md` (single bounded context "list-items"). Resumen en [architecture/bounded-contexts.md](architecture/bounded-contexts.md). | [architecture/bounded-contexts.md](architecture/bounded-contexts.md) |
+| ¿Por qué al re-añadir un producto ya comprado no salta el aviso de duplicado? | Por diseño (FEAT-DUPCHECK-ACTIVE): el check de duplicado ignora los ítems `is_purchased=true`. Al añadir un homónimo de un comprado, el backend borra el comprado y crea el pendiente nuevo. El match reconoce singular/plural español (`pan↔panes`) vía `SpanishInflector`. | [technical-design/dupcheck-active.md](technical-design/dupcheck-active.md) |

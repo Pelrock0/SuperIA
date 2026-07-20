@@ -4,9 +4,9 @@
 |----------|-------|
 | Build date | 2026-04-25 |
 | Build completed | 2026-04-25 |
-| Last sync | 2026-05-14 |
-| Git HEAD (build) | d0d3b6629b8b37115af604b8dbfd7df7a85c19df |
-| Git HEAD (sync) | 34fe4b3 |
+| Last sync | 2026-07-19 |
+| Git HEAD (build) | d0d3b6629b8b37115af604b8dbfd7df7a85c19df (pre-rewrite, orphaned) |
+| Git HEAD (sync) | cae81fd (post history-rewrite) |
 | Mode | epic-based |
 | Stack | Laravel 12 + React (Vite SPA) |
 | PHP | 8.4+ |
@@ -26,6 +26,23 @@ FEAT-PURCHASE-ANIMATION, FEAT-PURCHASED-ITEM-SINK, FEAT-REC-SAVE-PARTIAL, FEAT-S
 FEAT-WAITLIST-ADMIN-NOTIFY
 
 ## Sync log
+
+### 2026-07-19 — sync + incorporate FEAT-DUPCHECK-ACTIVE + releases rebuild
+- **Historia reescrita**: `git filter-repo` purgó el framework Sofia4Builders
+  (`.cursor/`, `cli/`, `.claude/`, `dashboard/`) + force-push → todos los hashes
+  cambiaron. HEAD nuevo `cae81fd` (64 commits). Tabla RELEASES regenerada con
+  hashes nuevos + nota de aviso; hashes viejos (34fe4b3…) marcados como inexistentes.
+- **FEAT-DUPCHECK-ACTIVE incorporada** (S6, desplegada): creados
+  `scope/dupcheck-active.md` + `technical-design/dupcheck-active.md`; filas
+  añadidas en SUMMARY SCOPE + TECHNICAL DESIGN. Documenta `SpanishInflector`
+  (`app/Support/Inflector/`) — helper puro fuera de `app/Services/`.
+- **FEAT-COMPLETE-SHOPPING-PARTIAL**: solo S1 (WIP), no documentada (registrada PENDING).
+- Sin drift en models (19) / services (24) / rutas (71): el trabajo reciente
+  solo modificó existentes (ListItemService, WebauthnService/Credential).
+- Fix WebAuthn 5.3 (CredentialRecord API) — ver r001/r002; deuda: los tests de
+  WebAuthn mockean `check()` y no cubren registro/login real.
+- Archivos creados: 2 (scope + TD dupcheck). Modificados: SUMMARY.md, _meta.md, _todo.md.
+- Pendiente no resuelto: 3 FEAT-* con dirs vacíos (AUTH-LOGIN, DASHBOARD-V2, PAYMENT-GATEWAY).
 
 ### 2026-05-14 — sync + update --from-todo
 - Drift detectado:

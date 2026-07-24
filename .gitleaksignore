@@ -1,0 +1,9 @@
+# Falsos positivos verificados (passwords de fixtures de test y docs, no credenciales reales)
+04c431b43f21b3eacd8574275fc191c39e762080:tests/Feature/WebauthnTest.php:generic-api-key:374
+04c431b43f21b3eacd8574275fc191c39e762080:tests/Feature/WebauthnTest.php:generic-api-key:375
+04c431b43f21b3eacd8574275fc191c39e762080:tests/Feature/WebauthnTest.php:generic-api-key:392
+04c431b43f21b3eacd8574275fc191c39e762080:tests/Feature/WebauthnTest.php:generic-api-key:393
+04c431b43f21b3eacd8574275fc191c39e762080:tests/Feature/WebauthnTest.php:generic-api-key:412
+04c431b43f21b3eacd8574275fc191c39e762080:tests/Feature/WebauthnTest.php:generic-api-key:413
+2c2a0d5218a4543e617cffc8b45affa637907148:tests/Unit/Support/ShareTokenSignerTest.php:generic-api-key:74
+ef9351ed28d31f48316768d062875cf107ae188f:docs/features/FEAT-DUPCHECK-ACTIVE/07-test-gate.md:generic-api-key:121

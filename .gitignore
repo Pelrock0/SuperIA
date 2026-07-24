@@ -36,3 +36,7 @@ Thumbs.db
 
 # Coverage reports
 /coverage
+
+# Credenciales (nunca trackear)
+/auth.json
+/gitleaks-report.json

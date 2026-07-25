@@ -2,11 +2,11 @@
 
 # 🛒 Superlistia
 
-**Tu lista de la compra inteligente, potenciada con IA.**
+**Your smart shopping list, powered by AI.**
 
-Crea, comparte y optimiza tus listas de compra. Superlistia autocompleta productos,
-genera listas completas a partir de una frase, estima precios, detecta duplicados,
-te avisa de reposiciones y resume tu gasto semanal — todo con IA.
+Create, share and optimize your shopping lists. Superlistia autocompletes products,
+generates full lists from a single sentence, estimates prices, detects duplicates,
+warns you about restocks and summarizes your weekly spend — all powered by AI.
 
 ![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-8.4%2B-777BB4?logo=php&logoColor=white)
@@ -21,68 +21,68 @@ te avisa de reposiciones y resume tu gasto semanal — todo con IA.
 
 ---
 
-## ✨ ¿Qué hace?
+## ✨ What does it do?
 
-Superlistia convierte la lista de la compra en una experiencia asistida. En lugar de
-teclear producto a producto, describes lo que necesitas y la IA hace el trabajo pesado:
-sugiere, categoriza, estima precios y aprende de tus hábitos.
+Superlistia turns the shopping list into an assisted experience. Instead of typing
+product by product, you describe what you need and the AI does the heavy lifting:
+it suggests, categorizes, estimates prices and learns from your habits.
 
-### Funcionalidades
+### Features
 
-| Área | Funcionalidad |
+| Area | Feature |
 |---|---|
-| 🏠 **Landing & Waitlist** | Página de aterrizaje pública + lista de espera con captación de leads. |
-| 🔐 **Autenticación** | Login con email/contraseña + **JWT**, **biometría (WebAuthn/passkeys)**, verificación de email y **borrado de cuenta conforme a RGPD**. |
-| 📋 **Listas de compra** | CRUD completo, límite freemium (3 listas activas), archivar y eliminar. |
-| 🥕 **Ítems y categorías** | Productos dentro de cada lista, auto-organización por secciones (Frutas, Lácteos, Panadería…), histórico de productos. |
-| 👥 **Colaboración** | Comparte listas por **enlace firmado (HMAC)** con permisos (editar / solo ver), difusión por **WhatsApp y Email**. |
-| ⚡ **Autocompletado inteligente** | Pipeline de **3 capas** (historial personal → catálogo → IA) que aprende de tus compras. |
-| 🔁 **Reposición y complementos** | Avisos de reposición según tu frecuencia de compra + sugerencias de productos complementarios. |
-| 🤖 **Generación con IA** | Escribe *"cena italiana para 2 personas"* y obtén una lista completa, con cantidades escaladas por comensal. |
-| 💶 **Estimación de precios** | Precio estimado por producto con pipeline de 3 capas (historial + catálogo + IA) y confirmación de precios reales para mejorar futuras estimaciones. |
-| 🔎 **Detección de duplicados** | Evita duplicados con normalización singular/plural en español (*pan ↔ panes*); los ítems ya comprados no bloquean nuevas adiciones. |
-| 📊 **Historial y estadísticas** | Historial de compras + panel de estadísticas (gráficas de gasto y categorías). |
-| 📧 **Resumen semanal** | Email programado (lunes) con el resumen de la semana, opt-in y baja mediante enlace firmado. |
-| 🛠️ **Panel de administración** | Backoffice con **Backpack** (gestión de usuarios, planes, límites de IA, uso de IA) + **Telescope** para observabilidad. |
+| 🏠 **Landing & Waitlist** | Public landing page + waitlist with lead capture. |
+| 🔐 **Authentication** | Email/password login + **JWT**, **biometrics (WebAuthn/passkeys)**, email verification and **GDPR-compliant account deletion**. |
+| 📋 **Shopping lists** | Full CRUD, freemium limit (3 active lists), archive and delete. |
+| 🥕 **Items and categories** | Products within each list, auto-organized by section (Fruits, Dairy, Bakery…), product history. |
+| 👥 **Collaboration** | Share lists via **signed link (HMAC)** with permissions (edit / view-only), sharing over **WhatsApp and Email**. |
+| ⚡ **Smart autocomplete** | **3-layer** pipeline (personal history → catalog → AI) that learns from your purchases. |
+| 🔁 **Restock and complements** | Restock reminders based on your purchase frequency + complementary product suggestions. |
+| 🤖 **AI generation** | Write *"Italian dinner for 2"* and get a full list, with quantities scaled per diner. |
+| 💶 **Price estimation** | Estimated price per product with a 3-layer pipeline (history + catalog + AI) and confirmation of real prices to improve future estimates. |
+| 🔎 **Duplicate detection** | Avoids duplicates with singular/plural normalization in Spanish (*pan ↔ panes*); already-purchased items don't block new additions. |
+| 📊 **History and stats** | Purchase history + stats dashboard (spending and category charts). |
+| 📧 **Weekly summary** | Scheduled email (Mondays) with the week's summary, opt-in and unsubscribe via signed link. |
+| 🛠️ **Admin panel** | Backoffice with **Backpack** (user, plan and AI limit/usage management) + **Telescope** for observability. |
 
 ---
 
-## 🧱 Arquitectura y stack
+## 🧱 Architecture and stack
 
-- **Backend:** Laravel 12 (PHP 8.4+), arquitectura **hexagonal** con principios **DDD**
-  (contextos acotados, servicios de dominio, glosario por contexto).
-- **Frontend:** React 19 + Vite (SPA servida por Laravel), Tailwind CSS con sistema de
-  diseño propio, internacionalización con **i18next**.
-- **Base de datos:** MySQL 8 (colas, caché y sesiones sobre BBDD — sin Redis obligatorio).
-- **IA:** API de Claude (**Haiku**) para autocompletado, generación, precios y resúmenes,
-  con **presupuesto mensual** configurable y límites de uso por operación/plan.
-- **Auth:** JWT + WebAuthn (passkeys/biometría).
-- **Calidad:** ~967 tests (PHPUnit + Vitest), **100 % de cobertura** exigida y
-  **mutation testing** con Infection (Covered MSI ≈ 87 %).
+- **Backend:** Laravel 12 (PHP 8.4+), **hexagonal** architecture with **DDD**
+  principles (bounded contexts, domain services, per-context glossary).
+- **Frontend:** React 19 + Vite (SPA served by Laravel), Tailwind CSS with a custom
+  design system, internationalization with **i18next**.
+- **Database:** MySQL 8 (queues, cache and sessions on the database — no Redis required).
+- **AI:** Claude API (**Haiku**) for autocomplete, generation, pricing and summaries,
+  with a configurable **monthly budget** and per-operation/plan usage limits.
+- **Auth:** JWT + WebAuthn (passkeys/biometrics).
+- **Quality:** ~967 tests (PHPUnit + Vitest), **100% coverage** enforced and
+  **mutation testing** with Infection (Covered MSI ≈ 87%).
 
 ```
 app/
-├── Domain / Services      # Lógica de negocio (hexagonal + DDD)
-├── Http/Controllers       # API REST + catch-all SPA
-├── Jobs                   # Trabajos encolados (p.ej. categorización IA)
-├── Console/Commands       # Comandos programados (cron)
-└── Support/Inflector      # Normalizador singular/plural (ES)
-resources/js/              # SPA React 19 (páginas, componentes, libs)
-routes/console.php         # Tareas programadas (scheduler)
-docs/                      # Documentación de features y despliegue
+├── Domain / Services      # Business logic (hexagonal + DDD)
+├── Http/Controllers       # REST API + catch-all SPA
+├── Jobs                   # Queued jobs (e.g. AI categorization)
+├── Console/Commands       # Scheduled commands (cron)
+└── Support/Inflector      # Singular/plural normalizer (ES)
+resources/js/              # React 19 SPA (pages, components, libs)
+routes/console.php         # Scheduled tasks (scheduler)
+docs/                      # Feature and deployment documentation
 ```
 
 ---
 
-## 🚀 Puesta en marcha (desarrollo local)
+## 🚀 Getting started (local development)
 
-### Requisitos
+### Requirements
 
-- PHP **≥ 8.4** con extensiones: `mbstring, pdo_mysql, openssl, tokenizer, xml, ctype, json, bcmath, curl, fileinfo, intl`
-- Composer 2.x · Node 20+ · MySQL 8 (o MariaDB 10.6+)
-- Una **API key de Claude** (Anthropic) para las funciones de IA.
+- PHP **≥ 8.4** with extensions: `mbstring, pdo_mysql, openssl, tokenizer, xml, ctype, json, bcmath, curl, fileinfo, intl`
+- Composer 2.x · Node 20+ · MySQL 8 (or MariaDB 10.6+)
+- A **Claude API key** (Anthropic) for the AI features.
 
-### Instalación
+### Installation
 
 ```bash
 git clone https://github.com/Pelrock0/SuperIA.git
@@ -92,74 +92,108 @@ composer install
 cp .env.example .env
 php artisan key:generate
 
-# Configura .env: DB_CONNECTION=mysql, credenciales de BBDD y CLAUDE_API_KEY
-php artisan migrate --seed          # crea tablas + catálogo, prompts y superadmin
+# Configure .env: DB_CONNECTION=mysql, DB credentials and CLAUDE_API_KEY
+php artisan migrate --seed          # creates tables + catalog, prompts and superadmin
 
 npm install
-npm run dev                         # Vite en modo desarrollo
+npm run dev                         # Vite in development mode
 php artisan serve                   # http://localhost:8000
 ```
 
-### Variables de entorno clave
+### Key environment variables
 
-| Variable | Descripción |
+| Variable | Description |
 |---|---|
-| `APP_KEY` | Clave de la app (`php artisan key:generate`). |
-| `DB_*` | Conexión MySQL (`DB_CONNECTION=mysql` en real; el default `sqlite` es solo dev). |
-| `CLAUDE_API_KEY` | **Imprescindible** — sin ella no funcionan autocompletado, generación, precios ni resúmenes. |
-| `CLAUDE_MODEL` / `AI_GENERATION_MODEL` / `AI_WEEKLY_SUMMARY_MODEL` | Modelos de IA (por defecto `claude-haiku-4-5`). |
-| `AI_BUDGET_CAP_MONTHLY_USD` | Tope de gasto mensual de IA; corta las llamadas si se supera. |
-| `MAIL_*` | SMTP para verificación de email, resumen semanal y bajas. |
-| `QUEUE_CONNECTION` / `CACHE_STORE` / `SESSION_DRIVER` | `database` por defecto. |
+| `APP_KEY` | App key (`php artisan key:generate`). |
+| `DB_*` | MySQL connection (`DB_CONNECTION=mysql` in real environments; the `sqlite` default is dev-only). |
+| `CLAUDE_API_KEY` | **Required** — without it, autocomplete, generation, pricing and summaries don't work. |
+| `CLAUDE_MODEL` / `AI_GENERATION_MODEL` / `AI_WEEKLY_SUMMARY_MODEL` | AI models (defaults to `claude-haiku-4-5`). |
+| `AI_BUDGET_CAP_MONTHLY_USD` | Monthly AI spend cap; cuts off calls once exceeded. |
+| `MAIL_*` | SMTP for email verification, weekly summary and unsubscribes. |
+| `QUEUE_CONNECTION` / `CACHE_STORE` / `SESSION_DRIVER` | `database` by default. |
 
-> ⚠️ Los secretos (`CLAUDE_API_KEY`, `DB_PASSWORD`, `MAIL_PASSWORD`) nunca se versionan —
-> `.env` está en `.gitignore`.
+> ⚠️ Secrets (`CLAUDE_API_KEY`, `DB_PASSWORD`, `MAIL_PASSWORD`) are never committed —
+> `.env` is in `.gitignore`.
 
 ### Tests
 
 ```bash
-php artisan test        # backend (PHPUnit, 100% cobertura)
+php artisan test        # backend (PHPUnit, 100% coverage)
 npm run test            # frontend (Vitest)
 composer security       # composer audit + Psalm taint analysis
 ```
 
 ---
 
-## 🔧 Despliegue
+## 🔧 Deployment
 
-El proyecto **ya está desplegado en producción**. Para el detalle completo de
-infraestructura (Nginx, worker de colas, scheduler cron, primer arranque) consulta
+The project is **already deployed in production**. For full infrastructure details
+(Nginx, queue worker, cron scheduler, first boot) see
 **[`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)**.
 
-### Guía de actualización (deploy incremental)
+### Update guide (incremental deploy)
 
 ```bash
-php artisan down                                   # modo mantenimiento
+php artisan down                                   # maintenance mode
 git pull origin main
 composer install --no-dev --optimize-autoloader
 php artisan migrate --force
 npm ci && npm run build
 php artisan config:cache && php artisan route:cache && php artisan view:cache
-php artisan queue:restart                          # recarga el código en los workers
+php artisan queue:restart                          # reload code in the workers
 php artisan up
 ```
 
-**Recuerda** que en producción deben seguir activos:
-- **Worker de colas:** `php artisan queue:work` (bajo Supervisor/systemd) — procesa la
-  categorización de ítems por IA.
-- **Scheduler (cron cada minuto):** `* * * * * php artisan schedule:run` — ejecuta el
-  borrado RGPD, la limpieza de colaboración/sugerencias, el reseteo de cuotas de IA y el
-  resumen semanal de los lunes.
+**Remember** that in production these must keep running:
+- **Queue worker:** `php artisan queue:work` (under Supervisor/systemd) — processes
+  AI item categorization.
+- **Scheduler (cron every minute):** `* * * * * php artisan schedule:run` — runs GDPR
+  deletion, collaboration/suggestion cleanup, AI quota resets and the Monday weekly
+  summary.
 
 ---
 
-## 📄 Licencia
+## 🤖 How it was built: Sofia4Builders
 
-Distribuido bajo licencia **[MIT](LICENSE)** — © 2026 Alfredo Martín (pelrock@gmail.com).
+This project wasn't hand-written. It was built with **Sofia4Builders**, a
+deterministic agentic harness I designed to take an ambiguous request all the way to
+production software without losing rigor along the way.
 
-Puedes usar, modificar y distribuir el proyecto libremente, **conservando el aviso de
-copyright y atribución al autor** en todas las copias o partes sustanciales del software.
+What you see in this repository is its output, not a separate effort:
+
+| What's here | Why it's here |
+| --- | --- |
+| Hexagonal architecture with DDD and a per-context glossary | The system requires a closed glossary before code gets written; if a term is ambiguous, work doesn't move forward |
+| ~967 tests with 100% coverage and mutation testing (MSI ≈ 87%) | Coverage is an invariant of the harness, not an optional goal; tests run against a real database |
+| Security review (JWT, WebAuthn, HMAC-signed links, GDPR) | Every feature goes through a security reviewer that maps against the OWASP Top 10 for web, API and LLM; any medium-or-higher finding blocks the pipeline |
+| AI spend cap and per-operation limits | Cost is treated as a requirement, not a surprise at month's end |
+| `CLAUDE.md`, `PROMPTS.md`, `wiki/`, `docs/` | Flat, auditable project memory that carries forward across features |
+
+The design rests on three non-negotiable rules: **one agent per step**, so none
+encroaches on another's work; **four independent reviewers** (code, security, tests
+and UX) that can send work back and cannot be skipped; and **a human approval at
+every step**, because machines propose and prove, but don't decide.
+
+In the professional setting where I use it daily — a regulated pharmaceutical sector
+under audit — application delivery time went from 66 days to 10–15, and project teams
+of 3–4 developers dropped to 1.
+
+If you're curious about the reasoning behind some of the design decisions:
+
+- [Anticipated Rationalizations](https://medium.com/@pelrock) · why agents drift when
+  the workflow is a suggestion instead of an obligation
+- [Memory for Agents](https://medium.com/@pelrock) · why project memory is a flat,
+  auditable wiki instead of the trendy tooling
+
+---
+
+## 📄 License
+
+Distributed under the **[MIT](LICENSE)** license — © 2026 Alfredo Martín (pelrock@gmail.com).
+
+You may use, modify and distribute the project freely, **keeping the copyright notice
+and attribution to the author** in all copies or substantial portions of the software.
 
 <div align="center">
-<sub>Hecho con Laravel · React · Claude</sub>
+<sub>Made with Laravel · React · Claude</sub>
 </div>
